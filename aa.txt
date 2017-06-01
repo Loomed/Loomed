@@ -1,0 +1,148 @@
+ <div class="container">
+      <form data-toggle="validator" role="form">
+        <div class="form-group has-feedback">
+          <label for="inputName" class="control-label">
+            <span class="label label-danger">必須項目</span>　宛先
+          </label>
+          <input type="text" class="form-control" id="inputName" placeholder="宛先" data-required-error="宛先が未入力です" required>
+          <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+          <div class="help-block with-errors"></div>
+        </div>
+       
+        <div class="form-group has-feedback">
+          <label for="inputName" class="control-label">
+            <span class="label label-danger">必須項目</span>　件名
+          </label>
+          <input type="text" class="form-control" id="inputName" placeholder="件名" data-required-error="件名が未入力です" required>
+          <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+          <div class="help-block with-errors"></div>
+        </div>
+
+ <div class="form-group has-feedback">
+          <label for="inputName" class="control-label">
+            <span class="label label-danger">必須項目</span>　本文
+          </label>
+          <input type="text" class="form-control" id="inputName" placeholder="本文" data-required-error="本文が未入力です" required>
+          <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+          <div class="help-block with-errors"></div>
+        </div>
+       
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">送信</button>
+        </div>
+      </form>
+    </div>
+
+
+
+<section>
+  <div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title accordion-toggle">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">名前　件名 </a>
+        </h4>
+      </div>
+      <div id="collapseOne" class="panel-collapse collapse in">
+        <div class="panel-body">
+          <br>To) 教育事業部 飯田さん <br>cc) 管理部 長野さん 井戸さん <br> <br>
+						<br>今週の週報を提出いたします。 <br> <br> <br>以上、よろしくお願い致します。
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title accordion-toggle">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="collapsed">名前　件名 </a>
+        </h4>
+      </div>
+      <div id="collapseTwo" class="panel-collapse collapse">
+        <div class="panel-body">
+          <h3>アコーディオンの中身2</h3>
+          <p>コメントコメントコメントコメントコメントコメントコメント </p>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title accordion-toggle">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="collapsed">名前　件名</a>
+        </h4>
+      </div>
+      <div id="collapseThree" class="panel-collapse collapse">
+        <div class="panel-body">
+          <h3>アコーディオンの中身3</h3>
+          <p>コメントコメントコメントコメントコメントコメントコメント </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingOne">
+                                    <h4 class="panel-title">
+                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                          メール作成
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                    <div class="panel-body">
+                                        <form id="changeForm" class="form-horizontal" action="userinfo.html">
+<div class="container">
+					<form data-toggle="validator" role="form">
+						<div class="form-group has-feedback">
+							<label for="inputName" class="control-label"> <span
+								class="label label-danger"></span> 宛先
+							</label> <input type="text" class="form-control" id="inputName"
+								placeholder="宛先" data-required-error="宛先が未入力です" required>
+							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+							<div class="help-block with-errors"></div>
+						</div>
+
+						<div class="form-group has-feedback">
+							<label for="inputName" class="control-label"> <span
+								class="label label-danger"></span> 件名
+							</label> <input type="text" class="form-control" id="inputName"
+								placeholder="件名" data-required-error="件名が未入力です" required>
+							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+							<div class="help-block with-errors"></div>
+						</div>
+
+
+						<div class="form-group">
+							<label for="inputName" class="control-label"> <span
+								class="label label-danger"></span> 本文
+							</label>
+							<div class="radio-inline">
+								<input type="radio" value="1" name="temp" id="none" checked>
+								<label for="man">無し</label>
+							</div>
+							<div class="radio-inline">
+								<input type="radio" value="2" name="temp" id="late"> <label
+									for="woman">遅刻</label>
+							</div>
+							<div class="radio-inline">
+								<input type="radio" value="3" name="temp" id="abs"> <label
+									for="woman">欠席</label>
+							</div>
+
+
+
+							<textarea rows="10" type="text" class="form-control"
+								id="inputName" placeholder="本文" data-required-error="本文が未入力です"
+								required></textarea>
+							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+							<div class="help-block with-errors"></div>
+						</div>
+				</div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
