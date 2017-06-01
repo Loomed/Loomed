@@ -1,34 +1,20 @@
- <div class="container">
-      <form data-toggle="validator" role="form">
-        <div class="form-group has-feedback">
+
+
+
+
+
+
+
           <label for="inputName" class="control-label">
-            <span class="label label-danger">•K{€–Ú</span>@ˆ¶æ
+            <span class="label label-danger">ï¿½Kï¿½{ï¿½ï¿½ï¿½ï¿½</span>ï¿½@ï¿½{ï¿½ï¿½
           </label>
-          <input type="text" class="form-control" id="inputName" placeholder="ˆ¶æ" data-required-error="ˆ¶æ‚ª–¢“ü—Í‚Å‚·" required>
-          <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-          <div class="help-block with-errors"></div>
-        </div>
-       
-        <div class="form-group has-feedback">
-          <label for="inputName" class="control-label">
-            <span class="label label-danger">•K{€–Ú</span>@Œ–¼
-          </label>
-          <input type="text" class="form-control" id="inputName" placeholder="Œ–¼" data-required-error="Œ–¼‚ª–¢“ü—Í‚Å‚·" required>
+          <input type="text" class="form-control" id="inputName" placeholder="ï¿½{ï¿½ï¿½" data-required-error="ï¿½{ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í‚Å‚ï¿½" required>
           <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
           <div class="help-block with-errors"></div>
         </div>
 
- <div class="form-group has-feedback">
-          <label for="inputName" class="control-label">
-            <span class="label label-danger">•K{€–Ú</span>@–{•¶
-          </label>
-          <input type="text" class="form-control" id="inputName" placeholder="–{•¶" data-required-error="–{•¶‚ª–¢“ü—Í‚Å‚·" required>
-          <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-          <div class="help-block with-errors"></div>
-        </div>
-       
         <div class="form-group">
-          <button type="submit" class="btn btn-primary">‘—M</button>
+          <button type="submit" class="btn btn-primary">ï¿½ï¿½ï¿½M</button>
         </div>
       </form>
     </div>
@@ -40,39 +26,39 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title accordion-toggle">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">–¼‘O@Œ–¼ </a>
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">ï¿½ï¿½ï¿½Oï¿½@ï¿½ï¿½ï¿½ï¿½ </a>
         </h4>
       </div>
       <div id="collapseOne" class="panel-collapse collapse in">
         <div class="panel-body">
-          <br>To) ‹³ˆçŽ–‹Æ•” ”Ñ“c‚³‚ñ <br>cc) ŠÇ—•” ’·–ì‚³‚ñ ˆäŒË‚³‚ñ <br> <br>
-						<br>¡T‚ÌT•ñ‚ð’ño‚¢‚½‚µ‚Ü‚·B <br> <br> <br>ˆÈãA‚æ‚ë‚µ‚­‚¨Šè‚¢’v‚µ‚Ü‚·B
+          <br>To) ï¿½ï¿½ï¿½çŽ–ï¿½Æ•ï¿½ ï¿½Ñ“cï¿½ï¿½ï¿½ï¿½ <br>cc) ï¿½Ç—ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ì‚³ï¿½ï¿½ ï¿½ï¿½Ë‚ï¿½ï¿½ï¿½ <br> <br>
+						<br>ï¿½ï¿½ï¿½Tï¿½ÌTï¿½ï¿½ï¿½ï¿½oï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B <br> <br> <br>ï¿½Èï¿½Aï¿½ï¿½ë‚µï¿½ï¿½ï¿½ï¿½ï¿½è‚¢ï¿½vï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B
         </div>
       </div>
     </div>
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title accordion-toggle">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="collapsed">–¼‘O@Œ–¼ </a>
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="collapsed">ï¿½ï¿½ï¿½Oï¿½@ï¿½ï¿½ï¿½ï¿½ </a>
         </h4>
       </div>
       <div id="collapseTwo" class="panel-collapse collapse">
         <div class="panel-body">
-          <h3>ƒAƒR[ƒfƒBƒIƒ“‚Ì’†g2</h3>
-          <p>ƒRƒƒ“ƒgƒRƒƒ“ƒgƒRƒƒ“ƒgƒRƒƒ“ƒgƒRƒƒ“ƒgƒRƒƒ“ƒgƒRƒƒ“ƒg </p>
+          <h3>ï¿½Aï¿½Rï¿½[ï¿½fï¿½Bï¿½Iï¿½ï¿½ï¿½Ì’ï¿½ï¿½g2</h3>
+          <p>ï¿½Rï¿½ï¿½ï¿½ï¿½ï¿½gï¿½Rï¿½ï¿½ï¿½ï¿½ï¿½gï¿½Rï¿½ï¿½ï¿½ï¿½ï¿½gï¿½Rï¿½ï¿½ï¿½ï¿½ï¿½gï¿½Rï¿½ï¿½ï¿½ï¿½ï¿½gï¿½Rï¿½ï¿½ï¿½ï¿½ï¿½gï¿½Rï¿½ï¿½ï¿½ï¿½ï¿½g </p>
         </div>
       </div>
     </div>
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title accordion-toggle">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="collapsed">–¼‘O@Œ–¼</a>
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="collapsed">ï¿½ï¿½ï¿½Oï¿½@ï¿½ï¿½ï¿½ï¿½</a>
         </h4>
       </div>
       <div id="collapseThree" class="panel-collapse collapse">
         <div class="panel-body">
-          <h3>ƒAƒR[ƒfƒBƒIƒ“‚Ì’†g3</h3>
-          <p>ƒRƒƒ“ƒgƒRƒƒ“ƒgƒRƒƒ“ƒgƒRƒƒ“ƒgƒRƒƒ“ƒgƒRƒƒ“ƒgƒRƒƒ“ƒg </p>
+          <h3>ï¿½Aï¿½Rï¿½[ï¿½fï¿½Bï¿½Iï¿½ï¿½ï¿½Ì’ï¿½ï¿½g3</h3>
+          <p>ï¿½Rï¿½ï¿½ï¿½ï¿½ï¿½gï¿½Rï¿½ï¿½ï¿½ï¿½ï¿½gï¿½Rï¿½ï¿½ï¿½ï¿½ï¿½gï¿½Rï¿½ï¿½ï¿½ï¿½ï¿½gï¿½Rï¿½ï¿½ï¿½ï¿½ï¿½gï¿½Rï¿½ï¿½ï¿½ï¿½ï¿½gï¿½Rï¿½ï¿½ï¿½ï¿½ï¿½g </p>
         </div>
       </div>
     </div>
@@ -85,7 +71,7 @@
                                 <div class="panel-heading" role="tab" id="headingOne">
                                     <h4 class="panel-title">
                                         <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                          ƒ[ƒ‹ì¬
+                                          ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ì¬
                                         </a>
                                     </h4>
                                 </div>
@@ -96,18 +82,18 @@
 					<form data-toggle="validator" role="form">
 						<div class="form-group has-feedback">
 							<label for="inputName" class="control-label"> <span
-								class="label label-danger"></span> ˆ¶æ
+								class="label label-danger"></span> ï¿½ï¿½ï¿½ï¿½
 							</label> <input type="text" class="form-control" id="inputName"
-								placeholder="ˆ¶æ" data-required-error="ˆ¶æ‚ª–¢“ü—Í‚Å‚·" required>
+								placeholder="ï¿½ï¿½ï¿½ï¿½" data-required-error="ï¿½ï¿½ï¿½æ‚ªï¿½ï¿½ï¿½ï¿½ï¿½Í‚Å‚ï¿½" required>
 							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 							<div class="help-block with-errors"></div>
 						</div>
 
 						<div class="form-group has-feedback">
 							<label for="inputName" class="control-label"> <span
-								class="label label-danger"></span> Œ–¼
+								class="label label-danger"></span> ï¿½ï¿½ï¿½ï¿½
 							</label> <input type="text" class="form-control" id="inputName"
-								placeholder="Œ–¼" data-required-error="Œ–¼‚ª–¢“ü—Í‚Å‚·" required>
+								placeholder="ï¿½ï¿½ï¿½ï¿½" data-required-error="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í‚Å‚ï¿½" required>
 							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 							<div class="help-block with-errors"></div>
 						</div>
@@ -115,25 +101,25 @@
 
 						<div class="form-group">
 							<label for="inputName" class="control-label"> <span
-								class="label label-danger"></span> –{•¶
+								class="label label-danger"></span> ï¿½{ï¿½ï¿½
 							</label>
 							<div class="radio-inline">
 								<input type="radio" value="1" name="temp" id="none" checked>
-								<label for="man">–³‚µ</label>
+								<label for="man">ï¿½ï¿½ï¿½ï¿½</label>
 							</div>
 							<div class="radio-inline">
 								<input type="radio" value="2" name="temp" id="late"> <label
-									for="woman">’x</label>
+									for="woman">ï¿½xï¿½ï¿½</label>
 							</div>
 							<div class="radio-inline">
 								<input type="radio" value="3" name="temp" id="abs"> <label
-									for="woman">Œ‡È</label>
+									for="woman">ï¿½ï¿½ï¿½ï¿½</label>
 							</div>
 
 
 
 							<textarea rows="10" type="text" class="form-control"
-								id="inputName" placeholder="–{•¶" data-required-error="–{•¶‚ª–¢“ü—Í‚Å‚·"
+								id="inputName" placeholder="ï¿½{ï¿½ï¿½" data-required-error="ï¿½{ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í‚Å‚ï¿½"
 								required></textarea>
 							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 							<div class="help-block with-errors"></div>
