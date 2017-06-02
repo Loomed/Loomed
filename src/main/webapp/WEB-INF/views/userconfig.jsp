@@ -2,18 +2,330 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%><!DOCTYPE html>
-<html>
+<html lang="ja">
 
 <head>
 <meta charset="UTF-8">
-<title>ユーザー処理</title>
+<title>ユーザ管理</title>
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-combobox/1.1.8/css/bootstrap-combobox.min.css" />
+<link rel="stylesheet" href="css/common.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-combobox/1.1.8/js/bootstrap-combobox.js"></script>
+
+
+<script>
+	$(function() {
+		$('.delete').click(function() {
+			$('#configModal').modal();
+		});
+		$('.change').click(function() {
+			location.href = "rootuserchange.jsp";
+		});
+		$('.combobox').combobox();
+	});
+</script>
 </head>
 
 <body>
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<!-- href内はセッションにより変わる
+                    1.セッションに値がなければindex
+                    2.セッションに値があればそれぞれのhome
+                    今回はルートなのでroothome.jspとする
+            　  -->
+				<a class="navbar-brand" href="roothome.jsp"> </a>
+				<p class="navbar-text navbar-right">
+					<a href="index.jsp" class="navbar-link">研修教室名一覧</a> <a
+						type="button" class="btn btn-info navbar-btn navbar-btn-modify"
+						onclick="$('#logout-modal').modal();">ログアウト</a>
+				</p>
+			</div>
+		</div>
+	</nav>
 
+	<div class="container mycontainer">
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">ユーザ管理</h3>
+					</div>
+					<div class="panel-body">
+						<div class="panel-group" id="accordion" role="tablist"
+							aria-multiselectable="true">
+							<div class="panel panel-default">
+								<div class="panel-heading" role="tab" id="headingOne">
+									<h4 class="panel-title">
+										<a role="button" data-toggle="collapse"
+											data-parent="#accordion" href="#collapseOne"
+											aria-expanded="true" aria-controls="collapseOne">
+											ユーザ追加はこちらから </a>
+									</h4>
+								</div>
+								<div id="collapseOne" class="panel-collapse collapse"
+									role="tabpanel" aria-labelledby="headingOne">
+									<div class="panel-body">
+										<form id="changeForm" class="form-horizontal"
+											action="rootuserinfo.jsp">
+											<div class="form-group">
+												<label for="intputUserId" class="col-sm-2 control-label">ユーザID</label>
+												<div class="col-sm-10">
+													<label for="intputUserId" class="control-label">自動採番</label>
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="inputPassword" class="col-sm-2 control-label">パスワード</label>
+												<div class="col-sm-10">
+													<input type="password" class="form-control"
+														id="inputPassword" required>
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="inputPassword" class="col-sm-2 control-label">権限</label>
+												<div class="col-sm-10">
+													<select class="form-control">
+														<option selected>ルートユーザ</option>
+														<option>講師</option>
+														<option>担当者</option>
+														<option>研修生</option>
+													</select>
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="inputName" class="col-sm-2 control-label">氏
+													名</label>
+												<div class="col-sm-10">
+													<input type="text" class="form-control" id="inputName"
+														required>
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="inputCompany" class="col-sm-2 control-label">企業名</label>
+												<div class="col-sm-10 select-container">
+													<select class="combobox form-control">
+														<option value=""></option>
+														<option>株式会社Axiz</option>
+														<option>株式会社コンピュータ・ハイテック・ビジュアルソリューション・グローバルパワー</option>
+														<option>株式会社プリウス</option>
+														<option>クラウン株式会社</option>
+														<option>ソニーグループ株式会社</option>
+													</select>
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="inputTraining" class="col-sm-2 control-label">配属研修教室</label>
+												<div class="col-sm-10">
+													<select class="form-control">
+														<option>研修教室選択なし</option>
+														<option>研修教室管理</option>
+														<option>経験者Java品川教室</option>
+														<option>未経験者Java品川教室</option>
+														<option>経験者C#田町教室</option>
+														<option>未経験者C#品川教室</option>
+														<option>経験者C#品川教室</option>
+													</select>
+												</div>
+											</div>
+											<div class="form-group">
+												<div class="col-sm-offset-1 col-sm-10">
+													<button type="submit" class="btn btn-primary btn-block">登録</button>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+						<table class="table">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>ID</th>
+									<th>氏名</th>
+									<th>研修教室名</th>
+									<th>権限</th>
+									<th>変更</th>
+									<th>削除</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>1</td>
+									<td>000001</td>
+									<td><a href="rootuserinfo.jsp">山田太郎</a></td>
+									<td>経験者Java品川教室</td>
+									<td><select class="form-control">
+											<option>ルートユーザ</option>
+											<option>講師</option>
+											<option>担当者</option>
+											<option>研修生</option>
+									</select></td>
+									<td><button class="btn btn-primary change">変更</button></td>
+									<td><button class="btn btn-danger delete">削除</button></td>
+								</tr>
+								<tr>
+									<td>2</td>
+									<td>000002</td>
+									<td><a href="#">鈴木太郎</a></td>
+									<td>経験者Java品川教室</td>
+									<td><select class="form-control">
+											<option selected>ルートユーザ</option>
+											<option>講師</option>
+											<option>担当者</option>
+											<option>研修生</option>
+									</select></td>
 
-	<!--   ここが本体 -->
+									<td><button class="btn btn-primary change">変更</button></td>
+									<td><button class="btn btn-danger delete">削除</button></td>
+								</tr>
+								<tr>
+									<td>3</td>
+									<td>000003</td>
+									<td><a href="#">高橋太郎</a></td>
+									<td>経験者Java品川教室</td>
+									<td><select class="form-control">
+											<option>ルートユーザ</option>
+											<option selected>講師</option>
+											<option>担当者</option>
+											<option>研修生</option>
+									</select></td>
 
+									<td><button class="btn btn-primary change">変更</button></td>
+									<td><button class="btn btn-danger delete">削除</button></td>
+								</tr>
+								<tr>
+									<td>4</td>
+									<td>000004</td>
+									<td><a href="root#">田中太郎</a></td>
+									<td>経験者Java品川教室</td>
+									<td><select class="form-control">
+											<option>ルートユーザ</option>
+											<option selected>講師</option>
+											<option>担当者</option>
+											<option>研修生</option>
+									</select></td>
 
+									<td><button class="btn btn-primary change">変更</button></td>
+									<td><button class="btn btn-danger delete">削除</button></td>
+								</tr>
+								<tr>
+									<td>5</td>
+									<td>000005</td>
+									<td><a href="#">伊藤太郎</a></td>
+									<td>未経験者Java品川教室</td>
+									<td><select class="form-control">
+											<option>ルートユーザ</option>
+											<option selected>講師</option>
+											<option>担当者</option>
+											<option>研修生</option>
+									</select></td>
+
+									<td><button class="btn btn-primary change">変更</button></td>
+									<td><button class="btn btn-danger delete">削除</button></td>
+								</tr>
+								<tr>
+									<td>6</td>
+									<td>000006</td>
+									<td><a href="#">山本太郎</a></td>
+									<td>未経験者Java品川教室</td>
+									<td><select class="form-control">
+											<option>ルートユーザ</option>
+											<option selected>講師</option>
+											<option>担当者</option>
+											<option>研修生</option>
+									</select></td>
+
+									<td><button class="btn btn-primary change">変更</button></td>
+									<td><button class="btn btn-danger delete">削除</button></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="insertModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header modal-header-modify">
+					<button type="button" class="close" data-dismiss="modal">
+						<span>×</span>
+					</button>
+					<h4 class="modal-title">登録確認</h4>
+				</div>
+				<div class="modal-body">
+					以下の内容で登録します。<br>入力内容にお間違いがなければ[OK]ボタンを押してください。
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+					<button type="button" class="btn btn-primary">登録</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="configModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header modal-header-modify">
+					<button type="button" class="close" data-dismiss="modal">
+						<span>×</span>
+					</button>
+					<h4 class="modal-title">削除確認</h4>
+				</div>
+				<div class="modal-body">
+					元に戻すことは出来ません<br> 削除しますか？
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+					<button type="button" class="btn btn-danger">削除</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- ログアウト確認ダイアログ -->
+	<div class="modal fade" id="logout-modal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header modal-header-modify">
+					<button type="button" class="close" data-dismiss="modal">
+						<span>×</span>
+					</button>
+					<h4 class="modal-title">ログアウト確認</h4>
+				</div>
+				<div class="modal-body">
+					ログアウトしますか？<br>[OK]ボタンを押すとログアウトされ、ログイン画面に移動します
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal"
+						onclick="location.href='login.jsp';">OK</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
+
 </html>
