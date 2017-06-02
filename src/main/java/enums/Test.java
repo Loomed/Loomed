@@ -1,5 +1,7 @@
 package enums;
 
-public class Test {
+import lombok.Getter;
 
+@Getter
+public class Test {
 }
