@@ -6,7 +6,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Companies {
-	private Integer companyId;
-	private String companyName;
+public class Maps {
+	private Integer userId;
+	private Integer trainingId;
 }

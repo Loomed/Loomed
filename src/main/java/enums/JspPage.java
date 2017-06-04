@@ -1,5 +1,10 @@
 package enums;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
+@Getter
+@RequiredArgsConstructor
 public enum JspPage {
 	HOME("home"),
 	INDEX("index"),
@@ -16,13 +21,6 @@ public enum JspPage {
 	USERINFO("userinfo"),
 	;
 
-	private final String pageName;
+	final String pageName;
 
-	JspPage(String pageName) {
-		this.pageName = pageName;
-	}
-
-	public String getPageName() {
-		return pageName;
-	}
 }
