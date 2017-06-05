@@ -281,6 +281,7 @@
 		$('#datepicker').on(
 				'changeDate',
 				function() {
+					//Javasctiptからの遷移？
 					location.href = 'schedule.jsp?date='
 							+ $('#datepicker').datepicker('getFormattedDate');
 				});
