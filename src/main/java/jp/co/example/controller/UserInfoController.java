@@ -52,12 +52,14 @@ public class UserInfoController {
 	 * @Author sakata
 	 */
 	@RequestMapping(value = "/userinfo", method = RequestMethod.POST)
-	public String postUserInfo() {
+	public String postUserInfo(UserChangeForm userChangeForm) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
+
+		log.info("user : " + userChangeForm.getCompanyId());
 		Users user = new Users();
 
-		myUserService.Update();
+		//myUserService.Update();
 
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());

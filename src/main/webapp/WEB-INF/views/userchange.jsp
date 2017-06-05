@@ -19,6 +19,12 @@ table>td>input {
 	width: 100px;
 }
 </style>
+
+<script>
+	$(function() {
+		$('.combobox').combobox();
+	});
+</script>
 </head>
 
 <body>
@@ -41,20 +47,29 @@ table>td>input {
 							<div class="form-group">
 								<label for="inputPassword" class="col-sm-2 control-label">パスワード</label>
 								<div class="col-sm-10">
-									<form:password path="password" class="form-control" value="●●●●●●" required/>
+									<form:password path="password" class="form-control"
+										value="●●●●●●" required />
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="inputName" class="col-sm-2 control-label">氏 名</label>
+								<label for="inputName" class="col-sm-2 control-label">氏
+									名</label>
 								<div class="col-sm-10">
-									<form:input path="userName" class="form-control" value="田中太郎" required/>
+									<form:input path="userName" class="form-control" value="田中太郎"
+										required />
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputCompany" class="col-sm-2 control-label">企業名</label>
-								<div class="col-sm-10">
-									<input type="text" class="form-control" id="inputCompany"
-										value="株式会社Axiz" required>
+								<div class="col-sm-10 select-container">
+									<form:select path="companyId" class="combobox form-control">
+										<option value=""></option>
+										<option value="1">株式会社Axiz</option>
+										<option value="2">株式会社コンピュータ・ハイテック・ビジュアルソリューション・グローバルパワー</option>
+										<option value="3">株式会社プリウス</option>
+										<option value="4">クラウン株式会社</option>
+										<option value="5">ソニーグループ株式会社</option>
+									</form:select>
 								</div>
 							</div>
 							<div class="form-group">
