@@ -1,12 +1,12 @@
 package jp.co.example.service.impl;
 
-import java.util.*;
+import java.util.List;
 
-import org.springframework.stereotype.*;
+import org.springframework.stereotype.Service;
 
-import jp.co.example.dao.*;
-import jp.co.example.entity.*;
-import jp.co.example.service.*;
+import jp.co.example.dao.UsersDao;
+import jp.co.example.entity.Users;
+import jp.co.example.service.MemberService;
 
 @Service
 public class MemberServiceImpl implements MemberService {
