@@ -8,7 +8,8 @@ import jp.co.example.entity.Mails;
 @Repository
 public class MailsDaoImpl implements MailsDao {
 	@Override
-	Mails findByIdAndTitleAndContents(Integer mailID, String mailTitle, String mailContents) {
+	public Mails findByIdAndTitleAndContents(Integer mailID, String mailTitle, String mailContents) {
+		return Mails;
 
 	}
 }
