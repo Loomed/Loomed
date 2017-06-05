@@ -26,7 +26,7 @@ public class HomeController {
 		}else if("member".equals(button)){
 			return JspPage.MEMBER.getPageName();
 		}else if("shareconfig".equals(button)){
-			return JspPage.SHARECONFIG.getPageName();;
+			return JspPage.SHARECONFIG.getPageName();
 		}
 		return null;
 
