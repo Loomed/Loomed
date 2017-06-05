@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import enums.JspPage;
 import enums.LogEnum;
@@ -21,6 +22,7 @@ import util.Util;
 //login.jspへの遷移、ログイン処理を記述
 @Slf4j
 @Controller
+@SessionAttributes(value = "users")
 public class LoginController {
 
 	@Autowired
@@ -32,7 +34,7 @@ public class LoginController {
 	}
 
 	// ログアウト処理
-	if
+
 
 	// login.jspからの遷移
 	@RequestMapping("/login")
@@ -46,18 +48,23 @@ public class LoginController {
 	// ログイン処理
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String postLogin(@Valid LoginForm form, BindingResult result, Model model) {
-		if (result.hasErrors()) {
-			return JspPage.LOGIN.getPageName();
-		}
+		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+//		if (result.hasErrors()) {
+//			log.info("hasError: " );
+//			return JspPage.LOGIN.getPageName();
+//		}
 
 		Users users = loginService.findByIdAndPass(form.getId(), form.getPass());
 
 		if (users != null) {
+			log.info("ユーザ: " +  users.getUserId());
 			model.addAttribute(users);
+			log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 			return JspPage.INDEX.getPageName();
 		}
 
 		model.addAttribute("msg", "IDまたはPASSが間違っています");
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return JspPage.LOGIN.getPageName();
 	}
 

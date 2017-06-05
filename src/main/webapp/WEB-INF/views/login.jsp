@@ -20,18 +20,18 @@
 						<h3 class="panel-title">ログイン</h3>
 					</div>
 					<div class="panel-body">
-						<form class="form-horizontal" action="index">
+						<form:form modelAttribute="loginForm" class="form-horizontal" method="POST">
 							<div class="form-group">
 								<label for="intputUserId" class="col-sm-2 control-label">ユーザID</label>
 								<div class="col-sm-10">
-									<input type="text" class="form-control" id="inputId" name="inputId"
+									<input type="text" class="form-control" id="userId" name="userId"
 										value="000001" required>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputPassword" class="col-sm-2 control-label">パスワード</label>
 								<div class="col-sm-10">
-									<input type="password" class="form-control" id="inputPassword" name="inputPassword"
+									<input type="password" class="form-control" id="Password" name="Password"
 										value="●●●●●●" required>
 								</div>
 							</div>
@@ -40,7 +40,7 @@
 									<button type="submit" class="btn btn-info btn-block">ログイン</button>
 								</div>
 							</div>
-						</form>
+						</form:form>
 					</div>
 				</div>
 			</div>

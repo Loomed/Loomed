@@ -37,7 +37,7 @@
 					<div class="card">
 						<ul class="nav nav-tabs" role="tablist">
 							<li role="presentation"><a aria-controls="home" role="tab"
-								data-toggle="tab">ようこそ {user.getuserName()} さん</a></li>
+								data-toggle="tab">ようこそ ${user.getUserName()} さん</a></li>
 						</ul>
 						<!-- Tab panes -->
 						<div class="tab-content">
@@ -46,7 +46,7 @@
 									<label>教室</label>
 								</div>
 								<div class="col-xs-9">
-									<label>{tr.gettrainingName()}</label>
+									<label>${tr.getTrainingName()}</label>
 								</div>
 							</h4>
 							<p>
@@ -68,7 +68,7 @@
 									data-toggle="tab"><i class="fa fa-envelope-o fa-5x"
 										style="margin-right: 20px; margin-left: 20px;"></i></a></li>
 								<p class="announcement-heading" style="margin-top: 10px;">
-									<span class="badge">{mail.mailcount()}</span>
+									<span class="badge">{}</span>
 								</p>
 							</ul>
 							<a href="mail">
@@ -175,7 +175,7 @@
 														</header>
 														<div class="comment-post">
 															<p>
-																<a href="#">研修日報_0月_株式会社Axiz_名前</a>
+																<a href="sharaconfig.jsp">研修日報_0月_株式会社Axiz_名前</a>
 															</p>
 														</div>
 													</div>
@@ -259,9 +259,6 @@
 							+ $('#datepicker').datepicker('getFormattedDate');
 				});
 	</script>
-	</div>
-	</div>
-	</div>
 	<!-- ログアウト確認ダイアログ -->
 	<div class="modal fade" id="logout-modal" tabindex="-1">
 		<div class="modal-dialog">
