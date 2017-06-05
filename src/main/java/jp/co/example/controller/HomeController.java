@@ -6,6 +6,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import enums.JspPage;
 import lombok.Getter;
 
 
@@ -18,14 +19,14 @@ public class HomeController {
 	@RequestMapping(value = "/home")
 	public String postLogin(@RequestParam("data") String data,@RequestParam("button") String button,BindingResult result, Model model) {
 		if (result.hasErrors()) {
-			return "login";
+			return JspPage.LOGIN.getPageName();
 		}
 		if("userinfo".equals(button)){
-			return "userinfo";
+			return JspPage.USERINFO.getPageName();
 		}else if("member".equals(button)){
-			return "member";
+			return JspPage.MEMBER.getPageName();
 		}else if("shareconfig".equals(button)){
-			return "shareconfig";
+			return JspPage.SHARECONFIG.getPageName();;
 		}
 		return null;
 
