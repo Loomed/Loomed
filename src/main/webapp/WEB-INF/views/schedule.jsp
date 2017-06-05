@@ -312,7 +312,6 @@ td {
 									min="0" max="23" required style="text-align: right;">時
 								<input id="minuteChangeModal" type="number" name="#" size="2"
 									min="0" max="59" required style="text-align: right;">分
-								</td>
 							</div>
 						</div>
 
@@ -322,7 +321,7 @@ td {
 							</div>
 							<div class="panel-body">
 								<!--<input id="contentChangeModal" size="70" type="text" value="" required>-->
-								<textarea id="contentChangeModal" class="col-xs-10" value=""
+								<textarea id="contentChangeModal" class="col-xs-10" value="#"
 									required></textarea>
 							</div>
 						</div>

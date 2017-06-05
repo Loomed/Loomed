@@ -6,11 +6,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import enums.JspPage;
 
 @Controller
-public class LoginController {
+public class ShareconfigController {
 
-	@RequestMapping("/login")
-	public String getLogin() {
-		return JspPage.LOGIN.getPageName();
+	//homeからの遷移
+	@RequestMapping("/shareconfig")
+	public String getShare() {
+		return JspPage.SHARECONFIG.getPageName();
 	}
+
+
 
 }
