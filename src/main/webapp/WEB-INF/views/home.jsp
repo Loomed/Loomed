@@ -30,7 +30,7 @@
 <body>
 
 	<%@ include file="common/header.jsp"%>
-
+<form action="home" method="get">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-4">
@@ -40,7 +40,6 @@
 							data-toggle="tab">ようこそ 山田 太郎 さん</a></li>
 					</ul>
 					<!-- Tab panes -->
-					<<<<<<< HEAD
 					<div class="tab-content">
 						<h4>
 							<div class="col-xs-3">
@@ -63,7 +62,6 @@
 								value="shareconfig">共有ファイルアップロード</button>
 						</p>
 					</div>
-					=======
 					<div class="tab-content">
 						<h4>
 							<div class="col-xs-3">
@@ -86,7 +84,6 @@
 								value="shareconfig">共有ファイルアップロード</button>
 						</p>
 					</div>
-					>>>>>>> 10ef5916e5887f5b52ab82b190ab5caddc3281cd
 					<div class="card">
 						<ul class="nav nav-tabs" role="tablist">
 							<li role="presentation"><a aria-controls="home" role="tab"
@@ -250,6 +247,7 @@
 				</div>
 			</div>
 		</div>
+		</form>
 		<script type="text/javascript">
 			$(function() {
 				$('#datepicker').datepicker({

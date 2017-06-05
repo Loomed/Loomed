@@ -31,7 +31,7 @@
 <body>
 
 	<%@ include file="common/header.jsp"%>
-
+<form action="roothome" method="get">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-4">
@@ -56,20 +56,20 @@
 							</div>
 						</h5>
 						<p>
-							<button class="btn btn-primary btn-block"
-								onclick="location.href='userinfo';">ユーザ情報</button>
+							<button type="submit" class="btn btn-primary btn-block"
+								value="userinfo">ユーザ情報</button>
+						</p>
+						<p>
+							<button type="submit" class="btn btn-primary btn-block"
+								value="userconfig">ユーザ管理</button>
+						</p>
+						<p>
+							<button type="submit" class="btn btn-primary btn-block"
+								value="trainingconfig">研修管理</button>
 						</p>
 						<p>
 							<button class="btn btn-primary btn-block"
-								onclick="location.href='userconfig';">ユーザ管理</button>
-						</p>
-						<p>
-							<button class="btn btn-primary btn-block"
-								onclick="location.href='trainingconfig';">研修管理</button>
-						</p>
-						<p>
-							<button class="btn btn-primary btn-block"
-								onclick="location.href='shareconfig';">共有ファイルアップロード</button>
+								value="shareconfig">共有ファイルアップロード</button>
 						</p>
 					</div>
 				</div>
@@ -235,6 +235,7 @@
 			</div>
 		</div>
 	</div>
+	</form>
 	<script type="text/javascript">
 		$(function() {
 			$('#datepicker').datepicker({
