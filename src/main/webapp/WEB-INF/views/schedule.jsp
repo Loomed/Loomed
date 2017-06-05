@@ -160,7 +160,7 @@ td {
 					<div class="panel-heading">
 						<h3 class="panel-title">スケジュール追加</h3>
 					</div>
-					<form action="schedule.jsp">
+					<form action="schedule">
 						<div class="panel-body">
 							<div class="panel panel-default">
 								<table class="table">
@@ -294,7 +294,7 @@ td {
 	<div class="modal fade" id="configChangeModal" tabindex="-1">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form action="schedule.jsp">
+				<form action="schedule">
 					<div class="modal-header modal-header-modify">
 						<button type="button" class="close" data-dismiss="modal">
 							<span>×</span>

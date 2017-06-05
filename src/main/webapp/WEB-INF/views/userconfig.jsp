@@ -50,7 +50,7 @@
 									role="tabpanel" aria-labelledby="headingOne">
 									<div class="panel-body">
 										<form id="changeForm" class="form-horizontal"
-											action="rootuserinfo.jsp">
+											action="rootuserinfo">
 											<div class="form-group">
 												<label for="intputUserId" class="col-sm-2 control-label">ユーザID</label>
 												<div class="col-sm-10">
@@ -136,7 +136,7 @@
 								<tr>
 									<td>1</td>
 									<td>000001</td>
-									<td><a href="rootuserinfo.jsp">山田太郎</a></td>
+									<td><a href="rootuserinfo">山田太郎</a></td>
 									<td>経験者Java品川教室</td>
 									<td><select class="form-control">
 											<option>ルートユーザ</option>
