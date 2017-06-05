@@ -1,9 +1,5 @@
 package jp.co.example.controller;
 
-import javax.validation.Valid;
-
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.Getter;
@@ -12,12 +8,11 @@ import lombok.Getter;
 @Getter
 public class MailController {
 
-	@RequestMapping(value = "/home")//コピペして少し弄っただけの状態。
-	public String postLogin(@Valid LoginForm form, BindingResult result, Model model) {
-		if (result.hasErrors())
-		{
-			return "home";
+	//home.jspのmailから遷移
+	@RequestMapping(value = "/mail")
+	public String postLogin() {
+			return "mail";
 		}
 
 }
-	}
+
