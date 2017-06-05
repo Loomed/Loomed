@@ -23,7 +23,7 @@ public class IndexController {
 	HttpServletRequest request;
 
 	@RequestMapping("/index")
-	public String getIndex(@RequestParam("id") String id, @RequestParam("pass") String pass,
+	public String getIndex(@RequestParam("inputId") String id, @RequestParam("inputPassword") String pass,
 			HttpServletRequest request) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
@@ -76,6 +76,9 @@ public class IndexController {
 //		}else{
 //			log.info(LogEnum.FALSE.getLogValue());
 //		}
+
+		//研修教室一覧受け取り
+		//List<Trainings> AllTrainings = IndexService.AllTrainings();	←作成から。
 
 
 		//判定処理

@@ -35,7 +35,7 @@
 								<label for="intputUserName" class="col-sm-2 control-label">氏
 									名</label>
 								<div class="col-sm-10">
-									<label for="intputUserName" class="control-label">田中太郎</label>
+									<label for="intputUserName" class="control-label">${user.userName}</label>
 								</div>
 							</div>
 							<div class="form-group">

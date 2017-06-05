@@ -21,7 +21,7 @@ public class MailController {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return JspPage.MAIL.getPageName();
-
+		//return JspPage.ROOTHOME.getPageName();
 	}
 
 	// メール処理はサービスに投げる
