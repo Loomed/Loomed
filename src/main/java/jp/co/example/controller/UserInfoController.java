@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.*;
 
 import enums.*;
 import jp.co.example.entity.*;
+import jp.co.example.form.*;
 import jp.co.example.myTest.*;
+import jp.co.example.service.*;
 import lombok.extern.slf4j.*;
 import util.*;
 
@@ -16,11 +18,17 @@ import util.*;
 public class UserInfoController {
 
 	@Autowired
-	private MyUsersService myUserService;
+	private MyUserService myUserService;
+	@Autowired
+	private MyUsersService myUsersService;
+
+	@ModelAttribute("indexForm")
+	private UserChangeForm setUpForm() {
+		return new UserChangeForm();
+	}
 
 	/**
-	 * userchangeへの遷移 2017/06/05
-	 *
+	 * userinfoへの遷移 2017/06/05
 	 * @Author sakata
 	 */
 	@RequestMapping("/userinfo")
@@ -30,17 +38,32 @@ public class UserInfoController {
 		Users user = new Users();
 		user.setUserId(1);
 
-		Users user2 = myUserService.getUser(user);
+		Users user2 = myUsersService.getUser(user);
 		model.addAttribute("user", user2);
 
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return JspPage.USERINFO.getPageName();
 	}
 
-	 @RequestMapping(value="/userinfo", method=RequestMethod.POST)
-	 public String postUserInfo() {
-	 log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+	/**
+	 * userinfoへの遷移 2017/06/05
+	 * userchangeから遷移
+	 *
+	 * @Author sakata
+	 */
+	@RequestMapping(value = "/userinfo", method = RequestMethod.POST)
+	public String postUserInfo(UserChangeForm userChangeForm) {
+		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
-	 return JspPage.USERINFO.getPageName();
-	 }
+
+		log.info("user : " + userChangeForm.getCompanyId());
+		Users user = new Users();
+
+		//myUserService.Update();
+
+
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
+		return JspPage.USERINFO.getPageName();
+	}
 
 }

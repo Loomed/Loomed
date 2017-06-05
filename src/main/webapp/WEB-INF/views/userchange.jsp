@@ -19,9 +19,10 @@ table>td>input {
 	width: 100px;
 }
 </style>
+
 <script>
 	$(function() {
-		jQuery("#changeForm").validationEngine();
+		$('.combobox').combobox();
 	});
 </script>
 </head>
@@ -36,34 +37,39 @@ table>td>input {
 						<h3 class="panel-title">ユーザ情報変更</h3>
 					</div>
 					<div class="panel-body">
-						<form id="changeForm" class="form-horizontal"
-							action="userinfo">
+						<form:form path="changeForm" class="form-horizontal">
 							<div class="form-group">
 								<label for="intputUserId" class="col-sm-2 control-label">ユーザID</label>
 								<div class="col-sm-10">
-									<label for="intputUserId" class="control-label">000001</label>
+									<form:form path="userId" class="control-label">000001</form:form>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputPassword" class="col-sm-2 control-label">パスワード</label>
 								<div class="col-sm-10">
-									<input type="password" class="form-control" id="inputPassword"
-										value="●●●●●●" required>
+									<form:password path="password" class="form-control"
+										value="●●●●●●" required />
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputName" class="col-sm-2 control-label">氏
 									名</label>
 								<div class="col-sm-10">
-									<input type="text" class="form-control" id="inputName"
-										value="田中太郎" required>
+									<form:input path="userName" class="form-control" value="田中太郎"
+										required />
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputCompany" class="col-sm-2 control-label">企業名</label>
-								<div class="col-sm-10">
-									<input type="text" class="form-control" id="inputCompany"
-										value="株式会社Axiz" required>
+								<div class="col-sm-10 select-container">
+									<form:select path="companyId" class="combobox form-control">
+										<option value=""></option>
+										<option value="1">株式会社Axiz</option>
+										<option value="2">株式会社コンピュータ・ハイテック・ビジュアルソリューション・グローバルパワー</option>
+										<option value="3">株式会社プリウス</option>
+										<option value="4">クラウン株式会社</option>
+										<option value="5">ソニーグループ株式会社</option>
+									</form:select>
 								</div>
 							</div>
 							<div class="form-group">
@@ -100,7 +106,7 @@ table>td>input {
 										onclick="$('#change-modal').modal();">変更</button>
 								</div>
 							</div>
-						</form>
+						</form:form>
 					</div>
 				</div>
 			</div>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ include file="common/taglibs.jsp"%>
 
 <!DOCTYPE html>
@@ -33,12 +35,22 @@
 			<div class="col-md-8 col-md-offset-2">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title">山田太郎さん、こんにちは</h3>
+						<h3 class="panel-title">${fn:escapeXml(sessionScope.loginuser.userName)}さん、こんにちは</h3>
 					</div>
 					<div class="panel-body">
-						<h2>
-							<a href="roothome">全体管理</a>
-						</h2>
+					<c:choose>
+						<c:when test="${(sessionScope.loginroom)==0}">
+							<h2><a href="roothome">全体管理</a></h2>
+						</c:when>
+						<c:when test="${(sessionScope.loginroom)!=0}">
+							<c:forEach var="room" items="${sessionScope.AllTrainings}">
+								<c:if test="${(sessionScope.loginroom)==room.trainingId}">
+									<h2><a href="home">${room.trainingName}</a></h2>
+								</c:if>
+							</c:forEach>
+						</c:when>
+						<c:otherwise></c:otherwise>
+					</c:choose>
 
 						<div class="panel-group" id="accordion" role="tablist"
 							aria-multiselectable="true">
@@ -47,32 +59,19 @@
 									<h4 class="panel-title">
 										<a role="button" data-toggle="collapse"
 											data-parent="#accordion" href="#collapse01"
-											aria-expanded="true" aria-controls="collapse01"> 全教室</a>
+											aria-expanded="true" aria-controls="collapse01"> 全教室一覧</a>
 									</h4>
 								</div>
 								<div id="collapse01" class="panel-collapse collapse"
 									role="tabpanel" aria-labelledby="heading01">
 									<ul>
-										<li>
-											<h3>
-												<a href="home">経験者Java(品川教室)</a>
-											</h3>
-										</li>
-										<li>
-											<h3>
-												<a href="#">未経験者Java(品川教室)</a>
-											</h3>
-										</li>
-										<li>
-											<h3>
-												<a href="#">未経験者Java(A教室)</a>
-											</h3>
-										</li>
-										<li>
-											<h3>
-												<a href="#">経験者Java(B教室)</a>
-											</h3>
-										</li>
+										<c:forEach var="rooms" items="${sessionScope.AllTrainings}">
+											<c:if test="${(sessionScope.loginroom)!=rooms.trainingId && (rooms.trainingId)!=0}">
+												<li>
+													<h3><a href="home">${rooms.trainingName}</a></h3>
+												</li>
+											</c:if>
+										</c:forEach>
 									</ul>
 								</div>
 							</div>

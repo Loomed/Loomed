@@ -24,14 +24,14 @@
 							<div class="form-group">
 								<label for="intputUserId" class="col-sm-2 control-label">ユーザID</label>
 								<div class="col-sm-10">
-									<input type="text" class="form-control" id="inputId"
+									<input type="text" class="form-control" id="inputId" name="inputId"
 										value="000001" required>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputPassword" class="col-sm-2 control-label">パスワード</label>
 								<div class="col-sm-10">
-									<input type="password" class="form-control" id="inputPassword"
+									<input type="password" class="form-control" id="inputPassword" name="inputPassword"
 										value="●●●●●●" required>
 								</div>
 							</div>
