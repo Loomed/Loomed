@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import enums.JspPage;
 import enums.LogEnum;
+//import jp.co.example.entity.Mails;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import util.Util;
@@ -14,17 +15,14 @@ import util.Util;
 
 public class MailController {
 
-	//home.jsp、roothome.jspのmailから遷移
+	// home.jsp、roothome.jspのmailから遷移
 	@RequestMapping(value = "/mail")
 	public String getMail() {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
-
-		//メール処理はサービスに投げる
-
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return JspPage.MAIL.getPageName();
 
-		}
-
+	}
+	// メール処理はサービスに投げる
+	// Mails mail = MailService.findByIdAndPass(form.getId(), form.getPass());
 }
-
