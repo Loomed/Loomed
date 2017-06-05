@@ -56,7 +56,7 @@ public class IndexController {
 		//ログイン処理：未作成（id,passを送り、Usersを受け取る。nullが戻ることも）
 		Users LoginUser = IndexService.LoginJudge(LoginId, LoginPass);
 
-		// ログイン成否判定：未作成（LoginUserがnullでなければ、Room番号を受け取る）
+		// ログイン成否判定：未作成（LoginUserがnullでなければRoom番号を受け取る）
 		log.info(LogEnum.IF.getLogValue() + "LoginUser == null");
 		if(LoginUser == null){
 			log.info(LogEnum.IF.getLogValue() + "/login");
