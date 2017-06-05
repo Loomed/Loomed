@@ -57,12 +57,9 @@ public class UserInfoController {
 	public String postUserInfo(@Valid UserChangeForm userChangeForm) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
-
 		getUserLog(userChangeForm);
-		Users user = new Users();
 
-		//myUserService.Update();
-
+		myUserService.Update(userChangeForm);
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return JspPage.USERINFO.getPageName();
