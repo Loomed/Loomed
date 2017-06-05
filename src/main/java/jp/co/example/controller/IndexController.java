@@ -31,13 +31,15 @@ public class IndexController {
 		String LoginPass = "";
 		int LoginRoom = 0;
 
+
 		// 入力されたidがintかどうか判定
 		log.info(LogEnum.IF.getLogValue() + "IndexService.isNum(id)");
 		if (IndexService.isNum(id)) {
 			log.info(LogEnum.IF.getLogValue() + "IndexService.isNum(id)");
 			LoginId = Integer.parseInt(id);
 		} else {
-			log.info(LogEnum.FALSE.getLogValue());
+			log.info(LogEnum.FALSE.getLogValue() + "/login");
+			return "/login";
 		}
 
 		// 入力されたpassが0文字以上か判定
@@ -46,20 +48,35 @@ public class IndexController {
 			log.info(LogEnum.IF.getLogValue() + "LoginPass == pass");
 			LoginPass = pass;
 		} else {
-			log.info(LogEnum.FALSE.getLogValue());
+			log.info(LogEnum.FALSE.getLogValue() + "/login");
+			return "/login";
 		}
 
-		// ログイン判定
+
+		//ログイン処理：未作成（id,passを送り、Usersを受け取る。nullが戻ることも）
 		Users LoginUser = IndexService.LoginJudge(LoginId, LoginPass);
 
-		//教室判定
-		log.info(LogEnum.IF.getLogValue() + "LoginUser != null");
-		if(LoginUser != null){
-			log.info(LogEnum.IF.getLogValue() + "LoginRoom = (番号)");
-			LoginRoom = IndexService.RoomJudge(LoginUser.getUserId());
+		// ログイン成否判定：未作成（LoginUserがnullでなければRoom番号を受け取る）
+		log.info(LogEnum.IF.getLogValue() + "LoginUser == null");
+		if(LoginUser == null){
+			log.info(LogEnum.IF.getLogValue() + "/login");
+			return "/login";
 		}else{
-			log.info(LogEnum.FALSE.getLogValue());
+			log.info(LogEnum.FALSE.getLogValue() + "MapsよりRoom番号をうけとる");
+			//教室判定
+			LoginRoom = IndexService.RoomJudge(LoginUser.getUserId());
 		}
+
+		//教室判定
+//
+//		log.info(LogEnum.IF.getLogValue() + "LoginUser != null");
+//		if(LoginUser != null){
+//			log.info(LogEnum.IF.getLogValue() + "LoginRoom = (番号)");
+//			LoginRoom = IndexService.RoomJudge(LoginUser.getUserId());
+//		}else{
+//			log.info(LogEnum.FALSE.getLogValue());
+//		}
+
 
 		//判定処理
 		log.info(LogEnum.IF.getLogValue() + "LoginUser == null || LoginRoom == 0");
