@@ -12,17 +12,35 @@
 
 <script>
         $(function () {
+
         	//モーダル表示
             $('.delete').click(function () {
                 $('#configDeleteModal').modal();
             });
             $('.change').click(function () {
-                var array = $('#timeScheduleTable1').text().split(':');
+            	console.log("change click");
+            	var id = $(this).attr("id");
+            	var changeId = id.split(':');
+            	console.log(changeId[1]);
+                var array = $('#timeScheduleTable' + changeId[1]).text().split(':');
                 console.log(array[0]);
                 console.log(array[1]);
                 $('#hourChangeModal').val(array[0]);
                 $('#minuteChangeModal').val(array[1]);
-                $('#contentChangeModal').val($('#contentScheduleTable1').text());
+                $('#contentChangeModal').val($('#contentScheduleTable' + changeId[1]).text());
+
+                //重要か通常か判定する
+                console.log("if");
+                if($('#timeScheduleTable' + changeId[1]).attr("class") == 'importanttrue') {
+                	console.log("true");
+                	$('#normalModal').removeAttr('checked');
+                	$('#importantModal').attr('checked', 'checked');
+                } else {
+                	console.log("false");
+                	$('#importantModal').removeAttr('checked');
+                	$('#normalModal').attr('checked', 'checked');
+                }
+
                 $('#configChangeModal').modal();
             });
             $('.reserve').click(function () {
@@ -57,6 +75,10 @@
 	margin-bottom: 0;
 	margin-right: 30px;
 	margin-left: 30px;
+}
+
+.importanttrue {
+	color: RED;
 }
 
 .modal-header-modify {
@@ -106,10 +128,10 @@ td {
 								<tbody>
 									<c:forEach var="list" items="${list}" varStatus="status">
 									<tr>
-										<td id="timeScheduleTable + ${status.index}">${fn:escapeXml(list.time) }</td>
-										<td id="contentScheduleTable + ${status.index}">${fn:escapeXml(list.content) }</td>
-										<td><button class="btn btn-primary change">変更</button></td>
-										<td><button class="btn btn-danger delete">削除</button></td>
+										<td id="timeScheduleTable${status.index}" class="important${fn:escapeXml(list.important) }">${fn:escapeXml(list.time) }</td>
+										<td id="contentScheduleTable${status.index}" class="important${fn:escapeXml(list.important) }">${fn:escapeXml(list.content) }</td>
+										<td><button id="change:${status.index}" class="btn btn-primary change">変更</button></td>
+										<td><button id="delete:${status.index}" class="btn btn-danger delete">削除</button></td>
 									</tr>
 									</c:forEach>
 								</tbody>
@@ -300,7 +322,7 @@ td {
 							<div class="panel-body">
 								<label for="normalModal"><input type="radio"
 									id="normalModal" name="importantModal" value="normalModal"
-									checked />通常</label> <label for="importantModal"><input
+									 />通常</label> <label for="importantModal"><input
 									type="radio" id="importantModal" name="importantModal"
 									value="importantModal" />重要</label>
 							</div>
