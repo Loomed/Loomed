@@ -77,6 +77,9 @@ public class IndexController {
 //			log.info(LogEnum.FALSE.getLogValue());
 //		}
 
+		//研修教室一覧受け取り
+		//List<Trainings> AllTrainings = IndexService.AllTrainings();	←作成から。
+
 
 		//判定処理
 		log.info(LogEnum.IF.getLogValue() + "LoginUser == null || LoginRoom == 0");
