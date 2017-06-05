@@ -290,7 +290,7 @@
             });
         });
         $('#datepicker').on('changeDate', function () {
-            location.href = 'schedule.jsp?date=' + $('#datepicker').datepicker('getFormattedDate');
+            location.href = 'schedule?date=' + $('#datepicker').datepicker('getFormattedDate');
         });
     </script>
 
