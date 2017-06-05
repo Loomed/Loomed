@@ -1,5 +1,7 @@
 package jp.co.example.controller;
 
+import javax.validation.*;
+
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
@@ -52,11 +54,11 @@ public class UserInfoController {
 	 * @Author sakata
 	 */
 	@RequestMapping(value = "/userinfo", method = RequestMethod.POST)
-	public String postUserInfo(UserChangeForm userChangeForm) {
+	public String postUserInfo(@Valid UserChangeForm userChangeForm) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
 
-		log.info("user : " + userChangeForm.getCompanyId());
+		getUserLog(userChangeForm);
 		Users user = new Users();
 
 		//myUserService.Update();
@@ -64,6 +66,17 @@ public class UserInfoController {
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return JspPage.USERINFO.getPageName();
+	}
+
+	private void getUserLog(UserChangeForm user)
+	{
+		log.info("user userId   : " + user.getUserId());
+		log.info("user password : " + user.getPassword());
+		log.info("user userName : " + user.getUserName());
+		log.info("user authority: " + user.getAuthority());
+		log.info("user companyId: " + user.getCompanyId());
+		log.info("user training : " + user.getTraining());
+
 	}
 
 }
