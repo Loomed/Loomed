@@ -36,11 +36,11 @@ public class UserInfoController {
 		return JspPage.USERINFO.getPageName();
 	}
 
-	// @RequestMapping(value="/userinfo", method=RequestMethod.POST)
-	// public String postUserInfo() {
-	// log.info(Util.getMethodName() + LogEnum.START.getLogValue());
-	//
-	// return JspPage.USERINFO.getPageName();
-	// }
+	 @RequestMapping(value="/userinfo", method=RequestMethod.POST)
+	 public String postUserInfo() {
+	 log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+
+	 return JspPage.USERINFO.getPageName();
+	 }
 
 }
