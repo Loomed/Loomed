@@ -1,15 +1,14 @@
 package jp.co.example.controller;
 
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.support.SessionStatus;
 
 import enums.JspPage;
 import enums.LogEnum;
@@ -26,6 +25,14 @@ public class LoginController {
 	@Autowired
 	private LoginService loginService;
 
+	@ModelAttribute("loginForm")
+	private LoginForm setUpForm() {
+		return new LoginForm();
+	}
+
+
+
+
 	// login.jspからの遷移
 	@RequestMapping("/login")
 	public String getLogin() {
@@ -35,18 +42,16 @@ public class LoginController {
 		return JspPage.LOGIN.getPageName();
 	}
 
-	//ログイン処理
+	// ログイン処理
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String postLogin(@Valid LoginForm form, BindingResult result, Model model) {
-		if (result.hasErrors())
-		{
+		if (result.hasErrors()) {
 			return JspPage.LOGIN.getPageName();
 		}
 
 		Users users = loginService.findByIdAndPass(form.getId(), form.getPass());
 
-		if (users != null)
-		{
+		if (users != null) {
 			model.addAttribute(users);
 			return JspPage.INDEX.getPageName();
 		}
@@ -55,10 +60,5 @@ public class LoginController {
 		return JspPage.LOGIN.getPageName();
 	}
 
-	@RequestMapping("/login")
-	public String postLogout(SessionStatus sessionStatus) {
-		sessionStatus.setComplete();
-		return JspPage.LOGIN.getPageName();
-	}
 
 }
