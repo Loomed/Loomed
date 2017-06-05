@@ -14,7 +14,7 @@ public class UsersDaoImpl implements UsersDao {
 	private static final String SQL_SELECT_ID_AND_PASS = "SELECT * FROM users WHERE user_id = ? AND password = ?";
 
 	@Autowired
-	private JdbcTemplate jdbcTemplate;
+ 	private JdbcTemplate jdbcTemplate;
 
 	@Override
 	public Users findByIdAndPass(Integer userId, String password) {
