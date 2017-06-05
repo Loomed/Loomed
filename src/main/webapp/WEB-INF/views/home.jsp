@@ -280,6 +280,7 @@
 			$('#datepicker').on(
 					'changeDate',
 					function() {
+						//遷移？
 						location.href = 'schedule.jsp?date='
 								+ $('#datepicker').datepicker(
 										'getFormattedDate');
