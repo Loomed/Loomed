@@ -1,30 +1,37 @@
 package jp.co.example.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
+import org.springframework.ui.*;
+import org.springframework.web.bind.annotation.*;
 
-import enums.JspPage;
-import enums.LogEnum;
-import jp.co.example.entity.Users;
-import lombok.extern.slf4j.Slf4j;
-import util.Util;
-
-/**
- * userchangeへの遷移 2017/06/05
- *
- * @Author sakata
- */
+import enums.*;
+import jp.co.example.entity.*;
+import jp.co.example.myTest.*;
+import lombok.extern.slf4j.*;
+import util.*;
 
 @Slf4j
 @Controller
 public class UserInfoController {
 
+	@Autowired
+	private MyUsersService myUserService;
+
+	/**
+	 * userchangeへの遷移 2017/06/05
+	 *
+	 * @Author sakata
+	 */
 	@RequestMapping("/userinfo")
-	public String getUserInfo() { // セッションからユーザの値を取得する
+	public String getUserInfo(Model model) { // セッションからユーザの値を取得する
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
 		Users user = new Users();
 		user.setUserId(1);
+
+		Users user2 = myUserService.getUser(user);
+		model.addAttribute("user", user2);
 
 		return JspPage.USERINFO.getPageName();
 	}

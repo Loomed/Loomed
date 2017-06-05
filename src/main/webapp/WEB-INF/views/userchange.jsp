@@ -10,6 +10,7 @@
 
 <%@ include file="common/head.jsp"%>
 
+<style>
 table>tbody>tr>td, .table>tbody>tr>th {
 	border-style: none !important;
 }
@@ -106,27 +107,6 @@ table>td>input {
 		</div>
 	</div>
 
-	<!-- ログアウト確認ダイアログ -->
-	<div class="modal fade" id="logout-modal" tabindex="-1">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header modal-header-modify">
-					<button type="button" class="close" data-dismiss="modal">
-						<span>×</span>
-					</button>
-					<h4 class="modal-title">ログアウト確認</h4>
-				</div>
-				<div class="modal-body">
-					ログアウトしますか？<br>[OK]ボタンを押すとログアウトされ、ログイン画面に移動します
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal"
-						onclick="location.href='login';">OK</button>
-				</div>
-			</div>
-		</div>
-	</div>
 	<!-- 変更確認ダイアログ -->
 	<div class="modal fade" id="change-modal" tabindex="-1">
 		<div class="modal-dialog">
