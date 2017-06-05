@@ -1,28 +1,23 @@
 package jp.co.example.controller;
 
-import javax.validation.Valid;
+import javax.validation.*;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
+import org.springframework.ui.*;
+import org.springframework.validation.*;
+import org.springframework.web.bind.annotation.*;
 
-import enums.JspPage;
-import enums.LogEnum;
-import jp.co.example.entity.Users;
-import jp.co.example.form.LoginForm;
-import jp.co.example.service.LoginService;
-import lombok.extern.slf4j.Slf4j;
-import util.Util;
+import enums.*;
+import jp.co.example.entity.*;
+import jp.co.example.form.*;
+import jp.co.example.service.*;
+import lombok.extern.slf4j.*;
+import util.*;
 
 //login.jspへの遷移、ログイン処理を記述
 @Slf4j
 @Controller
-@SessionAttributes(value = "users")
 public class LoginController {
 
 	@Autowired
@@ -34,7 +29,6 @@ public class LoginController {
 	}
 
 	// ログアウト処理
-
 
 	// login.jspからの遷移
 	@RequestMapping("/login")
@@ -48,24 +42,23 @@ public class LoginController {
 	// ログイン処理
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String postLogin(@Valid LoginForm form, BindingResult result, Model model) {
-		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
-//		if (result.hasErrors()) {
-//			log.info("hasError: " );
-//			return JspPage.LOGIN.getPageName();
-//		}
+		if (result.hasErrors()) {
+			return JspPage.LOGIN.getPageName();
+		}
 
 		Users users = loginService.findByIdAndPass(Integer.parseInt(form.getUserId()), form.getPassword());
 
 		if (users != null) {
+<<<<<<< HEAD
 			log.info("ユーザ");
 			log.info("ユーザ: " +  users.getUserId());
+=======
+>>>>>>> 920dba611398fa5825e3963dd3b4e0aeae90167c
 			model.addAttribute(users);
-			log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 			return JspPage.INDEX.getPageName();
 		}
 
 		model.addAttribute("msg", "IDまたはPASSが間違っています");
-		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return JspPage.LOGIN.getPageName();
 	}
 
