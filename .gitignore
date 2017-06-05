@@ -22,3 +22,5 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+src/main/java/jp/co/example/dao/MyUsersDao.java
+src/main/java/jp/co/example/dao/impl/MyUsersDaoImpl.java
