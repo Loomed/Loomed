@@ -29,25 +29,16 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
 		</dependency>
-<<<<<<< HEAD
-=======
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
->>>>>>> 10abf843a8c250bff27c56cf72a402dfd3071af9
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-
-<<<<<<< HEAD
-
-=======
->>>>>>> 10abf843a8c250bff27c56cf72a402dfd3071af9
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -64,15 +55,11 @@
 			<scope>provided</scope>
 		</dependency>
 
-<<<<<<< HEAD
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-
-=======
->>>>>>> 10abf843a8c250bff27c56cf72a402dfd3071af9
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
