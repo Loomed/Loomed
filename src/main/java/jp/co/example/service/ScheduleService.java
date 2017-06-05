@@ -5,5 +5,5 @@ import java.util.List;
 import jp.co.example.entity.Schedules;
 
 public interface ScheduleService {
-	List<Schedules> getSchedule(String date);
+	List<Schedules> getSchedule(Integer userId, String date);
 }
