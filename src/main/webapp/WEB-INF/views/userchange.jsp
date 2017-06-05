@@ -19,11 +19,6 @@ table>td>input {
 	width: 100px;
 }
 </style>
-<script>
-	$(function() {
-		jQuery("#changeForm").validationEngine();
-	});
-</script>
 </head>
 
 <body>
@@ -36,27 +31,23 @@ table>td>input {
 						<h3 class="panel-title">ユーザ情報変更</h3>
 					</div>
 					<div class="panel-body">
-						<form id="changeForm" class="form-horizontal"
-							action="userinfo">
+						<form:form path="changeForm" class="form-horizontal">
 							<div class="form-group">
 								<label for="intputUserId" class="col-sm-2 control-label">ユーザID</label>
 								<div class="col-sm-10">
-									<label for="intputUserId" class="control-label">000001</label>
+									<form:form path="userId" class="control-label">000001</form:form>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputPassword" class="col-sm-2 control-label">パスワード</label>
 								<div class="col-sm-10">
-									<input type="password" class="form-control" id="inputPassword"
-										value="●●●●●●" required>
+									<form:password path="password" class="form-control" value="●●●●●●" required/>
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="inputName" class="col-sm-2 control-label">氏
-									名</label>
+								<label for="inputName" class="col-sm-2 control-label">氏 名</label>
 								<div class="col-sm-10">
-									<input type="text" class="form-control" id="inputName"
-										value="田中太郎" required>
+									<form:input path="userName" class="form-control" value="田中太郎" required/>
 								</div>
 							</div>
 							<div class="form-group">
@@ -100,7 +91,7 @@ table>td>input {
 										onclick="$('#change-modal').modal();">変更</button>
 								</div>
 							</div>
-						</form>
+						</form:form>
 					</div>
 				</div>
 			</div>
