@@ -102,37 +102,59 @@ public class ScheduleServiceImpl implements ScheduleService {
 			// プロジェクトの数を取得
 			int projectorCount = td.getTraining(trainingId).getProjectorCount();
 
-			Timestamp ts = null;
 			int listIndex = 0;
 			Users projectorUser;
+			Timestamp ts = null;
 
-			// 時間ごとにループをする
-			log.info(LogEnum.FOR.getLogValue() + "int i = 0; i < TIME_SPAN.length; i++" + LogEnum.START.getLogValue());
-			for (int i = 0; i < TIME_SPAN.length; i++) {
-				// jsp用にtimestampをStringに変換
-				String timeForm = SDF_TIME.format(list.get(listIndex).getReserveTime());
-				log.info(LogEnum.FOR.getLogValue() + "int j = 0; j < projectorCount; j++" + LogEnum.START.getLogValue());
-				for (int j = 0; j < projectorCount; j++) {
-					// プロジェクタの数だけループ
-					// テーブルがない場合予約なしを追加する
-					log.info(LogEnum.IF.getLogValue() + "TIME_SPAN[i].equals(timeForm) && list.get(listIndex).getProjectorNumber() == j");
-					if(TIME_SPAN[i].equals(timeForm) && list.get(listIndex).getProjectorNumber() == j) {
-						//Projectorのlistに時間が同じなおかつ、プロジェクタ番号が同じの場合のレコードがある場合
+			if(SELECT_ALL.equals(time)) {
+
+			} else {
+				for(int i = 0; i < projectorCount; i++) {
+					if(list.get(listIndex).getProjectorNumber() == i + 1) {
+						//プロジェクタ番号が同じの場合のレコードがある場合
 						log.info(LogEnum.TRUE.getLogValue());
 
 						projectorUser = ud.findById(list.get(listIndex).getUserId());
-						listForm.add(new ProjectorForm(timeForm, "プロジェクタ" + list.get(listIndex).getProjectorNumber(),
+						listForm.add(new ProjectorForm(time, "プロジェクタ" + list.get(listIndex).getProjectorNumber(),
 								projectorUser.getUserName()));
-						listIndex++;
 					} else {
-						//ない場合
 						log.info(LogEnum.FALSE.getLogValue());
 
-						listForm.add(new ProjectorForm(TIME_SPAN[i], "プロジェクタ" + j, "予約なし"));
+						listForm.add(new ProjectorForm(TIME_SPAN[i], "プロジェクタ" + (i + 1), "予約なし"));
 					}
 				}
-				log.info(LogEnum.FOR.getLogValue() + "int j = 0; j < projectorCount; j++" + LogEnum.END.getLogValue());
 			}
+
+
+
+
+//			// 時間ごとにループをする
+//			log.info(LogEnum.FOR.getLogValue() + "int i = 0; i < TIME_SPAN.length; i++" + LogEnum.START.getLogValue());
+//			for (int i = 0; i < TIME_SPAN.length; i++) {
+//				// jsp用にtimestampをStringに変換
+//				String timeForm = SDF_TIME.format(list.get(listIndex).getReserveTime());
+//				log.info(LogEnum.FOR.getLogValue() + "int j = 0; j < projectorCount; j++" + LogEnum.START.getLogValue());
+//				for (int j = 0; j < projectorCount; j++) {
+//					// プロジェクタの数だけループ
+//					// テーブルがない場合予約なしを追加する
+//					log.info(LogEnum.IF.getLogValue() + "TIME_SPAN[i].equals(timeForm) && list.get(listIndex).getProjectorNumber() == j");
+//					if(TIME_SPAN[i].equals(timeForm) && list.get(listIndex).getProjectorNumber() == j ) {
+//						//Projectorのlistに時間が同じなおかつ、プロジェクタ番号が同じの場合のレコードがある場合
+//						log.info(LogEnum.TRUE.getLogValue());
+//
+//						projectorUser = ud.findById(list.get(listIndex).getUserId());
+//						listForm.add(new ProjectorForm(timeForm, "プロジェクタ" + list.get(listIndex).getProjectorNumber(),
+//								projectorUser.getUserName()));
+//						listIndex++;
+//					} else {
+//						//ない場合
+//						log.info(LogEnum.FALSE.getLogValue());
+//
+//						listForm.add(new ProjectorForm(TIME_SPAN[i], "プロジェクタ" + j, "予約なし"));
+//					}
+//				}
+//				log.info(LogEnum.FOR.getLogValue() + "int j = 0; j < projectorCount; j++" + LogEnum.END.getLogValue());
+//			}
 			log.info(LogEnum.FOR.getLogValue() + "int i = 0; i < TIME_SPAN.length; i++" + LogEnum.END.getLogValue());
 
 			log.info(Util.getMethodName() + LogEnum.END.getLogValue());
