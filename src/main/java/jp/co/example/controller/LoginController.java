@@ -1,5 +1,6 @@
 package jp.co.example.controller;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,11 @@ public class LoginController {
 	}
 
 	// ログアウト処理
+	HttpSession session = request.getSession(false);
+	if(session != null){
+		session.invalidate();
+		session = request.getSession(false);
+	}
 
 	// login.jspからの遷移
 	@RequestMapping("/login")
@@ -56,6 +62,11 @@ public class LoginController {
 			model.addAttribute(users);
 			return JspPage.INDEX.getPageName();
 		}
+
+		//セッションに保存する？
+		HttpSession session = request.getSession();
+		session.setAttribute("users", users);
+
 
 		model.addAttribute("msg", "IDまたはPASSが間違っています");
 		return JspPage.LOGIN.getPageName();
