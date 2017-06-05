@@ -11,6 +11,6 @@ public class UserChangeForm {
 	private Integer userId;
 	private String password;
 	private String userName;
-	private Integer companyId;
+	private String companyId;
 	private Integer authority;
 }
