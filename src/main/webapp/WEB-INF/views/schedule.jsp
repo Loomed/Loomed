@@ -106,8 +106,8 @@ td {
 								<tbody>
 									<c:forEach var="list" items="${list}" varStatus="status">
 									<tr>
-										<td id="timeScheduleTable + ${status.index}">${fn:escapeXml(list.uploadDatetime) }</td>
-										<td id="contentScheduleTable + ${status.index}">${fn:escapeXml(list.scheduleContents) }</td>
+										<td id="timeScheduleTable + ${status.index}">${fn:escapeXml(list.time) }</td>
+										<td id="contentScheduleTable + ${status.index}">${fn:escapeXml(list.content) }</td>
 										<td><button class="btn btn-primary change">変更</button></td>
 										<td><button class="btn btn-danger delete">削除</button></td>
 									</tr>

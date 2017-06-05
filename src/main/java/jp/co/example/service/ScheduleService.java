@@ -2,8 +2,8 @@ package jp.co.example.service;
 
 import java.util.List;
 
-import jp.co.example.entity.Schedules;
+import jp.co.example.form.ScheduleForm;
 
 public interface ScheduleService {
-	List<Schedules> getSchedule(Integer userId, String date);
+	List<ScheduleForm> getSchedule(Integer userId, String date);
 }

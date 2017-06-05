@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import enums.*;
-import jp.co.example.entity.Schedules;
 import jp.co.example.entity.Users;
+import jp.co.example.form.ScheduleForm;
 import jp.co.example.service.ScheduleService;
 import lombok.extern.slf4j.Slf4j;
 import util.Util;
@@ -42,7 +42,7 @@ public class ScheduleController {
 			log.info(LogEnum.FALSE.getLogValue());
 		}
 
-		List<Schedules> list = ss.getSchedule(user.getUserId(), date);
+		List<ScheduleForm> list = ss.getSchedule(user.getUserId(), date);
 		model.addAttribute("list", list);
 
 		log.info(list.get(0).toString());
