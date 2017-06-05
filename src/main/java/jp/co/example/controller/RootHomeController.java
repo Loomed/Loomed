@@ -20,6 +20,8 @@ public class RootHomeController {
 			return JspPage.TRAININGCONFIG.getPageName();
 		} else if ("sharaconfig".equals(button)) {
 			return JspPage.SHARECONFIG.getPageName();
+		} else if("userinfo".equals(button)){
+			return JspPage.USERINFO.getPageName();
 		}
 
 		return null;
