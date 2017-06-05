@@ -1,5 +1,6 @@
 package jp.co.example.dao.impl;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,18 +17,19 @@ import util.Util;
 @Repository
 @Slf4j
 public class SchedulesDaoImpl implements SchedulesDao{
-	private static final String SQL_SELECT_SCHEDULES_WHERE_USERID = "SELECT * FROM schedules WHERE user_id = ?";
+	private static final String SQL_SELECT_SCHEDULES_WHERE_USERID_AND_DATE =
+			 "SELECT * FROM schedules WHERE user_id = ? AND upload_datetime BETWEEN ? AND ?";
 
 	@Autowired
 	JdbcTemplate jt;
 
 	@Override
-	public List<Schedules> SelectScheduleWhereUserId(Integer userId) {
+	public List<Schedules> selectScheduleWhereUserIdAndDate(Integer userId, Timestamp dateMin, Timestamp dateMax) {
 		// TODO 自動生成されたメソッド・スタブ
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
-		List<Schedules> list = jt.query(SQL_SELECT_SCHEDULES_WHERE_USERID, new BeanPropertyRowMapper<Schedules>(Schedules.class),
-				userId);
+		List<Schedules> list = jt.query(SQL_SELECT_SCHEDULES_WHERE_USERID_AND_DATE, new BeanPropertyRowMapper<Schedules>(Schedules.class),
+				userId, dateMin, dateMax);
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return list;
