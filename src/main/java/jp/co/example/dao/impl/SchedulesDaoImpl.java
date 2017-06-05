@@ -16,10 +16,9 @@ import util.Util;
 
 @Repository
 @Slf4j
-public class SchedulesDaoImpl implements SchedulesDao{
-	private static final String SQL_SELECT_SCHEDULES_WHERE_USERID_AND_DATE =
-			 "SELECT * FROM schedules WHERE user_id = ? AND upload_datetime BETWEEN ? AND ?";
-
+public class SchedulesDaoImpl implements SchedulesDao {
+	private static final String SQL_SELECT_SCHEDULES_WHERE_USERID_AND_DATE = "SELECT * FROM schedules WHERE user_id = ? AND upload_datetime BETWEEN ? AND ?";
+	private static final String SQL_SELECT_SCHEDULES_WHERE_IMPORTANT = "SELECT * FROM schedules WHERE important = true ORDER BY upload_datetime desc";
 	@Autowired
 	JdbcTemplate jt;
 
@@ -28,10 +27,18 @@ public class SchedulesDaoImpl implements SchedulesDao{
 		// TODO 自動生成されたメソッド・スタブ
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
-		List<Schedules> list = jt.query(SQL_SELECT_SCHEDULES_WHERE_USERID_AND_DATE, new BeanPropertyRowMapper<Schedules>(Schedules.class),
-				userId, dateMin, dateMax);
+		List<Schedules> list = jt.query(SQL_SELECT_SCHEDULES_WHERE_USERID_AND_DATE,
+				new BeanPropertyRowMapper<Schedules>(Schedules.class), userId, dateMin, dateMax);
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
+		return list;
+	}
+
+	@Override
+	public List<Schedules> getInpoSche() {
+		List<Schedules> list = jt.query(SQL_SELECT_SCHEDULES_WHERE_IMPORTANT,
+				new BeanPropertyRowMapper<Schedules>(Schedules.class));
+
 		return list;
 	}
 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import enums.LogEnum;
 import jp.co.example.dao.MapsDao;
+import jp.co.example.dao.TrainingsDao;
 import jp.co.example.dao.UsersDao;
 import jp.co.example.entity.Trainings;
 import jp.co.example.entity.Users;
@@ -19,12 +20,14 @@ import util.Util;
 public class IndexServiceImpl implements IndexService {
 
 	UsersDao UsersDao;
+	TrainingsDao TrainingsDao;
 	MapsDao MapsDao;
 
+	//ログインの処理：未記入
 	public Users LoginJudge(int id, String pass) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
-		// Users LoginUser = UsersDao.FindOneId;
+		//仮データ
 		Users LoginUser = new Users(100, "test", "テスト", 1, 3);
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
@@ -32,6 +35,7 @@ public class IndexServiceImpl implements IndexService {
 
 	}
 
+	//ユーザと教室の紐付け：未確定
 	public int RoomJudge(int id) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
@@ -59,10 +63,11 @@ public class IndexServiceImpl implements IndexService {
 
 		// 処理未確定のため擬似作成
 		List<Trainings> AllRoom = new ArrayList();
-		AllRoom.add(new Trainings(0,"全体管理",6,"test:root"));
-		AllRoom.add(new Trainings(1,"経験者Java(品川教室)",1,"test:a"));
-		AllRoom.add(new Trainings(2,"未経験者Java(品川教室)",2,"test:b"));
-		AllRoom.add(new Trainings(3,"未経験者Java(A教室)",3,"test:c"));
+		AllRoom =  TrainingsDao.AllRooms();
+//		AllRoom.add(new Trainings(0,"全体管理",6,"test:root"));
+//		AllRoom.add(new Trainings(1,"経験者Java(品川教室)",1,"test:a"));
+//		AllRoom.add(new Trainings(2,"未経験者Java(品川教室)",2,"test:b"));
+//		AllRoom.add(new Trainings(3,"未経験者Java(A教室)",3,"test:c"));
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return AllRoom;

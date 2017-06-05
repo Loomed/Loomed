@@ -7,4 +7,8 @@ import jp.co.example.entity.Schedules;
 
 public interface SchedulesDao {
 	List<Schedules> selectScheduleWhereUserIdAndDate(Integer userId, Timestamp dateMin, Timestamp dateMax);
+
+	List<Schedules> getInpoSche();
+
+
 }
