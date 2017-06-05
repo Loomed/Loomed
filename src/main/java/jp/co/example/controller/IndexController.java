@@ -1,6 +1,9 @@
 package jp.co.example.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import enums.LogEnum;
+import enums.ScopeKey;
+import jp.co.example.entity.Trainings;
 import jp.co.example.entity.Users;
 import jp.co.example.service.IndexService;
 import lombok.Getter;
@@ -24,7 +29,7 @@ public class IndexController {
 
 	@RequestMapping("/index")
 	public String getIndex(@RequestParam("inputId") String id, @RequestParam("inputPassword") String pass,
-			HttpServletRequest request) {
+			HttpServletRequest request, HttpSession session) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
 		int LoginId = 0;
@@ -78,7 +83,8 @@ public class IndexController {
 //		}
 
 		//研修教室一覧受け取り
-		//List<Trainings> AllTrainings = IndexService.AllTrainings();	←作成から。
+		List<Trainings> AllTrainings = IndexService.AllTrainings();
+
 
 
 		//判定処理
@@ -89,8 +95,9 @@ public class IndexController {
 			return "/login";
 		}else{
 			log.info(LogEnum.FALSE.getLogValue()+ "index.jsp");
-			request.getSession().setAttribute("ScopeKey.LOGINUSER.getLogValue()", LoginUser);
-			request.getSession().setAttribute("ScopeKey.LOGINROOM.getLogValue()", LoginRoom);
+			session.setAttribute(ScopeKey.LOGINUSER.getScopeKey(), LoginUser);
+			session.setAttribute(ScopeKey.LOGINROOM.getScopeKey(), LoginRoom);
+			session.setAttribute("AllTrainings", AllTrainings);
 			log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 			return "index";
 		}
