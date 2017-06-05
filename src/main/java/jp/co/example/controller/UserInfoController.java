@@ -34,13 +34,15 @@ public class UserInfoController {
 	 * @Author sakata
 	 */
 	@RequestMapping("/userinfo")
-	public String getUserInfo(Model model) { // セッションからユーザの値を取得する
+	public String getUserInfo(Model model) { // 引数の
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
+		//本来ならセッションのユーザ値を使用する
 		Users user = new Users();
 		user.setUserId(1);
-
 		Users user2 = myUsersService.getUser(user);
+
+
 		model.addAttribute("user", user2);
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
@@ -56,8 +58,10 @@ public class UserInfoController {
 	@RequestMapping(value = "/userinfo", method = RequestMethod.POST)
 	public String postUserInfo(@Valid UserChangeForm userChangeForm) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
-
+		//ログ表示
 		getUserLog(userChangeForm);
+
+
 
 		myUserService.Update(userChangeForm);
 
