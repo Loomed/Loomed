@@ -104,7 +104,7 @@
 								<tr>
 									<td>1</td>
 									<td>000001</td>
-									<td><a href="home.jsp">経験者Java品川教室</a></td>
+									<td><a href="home">経験者Java品川教室</a></td>
 									<td><button class="btn btn-primary change">変更</button></td>
 									<td><button class="btn btn-danger delete">削除</button></td>
 								</tr>

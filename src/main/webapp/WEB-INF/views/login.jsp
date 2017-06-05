@@ -20,7 +20,7 @@
 						<h3 class="panel-title">ログイン</h3>
 					</div>
 					<div class="panel-body">
-						<form class="form-horizontal" action="index.jsp">
+						<form class="form-horizontal" action="index">
 							<div class="form-group">
 								<label for="intputUserId" class="col-sm-2 control-label">ユーザID</label>
 								<div class="col-sm-10">
