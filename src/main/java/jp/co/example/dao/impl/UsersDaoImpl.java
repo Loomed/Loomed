@@ -1,15 +1,14 @@
 package jp.co.example.dao.impl;
 
-import java.util.List;
+import java.util.*;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.dao.*;
+import org.springframework.jdbc.core.*;
+import org.springframework.stereotype.*;
 
-import jp.co.example.dao.UsersDao;
-import jp.co.example.entity.Users;
+import jp.co.example.dao.*;
+import jp.co.example.entity.*;
 
 @Repository
 public class UsersDaoImpl implements UsersDao {
@@ -36,7 +35,7 @@ public class UsersDaoImpl implements UsersDao {
 
 	@Override
 	public int update(Integer userId, String password, String userName, Integer companyId, Integer authority) {
-		return jdbcTemplate.update(UPDATE, password, userName, companyId, authority);
+		return jdbcTemplate.update(UPDATE, password, userName, companyId, authority, userId);
 	}
 
 	@Override
