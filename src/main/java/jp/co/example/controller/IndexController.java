@@ -30,6 +30,7 @@ public class IndexController {
 
 		int LoginId = 0;
 		String LoginPass = "";
+		int LoginRoom = 0;
 
 		// 入力されたidがintかどうか判定
 		log.info(LogEnum.IF.getLogValue() + "Generalized.isNum(id)");
@@ -52,9 +53,19 @@ public class IndexController {
 		// ログイン判定
 		Users LoginUser = IndexService.LoginJudge(LoginId, LoginPass);
 
+		//教室判定
+		if(LoginUser != null){
+			LoginRoom = IndexService.RoomJudge(LoginUser.getUserId());
+		}
+
+		//判定処理
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
-		return null;
-
+		if(LoginUser == null || LoginRoom == 0){
+			return "/login";
+		}else{
+			request.getSession().setAttribute("ScopeKey.LOGINUSER.getLogValue()", LoginUser);
+			request.getSession().setAttribute("ScopeKey.LOGINROOM.getLogValue()", LoginRoom);
+			return "index";
+		}
 	}
-
 }
