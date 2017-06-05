@@ -1,5 +1,7 @@
 package jp.co.example.dao;
 
+import java.util.List;
+
 import jp.co.example.entity.Users;
 
 public interface UsersDao {
@@ -7,4 +9,6 @@ public interface UsersDao {
 	Users findById(Integer userId);
 
 	int update(Integer userId, String password, String userName, Integer companyId, Integer authority);
+
+	public List<Users> FindMember(int roomId, int comId);
 }

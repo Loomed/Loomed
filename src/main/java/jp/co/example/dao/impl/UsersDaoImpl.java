@@ -1,5 +1,7 @@
 package jp.co.example.dao.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -14,6 +16,7 @@ public class UsersDaoImpl implements UsersDao {
 	private static final String SQL_SELECT_ID_AND_PASS = "SELECT * FROM users WHERE user_id = ? AND password = ?";
 	private static final String SQL_SELECT_ID = "SELECT * FROM users WHERE user_id = ?";
 	private static final String UPDATE ="UPDATE users SET password = ?, user_name = ?, company_id = ?, authority = ? WHERE user_id = ?";
+	private static final String SQL_MEMBER_SELECT ="SELECT * FROM users WHERE company_id = ?";
 
 	@Autowired
  	private JdbcTemplate jdbcTemplate;
@@ -48,6 +51,20 @@ public class UsersDaoImpl implements UsersDao {
 		}
 
 		return users;
+	}
+
+	@Override
+	public List<Users> FindMember(int roomId, int comId){
+		//作成途中
+		List<Users> member = null;
+		try {
+			member = jdbcTemplate.query(SQL_MEMBER_SELECT, new BeanPropertyRowMapper<Users>(Users.class),
+					comId);
+		} catch (DataAccessException e) {
+			member = null;
+		}
+
+		return member;
 	}
 
 }
