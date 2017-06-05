@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.support.SessionStatus;
 
 import enums.JspPage;
 import enums.LogEnum;
@@ -39,7 +40,7 @@ public class LoginController {
 	public String postLogin(@Valid LoginForm form, BindingResult result, Model model) {
 		if (result.hasErrors())
 		{
-			return "login";
+			return JspPage.LOGIN.getPageName();
 		}
 
 		Users users = loginService.findByIdAndPass(form.getId(), form.getPass());
@@ -47,17 +48,17 @@ public class LoginController {
 		if (users != null)
 		{
 			model.addAttribute(users);
-			return "menu";
+			return JspPage.INDEX.getPageName();
 		}
 
 		model.addAttribute("msg", "IDまたはPASSが間違っています");
-		return "login";
+		return JspPage.LOGIN.getPageName();
 	}
 
-//	@RequestMapping("/logout")
-//	public String postLogout(SessionStatus sessionStatus) {
-//		sessionStatus.setComplete();
-//		return "logout";
-//	}
+	@RequestMapping("/login")
+	public String postLogout(SessionStatus sessionStatus) {
+		sessionStatus.setComplete();
+		return JspPage.LOGIN.getPageName();
+	}
 
 }
