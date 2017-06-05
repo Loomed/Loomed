@@ -10,7 +10,6 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import util.Util;
 
-//home、roothomeからのmail.jspの遷移を記述
 @Getter
 @Slf4j
 
@@ -34,7 +33,13 @@ public class MailController {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return JspPage.MAIL.getPageName();
+	}
 
-		// 削除したらmail.jspへ遷移。（？）
+	// 削除したらmail.jspへ遷移。
+	@RequestMapping(value = "/messagedelete")
+	public String messageDelete() {
+		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
+		return JspPage.MAIL.getPageName();
 	}
 }

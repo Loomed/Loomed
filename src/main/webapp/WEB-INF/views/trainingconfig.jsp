@@ -17,6 +17,7 @@
 		});
 
 		$('.change').click(function() {
+			//Javasctiptからの遷移？
 			location.href = "trainingchange.jsp";
 		});
 	});
