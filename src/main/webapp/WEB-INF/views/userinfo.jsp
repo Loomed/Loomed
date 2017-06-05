@@ -59,9 +59,9 @@
 							<div class="form-group">
 								<div class="col-sm-offset-1 col-sm-10">
 									<button type="button" class="btn btn-default"
-										onclick="location.href = 'home.jsp';">前の画面に戻る</button>
+										onclick="location.href = 'home';">前の画面に戻る</button>
 									<button type="button" class="btn btn-primary pull-right"
-										onclick="location.href = 'userchange.jsp';">ユーザ情報を変更する</button>
+										onclick="location.href = 'userchange';">ユーザ情報を変更する</button>
 								</div>
 							</div>
 						</form>

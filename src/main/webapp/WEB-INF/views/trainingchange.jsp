@@ -37,7 +37,7 @@ table>td>input {
 					</div>
 					<div class="panel-body">
 						<form id="changeForm" class="form-horizontal"
-							action="trainingconfig.jsp">
+							action="trainingconfig">
 							<div class="form-group">
 								<label for="intputUserId" class="col-sm-3 control-label">教室ID</label>
 								<div class="col-sm-9">
@@ -69,7 +69,7 @@ table>td>input {
 							<div class="form-group">
 								<div class="col-sm-offset-1 col-sm-10">
 									<button type="button" class="btn btn-default"
-										onclick="location.href='trainingconfig.jsp';">前の画面に戻る</button>
+										onclick="location.href='trainingconfig';">前の画面に戻る</button>
 									<button type="button" class="btn btn-primary pull-right"
 										onclick="$('#change-modal').modal();">変更</button>
 								</div>
@@ -97,7 +97,7 @@ table>td>input {
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
 					<button type="button" class="btn btn-default btn-primary"
-						data-dismiss="modal" onclick="location.href='trainingconfig.jsp';">OK</button>
+						data-dismiss="modal" onclick="location.href='trainingconfig';">OK</button>
 				</div>
 			</div>
 		</div>

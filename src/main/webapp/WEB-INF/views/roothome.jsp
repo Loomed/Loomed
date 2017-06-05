@@ -57,19 +57,19 @@
 						</h5>
 						<p>
 							<button class="btn btn-primary btn-block"
-								onclick="location.href='userinfo.jsp';">ユーザ情報</button>
+								onclick="location.href='userinfo';">ユーザ情報</button>
 						</p>
 						<p>
 							<button class="btn btn-primary btn-block"
-								onclick="location.href='userconfig.jsp';">ユーザ管理</button>
+								onclick="location.href='userconfig';">ユーザ管理</button>
 						</p>
 						<p>
 							<button class="btn btn-primary btn-block"
-								onclick="location.href='trainingconfig.jsp';">研修管理</button>
+								onclick="location.href='trainingconfig';">研修管理</button>
 						</p>
 						<p>
 							<button class="btn btn-primary btn-block"
-								onclick="location.href='shareconfig.jsp';">共有ファイルアップロード</button>
+								onclick="location.href='shareconfig';">共有ファイルアップロード</button>
 						</p>
 					</div>
 				</div>
@@ -82,7 +82,7 @@
 							<span class="badge">26</span>
 						</p>
 					</ul>
-					<a href="mail.jsp">
+					<a href="mail">
 						<div class="tab-content">
 							<div class="row">
 								<div class="col-xs-6">メールボックス</div>
@@ -96,7 +96,7 @@
 				</div>
 				<div class="card">
 					<ul class="nav nav-tabs" role="tablist">
-						<li role="presentation"><a href="schedule.jsp"
+						<li role="presentation"><a href="schedule"
 							aria-controls="home" role="tab"><i
 								class="fa fa-calendar fa-2x" style="margin-right: 10px;"></i>スケジュール</a>
 						</li>
@@ -163,7 +163,7 @@
 				<!-- tabs -->
 				<div class="card">
 					<ul class="nav nav-tabs" role="tablist1">
-						<li role="presentation"><a href="shareconfig.jsp"
+						<li role="presentation"><a href="shareconfig"
 							aria-controls="file" role="tab" data-toggle="tab">ファイル共有</a></li>
 					</ul>
 					<!-- Tab panes -->
@@ -265,6 +265,7 @@
 		$('#datepicker').on(
 				'changeDate',
 				function() {
+					//Javasctiptからの遷移？
 					location.href = 'schedule.jsp?date='
 							+ $('#datepicker').datepicker('getFormattedDate');
 				});

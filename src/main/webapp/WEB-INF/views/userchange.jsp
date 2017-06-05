@@ -10,7 +10,6 @@
 
 <%@ include file="common/head.jsp"%>
 
-<style>
 table>tbody>tr>td, .table>tbody>tr>th {
 	border-style: none !important;
 }
@@ -37,7 +36,7 @@ table>td>input {
 					</div>
 					<div class="panel-body">
 						<form id="changeForm" class="form-horizontal"
-							action="userinfo.jsp">
+							action="userinfo">
 							<div class="form-group">
 								<label for="intputUserId" class="col-sm-2 control-label">ユーザID</label>
 								<div class="col-sm-10">
@@ -95,7 +94,7 @@ table>td>input {
 							<div class="form-group">
 								<div class="col-sm-offset-1 col-sm-10">
 									<button type="button" class="btn btn-default"
-										onclick="location.href='userinfo.jsp';">前の画面に戻る</button>
+										onclick="location.href='userinfo';">前の画面に戻る</button>
 									<button type="button" class="btn btn-primary pull-right"
 										onclick="$('#change-modal').modal();">変更</button>
 								</div>
@@ -123,7 +122,7 @@ table>td>input {
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
 					<button type="button" class="btn btn-primary" data-dismiss="modal"
-						onclick="location.href='login.jsp';">OK</button>
+						onclick="location.href='login';">OK</button>
 				</div>
 			</div>
 		</div>
@@ -144,7 +143,7 @@ table>td>input {
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
 					<button type="button" class="btn btn-primary" data-dismiss="modal"
-						onclick="location.href='userinfo.jsp';">OK</button>
+						onclick="location.href='userinfo';">OK</button>
 				</div>
 			</div>
 		</div>
