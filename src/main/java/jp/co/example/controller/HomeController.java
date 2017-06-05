@@ -45,6 +45,7 @@ public class HomeController {
 		// テストデータ
 		user = new Users(1, "pass", "山田 太郎", 1, 0);
 		tr = new Trainings(2, "Java研修", 2, "未経験者向けのJava研修");
+
 		// ボタンで遷移先を決定
 		/*
 		 * if ("userinfo".equals(button)) { return
