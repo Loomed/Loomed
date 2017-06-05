@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import enums.JspPage;
 import enums.LogEnum;
 import jp.co.example.entity.Users;
+import jp.co.example.form.LoginForm;
 import jp.co.example.service.LoginService;
 import lombok.extern.slf4j.Slf4j;
 import util.Util;
@@ -30,8 +31,8 @@ public class LoginController {
 		return new LoginForm();
 	}
 
-
-
+	// ログアウト処理
+	if
 
 	// login.jspからの遷移
 	@RequestMapping("/login")
@@ -59,6 +60,5 @@ public class LoginController {
 		model.addAttribute("msg", "IDまたはPASSが間違っています");
 		return JspPage.LOGIN.getPageName();
 	}
-
 
 }
