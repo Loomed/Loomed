@@ -37,31 +37,9 @@
 				<div class="card">
 					<ul class="nav nav-tabs" role="tablist">
 						<li role="presentation"><a aria-controls="home" role="tab"
-							data-toggle="tab">ようこそ 山田 太郎 さん</a></li>
+							data-toggle="tab">ようこそ {list.userName} さん</a></li>
 					</ul>
 					<!-- Tab panes -->
-					<div class="tab-content">
-						<h4>
-							<div class="col-xs-3">
-								<label>教室</label>
-							</div>
-							<div class="col-xs-9">
-								<label>経験者Java品川教室</label>
-							</div>
-						</h4>
-						<p>
-							<button type="submit" class="btn btn-primary btn-block"
-								value="userinfo">ユーザ情報</button>
-						</p>
-						<p>
-							<button type="submit" class="btn btn-primary btn-block"
-								value="member">研修参加者一覧ページへ</button>
-						</p>
-						<p>
-							<button type="submit" class="btn btn-primary btn-block"
-								value="shareconfig">共有ファイルアップロード</button>
-						</p>
-					</div>
 					<div class="tab-content">
 						<h4>
 							<div class="col-xs-3">
@@ -242,8 +220,6 @@
 							<div role="tabpanel1" class="tab-pane" id="traning">研修情報</div>
 						</div>
 					</div>
-
-					<<<<<<< HEAD
 				</div>
 			</div>
 		</div>
@@ -284,7 +260,6 @@
 										'getFormattedDate');
 					});
 		</script>
-		=======
 	</div>
 	</div>
 	</div>
@@ -343,8 +318,6 @@
 							+ $('#datepicker').datepicker('getFormattedDate');
 				});
 	</script>
-	>>>>>>> 0d7cdb8d43face8164bc703b531d29647d597a64
-
 </body>
 
 </html>
