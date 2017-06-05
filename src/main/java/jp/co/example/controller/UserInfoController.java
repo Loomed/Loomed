@@ -22,7 +22,7 @@ public class UserInfoController {
 	@Autowired
 	private MyUsersService myUsersService;
 
-	@ModelAttribute("userChangeForm")
+	@ModelAttribute("indexForm")
 	private UserChangeForm setUpForm() {
 		return new UserChangeForm();
 	}

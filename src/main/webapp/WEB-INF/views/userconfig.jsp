@@ -263,7 +263,9 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+					<a href="userDelete">
 					<button type="button" class="btn btn-danger">削除</button>
+					</a>
 				</div>
 			</div>
 		</div>

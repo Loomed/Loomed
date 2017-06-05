@@ -198,11 +198,13 @@
 												<div class="help-block with-errors"></div>
 											</div>
 
- 											<form:form action="mail" method="post">
+
 												<div class="form-group">
+ 												<form:form action="mail" method="post">
 													<button type="submit" class="btn btn-primary">送信</button>
+ 												</form:form>
 												</div>
-  											</form:form>
+
 											<!--　入力フォーム -->
 										</form>
 									</div>
@@ -304,7 +306,7 @@
 					<!-- 6.モーダルのフッタ -->
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
-						<a href="messagedelete">
+						<a href="messageDelete">
 							<button type="button" class="btn btn-danger">削除</button>
 						</a>
 					</div>
