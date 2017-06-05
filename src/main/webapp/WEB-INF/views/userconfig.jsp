@@ -16,6 +16,7 @@
 			$('#configModal').modal();
 		});
 		$('.change').click(function() {
+			//Javasctiptからの遷移？
 			location.href = "rootuserchange.jsp";
 		});
 		$('.combobox').combobox();
