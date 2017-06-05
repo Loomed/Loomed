@@ -1,19 +1,22 @@
 package jp.co.example.controller;
 
-import javax.validation.*;
+import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.stereotype.*;
-import org.springframework.ui.*;
-import org.springframework.validation.*;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import enums.*;
-import jp.co.example.entity.*;
-import jp.co.example.form.*;
-import jp.co.example.service.*;
-import lombok.extern.slf4j.*;
-import util.*;
+import enums.JspPage;
+import enums.LogEnum;
+import jp.co.example.entity.Users;
+import jp.co.example.form.LoginForm;
+import jp.co.example.service.LoginService;
+import lombok.extern.slf4j.Slf4j;
+import util.Util;
 
 //login.jspへの遷移、ログイン処理を記述
 @Slf4j
@@ -49,11 +52,7 @@ public class LoginController {
 		Users users = loginService.findByIdAndPass(Integer.parseInt(form.getUserId()), form.getPassword());
 
 		if (users != null) {
-<<<<<<< HEAD
-			log.info("ユーザ");
-			log.info("ユーザ: " +  users.getUserId());
-=======
->>>>>>> 920dba611398fa5825e3963dd3b4e0aeae90167c
+
 			model.addAttribute(users);
 			return JspPage.INDEX.getPageName();
 		}
