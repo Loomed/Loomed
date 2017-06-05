@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import enums.LogEnum;
 import jp.co.example.dao.SchedulesDao;
 import jp.co.example.entity.Schedules;
+import jp.co.example.form.ProjectorForm;
 import jp.co.example.form.ScheduleForm;
 import jp.co.example.service.ScheduleService;
 import lombok.extern.slf4j.Slf4j;
@@ -54,9 +55,29 @@ public class ScheduleServiceImpl implements ScheduleService {
 			e.printStackTrace();
 		}
 		return null;
+	}
 
+	@Override
+	public List<ProjectorForm> getScheduleJson(Integer trainingId, String date, String time) {
+		// TODO 自動生成されたメソッド・スタブ
+		List<Bean> list = new ArrayList<>();
+		Timestamp ts = null;
 
-
+		try {
+			Timestamp getTs = new Timestamp(SDF_DATETIME.parse(date + " " + time).getTime());
+			for (int i = 0; i < timeBeanList.size(); i++) {
+				ts = timeBeanList.get(i).getTime();
+				if (getTs.equals(ts)) {
+					// 時間が一致したものだけをリストに格納
+					String formatTime = SDF_TIME.format(ts);
+					list.add(new Bean(beanList.get(i).getId(), beanList.get(i).getName(), formatTime));
+				}
+			}
+		} catch (ParseException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
