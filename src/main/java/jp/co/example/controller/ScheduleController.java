@@ -59,8 +59,6 @@ public class ScheduleController {
 		log.info(LogEnum.METHOD_PARAM.getLogValue() + date);
 		log.info(LogEnum.METHOD_PARAM.getLogValue() + time);
 
-
-
 		Users user = (Users) session.getAttribute(ScopeKey.LOGINUSER.getScopeKey());
 		Trainings room = (Trainings) session.getAttribute(ScopeKey.LOGINROOM.getScopeKey());
 

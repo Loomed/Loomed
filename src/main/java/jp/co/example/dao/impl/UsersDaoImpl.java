@@ -1,16 +1,18 @@
 package jp.co.example.dao.impl;
 
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.dao.*;
-import org.springframework.jdbc.core.*;
-import org.springframework.stereotype.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
-import jp.co.example.dao.*;
-import jp.co.example.entity.*;
+import jp.co.example.dao.UsersDao;
+import jp.co.example.entity.Users;
 
 @Repository
 public class UsersDaoImpl implements UsersDao {
 	private static final String SQL_SELECT_ID_AND_PASS = "SELECT * FROM users WHERE user_id = ? AND password = ?";
+	private static final String SQL_SELECT_ID = "SELECT * FROM users WHERE user_id = ?";
 	private static final String UPDATE ="UPDATE users SET password = ?, user_name = ?, company_id = ?, authority = ? WHERE user_id = ?";
 
 	@Autowired
@@ -32,6 +34,20 @@ public class UsersDaoImpl implements UsersDao {
 	@Override
 	public int update(Integer userId, String password, String userName, Integer companyId, Integer authority) {
 		return jdbcTemplate.update(UPDATE, password, userName, companyId, authority);
+	}
+
+	@Override
+	public Users findById(Integer userId) {
+		// TODO 自動生成されたメソッド・スタブ
+		Users users = null;
+		try {
+			users = jdbcTemplate.queryForObject(SQL_SELECT_ID, new BeanPropertyRowMapper<Users>(Users.class),
+					userId);
+		} catch (DataAccessException e) {
+			users = null;
+		}
+
+		return users;
 	}
 
 }

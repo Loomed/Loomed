@@ -8,12 +8,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import enums.LogEnum;
-import jp.co.example.dao.ProjectorsDao;
-import jp.co.example.dao.SchedulesDao;
-import jp.co.example.entity.Projectors;
-import jp.co.example.entity.Schedules;
+import jp.co.example.dao.*;
+import jp.co.example.entity.*;
 import jp.co.example.form.ProjectorForm;
 import jp.co.example.form.ScheduleForm;
 import jp.co.example.service.ScheduleService;
@@ -22,16 +21,20 @@ import util.Util;
 
 @Slf4j
 @Service
+@Transactional
 public class ScheduleServiceImpl implements ScheduleService {
 	private static final SimpleDateFormat SDF_DATETIME = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 	private static final SimpleDateFormat SDF_TIME = new SimpleDateFormat("HH:mm");
-	private static final String SELECT_ALL = "all";
+	private static final String SELECT_ALL = "All";
 
 	@Autowired
 	SchedulesDao sd;
 
 	@Autowired
 	ProjectorsDao pd;
+
+	@Autowired
+	UsersDao ud;
 
 	@Override
 	public List<ScheduleForm> getSchedule(Integer userId, String date) {
@@ -89,8 +92,14 @@ public class ScheduleServiceImpl implements ScheduleService {
 			// jsp用にtimestampをStringに変換
 			for (int i = 0; i < list.size(); i++) {
 				ts = list.get(i).getReserveTime();
-				//listForm.add(new ProjectorForm(SDF_TIME.format(ts), );
+				Users projectorUser = ud.findById(list.get(i).getUserId());
+				listForm.add(new ProjectorForm(
+						SDF_TIME.format(ts), "プロジェクタ" + list.get(i).getProjectorNumber(), projectorUser.getUserName()
+						));
 			}
+
+			return listForm;
+
 		} catch (ParseException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
