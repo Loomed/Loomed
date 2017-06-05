@@ -32,7 +32,7 @@ public class LoginController {
 	}
 
 	// ログアウト処理
-	if
+
 
 	// login.jspからの遷移
 	@RequestMapping("/login")
