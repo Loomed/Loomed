@@ -163,7 +163,7 @@
 				<!-- tabs -->
 				<div class="card">
 					<ul class="nav nav-tabs" role="tablist1">
-						<li role="presentation"><a href="shareconfig.jsp"
+						<li role="presentation"><a href="shareconfig"
 							aria-controls="file" role="tab" data-toggle="tab">ファイル共有</a></li>
 					</ul>
 					<!-- Tab panes -->
@@ -265,6 +265,7 @@
 		$('#datepicker').on(
 				'changeDate',
 				function() {
+					//Javasctiptからの遷移？
 					location.href = 'schedule.jsp?date='
 							+ $('#datepicker').datepicker('getFormattedDate');
 				});

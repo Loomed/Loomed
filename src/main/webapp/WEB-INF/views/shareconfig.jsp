@@ -15,6 +15,7 @@
 			$('#configDeleteModal').modal();
 		});
 		$('.change').click(function() {
+			//Javasctiptからの遷移？
 			location.href = "userchange.jsp";
 		});
 		$('.reserve').click(function() {
