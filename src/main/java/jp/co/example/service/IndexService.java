@@ -8,4 +8,6 @@ public interface IndexService {
 
 	public int RoomJudge(int id);
 
+	public boolean isNum(String strId);
+
 }

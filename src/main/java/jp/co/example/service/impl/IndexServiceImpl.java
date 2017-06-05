@@ -26,4 +26,13 @@ public class IndexServiceImpl implements IndexService{
 
 		return RoomNum;
 	}
+
+	public boolean isNum(String strId) {
+		try {
+			Integer.parseInt(strId);
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
+	}
 }
