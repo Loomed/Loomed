@@ -1,5 +1,9 @@
 package jp.co.example.dao;
 
-public interface SchedulesDao {
+import java.util.List;
 
+import jp.co.example.entity.Schedules;
+
+public interface SchedulesDao {
+	List<Schedules> SelectScheduleWhereUserId(Integer userId);
 }
