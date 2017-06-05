@@ -1,22 +1,19 @@
 package jp.co.example.controller;
 
-import javax.validation.Valid;
+import javax.validation.*;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
+import org.springframework.ui.*;
+import org.springframework.validation.*;
+import org.springframework.web.bind.annotation.*;
 
-import enums.JspPage;
-import enums.LogEnum;
-import jp.co.example.entity.Users;
-import jp.co.example.form.LoginForm;
-import jp.co.example.service.LoginService;
-import lombok.extern.slf4j.Slf4j;
-import util.Util;
+import enums.*;
+import jp.co.example.entity.*;
+import jp.co.example.form.*;
+import jp.co.example.service.*;
+import lombok.extern.slf4j.*;
+import util.*;
 
 //login.jspへの遷移、ログイン処理を記述
 @Slf4j
@@ -32,7 +29,6 @@ public class LoginController {
 	}
 
 	// ログアウト処理
-
 
 	// login.jspからの遷移
 	@RequestMapping("/login")

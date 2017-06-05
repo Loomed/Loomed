@@ -84,7 +84,7 @@ public class ScheduleController {
 			log.info(LogEnum.FALSE.getLogValue());
 		}
 
-		List<ProjectorForm> list = ss.getScheduleJson(room.getTrainingId(), date, time);
+		List<ProjectorForm> list = ss.getProjectorJson(room.getTrainingId(), date, time);
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return list;
