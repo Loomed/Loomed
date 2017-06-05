@@ -20,10 +20,14 @@ public class HomeController {
 		if (result.hasErrors()) {
 			return "login";
 		}
-		if("".equals(button)){
+		if("userinfo".equals(button)){
+			return "userinfo";
+		}else if("member".equals(button)){
 			return "member";
+		}else if("shareconfig".equals(button)){
+			return "shareconfig";
 		}
-		return "userinfo";
+		return null;
 
 	}
 
