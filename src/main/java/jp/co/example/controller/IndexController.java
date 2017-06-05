@@ -23,7 +23,7 @@ public class IndexController {
 	HttpServletRequest request;
 
 	@RequestMapping("/index")
-	public String getIndex(@RequestParam("id") String id, @RequestParam("pass") String pass,
+	public String getIndex(@RequestParam("inputId") String id, @RequestParam("inputPassword") String pass,
 			HttpServletRequest request) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 

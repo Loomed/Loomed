@@ -9,6 +9,7 @@
 <title>研修教室一覧</title>
 
 <%@ include file="common/head.jsp"%>
+<link rel="stylesheet" href="css/common.css">
 
 <script>
 	$(function() {
