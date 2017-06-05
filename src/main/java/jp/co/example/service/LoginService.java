@@ -1,5 +1,7 @@
 package jp.co.example.service;
 
-public class LoginService {
+import jp.co.example.entity.Users;
 
+public interface LoginService {
+	public Users findByIdAndPass(Integer userId, String password);
 }

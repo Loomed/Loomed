@@ -16,6 +16,7 @@ public enum LogEnum {
 	TRUE("TRUE"),
 	FALSE("FALSE"),
 	UPDATE_COUNT("SQL UPDATE COUNT : "),
+	EXCEPTION("Exception"),
 	;
 	final String logValue;
 
