@@ -26,7 +26,7 @@ public class MailsDaoImpl implements MailsDao {
 	public int getNewMails(Users user) {
 		int cnt =
 
-		return jt.queryForInt(SQL_SELECT_MAILS_WHERE_OPENFLAG);
+		return 0;
 	}
 }
 
