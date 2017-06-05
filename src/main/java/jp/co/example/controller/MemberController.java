@@ -28,6 +28,7 @@ public class MemberController {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
 		session.getAttribute(ScopeKey.LOGINUSER.getScopeKey());
+		session.getAttribute(ScopeKey.LOGINUSER.getScopeKey());
 
 
 
