@@ -53,10 +53,10 @@ public class IndexController {
 		}
 
 
-		//ログイン処理：未作成（id,passを送り、Usersを受け取る）
+		//ログイン処理：未作成（id,passを送り、Usersを受け取る。nullが戻ることも）
 		Users LoginUser = IndexService.LoginJudge(LoginId, LoginPass);
 
-		// ログイン判定
+		// ログイン成否判定：未作成（LoginUserがnullでなければRoom番号を受け取る）
 		log.info(LogEnum.IF.getLogValue() + "LoginUser == null");
 		if(LoginUser == null){
 			log.info(LogEnum.IF.getLogValue() + "/login");
@@ -76,6 +76,9 @@ public class IndexController {
 //		}else{
 //			log.info(LogEnum.FALSE.getLogValue());
 //		}
+
+		//研修教室一覧受け取り
+		//List<Trainings> AllTrainings = IndexService.AllTrainings();	←作成から。
 
 
 		//判定処理

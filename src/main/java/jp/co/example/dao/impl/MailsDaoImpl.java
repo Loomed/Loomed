@@ -9,7 +9,9 @@ import jp.co.example.entity.Mails;
 public class MailsDaoImpl implements MailsDao {
 	@Override
 	public Mails findByIdAndTitleAndContents(Integer mailID, String mailTitle, String mailContents) {
-		return Mails;
+		return null;
+
 
 	}
 }
+

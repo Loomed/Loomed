@@ -10,17 +10,6 @@
 
 <%@ include file="common/head.jsp"%>
 
-<script type="text/javascript">
-   $(function(){
-    $("a[href^=#page-bottom]").click(function(){
-        $('html, body').animate({
-          scrollTop: $(document).height()
-        },1500);
-        return false;
-    });
-});
-</script>
-
 <script>
         $(function () {
         	//モーダル表示
@@ -115,36 +104,14 @@ td {
 									</tr>
 								</thead>
 								<tbody>
+									<c:forEach var="list" items="${list}" varStatus="status">
 									<tr>
-										<td id="timeScheduleTable1">9:00</td>
-										<td id="contentScheduleTable1">レビュー</td>
+										<td id="timeScheduleTable + ${status.index}">${fn:escapeXml(list.time) }</td>
+										<td id="contentScheduleTable + ${status.index}">${fn:escapeXml(list.content) }</td>
 										<td><button class="btn btn-primary change">変更</button></td>
 										<td><button class="btn btn-danger delete">削除</button></td>
 									</tr>
-									<tr>
-										<td>12:30</td>
-										<td>昼休み</td>
-										<td><button class="btn btn-primary change">変更</button></td>
-										<td><button class="btn btn-danger delete">削除</button></td>
-									</tr>
-									<tr>
-										<td>15:00</td>
-										<td>演習課題提出</td>
-										<td><button class="btn btn-primary change">変更</button></td>
-										<td><button class="btn btn-danger delete">削除</button></td>
-									</tr>
-									<tr>
-										<td style="color: RED">16:00</td>
-										<td style="color: RED">プロジェクタ予約</td>
-										<td><button class="btn btn-primary change">変更</button></td>
-										<td><button class="btn btn-danger delete">削除</button></td>
-									</tr>
-									<tr>
-										<td>終日</td>
-										<td>発表練習</td>
-										<td><button class="btn btn-primary change">変更</button></td>
-										<td><button class="btn btn-danger delete">削除</button></td>
-									</tr>
+									</c:forEach>
 								</tbody>
 							</table>
 						</div>
