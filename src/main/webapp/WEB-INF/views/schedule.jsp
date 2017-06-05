@@ -17,38 +17,38 @@
 		$('.delete').click(function() {
 			$('#configDeleteModal').modal();
 		});
-		$('.change')
-				.click(
-						function() {
-							console.log("change click");
-							var id = $(this).attr("id");
-							var changeId = id.split(':');
-							console.log(changeId[1]);
-							var array = $('#timeScheduleTable' + changeId[1])
-									.text().split(':');
-							console.log(array[0]);
-							console.log(array[1]);
-							$('#hourChangeModal').val(array[0]);
-							$('#minuteChangeModal').val(array[1]);
-							$('#contentChangeModal').val(
-									$('#contentScheduleTable' + changeId[1])
-											.text());
 
-							//重要か通常か判定する
-							console.log("if");
-							if ($('#timeScheduleTable' + changeId[1]).attr(
-									"class") == 'importanttrue') {
-								console.log("true");
-								$('#normalModal').removeAttr('checked');
-								$('#importantModal').attr('checked', 'checked');
-							} else {
-								console.log("false");
-								$('#importantModal').removeAttr('checked');
-								$('#normalModal').attr('checked', 'checked');
-							}
+		//変更クリック
+		$('.change').click(function() {
+			console.log("change click");
+			var id = $(this).attr("id");
+			var changeId = id.split(':');
+			console.log(changeId[1]);
+			var array = $('#timeScheduleTable' + changeId[1])
+					.text().split(':');
+			console.log(array[0]);
+			console.log(array[1]);
+			$('#hourChangeModal').val(array[0]);
+			$('#minuteChangeModal').val(array[1]);
+			$('#contentChangeModal').val($('#contentScheduleTable' + changeId[1]).text());
 
-							$('#configChangeModal').modal();
-						});
+			//重要か通常か判定する
+			console.log("if");
+			if ($('#timeScheduleTable' + changeId[1]).attr(
+					"class") == 'importanttrue') {
+				console.log("true");
+				$('#normalModal').removeAttr('checked');
+				$('#importantModal').attr('checked', 'checked');
+			} else {
+				console.log("false");
+				$('#importantModal').removeAttr('checked');
+				$('#normalModal').attr('checked', 'checked');
+			}
+
+			$('#configChangeModal').modal();
+		});
+
+		//削除クリック
 		$('.reserve').click(function() {
 			console.log($('#timeTable2').text());
 			$('#timeModal').text($('#timeTable2').text());
@@ -56,9 +56,11 @@
 			$('#configReserveModal').modal();
 		});
 
+
 		//プロジェクタ非同期通信
 		$("#selectTime").change(function() {
-			// outputDataを空に初期化
+			// プロジェクタ予約状況を空に初期化
+			$("#projectorBody").html("");
 			//セレクトボックスで選んだ値のtextを取得
 			var time = $("[name=selectTime] option:selected").text();
 
@@ -86,8 +88,9 @@
 				error : function() {
 					error();
 				}
-	});
+			});
 		});
+
 	});
 
 	// Ajax通信成功時処理(未完成)
@@ -97,9 +100,9 @@
 			$("#projectorBody").html(
 					$("#projectorBody").html() +
 					'<tr>' +
-						'<td>9:00</td>' +
-						'<td>プロジェクタ１</td>' +
-						'<td>山田太郎</td>' +
+						'<td>' + data[cnt].time + '</td>' +
+						'<td>' + data[cnt].projectorNumber + '</td>' +
+						'<td>' + data[cnt].userName + '</td>' +
 						'<td><button class="btn btn-primary reserve" name="#" disabled>予約する</button></td>' +
 					"</tr>"
 					);
@@ -107,8 +110,9 @@
 	}
 	// Ajax通信失敗時処理
 	function error() {
-		alert("通信失敗");
+		//alert("通信失敗");
 	}
+
 </script>
 
 <!-- 研修教室管理と同じ -->
@@ -136,25 +140,9 @@
 	margin-left: 30px;
 }
 
-<!--
-データベースのimportantがtrueだった場合 -->.importanttrue {
+/*データベースのimportantがtrueだった場合 */
+.importanttrue {
 	color: RED;
-}
-
-.modal-header-modify {
-	/*
-            background-color: #FFF59D;
-            color: white;
-            padding: 9px 15px;
-            border-bottom: 1px solid #eee;
-            -webkit-border-top-left-radius: 5px;
-            -webkit-border-top-right-radius: 5px;
-            -moz-border-radius-topleft: 5px;
-            -moz-border-radius-topright: 5px;
-            border-top-left-radius: 5px;
-            border-top-right-radius: 5px;
-            */
-
 }
 
 td {
@@ -256,7 +244,8 @@ td {
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title">プロジェクタ予約状況</h3>
-						<br> 閲覧したい時間 <select id="selectTime" name="selectTime">
+						<br> 閲覧したい時間 <select id="selectTime" name="selectTime" >
+							<option></option>
 							<option value="9:00">9:00</option>
 							<option value="9:30">9:30</option>
 							<option value="10:00">10:00</option>
@@ -294,13 +283,6 @@ td {
 									</tr>
 								</thead>
 								<tbody id="projectorBody">
-									<tr>
-										<td>9:00</td>
-										<td>プロジェクタ１</td>
-										<td>山田太郎</td>
-										<td><button class="btn btn-primary reserve" name="#"
-												disabled>予約する</button></td>
-									</tr>
 								</tbody>
 							</table>
 						</div>

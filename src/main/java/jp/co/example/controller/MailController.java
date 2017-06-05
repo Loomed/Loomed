@@ -10,8 +10,6 @@ import enums.LogEnum;
 import lombok.extern.slf4j.Slf4j;
 import util.Util;
 
-
-
 @Slf4j
 @Controller
 public class MailController {
@@ -33,12 +31,12 @@ public class MailController {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return JspPage.MAIL.getPageName();
-		//return JspPage.HOME.getPageName();
+		// return JspPage.HOME.getPageName();
 
 	}
 
 	// 削除したらmail.jspへ遷移。
-	@RequestMapping(value = "/messagedelete")
+	@RequestMapping(value = "/messageDelete")
 	public String messageDelete() {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());

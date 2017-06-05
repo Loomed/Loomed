@@ -59,8 +59,6 @@ public class ScheduleController {
 		log.info(LogEnum.METHOD_PARAM.getLogValue() + date);
 		log.info(LogEnum.METHOD_PARAM.getLogValue() + time);
 
-
-
 		Users user = (Users) session.getAttribute(ScopeKey.LOGINUSER.getScopeKey());
 		Trainings room = (Trainings) session.getAttribute(ScopeKey.LOGINROOM.getScopeKey());
 
@@ -84,7 +82,7 @@ public class ScheduleController {
 			log.info(LogEnum.FALSE.getLogValue());
 		}
 
-		List<ProjectorForm> list = ss.getProjectorJson(room.getTrainingId(), date, time);
+		List<ProjectorForm> list = ss.getScheduleJson(room.getTrainingId(), date, time);
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return list;

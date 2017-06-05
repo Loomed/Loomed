@@ -61,7 +61,7 @@ public class IndexServiceImpl implements IndexService {
 	public List<Trainings> AllTrainings() {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
-		// 全件参照・昇順：完成
+		// 処理未確定のため擬似作成
 		List<Trainings> AllRoom = new ArrayList();
 		AllRoom =  TrainingsDao.AllRooms();
 //		AllRoom.add(new Trainings(0,"全体管理",6,"test:root"));
