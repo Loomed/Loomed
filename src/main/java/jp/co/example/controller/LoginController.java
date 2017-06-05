@@ -54,9 +54,10 @@ public class LoginController {
 //			return JspPage.LOGIN.getPageName();
 //		}
 
-		Users users = loginService.findByIdAndPass(form.getId(), form.getPass());
+		Users users = loginService.findByIdAndPass(Integer.parseInt(form.getUserId()), form.getPassword());
 
 		if (users != null) {
+			log.info("ユーザ");
 			log.info("ユーザ: " +  users.getUserId());
 			model.addAttribute(users);
 			log.info(Util.getMethodName() + LogEnum.END.getLogValue());
