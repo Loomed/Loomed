@@ -1,12 +1,12 @@
-package myTest;
+package jp.co.example.myTest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
 
-import jp.co.example.entity.Users;
+import jp.co.example.entity.*;
 
 @Service
-public class MyUserServiceImpl implements MyUserService{
+public class MyUsersServiceImpl implements MyUsersService{
 
 	@Autowired
 	private MyUsersDao myUserDao;
