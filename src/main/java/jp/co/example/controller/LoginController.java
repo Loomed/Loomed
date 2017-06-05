@@ -1,5 +1,6 @@
 package jp.co.example.controller;
 
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import jp.co.example.service.LoginService;
 import lombok.extern.slf4j.Slf4j;
 import util.Util;
 
-//login.jspへの遷移を記述
+//login.jspへの遷移、ログイン処理を記述
 @Slf4j
 @Controller
 public class LoginController {
@@ -33,17 +34,30 @@ public class LoginController {
 		return JspPage.LOGIN.getPageName();
 	}
 
+	//ログイン処理
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String postLogin(@Valid LoginForm form, BindingResult result, Model model) {
-		if (result.hasErrors()) {
+		if (result.hasErrors())
+		{
 			return "login";
 		}
 
 		Users users = loginService.findByIdAndPass(form.getId(), form.getPass());
 
-		if (users != null) {
+		if (users != null)
+		{
 			model.addAttribute(users);
-			return "login";
+			return "menu";
 		}
+
+		model.addAttribute("msg", "IDまたはPASSが間違っています");
+		return "login";
 	}
+
+//	@RequestMapping("/logout")
+//	public String postLogout(SessionStatus sessionStatus) {
+//		sessionStatus.setComplete();
+//		return "logout";
+//	}
+
 }
