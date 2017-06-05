@@ -10,18 +10,6 @@
 
 <%@ include file="common/head.jsp"%>
 
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" />
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker3.css" />
-<link
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/locales/bootstrap-datepicker.ja.min.js"></script>
-
 <link rel="stylesheet" href="css/home.css">
 
 <style>
@@ -234,6 +222,7 @@
 					</div>
 				</div>
 
+<<<<<<< HEAD
 			</div>
 		</div>
 	</div>
@@ -271,6 +260,60 @@
 							+ $('#datepicker').datepicker('getFormattedDate');
 				});
 	</script>
+=======
+            </div>
+        </div>
+    </div>
+    <!-- ログアウト確認ダイアログ -->
+    <div class="modal fade" id="logout-modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header modal-header-modify">
+                    <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+                    <h4 class="modal-title">ログアウト確認</h4>
+                </div>
+                <div class="modal-body">
+                    ログアウトしますか？<br>[OK]ボタンを押すとログアウトされ、ログイン画面に移動します
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="location.href='login.jsp';">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            $('#datepicker').datepicker({
+                inline: true,
+                format: "yyyy/mm/dd",
+                todayHighlight: true,
+                language: 'ja',
+                toggleActive: true,
+                beforeShowDay: function (date) {
+                    var myDate = new Object();
+                    if (date.getDay() == 0) {
+                        myDate.enabled = true;
+                        myDate.classes = 'class-sunday';
+                        myDate.tooltip = '日曜日';
+                    } else if (date.getDay() == 6) {
+                        myDate.enabled = true;
+                        myDate.classes = 'class-saturday';
+                        myDate.tooltip = '土曜日';
+                    } else {
+                        myDate.enabled = true;
+                        myDate.classes = 'class-weekday';
+                        myDate.tooltip = '平日';
+                    }
+                    return myDate;
+                }
+            });
+        });
+        $('#datepicker').on('changeDate', function () {
+            location.href = 'schedule?date=' + $('#datepicker').datepicker('getFormattedDate');
+        });
+    </script>
+>>>>>>> 0d7cdb8d43face8164bc703b531d29647d597a64
 
 </body>
 

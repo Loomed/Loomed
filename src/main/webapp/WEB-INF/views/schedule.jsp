@@ -23,7 +23,7 @@
 
 <script>
         $(function () {
-        	<!-- モーダル表示 -->
+        	//モーダル表示
             $('.delete').click(function () {
                 $('#configDeleteModal').modal();
             });

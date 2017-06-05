@@ -17,6 +17,12 @@
 <link rel="stylesheet" href="css/bootstrap-multiselect.css">
 <script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
 
+<!-- コンボボックス関連 -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-combobox/1.1.8/css/bootstrap-combobox.min.css" />
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-combobox/1.1.8/js/bootstrap-combobox.js"></script>
+
 <!-- カレンダー関連 -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" />
@@ -28,7 +34,9 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/locales/bootstrap-datepicker.ja.min.js"></script>
 
 <!-- アイコン関連 -->
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<link
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+	rel="stylesheet">
 
 <!--  共通スタイル -->
 <link rel="stylesheet" href="css/common.css">
