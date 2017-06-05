@@ -1,9 +1,9 @@
 package jp.co.example.dao;
 
-import jp.co.example.entity.Users;
+import jp.co.example.entity.*;
 
 public interface UsersDao {
 	Users findByIdAndPass(Integer userId, String password);
 
-	int update(Integer userId, String Password password, String userName, Integer companyId, );
+	int update(Integer userId, String password, String userName, Integer companyId, Integer authority);
 }
