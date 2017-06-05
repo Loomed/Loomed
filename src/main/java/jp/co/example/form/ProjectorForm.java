@@ -10,6 +10,6 @@ import lombok.*;
 public class ProjectorForm {
 	private String time;
 	private String projectorNumber;
-	private String user;
+	private String userName;
 
 }
