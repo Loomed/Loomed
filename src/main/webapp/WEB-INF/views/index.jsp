@@ -38,7 +38,7 @@
 					</div>
 					<div class="panel-body">
 						<h2>
-							<a href="roothome.jsp">全体管理</a>
+							<a href="roothome">全体管理</a>
 						</h2>
 
 						<div class="panel-group" id="accordion" role="tablist"
@@ -56,7 +56,7 @@
 									<ul>
 										<li>
 											<h3>
-												<a href="home.jsp">経験者Java(品川教室)</a>
+												<a href="home">経験者Java(品川教室)</a>
 											</h3>
 										</li>
 										<li>
