@@ -4,6 +4,7 @@ import javax.validation.constraints.*;
 
 import org.hibernate.validator.constraints.*;
 
+import jp.co.example.entity.*;
 import lombok.*;
 
 @Getter
@@ -11,17 +12,19 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class UserChangeForm {
+public class UserChangeForm extends Users {
 	@NotNull
 	private Integer userId;
 	@NotBlank
 	private String password;
 	@NotBlank
 	private String userName;
-	@NotBlank
-	private String companyId;
+	@NotNull
+	private Integer companyId;
 	@NotNull
 	private Integer authority;
 
 	private String training;
+
+
 }
