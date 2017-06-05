@@ -26,6 +26,7 @@ table>td>input {
 	});
 
 	$('#changeForm').submit(function() {
+		console.log("click");
 		$('#change-modal').modal('toggle');
 		if ($('#changeForm').attr('submit-flag') == 'false') {
 			return false;
@@ -33,6 +34,7 @@ table>td>input {
 	});
 
 	$('#modal-ok').click(function() {
+		console.log("click");
 		$('#changeForm').attr('submit-flag', 'true');
 		$('#changeForm').submit();
 	});
