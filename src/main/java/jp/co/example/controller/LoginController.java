@@ -54,7 +54,7 @@ public class LoginController {
 //	public String postLogout(SessionStatus sessionStatus) {
 //		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 //
-//		HttpSession session = equest.getSession(false);
+//		HttpSession session = request.getSession(false);
 //		 if(session != null){
 //		 session.invalidate();
 //		 session = request.getSession(false);
@@ -92,7 +92,7 @@ public class LoginController {
 
 			session.setAttribute(ScopeKey.LOGINUSER.getScopeKey(), users);
 
-			return "/"+JspPage.INDEX.getPageName();
+			return "/index";
 		}
 
 		model.addAttribute("msg", "IDまたはPASSが間違っています");
