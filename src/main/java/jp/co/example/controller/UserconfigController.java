@@ -22,6 +22,7 @@ public class UserconfigController {
 	}
 
 
+
 	// 氏名←コメント解除するとエラー出る
 //	@RequestMapping(value = "/userinfo")
 //	public String getName() {
@@ -30,7 +31,8 @@ public class UserconfigController {
 //		return JspPage.USERINFO.getPageName();
 //	}
 
-	// //変更←コメント解除するとエラー出る
+
+	// //変更
 //	@RequestMapping(value = "/userchange")
 //	public String getuserChange() {
 //		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
