@@ -1,16 +1,24 @@
 package jp.co.example.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import java.util.*;
 
-import enums.JspPage;
-import enums.LogEnum;
-import lombok.extern.slf4j.Slf4j;
-import util.Util;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
+import org.springframework.ui.*;
+import org.springframework.web.bind.annotation.*;
+
+import enums.*;
+import jp.co.example.entity.*;
+import jp.co.example.service.*;
+import lombok.extern.slf4j.*;
+import util.*;
 
 @Slf4j
 @Controller
 public class UserChangeController {
+
+	@Autowired
+	private UserInfoService userInfoSerice;
 
 	/**
 	* userchangeへの遷移
@@ -18,8 +26,13 @@ public class UserChangeController {
 	* @Author sakata
 	*/
 	@RequestMapping("/userchange")
-	public String getUserChange() {
+	public String getUserChange(Model model) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+
+
+		List<Trainings> trainigs = userInfoSerice.getTrainig();
+		model.addAttribute("rooms", trainigs);
+		log.info(trainigs.get(0).getTrainingName());
 
 		return JspPage.USERCHANGE.getPageName();
 	}

@@ -3,6 +3,7 @@ package jp.co.example.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import enums.LogEnum;
@@ -19,8 +20,11 @@ import util.Util;
 @Service
 public class IndexServiceImpl implements IndexService {
 
+	@Autowired
 	UsersDao UsersDao;
+	@Autowired
 	TrainingsDao TrainingsDao;//
+	@Autowired
 	MapsDao MapsDao;
 
 	//ログインの処理：未記入
@@ -28,7 +32,8 @@ public class IndexServiceImpl implements IndexService {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
 		//仮データ
-		Users LoginUser = new Users(100, "test", "テスト", 1, 3);
+		//Users LoginUser = new Users(100, "test", "テスト", 1, 3);
+		Users LoginUser = UsersDao.findByIdAndPass(id, pass);
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return LoginUser;
@@ -62,7 +67,8 @@ public class IndexServiceImpl implements IndexService {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
 		// 処理未確定のため擬似作成 → ルーム情報を全件取得：完了
-		List<Trainings> AllRoom = new ArrayList();
+		List<Trainings> AllRoom = new ArrayList<>();
+
 		AllRoom =  TrainingsDao.AllRooms();
 //		AllRoom.add(new Trainings(0,"全体管理",6,"test:root"));
 //		AllRoom.add(new Trainings(1,"経験者Java(品川教室)",1,"test:a"));

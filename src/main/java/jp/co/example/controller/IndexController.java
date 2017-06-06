@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import enums.LogEnum;
 import enums.ScopeKey;
@@ -28,7 +27,7 @@ public class IndexController {
 	HttpServletRequest request;
 
 	@RequestMapping("/index")
-	public String getIndex(@RequestParam("inputId") String id, @RequestParam("inputPassword") String pass,
+	public String getIndex(/*@RequestParam("inputId") String id, @RequestParam("inputPassword") String pass,*/
 			HttpServletRequest request, HttpSession session) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
@@ -60,10 +59,13 @@ public class IndexController {
 
 		//ログイン処理：未作成（id,passを送り、Usersを受け取る。nullが戻ることも）
 		//Users LoginUser = IndexService.LoginJudge(LoginId, LoginPass);
-		Users LoginUser;
+		//Users LoginUser;
+		LoginId = 10;
+		LoginPass = "test";
+		Users LoginUser = IndexService.LoginJudge(LoginId, LoginPass);
 
 		try{
-			LoginUser = (Users) session.getAttribute(ScopeKey.LOGINUSER.getScopeKey());
+			//LoginUser = (Users) session.getAttribute(ScopeKey.LOGINUSER.getScopeKey());
 		}catch(Error e){
 			LoginUser = null;
 		}

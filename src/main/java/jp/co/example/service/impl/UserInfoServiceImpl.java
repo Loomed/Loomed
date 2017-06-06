@@ -1,15 +1,15 @@
 package jp.co.example.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import java.util.*;
 
-import jp.co.example.dao.MapsDao;
-import jp.co.example.dao.UsersDao;
-import jp.co.example.entity.Maps;
-import jp.co.example.entity.Users;
-import jp.co.example.service.UserInfoService;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.dao.*;
+import org.springframework.stereotype.*;
+import org.springframework.transaction.annotation.*;
+
+import jp.co.example.dao.*;
+import jp.co.example.entity.*;
+import jp.co.example.service.*;
 
 @Transactional
 @Service
@@ -20,6 +20,9 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 	@Autowired
 	private MapsDao mapsDao;
+
+	@Autowired
+	private TrainingsDao trainigDao;
 
 	/**
 	 * usersテーブルの更新を行う
@@ -42,6 +45,11 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 	@Override
 	public Users getUser(Users user) {
-		return userDao.findById(user.getUserId());//
+		return userDao.findById(user.getUserId());
+	}
+
+	@Override
+	public List<Trainings> getTrainig() {
+		return trainigDao.AllRooms();
 	}
 }
