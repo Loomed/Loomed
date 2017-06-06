@@ -1,9 +1,6 @@
 package jp.co.example.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
@@ -15,6 +12,4 @@ public class Users {
 	private String userName;
 	private Integer companyId;
 	private Integer authority;
-
-
 }

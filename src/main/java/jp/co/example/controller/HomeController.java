@@ -49,8 +49,7 @@ public class HomeController {
 		// ボタンで遷移先を決定
 		/*
 		 * if ("userinfo".equals(button)) { return
-		JspPage.USERINFO.getPageName();
-		  } else if ("member".equa
+		 * JspPage.USERINFO.getPageName(); } else if ("member".equa
 		 * ("shareconfig".equals(button)) { return
 		 * JspPage.SHARECONFIG.getPagls(button)) {
 		 * return JspPage.MEMBER.getPageName(); } else ifeName(); }

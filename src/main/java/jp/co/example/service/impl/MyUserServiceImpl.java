@@ -10,7 +10,6 @@ import jp.co.example.service.*;
 @Service
 public class MyUserServiceImpl implements MyUserService {
 
-
 	@Autowired
 	private UsersDao userDao;
 
