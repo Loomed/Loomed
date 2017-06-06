@@ -113,7 +113,9 @@
 											</div>
 											<div class="form-group">
 												<div class="col-sm-offset-1 col-sm-10">
+													<a href="userconfig">
 													<button type="submit" class="btn btn-primary btn-block">登録</button>
+												    </a>
 												</div>
 											</div>
 										</form>
@@ -263,7 +265,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
-					<a href="userDelete">
+					<a href="userdelete">
 					<button type="button" class="btn btn-danger">削除</button>
 					</a>
 				</div>
