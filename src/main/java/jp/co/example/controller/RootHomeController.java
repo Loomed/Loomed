@@ -31,8 +31,7 @@ public class RootHomeController {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
 		// セッションの受け取りと必要なデータ生成
-		// Users user =
-		// (Users)session.getAttribute(ScopeKey.LOGINUSER.getScopeKey());
+		//Users user =(Users)session.getAttribute(ScopeKey.LOGINUSER.getScopeKey());
 		Trainings tr = new Trainings();
 		String cnt = null;
 		String maps = null;
