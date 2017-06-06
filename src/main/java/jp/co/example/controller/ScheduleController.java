@@ -71,8 +71,11 @@ public class ScheduleController {
 			projectorAuthority =  ss.isProjectorAuthority(user.getUserId(), room.getTrainingId());
 		}
 		log.info(LogEnum.IF_PARAM.getLogValue() + projectorAuthority);
-		//権限を格納
+		//プロジェクタ権限を格納
 		model.addAttribute("projectorAuthority", projectorAuthority);
+
+		//ログインユーザ権限を格納
+		model.addAttribute("loginUserAuthority", user.getAuthority());
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return JspPage.SCHEDULE.getPageName();
@@ -86,12 +89,14 @@ public class ScheduleController {
 		log.info(LogEnum.METHOD_PARAM.getLogValue() + date);
 		log.info(LogEnum.METHOD_PARAM.getLogValue() + time);
 
+		//sessionLOGINLOOMは一時的
+		session.removeAttribute(ScopeKey.LOGINROOM.getScopeKey());
 		Users user = (Users) session.getAttribute(ScopeKey.LOGINUSER.getScopeKey());
-		Trainings room = (Trainings) session.getAttribute(ScopeKey.LOGINROOM.getScopeKey());
+		Trainings room = (Trainings)session.getAttribute(ScopeKey.LOGINROOM.getScopeKey());
 
 		// テストデータ
 		user = new Users(1, "pass", "山田 太郎", 1, 0);
-		room = new Trainings(1, "Java研修", 2, "");
+		room = new Trainings(2, "Java研修", 2, "");
 
 		// ユーザー情報を確認(未完成)
 		log.info(LogEnum.IF.getLogValue() + "user == null");

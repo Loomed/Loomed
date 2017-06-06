@@ -1,14 +1,45 @@
 package jp.co.example.test.dao;
 
-import java.util.List;
+import static org.junit.Assert.*;
 
-import jp.co.example.entity.Users;
+import org.junit.*;
+import org.junit.runner.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.boot.test.context.*;
+import org.springframework.test.context.junit4.*;
 
-public interface UsersDaoTset {
-	Users findByIdAndPass(Integer userId, String password);
-	Users findById(Integer userId);
+import jp.co.example.dao.*;
 
-	int update(Integer userId, String password, String userName, Integer companyId, Integer authority);
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class UsersDaoTset {
+//	Users findByIdAndPass(Integer userId, String password);
+//	Users findById(Integer userId);
+//
+//	int update(Integer userId, String password, String userName, Integer companyId, Integer authority);
+//
+//	public List<Users> FindMember(int roomId, int comId);
 
-	public List<Users> FindMember(int roomId, int comId);
+	@Autowired
+	private UsersDao UsersDao;
+
+	@Test
+	public void メールが取得できる() throws Exception{
+		assertTrue(true);
+	}
+
+	@Test
+	public void メールが取得できない() throws Exception{
+		assertTrue(true);
+	}
+
+	@Test
+	public void 最新のメール数を取得できる() throws Exception{
+		assertTrue(true);
+	}
+
+	@Test
+	public void 最新のメール数を取得できない() throws Exception{
+		assertTrue(true);
+	}
 }

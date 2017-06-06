@@ -1,12 +1,33 @@
 package jp.co.example.test.dao;
 
-import java.util.*;
+import static org.junit.Assert.*;
 
-import jp.co.example.entity.*;
+import org.junit.*;
+import org.junit.runner.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.boot.test.context.*;
+import org.springframework.test.context.junit4.*;
 
-public interface TrainingsDaoTest {
+import jp.co.example.dao.*;
 
-	List<Trainings> AllRooms() ;
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class TrainingsDaoTest {
 
-	Trainings getTraining(int tr);
+//	List<Trainings> AllRooms() ;
+//
+//	Trainings getTraining(int tr);
+
+	@Autowired
+	private TrainingsDao trainingDao;
+
+	@Test
+	public void メールが取得できる() throws Exception{
+		assertTrue(true);
+	}
+
+	@Test
+	public void メールが取得できない() throws Exception{
+		assertTrue(true);
+	}
 }
