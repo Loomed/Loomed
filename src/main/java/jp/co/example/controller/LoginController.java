@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import enums.JspPage;
 import enums.LogEnum;
+import enums.ScopeKey;
 import jp.co.example.entity.Users;
 import jp.co.example.form.LoginForm;
 import jp.co.example.service.LoginService;
@@ -67,7 +68,8 @@ public class LoginController {
 
 		if (users != null) {
 			// セッションに保存する？
-			session.setAttribute("users", users);
+
+			session.setAttribute(ScopeKey.LOGINUSER.getScopeKey(), users);
 
 			return JspPage.INDEX.getPageName();
 		}
