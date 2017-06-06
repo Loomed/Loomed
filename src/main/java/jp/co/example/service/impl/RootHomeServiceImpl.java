@@ -14,14 +14,13 @@ import jp.co.example.dao.TrainingsDao;
 import jp.co.example.entity.Schedules;
 import jp.co.example.entity.Trainings;
 import jp.co.example.entity.Users;
-import jp.co.example.service.HomeService;
+import jp.co.example.service.RootHomeService;
 import lombok.extern.slf4j.Slf4j;
 import util.Util;
 
 @Service
 @Slf4j
-public class HomeServiceImpl implements HomeService {
-
+public class RootHomeServiceImpl implements RootHomeService {
 	MailsDao mailsdao;
 	SharesDao sharesdao;
 	MapsDao mapsdao;
@@ -32,9 +31,9 @@ public class HomeServiceImpl implements HomeService {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 		Integer mails = 0;
 		String mailcnt;
-		try{
-		mails = mailsdao.getNewMails(user);
-		}catch(Exception e){
+		try {
+			mails = mailsdao.getNewMails(user);
+		} catch (Exception e) {
 			mailcnt = null;
 		}
 		mailcnt = Integer.toString(mails);
@@ -45,9 +44,9 @@ public class HomeServiceImpl implements HomeService {
 	public List<Schedules> getInpoSche() {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 		List<Schedules> list = new ArrayList<Schedules>();
-		try{
-		list = schedulesdao.getInpoSche();
-		}catch(Exception e){
+		try {
+			list = schedulesdao.getInpoSche();
+		} catch (Exception e) {
 			list = null;
 		}
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
@@ -55,7 +54,7 @@ public class HomeServiceImpl implements HomeService {
 
 	}
 
-	public Trainings getTrainingName(int tr){
+	public Trainings getTrainingName(int tr) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 		Trainings tra = null;
 		tra = trainingsdao.getTraining(tr);

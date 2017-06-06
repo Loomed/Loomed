@@ -10,111 +10,6 @@
 
 <%@ include file="common/head.jsp"%>
 
-<script>
-	$(function() {
-
-		//モーダル表示
-		$('.delete').click(function() {
-			$('#configDeleteModal').modal();
-		});
-
-		//変更クリック
-		$('.change').click(function() {
-			console.log("change click");
-			var id = $(this).attr("id");
-			var changeId = id.split(':');
-			console.log(changeId[1]);
-			var array = $('#timeScheduleTable' + changeId[1])
-					.text().split(':');
-			console.log(array[0]);
-			console.log(array[1]);
-			$('#hourChangeModal').val(array[0]);
-			$('#minuteChangeModal').val(array[1]);
-			$('#contentChangeModal').val($('#contentScheduleTable' + changeId[1]).text());
-
-			//重要か通常か判定する
-			console.log("if");
-			if ($('#timeScheduleTable' + changeId[1]).attr(
-					"class") == 'importanttrue') {
-				console.log("true");
-				$('#normalModal').removeAttr('checked');
-				$('#importantModal').attr('checked', 'checked');
-			} else {
-				console.log("false");
-				$('#importantModal').removeAttr('checked');
-				$('#normalModal').attr('checked', 'checked');
-			}
-
-			$('#configChangeModal').modal();
-		});
-
-		//削除クリック
-		$('.reserve').click(function() {
-			console.log($('#timeTable2').text());
-			$('#timeModal').text($('#timeTable2').text());
-			$('#projectorModal').text($('#projectorTable2').text());
-			$('#configReserveModal').modal();
-		});
-
-
-		//プロジェクタ非同期通信
-		$("#selectTime").change(function() {
-			// プロジェクタ予約状況を空に初期化
-			$("#projectorBody").html("");
-			//セレクトボックスで選んだ値のtextを取得
-			var time = $("[name=selectTime] option:selected").text();
-
-			//urlから日付を取得
-			var date = 'default';
-			var match = location.search.match(/date=(.*?)(&|$)/);
-			if (match) {
-				date = decodeURIComponent(match[1]);
-			}
-
-			console.log(time);
-			console.log(date);
-			$.ajax({
-				url : "json",
-				dataType : "json",
-				data : {
-					//key : value
-					//"time" : 変数timeと同義
-					time : time,
-					date : date
-				},
-				success : function(data) {
-					success(data);
-				},
-				error : function() {
-					error();
-				}
-			});
-		});
-
-	});
-
-	// Ajax通信成功時処理(未完成)
-	function success(data) {
-		console.log(data);
-		for (var cnt = 0; cnt < data.length; cnt++) {
-			$("#projectorBody").html(
-					$("#projectorBody").html() +
-					'<tr>' +
-						'<td>' + data[cnt].time + '</td>' +
-						'<td>' + data[cnt].projectorNumber + '</td>' +
-						'<td>' + data[cnt].userName + '</td>' +
-						'<td><button class="btn btn-primary reserve" name="#" disabled>予約する</button></td>' +
-					"</tr>"
-					);
-		}
-	}
-	// Ajax通信失敗時処理
-	function error() {
-		//alert("通信失敗");
-	}
-
-</script>
-
 <!-- 研修教室管理と同じ -->
 <style>
 .mycontainer {
@@ -243,33 +138,36 @@ td {
 			<div class="col-md-10 col-md-offset-1">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title">プロジェクタ予約状況</h3>
-						<br> 閲覧したい時間 <select id="selectTime" name="selectTime" >
-							<option></option>
-							<option value="9:00">9:00</option>
-							<option value="9:30">9:30</option>
-							<option value="10:00">10:00</option>
-							<option value="10:30">10:30</option>
-							<option value="11:00">11:00</option>
-							<option value="11:30">11:30</option>
-							<option value="12:00">12:00</option>
-							<option value="12:30">12:30</option>
-							<option value="13:00">13:00</option>
-							<option value="13:30">13:30</option>
-							<option value="14:00">14:00</option>
-							<option value="14:30">14:30</option>
-							<option value="15:00">15:00</option>
-							<option value="15:30">15:30</option>
-							<option value="16:00">16:00</option>
-							<option value="16:30">16:30</option>
-							<option value="17:00">17:00</option>
-							<option value="17:30">17:30</option>
-							<option value="18:00">18:00</option>
-							<option value="18:30">18:30</option>
-							<option value="19:00">19:00</option>
-							<option value="19:30">19:30</option>
-							<option value="0:00">All</option>
-						</select>
+						<!-- プロジェクタの権限がある場合セレクトボックス表示 -->
+						<!--<c:if test="${fn:escapeXml(projectorAuthority) }">-->
+							<h3 class="panel-title">プロジェクタ予約状況</h3>
+							<br> 閲覧したい時間 <select id="selectTime" name="selectTime" >
+								<option></option>
+								<option value="9:00">9:00</option>
+								<option value="9:30">9:30</option>
+								<option value="10:00">10:00</option>
+								<option value="10:30">10:30</option>
+								<option value="11:00">11:00</option>
+								<option value="11:30">11:30</option>
+								<option value="12:00">12:00</option>
+								<option value="12:30">12:30</option>
+								<option value="13:00">13:00</option>
+								<option value="13:30">13:30</option>
+								<option value="14:00">14:00</option>
+								<option value="14:30">14:30</option>
+								<option value="15:00">15:00</option>
+								<option value="15:30">15:30</option>
+								<option value="16:00">16:00</option>
+								<option value="16:30">16:30</option>
+								<option value="17:00">17:00</option>
+								<option value="17:30">17:30</option>
+								<option value="18:00">18:00</option>
+								<option value="18:30">18:30</option>
+								<option value="19:00">19:00</option>
+								<option value="19:30">19:30</option>
+								<option value="0:00">All</option>
+							</select>
+						<!--</c:if>-->
 					</div>
 					<div class="panel-body">
 						<div class="panel panel-default">
@@ -416,6 +314,8 @@ td {
 		</div>
 	</div>
 
+
+	<script type="text/javascript" src="/js/schedule.js"></script>
 	<!-- Latest compiled and minified JavaScript -->
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
