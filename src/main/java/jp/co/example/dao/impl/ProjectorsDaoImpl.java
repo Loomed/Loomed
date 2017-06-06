@@ -18,10 +18,10 @@ import util.Util;
 @Slf4j
 public class ProjectorsDaoImpl implements ProjectorsDao{
 	private static final String SQL_SELECT_PROJECTORS_WHERE_TRAININGID_AND_DATE =
-			"SELECT * FROM projectors WHERE training_id = ? AND reserve_time BETWEEN ? AND ?";
+			"SELECT * FROM projectors WHERE training_id = ? AND reserve_time BETWEEN ? AND ? ORDER BY reserve_time, projector_number";
 	private static final String SQL_SELECT_PROJECTORS_WHERE_TRAININGID_AND_DATETIME =
-			"SELECT * FROM projectors WHERE training_id = ? AND reserve_time = ?";
-
+			"SELECT * FROM projectors WHERE training_id = ? AND reserve_time = ? ORDER BY reserve_time, projector_number";
+//
 	@Autowired
 	JdbcTemplate jt;
 

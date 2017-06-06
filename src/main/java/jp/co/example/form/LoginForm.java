@@ -11,5 +11,5 @@ public class LoginForm {
 	private Integer userId;
 	@NotBlank
 	private String password;
-	private String page;
+	private String page;//
 }

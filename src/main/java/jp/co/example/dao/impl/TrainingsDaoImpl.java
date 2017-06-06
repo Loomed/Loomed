@@ -19,7 +19,7 @@ public class TrainingsDaoImpl implements TrainingsDao{
 	private static final String SQL_SELECT__TRAININGS_WHERE_TRAININGID = "SELECT * FROM trainings WHERE training_id = ?";
 
 	@Autowired
- 	private JdbcTemplate jdbcTemplate;
+ 	private JdbcTemplate jdbcTemplate;//
 
 	@Override
 	public List<Trainings> AllRooms() {

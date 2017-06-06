@@ -20,7 +20,7 @@ import util.Util;
 public class IndexServiceImpl implements IndexService {
 
 	UsersDao UsersDao;
-	TrainingsDao TrainingsDao;
+	TrainingsDao TrainingsDao;//
 	MapsDao MapsDao;
 
 	//ログインの処理：未記入

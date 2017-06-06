@@ -8,7 +8,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>研修教室一覧</title>
+<title>研修教室一覧 </title>
 
 <%@ include file="common/head.jsp"%>
 
