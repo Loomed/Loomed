@@ -6,7 +6,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>ユーザ変更</title>
+<title>ユーザ変更 </title>
 
 <%@ include file="common/head.jsp"%>
 

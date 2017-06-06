@@ -19,7 +19,7 @@ public enum ForwardController {
 	TRAININGCONFIG("forward:trainingconfig"),
 	USERCHANGE("forward:userchange"),
 	USERCONFIG("forward:userconfig"),
-	USERINFO("forward:userinfo"),
+	USERINFO("forward:userinfo"),//
 	;
 
 	final String ForwardName;

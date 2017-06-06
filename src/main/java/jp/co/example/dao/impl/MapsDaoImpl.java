@@ -1,11 +1,13 @@
 package jp.co.example.dao.impl;
 
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.jdbc.core.*;
-import org.springframework.stereotype.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
-import jp.co.example.dao.*;
-import jp.co.example.entity.*;
+import jp.co.example.dao.MapsDao;
+import jp.co.example.entity.Maps;
+import jp.co.example.entity.Users;
 
 @Repository
 public class MapsDaoImpl implements MapsDao{
@@ -29,7 +31,7 @@ public class MapsDaoImpl implements MapsDao{
 	 */
 	@Override
 	public int update(int userId, int trainingId) {
-		return jt.update(UPDATE, trainingId, userId);
+		return jt.update(UPDATE, trainingId, userId);//
 	}
 
 }

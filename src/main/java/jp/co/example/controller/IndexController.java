@@ -94,7 +94,7 @@ public class IndexController {
 		List<Trainings> AllTrainings = IndexService.AllTrainings();
 
 
-
+//
 		//判定処理
 		log.info(LogEnum.IF.getLogValue() + "LoginUser == null || LoginRoom == 0");
 		if(LoginUser == null || LoginRoom == 0){

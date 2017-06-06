@@ -98,7 +98,7 @@ public class LoginController {
 
 		model.addAttribute("msg", "IDまたはPASSが間違っています");
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
-		return JspPage.LOGIN.getPageName();
+		return JspPage.LOGIN.getPageName();//
 	}
 
 }
