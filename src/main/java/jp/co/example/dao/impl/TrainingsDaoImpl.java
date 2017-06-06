@@ -32,7 +32,7 @@ public class TrainingsDaoImpl implements TrainingsDao{
 	}
 
 	@Override
-	public Trainings getTraining(int tr) {
+	public Trainings getTraining(Integer tr) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());

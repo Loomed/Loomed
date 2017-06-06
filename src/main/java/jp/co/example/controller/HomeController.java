@@ -44,6 +44,7 @@ public class HomeController {
 		//データに色々格納中
 		try {
 			training_id = Integer.parseInt(id);
+			System.out.println(training_id);
 			tr = HS.getTrainingName(training_id);
 			session.setAttribute("tr", tr);
 		} catch (Exception e) {
