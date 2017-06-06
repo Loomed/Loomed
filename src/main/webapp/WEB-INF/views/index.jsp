@@ -41,6 +41,18 @@
 					<c:choose>
 						<c:when test="${sessionScope.loginuser.authority==0 || sessionScope.loginuser.authority==1}">
 							<h2><a href="roothome">全体管理</a></h2>
+							<c:forEach var="room" items="${sessionScope.AllTrainings}">
+								<c:forEach var="loginroom" items="${sessionScope.loginroom}">
+									<c:if test="${loginroom.trainingId==room.trainingId}">
+										<c:set var="page" value="${room.trainingId}" />
+	 									<%
+										  // スクリプトレットでpageスコープのpageContextにアクセスし変数を取得.
+										  int pageNum = (int)pageContext.findAttribute("page");
+										%>
+										<h2><a href="home?page=<%=pageNum %>">${room.trainingName}</a></h2>
+									</c:if>
+								</c:forEach>
+							</c:forEach>
 						</c:when>
 						<c:when test="${sessionScope.loginuser.authority!=0 && sessionScope.loginuser.authority!=1}">
 							<c:forEach var="room" items="${sessionScope.AllTrainings}">
@@ -73,19 +85,59 @@
 									role="tabpanel" aria-labelledby="heading01">
 									<ul>
 										<c:forEach var="rooms" items="${sessionScope.AllTrainings}">
-											<c:forEach var="loginroom" items="${sessionScope.loginroom}">
-												<c:if test="${loginroom.trainingId!=rooms.trainingId && (rooms.trainingId)!=0}">
-	 												<c:set var="page" value="${rooms.trainingId}" />
-	 												<%
-													  // スクリプトレットでpageスコープのpageContextにアクセスし変数を取得.
-													  int pageNum = (int)pageContext.findAttribute("page");
-													%>
-													<li>
-														<h3><a href="home?page=<%=pageNum %>">${rooms.trainingName}</a></h3>
-													</li>
-												</c:if>
+
+
+
+												<c:choose>
+													<c:when test="${sessionScope.loginuser.authority==0 && (rooms.trainingId)!=1}">
+														<c:set var="page" value="${rooms.trainingId}" />
+		 												<%
+														  // スクリプトレットでpageスコープのpageContextにアクセスし変数を取得.
+														  int pageNum = (int)pageContext.findAttribute("page");
+														%>
+														<li>
+															<h3><a href="home?page=<%=pageNum %>">${rooms.trainingName}</a></h3>
+														</li>
+													</c:when>
+
+
+													<c:when test="${sessionScope.loginuser.authority==1 && (rooms.trainingId)!=1}">
+														<c:forEach var="loginroom" items="${sessionScope.loginroom}">
+															<c:if test="${loginroom.trainingId!=rooms.trainingId && (rooms.trainingId)!=1}">
+				 												<c:set var="page" value="${rooms.trainingId}" />
+				 												<%
+																  // スクリプトレットでpageスコープのpageContextにアクセスし変数を取得.
+																  int pageNum = (int)pageContext.findAttribute("page");
+																%>
+																<li>
+																	<h3><a href="home?page=<%=pageNum %>">${rooms.trainingName}</a></h3>
+																</li>
+															</c:if>
+														</c:forEach>
+													</c:when>
+
+
+
+
+													<c:otherwise>
+														<c:forEach var="loginroom" items="${sessionScope.loginroom}">
+															<c:if test="${loginroom.trainingId!=rooms.trainingId && (rooms.trainingId)!=1}">
+				 												<c:set var="page" value="${rooms.trainingId}" />
+				 												<%
+																  // スクリプトレットでpageスコープのpageContextにアクセスし変数を取得.
+																  int pageNum = (int)pageContext.findAttribute("page");
+																%>
+																<li>
+																	<h3><a href="home?page=<%=pageNum %>">${rooms.trainingName}</a></h3>
+																</li>
+															</c:if>
+														</c:forEach>
+													</c:otherwise>
+												</c:choose>
+
+
 											</c:forEach>
-										</c:forEach>
+
 									</ul>
 								</div>
 							</div>
