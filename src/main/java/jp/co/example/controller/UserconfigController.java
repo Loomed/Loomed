@@ -21,15 +21,15 @@ public class UserconfigController {
 		return JspPage.USERCONFIG.getPageName();
 	}
 
-	// 氏名
-	@RequestMapping(value = "/userinfo")
-	public String getName() {
-		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
-		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
-		return JspPage.USERINFO.getPageName();
-	}
+	// 氏名←コメント解除するとエラー出る
+//	@RequestMapping(value = "/userinfo")
+//	public String getName() {
+//		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+//		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
+//		return JspPage.USERINFO.getPageName();
+//	}
 
-	// //変更
+	// //変更←コメント解除するとエラー出る
 //	@RequestMapping(value = "/userchange")
 //	public String getuserChange() {
 //		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
