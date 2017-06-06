@@ -11,6 +11,7 @@ import util.Util;
 @Slf4j
 @Controller
 public class UserconfigController {
+//実行時エラー出るので注意
 
 	//登録
 	@RequestMapping(value = "/userconfig")
