@@ -67,10 +67,10 @@
 									<ul>
 										<c:forEach var="rooms" items="${sessionScope.AllTrainings}">
 											<c:if test="${(sessionScope.loginroom)!=rooms.trainingId && (rooms.trainingId)!=0}">
-												<c:set var="page" value=rooms.trainingId />
+<%-- 												<c:set var="page" value=rooms.trainingId /> --%>
 												<li>
 													<h3><a href="home">${rooms.trainingName}</a></h3>
-													<h3>${page}</h3>
+<%-- 													<h3>${page}</h3> --%>
 												</li>
 											</c:if>
 										</c:forEach>

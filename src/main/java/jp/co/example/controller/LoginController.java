@@ -31,6 +31,10 @@ public class LoginController {
 
 	@ModelAttribute("loginForm")
 	private LoginForm setUpForm() {
+
+		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return new LoginForm();
 	}
 
