@@ -24,7 +24,7 @@ public class MemberController {
 
 
 	@RequestMapping("/member")
-	public void getMember(HttpServletRequest request, HttpSession session) {
+	public String getMember(HttpServletRequest request, HttpSession session) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
 		session.getAttribute(ScopeKey.LOGINUSER.getScopeKey());
@@ -32,5 +32,10 @@ public class MemberController {
 
 
 
+
+
+
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
+		return "member";
 	}
 }

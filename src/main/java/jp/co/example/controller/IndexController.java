@@ -40,7 +40,7 @@ public class IndexController {
 		// 入力されたidがintかどうか判定
 		log.info(LogEnum.IF.getLogValue() + "IndexService.isNum(id)");
 		if (IndexService.isNum(id)) {
-			log.info(LogEnum.IF.getLogValue() + "IndexService.isNum(id)");
+			log.info(LogEnum.TRUE.getLogValue() + "IndexService.isNum(id)");
 			LoginId = Integer.parseInt(id);
 		} else {
 			log.info(LogEnum.FALSE.getLogValue() + "/login");
@@ -50,7 +50,7 @@ public class IndexController {
 		// 入力されたpassが0文字以上か判定
 		log.info(LogEnum.IF.getLogValue() + "pass.length() > 0");
 		if (pass.length() > 0) {
-			log.info(LogEnum.IF.getLogValue() + "LoginPass == pass");
+			log.info(LogEnum.TRUE.getLogValue() + "LoginPass == pass");
 			LoginPass = pass;
 		} else {
 			log.info(LogEnum.FALSE.getLogValue() + "/login");
@@ -64,7 +64,7 @@ public class IndexController {
 		// ログイン成否判定：未作成（LoginUserがnullでなければRoom番号を受け取る）
 		log.info(LogEnum.IF.getLogValue() + "LoginUser == null");
 		if(LoginUser == null){
-			log.info(LogEnum.IF.getLogValue() + "/login");
+			log.info(LogEnum.TRUE.getLogValue() + "/login");
 			return "/login";
 		}else{
 			log.info(LogEnum.FALSE.getLogValue() + "MapsよりRoom番号をうけとる");
@@ -90,7 +90,7 @@ public class IndexController {
 		//判定処理
 		log.info(LogEnum.IF.getLogValue() + "LoginUser == null || LoginRoom == 0");
 		if(LoginUser == null || LoginRoom == 0){
-			log.info(LogEnum.IF.getLogValue() + "/login");
+			log.info(LogEnum.TRUE.getLogValue() + "/login");
 			log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 			return "/login";
 		}else{
