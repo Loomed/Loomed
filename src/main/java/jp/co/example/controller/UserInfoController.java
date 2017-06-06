@@ -1,7 +1,5 @@
 package jp.co.example.controller;
 
-import java.util.*;
-
 import javax.validation.*;
 
 import org.springframework.beans.factory.annotation.*;
@@ -43,13 +41,8 @@ public class UserInfoController {
 
 		//本来ならセッションのユーザ値を使用する
 		Users user = new Users();
-		user.setUserId(1);
-		Users user2 = myUsersService.getUser(user);
-
-
-		List<Trainings> trainigs = userInfoService.getTrainig();
-		model.addAttribute("rooms", trainigs);
-
+		user.setUserId(5);
+		UsersEx user2 = userInfoService.getUser(user);
 
 		model.addAttribute("user", user2);
 

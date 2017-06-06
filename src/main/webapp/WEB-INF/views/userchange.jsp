@@ -44,21 +44,21 @@ table>td>input {
 								<label for="userId" class="col-sm-2 control-label">ユーザID</label>
 								<div class="col-sm-10">
 									<input name="userId" id="userId" class="form-control"
-										value="000001" readonly>
+										value="${ fn:escapeXml(user.userId) }" readonly>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="password" class="col-sm-2 control-label">パスワード</label>
 								<div class="col-sm-10">
 									<input id="password" name="password" class="form-control"
-										value="●●●●●●" />
+										value="${ fn:escapeXml(user.password) }" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="userName" class="col-sm-2 control-label">氏 名</label>
 								<div class="col-sm-10">
 									<input id="userName" name="userName" class="form-control"
-										value="田中太郎" required />
+										value="${ fn:escapeXml(user.userName) }" required />
 								</div>
 							</div>
 
@@ -66,6 +66,25 @@ table>td>input {
 								<div class="form-group">
 									<label for="companyId" class="col-sm-2 control-label">企業名</label>
 									<div class="col-sm-10 select-container">
+
+										<select id="companyId" name="companyId"
+											class="combobox form-control">
+
+											<c:forEach var="companie" items="${companies}">
+												<c:choose>
+													<c:when test="${companie.companieId == user.companieId }">
+														<option value="${ fn:escapeXml(companie.companieId) }"
+															selected><c:out
+																value="${companie.companieName }" /></option>
+													</c:when>
+													<c:otherwise>
+														<option value="${ fn:escapeXml(companie.companieId) }"><c:out
+																value="${companie.companieName }" /></option>
+													</c:otherwise>
+												</c:choose>
+											</c:forEach>
+										</select>
+										<!--
 										<select id="companyId" name="companyId"
 											class="combobox form-control">
 											<option value=""></option>
@@ -75,6 +94,7 @@ table>td>input {
 											<option value="4">クラウン株式会社</option>
 											<option value="5">ソニーグループ株式会社</option>
 										</select>
+										 -->
 									</div>
 								</div>
 
