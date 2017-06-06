@@ -25,6 +25,8 @@ public class UserInfoController {
 	private MyUserService myUserService;
 	@Autowired
 	private MyUsersService myUsersService;
+	@Autowired
+	private UserInfoService userInfoService;
 
 	@ModelAttribute("userChangeForm")
 	private UserChangeForm setUpForm() {
@@ -45,7 +47,7 @@ public class UserInfoController {
 		Users user2 = myUsersService.getUser(user);
 
 
-		List<Trainings> trainigs = userInfoSerice.getTrainig();
+		List<Trainings> trainigs = userInfoService.getTrainig();
 		model.addAttribute("rooms", trainigs);
 		log.info(trainigs.get(0).getTrainingName());
 		model.addAttribute("user", user2);
