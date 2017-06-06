@@ -15,11 +15,9 @@ public class MapsDaoImpl implements MapsDao{
 	@Autowired
 	JdbcTemplate jt;
 	@Override
-	public int getUserTrainigs(Users user) {
-		Maps map = (Maps) jt.query(SQL_SELECT_MAPS_WHERE_USERID_AND_TRAININGID,
+	public Maps getUserTrainigs(Users user) {
+		return (Maps) jt.queryForObject(SQL_SELECT_MAPS_WHERE_USERID_AND_TRAININGID,
 				new BeanPropertyRowMapper<Maps>(Maps.class));
-		int tid = map.getTrainingId();
-		return tid;
 	}
 
 }
