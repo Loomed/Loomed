@@ -1,7 +1,6 @@
 package jp.co.example.dao.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -18,11 +17,9 @@ public class MapsDaoImpl implements MapsDao{
 	JdbcTemplate jt;
 
 	@Override
-	public int getUserTrainigs(Users user) {
-		Maps map = (Maps) jt.query(SQL_SELECT_MAPS_WHERE_USERID_AND_TRAININGID,
-				new BeanPropertyRowMapper<Maps>(Maps.class));
-		int tid = map.getTrainingId();
-		return tid;
+	public Maps getUserTrainigs(Users user) {
+		return (Maps) jt.queryForObject(SQL_SELECT_MAPS_WHERE_USERID_AND_TRAININGID,
+				(Maps.class));
 	}
 
 	/**
