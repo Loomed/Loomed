@@ -48,9 +48,30 @@ public class ScheduleController {
 		//スケジュールを取得
 		List<ScheduleForm> list = ss.getSchedule(user.getUserId(), date);
 		model.addAttribute("list", list);
+		boolean projectorAuthority;
 
 		//プロジェクタ参照権限があるかチェック
-		boolean projectorAuthority =  ss.isProjectorAuthority();
+		log.info(LogEnum.IF + "AutorityCheck");
+		if(user.getAuthority().equals(Authority.ROOT.getAuthority())) {
+			log.info("ROOT");
+			//ログインユーザがルートの場合全てのプロジェクタ権限あり
+			projectorAuthority = true;
+		} else if(user.getAuthority().equals(Authority.CHARGE.getAuthority())) {
+			log.info("CHARGE");
+			//ログインユーザが担当者の場合全てのプロジェクタ権限なし
+			projectorAuthority = false;
+		} else {
+			log.info("LECTURER or STUDENT");
+			//講師と研修生は所属教室かチェックを行う
+			Trainings room = (Trainings)session.getAttribute(ScopeKey.LOGINROOM.getScopeKey());
+
+			//テストデータ
+			room = new Trainings(2, "Java研修", 2, "");
+
+			projectorAuthority =  ss.isProjectorAuthority(user.getUserId(), room.getTrainingId());
+		}
+		log.info(LogEnum.IF_PARAM.getLogValue() + projectorAuthority);
+		//権限を格納
 		model.addAttribute("projectorAuthority", projectorAuthority);
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
@@ -70,7 +91,7 @@ public class ScheduleController {
 
 		// テストデータ
 		user = new Users(1, "pass", "山田 太郎", 1, 0);
-		room = new Trainings(2, "Java研修", 2, "");
+		room = new Trainings(1, "Java研修", 2, "");
 
 		// ユーザー情報を確認(未完成)
 		log.info(LogEnum.IF.getLogValue() + "user == null");
