@@ -9,7 +9,7 @@
                     2.セッションに値があればそれぞれのhome
                     今回はルートなのでroothome.jspとする
             　  -->
-			<a class="navbar-brand" href="roothome.jsp"> </a>
+			<a class="navbar-brand" href=""> </a>
 			<p class="navbar-text navbar-right">
 				<a href="index" class="navbar-link">研修教室名一覧</a> <a type="button"
 					class="btn btn-defaul btn-info navbar-btn navbar-btn-modify"
