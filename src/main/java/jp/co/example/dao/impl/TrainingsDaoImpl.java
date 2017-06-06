@@ -7,9 +7,11 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import enums.LogEnum;
 import jp.co.example.dao.TrainingsDao;
 import jp.co.example.entity.Trainings;
 import lombok.extern.slf4j.Slf4j;
+import util.Util;
 
 @Repository
 @Slf4j
@@ -28,6 +30,9 @@ public class TrainingsDaoImpl implements TrainingsDao{
 
 	@Override
 	public Trainings getTraining(int tr) {
+		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return jdbcTemplate.queryForObject(SQL_SELECT__TRAININGS_WHERE_TRAININGID, new BeanPropertyRowMapper<Trainings>(Trainings.class), tr);
 	}
 

@@ -237,6 +237,10 @@
 												<a role="button" data-toggle="collapse"
 													data-parent="#accordion" href="#collapse01"
 													aria-expanded="true" aria-controls="collapse01">
+													<!-- フレームワーク課題、list.jspを参考に -->
+<%-- 													<c:out value="${fn:escapeXml(mail.transmissionUserId)}" /> --%>
+<%-- 													<c:out value="${fn:escapeXml(mail.mailTitle)}" /> --%>
+<%-- 													<c:out value="${fn:escapeXml(mail.mailContents)}" /> --%>
 													宛先:高橋太郎 件名:週報提出しました </a>
 												<button class="btn btn-danger delete" data-toggle="modal"
 													data-target="#modal-example">削除</button>

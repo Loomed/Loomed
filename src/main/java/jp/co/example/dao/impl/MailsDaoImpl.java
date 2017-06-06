@@ -22,8 +22,7 @@ public class MailsDaoImpl implements MailsDao {
 
 	@Override
 	public Integer getNewMails(Users user) {
-		int cnt =0;
-		return cnt;
+		return  jt.queryForObject(SQL_SELECT_MAILS_WHERE_OPENFLAG,Integer.class);
 	}
 }
 
