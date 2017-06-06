@@ -7,5 +7,5 @@ import jp.co.example.entity.Users;
 
 public interface MemberService {
 
-	public List<Users> Member(int roomId, int comId);
+	public List<Users> Member(int myRoomId, int comId, int nowRoomId);
 }

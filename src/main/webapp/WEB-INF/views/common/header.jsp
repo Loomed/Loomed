@@ -11,7 +11,7 @@
             　  -->
 			<a class="navbar-brand" href=""> </a>
 			<p class="navbar-text navbar-right">
-				<a href="index.jsp" class="navbar-link">研修教室名一覧</a> <a type="button"
+				<a href="index" class="navbar-link">研修教室名一覧</a> <a type="button"
 					class="btn btn-defaul btn-info navbar-btn navbar-btn-modify"
 					onclick="$('#logout-modal').modal();">ログアウト</a>
 			</p>

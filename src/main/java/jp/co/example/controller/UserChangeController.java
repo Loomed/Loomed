@@ -1,11 +1,12 @@
 package jp.co.example.controller;
 
-import org.springframework.stereotype.*;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import enums.*;
-import lombok.extern.slf4j.*;
-import util.*;
+import enums.JspPage;
+import enums.LogEnum;
+import lombok.extern.slf4j.Slf4j;
+import util.Util;
 
 @Slf4j
 @Controller
