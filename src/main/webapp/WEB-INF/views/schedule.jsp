@@ -138,33 +138,36 @@ td {
 			<div class="col-md-10 col-md-offset-1">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title">プロジェクタ予約状況</h3>
-						<br> 閲覧したい時間 <select id="selectTime" name="selectTime" >
-							<option></option>
-							<option value="9:00">9:00</option>
-							<option value="9:30">9:30</option>
-							<option value="10:00">10:00</option>
-							<option value="10:30">10:30</option>
-							<option value="11:00">11:00</option>
-							<option value="11:30">11:30</option>
-							<option value="12:00">12:00</option>
-							<option value="12:30">12:30</option>
-							<option value="13:00">13:00</option>
-							<option value="13:30">13:30</option>
-							<option value="14:00">14:00</option>
-							<option value="14:30">14:30</option>
-							<option value="15:00">15:00</option>
-							<option value="15:30">15:30</option>
-							<option value="16:00">16:00</option>
-							<option value="16:30">16:30</option>
-							<option value="17:00">17:00</option>
-							<option value="17:30">17:30</option>
-							<option value="18:00">18:00</option>
-							<option value="18:30">18:30</option>
-							<option value="19:00">19:00</option>
-							<option value="19:30">19:30</option>
-							<option value="0:00">All</option>
-						</select>
+						<!-- プロジェクタの権限がある場合セレクトボックス表示 -->
+						<!--<c:if test="${fn:escapeXml(projectorAuthority) }">-->
+							<h3 class="panel-title">プロジェクタ予約状況</h3>
+							<br> 閲覧したい時間 <select id="selectTime" name="selectTime" >
+								<option></option>
+								<option value="9:00">9:00</option>
+								<option value="9:30">9:30</option>
+								<option value="10:00">10:00</option>
+								<option value="10:30">10:30</option>
+								<option value="11:00">11:00</option>
+								<option value="11:30">11:30</option>
+								<option value="12:00">12:00</option>
+								<option value="12:30">12:30</option>
+								<option value="13:00">13:00</option>
+								<option value="13:30">13:30</option>
+								<option value="14:00">14:00</option>
+								<option value="14:30">14:30</option>
+								<option value="15:00">15:00</option>
+								<option value="15:30">15:30</option>
+								<option value="16:00">16:00</option>
+								<option value="16:30">16:30</option>
+								<option value="17:00">17:00</option>
+								<option value="17:30">17:30</option>
+								<option value="18:00">18:00</option>
+								<option value="18:30">18:30</option>
+								<option value="19:00">19:00</option>
+								<option value="19:30">19:30</option>
+								<option value="0:00">All</option>
+							</select>
+						<!--</c:if>-->
 					</div>
 					<div class="panel-body">
 						<div class="panel panel-default">

@@ -42,6 +42,9 @@ public class ScheduleServiceImpl implements ScheduleService {
 	@Autowired
 	TrainingsDao td;
 
+	@Autowired
+	MapsDao md;
+
 	@Override
 	public List<ScheduleForm> getSchedule(Integer userId, String date) {
 		// TODO 自動生成されたメソッド・スタブ
@@ -133,6 +136,8 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 * @return Schedule.jspに表示させるリスト
 	 */
 	private static List<ProjectorForm> valueOfProjectorFormTimeSelect(List<Projectors> list, UsersDao ud, String time, int projectorCount) {
+		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+
 		List<ProjectorForm> listForm = new ArrayList<>();
 		Users projectorUser;
 		int listIndex = 0;
@@ -154,6 +159,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 			}
 		}
 
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return listForm;
 	}
 
@@ -167,6 +173,8 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 * @return Schedule.jspに表示させるリスト
 	 */
 	private static List<ProjectorForm> valueOfProjectorFormTimeAll(List<Projectors> list, UsersDao ud, String time, int projectorCount) {
+		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+
 		List<ProjectorForm> listForm = new ArrayList<>();
 		Users projectorUser;
 		int listIndex = 0;
@@ -200,17 +208,35 @@ public class ScheduleServiceImpl implements ScheduleService {
 		}
 		log.info(LogEnum.FOR.getLogValue() + "int i = 0; i < TIME_SPAN.length; i++" + LogEnum.END.getLogValue());
 
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return listForm;
 	}
 
 	/**
 	 * プロジェクタの参照権限があるか判断するメソッド
+	 * @param userId
+	 * 		ユーザ情報や教室情報が格納されているセッション
 	 * @return
 	 * true...権限あり
 	 * false...権限なし
 	 */
 	@Override
-	public boolean isProjectorAuthority() {
+	public boolean isProjectorAuthority(Integer userId, Integer trainingId) {
+		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+
+		//userIdから所属教室を取得
+		List<Maps> list = md.selectWhereUserId(userId);
+
+
+		for(Maps m : list) {
+			if(trainingId.equals(m.getTrainingId())) {
+				//所属教室と引数教室が一致した場合
+				log.info(Util.getMethodName() + LogEnum.END.getLogValue());
+				return true;
+			}
+		}
+
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return false;
 	}
 

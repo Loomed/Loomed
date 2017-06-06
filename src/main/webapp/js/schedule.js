@@ -1,6 +1,6 @@
 $(function() {
 
-	// モーダル表示
+	// 削除クリック
 	$('.delete').click(function() {
 		$('#configDeleteModal').modal();
 	});
@@ -39,7 +39,7 @@ $(function() {
 						$('#configChangeModal').modal();
 					});
 
-	// 削除クリック
+	// 予約クリック
 	$('.reserve').click(function() {
 		console.log($('#timeTable2').text());
 		$('#timeModal').text($('#timeTable2').text());
