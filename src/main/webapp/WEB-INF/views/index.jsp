@@ -35,14 +35,14 @@
 			<div class="col-md-8 col-md-offset-2">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title">${fn:escapeXml(sessionScope.loginuser.userName)}さん、こんにちは${fn:escapeXml(sessionScope.loginuser.authority)}</h3>
+						<h3 class="panel-title">${fn:escapeXml(sessionScope.loginuser.userName)}さん、こんにちは</h3>
 					</div>
 					<div class="panel-body">
 					<c:choose>
-						<c:when test="${sessionScope.loginuser.authority==0}">
+						<c:when test="${sessionScope.loginuser.authority==0 || sessionScope.loginuser.authority==1}">
 							<h2><a href="roothome">全体管理</a></h2>
 						</c:when>
-						<c:when test="${sessionScope.loginuser.authority!=0}">
+						<c:when test="${sessionScope.loginuser.authority!=0 && sessionScope.loginuser.authority!=1}">
 							<c:forEach var="room" items="${sessionScope.AllTrainings}">
 								<c:forEach var="loginroom" items="${sessionScope.loginroom}">
 									<c:if test="${loginroom.trainingId==room.trainingId}">
