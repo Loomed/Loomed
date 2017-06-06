@@ -1,15 +1,20 @@
 package jp.co.example.form;
 
-import org.hibernate.validator.constraints.*;
+import org.hibernate.validator.constraints.NotBlank;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+
+
 
 @Getter
 @Setter
 public class LoginForm {
 	@NotBlank
-	private Integer userId;
+	private String userId;
 	@NotBlank
 	private String password;
 	private String page;
+
+
 }

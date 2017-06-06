@@ -1,10 +1,5 @@
 package jp.co.example.form;
 
-import javax.validation.constraints.*;
-
-import org.hibernate.validator.constraints.*;
-
-import jp.co.example.entity.*;
 import lombok.*;
 
 @Getter
@@ -12,19 +7,10 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class UserChangeForm extends Users {
-	@NotNull
+public class UserChangeForm {
 	private Integer userId;
-	@NotBlank
 	private String password;
-	@NotBlank
 	private String userName;
-	@NotNull
-	private Integer companyId;
-	@NotNull
+	private String companyId;
 	private Integer authority;
-
-	private String training;
-
-
 }

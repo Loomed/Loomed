@@ -36,8 +36,10 @@ public class SchedulesDaoImpl implements SchedulesDao {
 
 	@Override
 	public List<Schedules> getInpoSche() {
+		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 		List<Schedules> list = jt.query(SQL_SELECT_SCHEDULES_WHERE_IMPORTANT,
 				new BeanPropertyRowMapper<Schedules>(Schedules.class));
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 
 		return list;
 	}
