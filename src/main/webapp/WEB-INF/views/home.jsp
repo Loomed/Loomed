@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-		<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ include file="common/taglibs.jsp"%>
 
@@ -38,7 +38,8 @@
 				<div class="card">
 					<ul class="nav nav-tabs" role="tablist">
 						<li role="presentation"><a aria-controls="home" role="tab"
-							data-toggle="tab"> ${fn:escapeXml(sessionScope.user.userName)} さん</a></li>
+							data-toggle="tab">
+								${fn:escapeXml(sessionScope.user.userName)} さん</a></li>
 					</ul>
 					<!-- Tab panes -->
 					<div class="tab-content">
@@ -109,32 +110,32 @@
 						<div class="tab-content">
 							<div role="tabpanel" class="tab-pane active" id="home">
 								<!--<h2 class="page-header">Search Results</h2>-->
+								<c:forEach var="list" items="${list}" varStatus="status">
 								<section class="comment-list">
 									<!-- First Comment -->
 									<article class="row">
 										<div class="col-md-10 col-sm-10">
 											<div class="panel panel-default arrow left">
-												<c:forEach var="list" items="${list}" varStatus="status">
-													<div class="panel-body">
-														<header class="text-left">
-															<div class="comment-user">
-																<i></i>
-															</div>
-															<time class="comment-date"
-																datetime="${list.uploadDatetime}">
-																<i class="fa fa-clock-o"></i>${list.uploadDatetime}
-															</time>
-														</header>
-														<div class="comment-post">
-															<p>連絡内容:{list.scheduleContents}</p>
+												<div class="panel-body">
+													<header class="text-left">
+														<div class="comment-user">
+															<i></i>
 														</div>
-														<!--<p class="text-right"><a href="#" class="btn btn-default btn-sm"><i class="fa fa-reply"></i> reply</a></p>-->
+														<time class="comment-date"
+															datetime="${list.uploadDatetime}">
+															<i class="fa fa-clock-o"></i>${list.uploadDatetime}
+														</time>
+													</header>
+													<div class="comment-post">
+														<p>連絡内容:{list.scheduleContents}</p>
 													</div>
-												</c:forEach>
+													<!--<p class="text-right"><a href="#" class="btn btn-default btn-sm"><i class="fa fa-reply"></i> reply</a></p>-->
+												</div>
 											</div>
 										</div>
 									</article>
 								</section>
+									</c:forEach>
 							</div>
 						</div>
 					</div>

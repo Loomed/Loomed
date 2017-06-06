@@ -61,7 +61,6 @@ public class HomeController {
 		// テストデータ
 		Users user = new Users(10, "test", "稲田 泳助", 2, 3);
 		// サービスへ
-		maps = HS.getTrainingid(user);
 		cnt = HS.getNewMails(user);
 		list = HS.getInpoSche();
 		//tr = HS.getTrainingName(training_id);
