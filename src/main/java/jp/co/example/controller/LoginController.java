@@ -10,7 +10,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.support.SessionStatus;
 
 import enums.JspPage;
 import enums.LogEnum;
@@ -49,12 +48,25 @@ public class LoginController {
 //	 return JspPage.LOGIN.getPageName();
 //	 }
 
-	//ログアウト処理、loginへ遷移
-	@RequestMapping("/logout")
-	public String postLogout(SessionStatus sessionStatus) {
-		sessionStatus.setComplete();
-		return "login";
-	}
+
+//	//ログアウト処理、loginへ遷移
+//	@RequestMapping("/logout")
+//	public String postLogout(SessionStatus sessionStatus) {
+//		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+//
+//		HttpSession session = equest.getSession(false);
+//		 if(session != null){
+//		 session.invalidate();
+//		 session = request.getSession(false);
+//		 }
+//
+////		sessionStatus.setComplete();
+//
+//		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
+//		return JspPage.LOGIN.getPageName();
+//	}
+
+
 
 	// login.jspからの遷移
 	@RequestMapping("/login")
@@ -68,6 +80,7 @@ public class LoginController {
 	// ログイン処理
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String postLogin(@Valid LoginForm form, BindingResult result, Model model, HttpSession session) {
+		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 		if (result.hasErrors()) {
 			return JspPage.LOGIN.getPageName();
 		}
@@ -79,10 +92,11 @@ public class LoginController {
 
 			session.setAttribute(ScopeKey.LOGINUSER.getScopeKey(), users);
 
-			return JspPage.INDEX.getPageName();
+			return "/"+JspPage.INDEX.getPageName();
 		}
 
 		model.addAttribute("msg", "IDまたはPASSが間違っています");
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return JspPage.LOGIN.getPageName();
 	}
 
