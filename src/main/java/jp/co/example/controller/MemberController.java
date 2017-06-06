@@ -29,6 +29,7 @@ public class MemberController {
 
 		session.getAttribute(ScopeKey.LOGINUSER.getScopeKey());
 		session.getAttribute(ScopeKey.LOGINROOM.getScopeKey());
+		session.getAttribute(ScopeKey.USERMAP.getScopeKey());
 
 
 

@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 public enum ScopeKey {
 	LOGINUSER("loginuser"),
 	LOGINROOM("loginroom"),
+	USERMAP("usermap")
 	;
 
 	final String scopeKey;
