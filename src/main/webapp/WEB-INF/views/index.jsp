@@ -45,7 +45,12 @@
 						<c:when test="${(sessionScope.loginroom)!=0}">
 							<c:forEach var="room" items="${sessionScope.AllTrainings}">
 								<c:if test="${(sessionScope.loginroom)==room.trainingId}">
-									<h2><a href="home">${room.trainingName}</a></h2>
+									<c:set var="page" value="${room.trainingId}" />
+ 									<%
+									  // スクリプトレットでpageスコープのpageContextにアクセスし変数を取得.
+									  int pageNum = (int)pageContext.findAttribute("page");
+									%>
+									<h2><a href="home?page=<%=pageNum %>">${room.trainingName}</a></h2>
 								</c:if>
 							</c:forEach>
 						</c:when>
@@ -67,10 +72,13 @@
 									<ul>
 										<c:forEach var="rooms" items="${sessionScope.AllTrainings}">
 											<c:if test="${(sessionScope.loginroom)!=rooms.trainingId && (rooms.trainingId)!=0}">
-<%-- 												<c:set var="page" value=rooms.trainingId /> --%>
+ 												<c:set var="page" value="${rooms.trainingId}" />
+ 												<%
+												  // スクリプトレットでpageスコープのpageContextにアクセスし変数を取得.
+												  int pageNum = (int)pageContext.findAttribute("page");
+												%>
 												<li>
-													<h3><a href="home">${rooms.trainingName}</a></h3>
-<%-- 													<h3>${page}</h3> --%>
+													<h3><a href="home?page=<%=pageNum %>">${rooms.trainingName}</a></h3>
 												</li>
 											</c:if>
 										</c:forEach>
