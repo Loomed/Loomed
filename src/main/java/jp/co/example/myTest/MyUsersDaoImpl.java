@@ -7,6 +7,7 @@ import org.springframework.stereotype.*;
 import jp.co.example.entity.*;
 import lombok.extern.slf4j.*;
 
+
 @Slf4j
 @Repository
 public class MyUsersDaoImpl implements MyUsersDao {
@@ -17,17 +18,17 @@ public class MyUsersDaoImpl implements MyUsersDao {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public MyUsers loginUser(int id, String pass) {
-		MyUsers users = null;
-		users = jdbcTemplate.queryForObject(SELECT, new BeanPropertyRowMapper<MyUsers>(MyUsers.class),id, pass);
+	public Users loginUser(int id, String pass) {
+		Users users = null;
+		users = jdbcTemplate.queryForObject(SELECT, new BeanPropertyRowMapper<Users>(Users.class),id, pass);
 		return users;
 	}
 
 	@Override
-	public MyUsers getUser(int id) {
-		MyUsers users = null;
+	public Users getUser(int id) {
+		Users users = null;
 		log.info("id : " + id);
-		users = jdbcTemplate.queryForObject(SELECT2, new BeanPropertyRowMapper<MyUsers>(MyUsers.class),id);
+		users = jdbcTemplate.queryForObject(SELECT2, new BeanPropertyRowMapper<Users>(Users.class),id);
 		return users;
 	}
 
