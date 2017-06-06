@@ -48,7 +48,7 @@
 								<label>教室</label>
 							</div>
 							<div class="col-xs-9">
-								<label>${sessionScope.tr.gettrainingName()}</label>
+								<label>${sessionScope.tr.gettrainingName}</label>
 							</div>
 						</h4>
 						<pt>
@@ -107,20 +107,23 @@
 								data-toggle="tab">重要スケジュール</a></li>
 						</ul>
 						<!-- Tab panes -->
+
 						<div class="tab-content">
 							<div role="tabpanel" class="tab-pane active" id="home">
 								<!--<h2 class="page-header">Search Results</h2>-->
-								<c:forEach var="list" items="${list}" varStatus="status">
 								<section class="comment-list">
 									<!-- First Comment -->
 									<article class="row">
 										<div class="col-md-10 col-sm-10">
 											<div class="panel panel-default arrow left">
 												<div class="panel-body">
+												<c:forEach var="list" items="${list}" varStatus="status">
 													<header class="text-left">
+
 														<div class="comment-user">
 															<i></i>
 														</div>
+
 														<time class="comment-date"
 															datetime="${list.uploadDatetime}">
 															<i class="fa fa-clock-o"></i>${list.uploadDatetime}
@@ -129,13 +132,13 @@
 													<div class="comment-post">
 														<p>連絡内容:{list.scheduleContents}</p>
 													</div>
+													</c:forEach>
 													<!--<p class="text-right"><a href="#" class="btn btn-default btn-sm"><i class="fa fa-reply"></i> reply</a></p>-->
 												</div>
 											</div>
 										</div>
 									</article>
 								</section>
-									</c:forEach>
 							</div>
 						</div>
 					</div>

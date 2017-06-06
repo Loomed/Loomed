@@ -38,7 +38,7 @@
 				<div class="card">
 					<ul class="nav nav-tabs" role="tablist">
 						<li role="presentation"><a aria-controls="home" role="tab"
-							data-toggle="tab">${sessionScope.tr.gettrainingName()}さん</a></li>
+							data-toggle="tab">${sessionScope.user.getuserName}さん</a></li>
 					</ul>
 					<!-- Tab panes -->
 					<div class="tab-content">

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import enums.JspPage;
 import enums.LogEnum;
+import enums.ScopeKey;
 import jp.co.example.entity.Schedules;
 import jp.co.example.entity.Trainings;
 import jp.co.example.entity.Users;
@@ -32,34 +33,24 @@ public class HomeController {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
 		// セッションの受け取りと必要なデータ生成
-		// Users user =
-		// (Users)session.getAttribute(ScopeKey.LOGINUSER.getScopeKey());
+		Users user =(Users)session.getAttribute(ScopeKey.LOGINUSER.getScopeKey());
 		Trainings tr = new Trainings();
 		String cnt = null;
 		String maps = null;
+		String id = reques.getParameter("training_id");
 		Integer tid = 0;
-		String url = null;
-		int index = 0;
-		String id = null;
 		int training_id = 0;
 		List<Schedules> list = new ArrayList<Schedules>();
 		//データに色々格納中
+		System.out.println(id);
 		try {
-			url = reques.getRequestURI();
-			index = url.lastIndexOf("=");
-			id = url.substring(index);
-
-			if (id != null) {
-				training_id = Integer.parseInt(id);
-			}
+			training_id = Integer.parseInt(id);
 			tr = HS.getTrainingName(training_id);
 			session.setAttribute("tr", tr);
 		} catch (Exception e) {
 
 		}
 
-		// テストデータ
-		Users user = new Users(10, "test", "稲田 泳助", 2, 3);
 		// サービスへ
 		cnt = HS.getNewMails(user);
 		list = HS.getInpoSche();
