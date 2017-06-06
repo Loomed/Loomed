@@ -27,7 +27,7 @@ public class MailController {
 
 	// 送信したらmail.jspへ遷移。
 	@RequestMapping(value = "/mail", method = RequestMethod.POST)
-	public String postLogin() {
+	public String postMail() {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return JspPage.MAIL.getPageName();

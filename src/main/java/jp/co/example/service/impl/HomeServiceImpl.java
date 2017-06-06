@@ -55,7 +55,7 @@ public class HomeServiceImpl implements HomeService {
 
 	}
 
-	public Trainings getTrainingName(int tr){
+	public Trainings getTrainingName(Integer tr){
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 		Trainings tra = null;
 		tra = trainingsdao.getTraining(tr);
