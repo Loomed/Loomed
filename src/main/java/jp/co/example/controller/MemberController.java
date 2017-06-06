@@ -15,6 +15,7 @@ import enums.ScopeKey;
 import jp.co.example.entity.Maps;
 import jp.co.example.entity.Trainings;
 import jp.co.example.entity.Users;
+import jp.co.example.service.IndexService;
 import jp.co.example.service.MemberService;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -28,12 +29,13 @@ public class MemberController {
 	MemberService MemberService;
 	@Autowired
 	HttpServletRequest request;
-
+	@Autowired
+	IndexService IndexService;
 
 	@RequestMapping("/member")
 	public String getMember(HttpServletRequest request, HttpSession session) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
-
+/*
 		Users LoginUser = null;
 		Trainings nowTraining = null;
 		List<Maps> UserMap = null;
@@ -42,11 +44,19 @@ public class MemberController {
 		nowTraining = (Trainings) session.getAttribute(ScopeKey.LOGINROOM.getScopeKey());
 		UserMap = (List<Maps>) session.getAttribute(ScopeKey.USERMAP.getScopeKey());
 
+*/
+		//テストデータ
+		Users LoginUser = IndexService.LoginJudge(10,"test");
+		Trainings nowTraining = new Trainings(5,"test",2,"てすてす");
+		List<Maps> UserMap = IndexService.RoomJudge(10);
+
 		List<Users> members = new ArrayList<>();
 		members = MemberService.Member(UserMap, LoginUser.getCompanyId(), nowTraining.getTrainingId());
 
 
 		request.setAttribute(ScopeKey.MEMBERS.getScopeKey(),members);
+		request.setAttribute(ScopeKey.LOGINROOM.getScopeKey(),nowTraining);
+		//jsp内部から
 
 
 

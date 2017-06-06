@@ -28,7 +28,7 @@ public class IndexServiceImpl implements IndexService {
 	@Autowired
 	MapsDao MapsDao;
 
-	//ログインの処理：未記入
+	//ログインの処理：未記入→完成
 	public Users LoginJudge(int id, String pass) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
@@ -41,11 +41,11 @@ public class IndexServiceImpl implements IndexService {
 
 	}
 
-	//ユーザと教室の紐付け：未確定
+	//ユーザと教室の紐付け：未確定→完成
 	public List<Maps> RoomJudge(int id) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
-		// 処理未確定のため
+		// 処理未確定のため→完成
 		List<Maps> RoomNumList = new ArrayList<>();
 
 		RoomNumList = MapsDao.selectWhereUserId(id);

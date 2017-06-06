@@ -3,6 +3,7 @@ package jp.co.example.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import enums.LogEnum;
@@ -17,6 +18,7 @@ import util.Util;
 @Service
 public class MemberServiceImpl implements MemberService {
 
+	@Autowired
 	UsersDao UsersDao;
 
 	public List<Users> Member(List<Maps> UserMap, int userComId, int nowTrainingId) {

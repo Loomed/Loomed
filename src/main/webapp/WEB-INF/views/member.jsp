@@ -34,6 +34,18 @@
 									</tr>
 								</thead>
 								<tbody>
+								<c:set var="nowRoom" value="${request.getAttribute(ScopeKey.LOGINROOM.getScopeKey())}" />
+									<c:forEach var="member" items="${request.getAttribute(ScopeKey.MEMBERS.getScopeKey())}">
+										<c:set var="count" value="${count+1}" />
+										<out value="${count}" />
+										<tr>
+											<th>${count}</th>
+											<th>${member.userName}</th>
+											<th>${nowRoom.trainingName}</th>
+											<th>会社名どうする？</th>
+										</tr>
+									</c:forEach>
+
 									<tr>
 										<th>1</th>
 										<th>山田太郎</th>
