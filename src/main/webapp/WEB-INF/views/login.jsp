@@ -46,7 +46,7 @@
 	</div>
 
 	<!-- ログイン失敗ダイアログ -->
-	<div class="modal fade" id="deleteModal" tabindex="-1">
+	<div class="modal fade" id="loginModal" tabindex="-1">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header modal-header-modify">
@@ -64,6 +64,13 @@
 			</div>
 		</div>
 	</div>
+
 </div>
+<c:if test="${not empty msg}">
+	<script>
+	$('#loginModal').modal();
+	</script>
+
+	</c:if>
 
 </html>

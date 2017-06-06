@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.support.SessionStatus;
 
 import enums.ForwardController;
 import enums.JspPage;
@@ -54,22 +55,22 @@ public class LoginController {
 //	 }
 
 
-//	//ログアウト処理、loginへ遷移
-//	@RequestMapping("/header")
-//	public String postLogout(SessionStatus sessionStatus) {
-//		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
-//
+	//ログアウト処理、loginへ遷移
+	@RequestMapping("/logout")
+	public String postLogout(SessionStatus sessionStatus) {
+		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+
 //		HttpSession session = request.getSession(false);
 //		 if(session != null){
 //		 session.invalidate();
 //		 session = request.getSession(false);
 //		 }
-//
-////		sessionStatus.setComplete();
-//
-//		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
-//		return JspPage.LOGIN.getPageName();
-//	}
+
+		sessionStatus.setComplete();
+
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
+		return JspPage.LOGIN.getPageName();
+	}
 
 
 

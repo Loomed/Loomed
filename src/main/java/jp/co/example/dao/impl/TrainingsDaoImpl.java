@@ -25,6 +25,9 @@ public class TrainingsDaoImpl implements TrainingsDao{
 
 	@Override
 	public List<Trainings> AllRooms() {
+		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return jdbcTemplate.query(SQL_SELECT_ALL_TRAININGS, new BeanPropertyRowMapper<Trainings>(Trainings.class));
 	}
 
