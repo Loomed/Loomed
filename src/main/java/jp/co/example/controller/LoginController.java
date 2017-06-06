@@ -10,8 +10,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.support.SessionStatus;
 
+import enums.ForwardController;
 import enums.JspPage;
 import enums.LogEnum;
 import enums.ScopeKey;
@@ -50,22 +50,22 @@ public class LoginController {
 //	 }
 
 
-	//ログアウト処理、loginへ遷移
-	@RequestMapping("/header")
-	public String postLogout(SessionStatus sessionStatus) {
-		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
-
-		HttpSession session = request.getSession(false);
-		 if(session != null){
-		 session.invalidate();
-		 session = request.getSession(false);
-		 }
-
-//		sessionStatus.setComplete();
-
-		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
-		return JspPage.LOGIN.getPageName();
-	}
+//	//ログアウト処理、loginへ遷移
+//	@RequestMapping("/header")
+//	public String postLogout(SessionStatus sessionStatus) {
+//		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+//
+//		HttpSession session = request.getSession(false);
+//		 if(session != null){
+//		 session.invalidate();
+//		 session = request.getSession(false);
+//		 }
+//
+////		sessionStatus.setComplete();
+//
+//		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
+//		return JspPage.LOGIN.getPageName();
+//	}
 
 
 
@@ -93,7 +93,7 @@ public class LoginController {
 
 			session.setAttribute(ScopeKey.LOGINUSER.getScopeKey(), users);
 
-			return "/index";
+			return ForwardController.INDEX.getForwardName();
 		}
 
 		model.addAttribute("msg", "IDまたはPASSが間違っています");
