@@ -90,7 +90,7 @@ table>td>input {
 							<div class="form-group">
 								<label for="trainingId" class="col-sm-2 control-label">配属研修教室</label>
 								<div class="col-sm-10">
-									<select id="training" name="training" class="form-control">
+									<select id="trainingId" name="trainingId" class="form-control">
 										<option>研修教室選択なし</option>
 										<option value="1" selected>研修教室管理</option>
 										<option value="2">経験者Java品川教室</option>

@@ -24,7 +24,5 @@ public class UserChangeForm extends Users {
 	@NotNull
 	private Integer authority;
 
-	private String training;
-
-
+	private Integer trainingId;
 }
