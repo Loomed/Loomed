@@ -1,5 +1,7 @@
 package jp.co.example.controller;
 
+import java.util.*;
+
 import javax.validation.*;
 
 import org.springframework.beans.factory.annotation.*;
@@ -24,7 +26,7 @@ public class UserInfoController {
 	@Autowired
 	private MyUsersService myUsersService;
 
-	@ModelAttribute("indexForm")
+	@ModelAttribute("userChangeForm")
 	private UserChangeForm setUpForm() {
 		return new UserChangeForm();
 	}
@@ -43,6 +45,9 @@ public class UserInfoController {
 		Users user2 = myUsersService.getUser(user);
 
 
+		List<Trainings> trainigs = userInfoSerice.getTrainig();
+		model.addAttribute("rooms", trainigs);
+		log.info(trainigs.get(0).getTrainingName());
 		model.addAttribute("user", user2);
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());

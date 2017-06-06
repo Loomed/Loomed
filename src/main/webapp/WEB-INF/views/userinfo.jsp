@@ -14,7 +14,7 @@
 
 <body>
 
-<%@ include file="common/header.jsp"%>
+	<%@ include file="common/header.jsp"%>
 
 	<div class="container mycontainer">
 		<div class="row">
@@ -28,26 +28,31 @@
 							<div class="form-group">
 								<label for="intputUserId" class="col-sm-2 control-label">ユーザID</label>
 								<div class="col-sm-10">
-									<label for="intputUserId" class="control-label"><c:out value="${user.userId}" /></label>
+									<label for="intputUserId" class="control-label"><fmt:formatNumber
+											pattern="000000" value="${user.userId}" /></label>
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="intputUserName" class="col-sm-2 control-label">氏
-									名</label>
+								<label for="intputUserName" class="col-sm-2 control-label">氏名</label>
 								<div class="col-sm-10">
-									<label for="intputUserName" class="control-label"><c:out value="${user.userName}" /></label>
+									<label for="intputUserName" class="control-label"><c:out
+											value="${user.userName}" /></label>
 								</div>
 							</div>
-							<div class="form-group">
-								<label class="col-sm-2 control-label">権限</label>
-								<div class="col-sm-10">
-									<label class="control-label"><c:out value="${user.authority}" /></label>
+							<c:if test="${loginuser.authority <= 1}">
+								<div class="form-group">
+									<label class="col-sm-2 control-label">権限</label>
+									<div class="col-sm-10">
+										<label class="control-label"><c:out
+												value="${user.authority}" /></label>
+									</div>
 								</div>
-							</div>
+							</c:if>
 							<div class="form-group">
 								<label for="inputCompany" class="col-sm-2 control-label">企業名</label>
 								<div class="col-sm-10">
-									<label for="inputCompany" class="control-label"><c:out value="${user.companyId}" /></label>
+									<label for="inputCompany" class="control-label"><c:out
+											value="${user.companyId}" /></label>
 								</div>
 							</div>
 							<div class="form-group">
@@ -59,7 +64,7 @@
 							<div class="form-group">
 								<div class="col-sm-offset-1 col-sm-10">
 									<button type="button" class="btn btn-default"
-										onclick="location.href = 'home';">前の画面に戻る</button>
+										onclick="javascript:history.back();">前の画面に戻る</button>
 									<button type="button" class="btn btn-primary pull-right"
 										onclick="location.href = 'userchange';">ユーザ情報を変更する</button>
 								</div>
