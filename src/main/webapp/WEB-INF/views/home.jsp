@@ -119,12 +119,12 @@
 																<div class="comment-user">
 																	<i></i>
 																</div>
-																<time class="comment-date" datetime="2017:05:31">
-																	<i class="fa fa-clock-o"></i>{}
+																<time class="comment-date" datetime="${list.uploadDatetime}">
+																	<i class="fa fa-clock-o"></i>${list.uploadDatetime}
 																</time>
 															</header>
 															<div class="comment-post">
-																<p>連絡内容:{}</p>
+																<p>連絡内容:{list.scheduleContents}</p>
 															</div>
 															<!--<p class="text-right"><a href="#" class="btn btn-default btn-sm"><i class="fa fa-reply"></i> reply</a></p>-->
 														</div>

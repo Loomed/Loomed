@@ -25,10 +25,14 @@ public class HomeServiceImpl implements HomeService {
 	SchedulesDao schedulesdao;
 
 	public String getNewMails(Users user) {
-		Integer cnt = 0;
-		String mailcnt = null;
-		cnt = mailsdao.getNewMails(user);
-		mailcnt = Integer.toString(cnt);
+		Integer mails = 0;
+		String mailcnt;
+		try{
+		mails = mailsdao.getNewMails(user);
+		}catch(Exception e){
+			mailcnt = null;
+		}
+		mailcnt = Integer.toString(mails);
 		return mailcnt;
 	}
 
