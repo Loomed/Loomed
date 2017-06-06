@@ -1,9 +1,13 @@
 package jp.co.example.service;
 
-import jp.co.example.entity.Maps;
-import jp.co.example.entity.Users;
+import java.util.*;
+
+import jp.co.example.entity.*;
 
 public interface UserInfoService {
 	int Update(Users user, Maps map);
-	Users getUser(Users user);//
+
+	Users getUser(Users user);
+
+	List<Trainings> getTrainig();
 }

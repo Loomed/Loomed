@@ -35,13 +35,13 @@ public class HomeController {
 		//Users user = (Users) session.getAttribute(ScopeKey.LOGINUSER.getScopeKey());
 		Trainings tr = new Trainings();
 		String cnt = null;
-		//Maps maps =0;
+		Integer maps =0;
 		List<Schedules> list = new ArrayList<Schedules>();
 		// テストデータ
 		Users user = new Users(10, "test", "稲田 泳助", 2, 3);
 		//サービスへ
 		System.out.println(user);
-		//maps = HS.getTrainingid(user);
+		maps = HS.getTrainingid(user);
 		cnt = HS.getNewMails(user);
 		list = HS.getInpoSche();
 		//tr = HS.getTrainingName();

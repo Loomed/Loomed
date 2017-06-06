@@ -34,8 +34,8 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
-				<button type="submit" class="btn btn-primary" data-dismiss="modal">OK</button>
-<!-- 					onclick="location.href='login';" -->
+				<button type="submit" class="btn btn-primary" data-dismiss="modal" onclick="location.href='logout';">OK</button>
+
 
 			</div>
 		</div>
