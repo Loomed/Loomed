@@ -21,7 +21,7 @@ public class MailsDaoImpl implements MailsDao {
 	}
 
 	@Override
-	public int getNewMails(Users user) {
+	public Integer getNewMails(Users user) {
 		int cnt =0;
 		return cnt;
 	}

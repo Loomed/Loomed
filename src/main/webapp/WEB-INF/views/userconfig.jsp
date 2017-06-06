@@ -6,7 +6,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>ユーザ管理</title>
+<title>ユーザ管理 </title>
 
 <%@ include file="common/head.jsp"%>
 
@@ -17,7 +17,7 @@
 		});
 		$('.change').click(function() {
 			//Javasctiptからの遷移？
-			location.href = "userchange";
+			location.href = "rootuserchange.jsp";
 		});
 		$('.combobox').combobox();
 	});
@@ -263,7 +263,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
-					<a href="userdelete">
+					<a href="userDelete">
 					<button type="button" class="btn btn-danger">削除</button>
 					</a>
 				</div>

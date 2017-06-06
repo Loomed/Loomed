@@ -1,13 +1,12 @@
 package jp.co.example.dao;
 
-import java.util.List;
+import java.util.*;
 
-import jp.co.example.entity.Trainings;
+import jp.co.example.entity.*;
 
 public interface TrainingsDao {
 
-	public List<Trainings> AllRooms() ;
+	List<Trainings> AllRooms() ;
 
-	public Trainings getTraining(int tr);
-
+	Trainings getTraining(int tr);
 }

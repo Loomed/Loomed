@@ -6,7 +6,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>ログイン</title>
+<title>ログイン </title>
 
 <%@ include file="common/head.jsp"%>
 
@@ -20,20 +20,17 @@
 						<h3 class="panel-title">ログイン</h3>
 					</div>
 					<div class="panel-body">
-						<form:form modelAttribute="loginForm" class="form-horizontal"
-							method="POST">
+						<form:form modelAttribute="loginForm" class="form-horizontal" method="POST">
 							<div class="form-group">
 								<label for="intputUserId" class="col-sm-2 control-label">ユーザID</label>
 								<div class="col-sm-10">
-									<input type="text" class="form-control" id="userId"
-										name="userId" required>
+									<input type="text" class="form-control" id="userId" name="userId" required>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputPassword" class="col-sm-2 control-label">パスワード</label>
 								<div class="col-sm-10">
-									<input type="password" class="form-control" id="password"
-										name="password" required>
+									<input type="password" class="form-control" id="password" name="password" required>
 								</div>
 							</div>
 							<div class="form-group">
@@ -48,9 +45,8 @@
 		</div>
 	</div>
 
-
 	<!-- ログイン失敗ダイアログ -->
-	<div class="modal fade" id="loginModal" tabindex="-1">
+	<div class="modal fade" id="deleteModal" tabindex="-1">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header modal-header-modify">
@@ -68,14 +64,6 @@
 			</div>
 		</div>
 	</div>
-
-	<c:if test="${not empty msg}">
-		<script>
-			console.log('comming');
-			$('#loginModal').modal();
-		</script>
-	</c:if>
-
 </div>
 
 </html>

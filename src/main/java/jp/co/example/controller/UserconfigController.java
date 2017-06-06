@@ -13,7 +13,7 @@ import util.Util;
 public class UserconfigController {
 //実行時エラー出るので注意
 
-	//登録
+	//登録//
 	@RequestMapping(value = "/userconfig")
 	public String getResistration() {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
