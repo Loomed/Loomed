@@ -124,9 +124,11 @@
 																					int pageNum = (int) pageContext.findAttribute("page");
 															%>
 															<li>
+
 																<h3>
 																	<a href="home?page=<%=pageNum%>">${rooms.trainingName}</a>
 																</h3>
+
 															</li>
 														</c:if>
 													</c:forEach>
@@ -146,14 +148,11 @@
 																					int pageNum = (int) pageContext.findAttribute("page");
 															%>
 															<li>
-																<form name="seni" method="get" action="home.jsp">
-																	<input type=hidden name="training_id"
-																		value=<%=pageNum%>>
-																	<h3>
-																		<a href="javascript:seni.submit()">${rooms.trainingName }</a>
-																		<!--<a href="home?page=<%=pageNum%>">${rooms.trainingName}</a>-->
-																	</h3>
-																</form>
+																<h3>
+
+																	<a href="home?page=<%=pageNum%>">${rooms.trainingName}</a>
+																</h3>
+
 															</li>
 														</c:if>
 													</c:forEach>

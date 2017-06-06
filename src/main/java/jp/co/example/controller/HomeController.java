@@ -37,12 +37,11 @@ public class HomeController {
 		Trainings tr = new Trainings();
 		String cnt = null;
 		String maps = null;
-		String id = reques.getParameter("training_id");
+		String id = reques.getParameter("page");
 		Integer tid = 0;
 		int training_id = 0;
 		List<Schedules> list = new ArrayList<Schedules>();
 		//データに色々格納中
-		System.out.println(id);
 		try {
 			training_id = Integer.parseInt(id);
 			tr = HS.getTrainingName(training_id);
