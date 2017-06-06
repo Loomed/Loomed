@@ -46,7 +46,7 @@ public class HomeController {
 		list = HS.getInpoSche();
 		//tr = HS.getTrainingName();
 
-		if(cnt ==null){
+		if(cnt.equals("0")){
 			cnt ="新着無し";
 		}
 		// ボタンで遷移先を決定

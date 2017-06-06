@@ -38,7 +38,11 @@ public class HomeServiceImpl implements HomeService {
 
 	public List<Schedules> getInpoSche() {
 		List<Schedules> list = new ArrayList<Schedules>();
+		try{
 		list = schedulesdao.getInpoSche();
+		}catch(Exception e){
+			list = null;
+		}
 		return list;
 
 	}
