@@ -49,7 +49,7 @@ public class HomeServiceImpl implements HomeService {
 
 	public Integer getTrainingid(Users user) {
 		Maps maps = new Maps();
-		maps = mapsdao.getUserTrainigs(user);
+		maps = mapsdao.selectWhereUserId(user);
 		Integer tid = maps.getTrainingId();
 		return tid;
 
