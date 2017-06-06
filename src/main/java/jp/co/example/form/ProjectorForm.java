@@ -11,5 +11,7 @@ public class ProjectorForm {
 	private String time;
 	private String projectorNumber;
 	private String userName;
+//	private Integer authority;
+//	private Integer
 
 }
