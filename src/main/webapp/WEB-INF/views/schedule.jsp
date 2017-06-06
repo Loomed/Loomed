@@ -50,6 +50,9 @@ td {
 
 	<%@ include file="common/header.jsp"%>
 
+	<!-- ログインユーザの権限を保持 -->
+	<input type="hidden" id="loginUserAuthority" value="${fn:escapeXml(loginUserAuthority) }" />
+
 	<div class="container mycontainer">
 		<div class="row">
 			<div class="col-md-10 col-md-offset-1">
@@ -138,10 +141,10 @@ td {
 			<div class="col-md-10 col-md-offset-1">
 				<div class="panel panel-default">
 					<div class="panel-heading">
+						<h3 class="panel-title">プロジェクタ予約状況</h3>
 						<!-- プロジェクタの権限がある場合セレクトボックス表示 -->
-						<!--<c:if test="${fn:escapeXml(projectorAuthority) }">-->
-							<h3 class="panel-title">プロジェクタ予約状況</h3>
-							<br> 閲覧したい時間 <select id="selectTime" name="selectTime" >
+						<c:if test="${fn:escapeXml(projectorAuthority) }">
+							<br> 閲覧したい時間 <select id="selectTime" name="selectTime">
 								<option></option>
 								<option value="9:00">9:00</option>
 								<option value="9:30">9:30</option>
@@ -167,23 +170,32 @@ td {
 								<option value="19:30">19:30</option>
 								<option value="0:00">All</option>
 							</select>
-						<!--</c:if>-->
+						</c:if>
 					</div>
 					<div class="panel-body">
-						<div class="panel panel-default">
-							<table class="table">
-								<thead>
-									<tr>
-										<th>予約時間</th>
-										<th>プロジェクタ</th>
-										<th>予約ユーザ</th>
-										<th>予約</th>
-									</tr>
-								</thead>
-								<tbody id="projectorBody">
-								</tbody>
-							</table>
-						</div>
+
+						<!-- プロジェクタの権限がある場合セレクトボックス表示 -->
+						<c:choose>
+							<c:when test="${fn:escapeXml(projectorAuthority) }">
+								<div class="panel panel-default">
+									<table class="table">
+										<thead>
+											<tr>
+												<th>予約時間</th>
+												<th>プロジェクタ</th>
+												<th>予約ユーザ</th>
+												<th>予約</th>
+											</tr>
+										</thead>
+										<tbody id="projectorBody">
+										</tbody>
+									</table>
+								</div>
+							</c:when>
+							<c:when test="${!fn:escapeXml(projectorAuthority) }">
+								<h4 style="text-align: center;">権限がありません</h4>
+							</c:when>
+						</c:choose>
 					</div>
 				</div>
 			</div>
