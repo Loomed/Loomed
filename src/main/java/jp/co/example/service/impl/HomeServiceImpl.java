@@ -47,10 +47,16 @@ public class HomeServiceImpl implements HomeService {
 
 	}
 
-	public Integer getTrainingid(Users user) {
+	public String getTrainingid(Users user) {
 		Maps maps = new Maps();
-		maps = mapsdao.selectWhereUserId(user);
-		Integer tid = maps.getTrainingId();
+		String tid = null;
+		try{
+		maps = mapsdao.getUserTrainigs(user);
+		 tid = Integer.toString(maps.getTrainingId());
+		}catch(Exception e){
+			tid = null;
+		}
+
 		return tid;
 
 	}
