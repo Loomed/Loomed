@@ -34,18 +34,21 @@ public class HomeController {
 		//セッションの受け取りと必要なデータ生成
 		//Users user = (Users) session.getAttribute(ScopeKey.LOGINUSER.getScopeKey());
 		Trainings tr = new Trainings();
-		int cnt = 0;
-		//Maps maps =0;
+		String cnt = null;
+		Integer maps =0;
 		List<Schedules> list = new ArrayList<Schedules>();
 		// テストデータ
 		Users user = new Users(10, "test", "稲田 泳助", 2, 3);
 		//サービスへ
 		System.out.println(user);
-		//maps = HS.getTrainingid(user);
+		maps = HS.getTrainingid(user);
 		cnt = HS.getNewMails(user);
 		list = HS.getInpoSche();
 		//tr = HS.getTrainingName();
 
+		if(cnt.equals("0")){
+			cnt ="新着無し";
+		}
 		// ボタンで遷移先を決定
 		/*
 		 * if ("userinfo".equals(button)) { return
