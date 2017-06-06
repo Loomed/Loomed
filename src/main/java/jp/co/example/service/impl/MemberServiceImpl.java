@@ -46,7 +46,7 @@ public class MemberServiceImpl implements MemberService {
 			default:
 				break;
 		}
-
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return members;
 
 //		log.info(LogEnum.IF.getLogValue() + "myRoomId == nowRoomId");
