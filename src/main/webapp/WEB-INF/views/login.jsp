@@ -24,13 +24,15 @@
 							<div class="form-group">
 								<label for="intputUserId" class="col-sm-2 control-label">ユーザID</label>
 								<div class="col-sm-10">
-									<input type="text" class="form-control" id="userId" name="userId" required>
+									<input type="text" class="form-control" id="userId" name="userId"
+										value="000001" required>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputPassword" class="col-sm-2 control-label">パスワード</label>
 								<div class="col-sm-10">
-									<input type="password" class="form-control" id="password" name="password" required>
+									<input type="password" class="form-control" id="password" name="password"
+										value="●●●●●●" required>
 								</div>
 							</div>
 							<div class="form-group">

@@ -1,7 +1,5 @@
 package jp.co.example.controller;
 
-import javax.validation.*;
-
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
@@ -34,15 +32,13 @@ public class UserInfoController {
 	 * @Author sakata
 	 */
 	@RequestMapping("/userinfo")
-	public String getUserInfo(Model model) { // 引数の
+	public String getUserInfo(Model model) { // セッションからユーザの値を取得する
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
-		//本来ならセッションのユーザ値を使用する
 		Users user = new Users();
 		user.setUserId(1);
+
 		Users user2 = myUsersService.getUser(user);
-
-
 		model.addAttribute("user", user2);
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
@@ -56,28 +52,18 @@ public class UserInfoController {
 	 * @Author sakata
 	 */
 	@RequestMapping(value = "/userinfo", method = RequestMethod.POST)
-	public String postUserInfo(@Valid UserChangeForm userChangeForm) {
+	public String postUserInfo(UserChangeForm userChangeForm) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
-		//ログ表示
-		getUserLog(userChangeForm);
 
 
+		log.info("user : " + userChangeForm.getCompanyId());
+		Users user = new Users();
 
-		myUserService.Update(userChangeForm);
+		//myUserService.Update();
+
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return JspPage.USERINFO.getPageName();
-	}
-
-	private void getUserLog(UserChangeForm user)
-	{
-		log.info("user userId   : " + user.getUserId());
-		log.info("user password : " + user.getPassword());
-		log.info("user userName : " + user.getUserName());
-		log.info("user authority: " + user.getAuthority());
-		log.info("user companyId: " + user.getCompanyId());
-		log.info("user training : " + user.getTraining());
-
 	}
 
 }

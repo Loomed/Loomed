@@ -28,32 +28,32 @@
 							<div class="form-group">
 								<label for="intputUserId" class="col-sm-2 control-label">ユーザID</label>
 								<div class="col-sm-10">
-									<label for="intputUserId" class="control-label"><c:out value="${user.userId}" /></label>
+									<label for="intputUserId" class="control-label">000001</label>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="intputUserName" class="col-sm-2 control-label">氏
 									名</label>
 								<div class="col-sm-10">
-									<label for="intputUserName" class="control-label"><c:out value="${user.userName}" /></label>
+									<label for="intputUserName" class="control-label">${user.userName}</label>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">権限</label>
 								<div class="col-sm-10">
-									<label class="control-label"><c:out value="${user.authority}" /></label>
+									<label class="control-label">ルートユーザ</label>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputCompany" class="col-sm-2 control-label">企業名</label>
 								<div class="col-sm-10">
-									<label for="inputCompany" class="control-label"><c:out value="${user.companyId}" /></label>
+									<label for="inputCompany" class="control-label">株式会社Axiz</label>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">所属研修教室</label>
 								<div class="col-sm-10">
-									<label for="intputUserName" class="control-label"></label>
+									<label for="intputUserName" class="control-label">研修教室管理</label>
 								</div>
 							</div>
 							<div class="form-group">

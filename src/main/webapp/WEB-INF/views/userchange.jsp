@@ -24,8 +24,6 @@ table>td>input {
 	$(function() {
 		$('.combobox').combobox();
 	});
-
-
 </script>
 </head>
 
@@ -39,65 +37,63 @@ table>td>input {
 						<h3 class="panel-title">ユーザ情報変更</h3>
 					</div>
 					<div class="panel-body">
-						<form:form id="changeForm" modelAttribute="userChangeForm" class="form-horizontal"
-							action="userinfo" method="POST" submit-flag="false">
+						<form:form path="changeForm" class="form-horizontal">
 							<div class="form-group">
-								<label for="userId" class="col-sm-2 control-label">ユーザID</label>
+								<label for="intputUserId" class="col-sm-2 control-label">ユーザID</label>
 								<div class="col-sm-10">
-									<input name="userId" id="userId" class="form-control"
-										value="000001" readonly>
+									<form:form path="userId" class="control-label">000001</form:form>
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="password" class="col-sm-2 control-label">パスワード</label>
+								<label for="inputPassword" class="col-sm-2 control-label">パスワード</label>
 								<div class="col-sm-10">
-									<input id="password" name="password" class="form-control"
-										value="●●●●●●" />
+									<form:password path="password" class="form-control"
+										value="●●●●●●" required />
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="userName" class="col-sm-2 control-label">氏 名</label>
+								<label for="inputName" class="col-sm-2 control-label">氏
+									名</label>
 								<div class="col-sm-10">
-									<input id="userName" name="userName" class="form-control"
-										value="田中太郎" required />
+									<form:input path="userName" class="form-control" value="田中太郎"
+										required />
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="companyId" class="col-sm-2 control-label">企業名</label>
+								<label for="inputCompany" class="col-sm-2 control-label">企業名</label>
 								<div class="col-sm-10 select-container">
-									<select id="companyId" name="companyId"
-										class="combobox form-control">
+									<form:select path="companyId" class="combobox form-control">
 										<option value=""></option>
 										<option value="1">株式会社Axiz</option>
 										<option value="2">株式会社コンピュータ・ハイテック・ビジュアルソリューション・グローバルパワー</option>
 										<option value="3">株式会社プリウス</option>
 										<option value="4">クラウン株式会社</option>
 										<option value="5">ソニーグループ株式会社</option>
+									</form:select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputCompany" class="col-sm-2 control-label">権限</label>
+								<div class="col-sm-10">
+									<select class="form-control">
+										<option selected>ルートユーザ</option>
+										<option>講師</option>
+										<option>担当者</option>
+										<option>研修生</option>
 									</select>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-2 control-label">権限</label>
+								<label for="inputTraining" class="col-sm-2 control-label">配属研修教室</label>
 								<div class="col-sm-10">
-									<select id="authority" name="authority" class="form-control">
-										<option value="0" selected>ルートユーザ</option>
-										<option value="1">講師</option>
-										<option value="2">担当者</option>
-										<option value="3">研修生</option>
-									</select>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="trainingId" class="col-sm-2 control-label">配属研修教室</label>
-								<div class="col-sm-10">
-									<select id="training" name="training" class="form-control">
+									<select class="form-control">
 										<option>研修教室選択なし</option>
-										<option value="1" selected>研修教室管理</option>
-										<option value="2">経験者Java品川教室</option>
-										<option value="3">未経験者Java品川教室</option>
-										<option value="4">経験者C#田町教室</option>
-										<option value="5">未経験者C#品川教室</option>
-										<option value="6">経験者C#品川教室</option>
+										<option selected>研修教室管理</option>
+										<option>経験者Java品川教室</option>
+										<option>未経験者Java品川教室</option>
+										<option>経験者C#田町教室</option>
+										<option>未経験者C#品川教室</option>
+										<option>経験者C#品川教室</option>
 									</select>
 								</div>
 							</div>
@@ -132,30 +128,12 @@ table>td>input {
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
-					<button id="modal-ok" type="button" class="btn btn-primary"
-						data-dismiss="modal">OK</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal"
+						onclick="location.href='userinfo';">OK</button>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<script>
-	$('#changeForm').submit(function() {
-		$('#change-modal').modal('toggle');
-		if ($('#changeForm').attr('submit-flag') == 'false') {
-			return false;
-		}
-	});
-
-	$('#modal-ok').click(function() {
-		$('#changeForm').attr('submit-flag', 'true');
-		$('#changeForm').submit();
-	});
-
-	$('#change-modal').on('show.bs.modal', function(e) {
-		$('form').attr('submit-flag', 'false');
-	});
-	</script>
 </body>
 
 </html>
