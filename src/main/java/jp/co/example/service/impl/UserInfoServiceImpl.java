@@ -1,5 +1,7 @@
 package jp.co.example.service.impl;
 
+import java.util.*;
+
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.dao.*;
 import org.springframework.stereotype.*;
@@ -18,6 +20,9 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 	@Autowired
 	private MapsDao mapsDao;
+
+	@Autowired
+	private TrainingsDao trainigDao;
 
 	/**
 	 * usersテーブルの更新を行う
@@ -41,5 +46,10 @@ public class UserInfoServiceImpl implements UserInfoService {
 	@Override
 	public Users getUser(Users user) {
 		return userDao.findById(user.getUserId());
+	}
+
+	@Override
+	public List<Trainings> getTrainig() {
+		return trainigDao.AllRooms();
 	}
 }
