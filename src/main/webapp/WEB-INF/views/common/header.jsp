@@ -11,7 +11,7 @@
             　  -->
 			<a class="navbar-brand" href="roothome.jsp"> </a>
 			<p class="navbar-text navbar-right">
-				<a href="index.jsp" class="navbar-link">研修教室名一覧</a> <a type="button"
+				<a href="index" class="navbar-link">研修教室名一覧</a> <a type="button"
 					class="btn btn-defaul btn-info navbar-btn navbar-btn-modify"
 					onclick="$('#logout-modal').modal();">ログアウト</a>
 			</p>
@@ -35,7 +35,7 @@
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
 				<button type="button" class="btn btn-primary" data-dismiss="modal"
-					onclick="location.href='login.jsp';">OK</button>
+					onclick="location.href='login';">OK</button>
 			</div>
 		</div>
 	</div>
