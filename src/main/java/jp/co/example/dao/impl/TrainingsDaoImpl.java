@@ -32,6 +32,7 @@ public class TrainingsDaoImpl implements TrainingsDao{
 	public Trainings getTraining(int tr) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return jdbcTemplate.queryForObject(SQL_SELECT__TRAININGS_WHERE_TRAININGID, new BeanPropertyRowMapper<Trainings>(Trainings.class), tr);
 	}
 
