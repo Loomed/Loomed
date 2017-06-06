@@ -73,6 +73,12 @@ public class IndexController {
 			// 教室判定
 			LoginRoom = IndexService.RoomJudge(LoginUser.getUserId());
 
+			int Cn=0;
+			for(int i=0;i<LoginRoom.size();i++){
+				Cn++;
+			}
+			System.out.println(Cn);
+
 			// 研修教室一覧受け取り
 			List<Trainings> AllTrainings = IndexService.AllTrainings();
 

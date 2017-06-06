@@ -46,7 +46,9 @@ public class IndexServiceImpl implements IndexService {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
 		// 処理未確定のため
-		List<Maps> RoomNumList = new ArrayList<>();;
+		List<Maps> RoomNumList = new ArrayList<>();
+
+		RoomNumList = MapsDao.selectWhereUserId(id);
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return RoomNumList;
