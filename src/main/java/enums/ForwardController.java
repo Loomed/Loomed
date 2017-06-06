@@ -7,19 +7,19 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum ForwardController {
 
-	HOME("home"),
-	INDEX("index"),
-	LOGIN("login"),
-	MAIL("mail"),
-	MEMBER("member"),
-	ROOTHOME("roothome"),
-	SCHEDULE("schedule"),
-	SHARECONFIG("shareconfig"),
-	TRAININGCHANGE("trainingchange"),
-	TRAININGCONFIG("trainingconfig"),
-	USERCHANGE("userchange"),
-	USERCONFIG("userconfig"),
-	USERINFO("userinfo"),
+	HOME("forward:home"),
+	INDEX("forward:index"),
+	LOGIN("forward:login"),
+	MAIL("forward:mail"),
+	MEMBER("forward:member"),
+	ROOTHOME("forward:roothome"),
+	SCHEDULE("forward:schedule"),
+	SHARECONFIG("forward:shareconfig"),
+	TRAININGCHANGE("forward:trainingchange"),
+	TRAININGCONFIG("forward:trainingconfig"),
+	USERCHANGE("forward:userchange"),
+	USERCONFIG("forward:userconfig"),
+	USERINFO("forward:userinfo"),
 	;
 
 	final String ForwardName;
