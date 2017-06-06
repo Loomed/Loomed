@@ -11,7 +11,6 @@ import jp.co.example.dao.MapsDao;
 import jp.co.example.dao.SchedulesDao;
 import jp.co.example.dao.SharesDao;
 import jp.co.example.dao.TrainingsDao;
-import jp.co.example.entity.Maps;
 import jp.co.example.entity.Schedules;
 import jp.co.example.entity.Trainings;
 import jp.co.example.entity.Users;
@@ -52,21 +51,6 @@ public class RootHomeServiceImpl implements RootHomeService {
 		}
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return list;
-
-	}
-
-	public String getTrainingid(Users user) {
-		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
-		Maps maps = new Maps();
-		String tid = null;
-		try {
-			maps = mapsdao.getUserTrainigs(user);
-			tid = Integer.toString(maps.getTrainingId());
-		} catch (Exception e) {
-			tid = null;
-		}
-		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
-		return tid;
 
 	}
 

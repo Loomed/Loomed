@@ -38,7 +38,7 @@
 				<div class="card">
 					<ul class="nav nav-tabs" role="tablist">
 						<li role="presentation"><a aria-controls="home" role="tab"
-							data-toggle="tab">ようこそ 山田 太郎 さん</a></li>
+							data-toggle="tab">${sessionScope.tr.gettrainingName()}さん</a></li>
 					</ul>
 					<!-- Tab panes -->
 					<div class="tab-content">
@@ -199,18 +199,20 @@
 					</div>
 				</div>
 				<!-- tabs -->
-				<div class="card">
+				<!--<div class="card">
 					<ul class="nav nav-tabs" role="tablist1">
 						<li role="presentation"><a href="#training"
 							aria-controls="training" role="tab" data-toggle="tab">研修情報</a></li>
-					</ul>
+					</ul>-->
 					<!-- Tab panes -->
+					<!--
 					<div class="tab-content">
-						<div role="tabpanel1" class="tab-pane active" id="training">
+						<div role="tabpanel1" class="tab-pane active" id="training">-->
 							<!--<h2 class="page-header">Search Results</h2>-->
-							<section class="comment-list">
+							<!--
+							<section class="comment-list">-->
 								<!-- First Comment -->
-								<article class="row">
+								<!--<article class="row">
 									<div class="col-md-10 col-sm-10">
 										<div class="panel panel-default arrow left">
 											<div class="panel-body">
@@ -230,8 +232,7 @@
 						</div>
 						<div role="tabpanel1" class="tab-pane" id="traning">研修情報</div>
 					</div>
-				</div>
-
+				</div>-->
 			</div>
 		</div>
 	</div>

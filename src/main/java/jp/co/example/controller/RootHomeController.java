@@ -60,7 +60,6 @@ public class RootHomeController {
 		// テストデータ
 		Users user = new Users(1, "pass", "山田 太郎", 1, 0);
 		// サービスへ
-		maps = RHS.getTrainingid(user);
 		cnt = RHS.getNewMails(user);
 		list = RHS.getInpoSche();
 		//tr = RHS.getTrainingName(training_id);
