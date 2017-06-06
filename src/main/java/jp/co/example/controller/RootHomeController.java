@@ -1,67 +1,79 @@
 package jp.co.example.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import enums.JspPage;
 import enums.LogEnum;
-import enums.ScopeKey;
+import jp.co.example.entity.Schedules;
 import jp.co.example.entity.Trainings;
 import jp.co.example.entity.Users;
+import jp.co.example.service.RootHomeService;
 import lombok.extern.slf4j.Slf4j;
 import util.Util;
 @Slf4j
 @Controller
 public class RootHomeController {
-	@RequestMapping("/roothome")
-	public String getrootHome() {
-		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
-		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
-		return JspPage.ROOTHOME.getPageName();
-	}
-	@RequestMapping(value = "/roothome", method = RequestMethod.POST)
-	public String Home(HttpSession session,@RequestParam("button") String button, BindingResult result, Model model) {
+	@Autowired
+	private RootHomeService RHS;
+
+	@RequestMapping(value = "/roothome")
+	public String Home(HttpSession session, HttpServletRequest reques, Model model) {
 
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
-		if (result.hasErrors()) {
-			return JspPage.LOGIN.getPageName();
+		// セッションの受け取りと必要なデータ生成
+		// Users user =
+		// (Users)session.getAttribute(ScopeKey.LOGINUSER.getScopeKey());
+		Trainings tr = new Trainings();
+		String cnt = null;
+		String maps = null;
+		Integer tid = 0;
+		String url = null;
+		int index = 0;
+		String id = null;
+		int training_id = 0;
+		List<Schedules> list = new ArrayList<Schedules>();
+		//データに色々格納中
+		try {
+			url = reques.getRequestURI();
+			index = url.lastIndexOf("=");
+			id = url.substring(index);
+
+			if (id != null) {
+				training_id = Integer.parseInt(id);
+			}
+			tr = RHS.getTrainingName(training_id);
+			session.setAttribute("tr", tr);
+		} catch (Exception e) {
+
 		}
-		if ("userinfo".equals(button)) {
-			return JspPage.USERINFO.getPageName();
-		} else if ("member".equals(button)) {
-			return JspPage.MEMBER.getPageName();
-		} else if ("sharaconfig".equals(button)) {
-			return JspPage.SHARECONFIG.getPageName();
-		}
-		/*
-		 * if (result.hasErrors()) { return JspPage.LOGIN.getPageName(); }
-		 */
-		Users user = (Users) session.getAttribute(ScopeKey.LOGINUSER.getScopeKey());
-		Trainings tr = (Trainings) session.getAttribute(ScopeKey.LOGINROOM.getScopeKey());
 
 		// テストデータ
-		user = new Users(1, "pass", "山田 太郎", 1, 0);
-		tr = new Trainings(2, "Java研修", 2, "未経験者向けのJava研修");
-
-		// ボタンで遷移先を決定
-		/*
-		 * if ("userinfo".equals(button)) { return
-		 * JspPage.USERINFO.getPageName(); } else if ("member".equa
-		 * ("shareconfig".equals(button)) { return
-		 * JspPage.SHARECONFIG.getPagls(button)) {
-		 * return JspPage.MEMBER.getPageName(); } else ifeName(); }
-		 */
-		model.addAttribute(user);
-		model.addAttribute(tr);
+		Users user = new Users(1, "pass", "山田 太郎", 1, 0);
+		// サービスへ
+		maps = RHS.getTrainingid(user);
+		cnt = RHS.getNewMails(user);
+		list = RHS.getInpoSche();
+		//tr = RHS.getTrainingName(training_id);
+		//メールの新着無しを処理してます
+		if (cnt.equals("0")) {
+			cnt = "新着無し";
+		}
+		//基本セッションとかはここ
+		session.setAttribute("user", user);
+		model.addAttribute("list", list);
+		model.addAttribute("cnt", cnt);
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
-		return null;
+		return JspPage.ROOTHOME.getPageName();
 	}
 
 }
