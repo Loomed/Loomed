@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import enums.LogEnum;
 import enums.ScopeKey;
@@ -26,9 +27,8 @@ public class IndexController {
 	IndexService IndexService;
 	HttpServletRequest request;
 
-	//ログイン処理後、Usersの情報で取得する
 	@RequestMapping("/index")
-	public String getIndex(/*@RequestParam("inputId") String id, @RequestParam("inputPassword") String pass,*/
+	public String getIndex(@RequestParam("inputId") String id, @RequestParam("inputPassword") String pass,
 			HttpServletRequest request, HttpSession session) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
@@ -36,7 +36,7 @@ public class IndexController {
 		String LoginPass = "";
 		int LoginRoom = 0;
 
-/*
+
 		// 入力されたidがintかどうか判定
 		log.info(LogEnum.IF.getLogValue() + "IndexService.isNum(id)");
 		if (IndexService.isNum(id)) {
@@ -57,17 +57,9 @@ public class IndexController {
 			return "/login";
 		}
 
-*/
 
 		//ログイン処理：未作成（id,passを送り、Usersを受け取る。nullが戻ることも）
-		//Users LoginUser = IndexService.LoginJudge(LoginId, LoginPass);
-		Users LoginUser;
-		try{
-			LoginUser = (Users) session.getAttribute(ScopeKey.LOGINUSER.getScopeKey());
-		}catch(Error e){
-			LoginUser = null;
-		}
-
+		Users LoginUser = IndexService.LoginJudge(LoginId, LoginPass);
 
 		// ログイン成否判定：未作成（LoginUserがnullでなければRoom番号を受け取る）
 		log.info(LogEnum.IF.getLogValue() + "LoginUser == null");

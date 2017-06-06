@@ -28,9 +28,7 @@ public class IndexServiceImpl implements IndexService {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
 		//仮データ
-		//Users LoginUser = new Users(100, "test", "テスト", 1, 3);
-
-		Users LoginUser = UsersDao.findByIdAndPass(id, pass);
+		Users LoginUser = new Users(100, "test", "テスト", 1, 3);
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return LoginUser;

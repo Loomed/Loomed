@@ -7,5 +7,5 @@ import lombok.Setter;
 @Setter
 public class UsersEx extends Users {
 	private String companyName;
-	private String authName;//
+	private String authName;
 }
