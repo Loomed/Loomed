@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+		<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ include file="common/taglibs.jsp"%>
 
 <!DOCTYPE html>
@@ -36,8 +38,7 @@
 				<div class="card">
 					<ul class="nav nav-tabs" role="tablist">
 						<li role="presentation"><a aria-controls="home" role="tab"
-							data-toggle="tab">${fn:escapeXml(sessionScope.loginuser.userName)}
-								さん</a></li>
+							data-toggle="tab"> ${fn:escapeXml(sessionScope.user.userName)} さん</a></li>
 					</ul>
 					<!-- Tab panes -->
 					<div class="tab-content">
@@ -46,12 +47,12 @@
 								<label>教室</label>
 							</div>
 							<div class="col-xs-9">
-								<label>${sessionScope.tr.getTrainingName()}</label>
+								<label>${sessionScope.tr.gettrainingName()}</label>
 							</div>
 						</h4>
-						<p>
-							<button type="submit" class="btn btn-primary btn-block"
-								value="userinfo">ユーザ情報</button>
+						<pt>
+						<button type="submit" class="btn btn-primary btn-block"
+							value="userinfo">ユーザ情報</button>
 						</p>
 						<p>
 							<button type="submit" class="btn btn-primary btn-block"
@@ -197,7 +198,7 @@
 														</div>
 													</header>
 													<div class="comment-post">
-														<p>研修内容：{tr.getTraining_Info()}</p>
+														<p>研修内容：{tr.gettraining_Info()}</p>
 													</div>
 												</div>
 											</div>
