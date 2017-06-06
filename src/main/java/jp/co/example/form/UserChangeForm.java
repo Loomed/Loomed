@@ -1,11 +1,15 @@
 package jp.co.example.form;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.*;
+import org.hibernate.validator.constraints.NotBlank;
 
-import jp.co.example.entity.*;
-import lombok.*;
+import jp.co.example.entity.Users;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
@@ -14,7 +18,7 @@ import lombok.*;
 @ToString
 public class UserChangeForm extends Users {
 	@NotNull
-	private Integer userId;
+	private Integer userId;//
 	@NotBlank
 	private String password;
 	@NotBlank
@@ -24,5 +28,7 @@ public class UserChangeForm extends Users {
 	@NotNull
 	private Integer authority;
 
-	private Integer trainingId;
+	private String training;
+
+
 }

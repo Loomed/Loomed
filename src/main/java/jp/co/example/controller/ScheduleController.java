@@ -39,6 +39,8 @@ public class ScheduleController {
 		log.info(LogEnum.IF.getLogValue() + "user == null");
 		if (user == null) {
 			log.info(LogEnum.TRUE.getLogValue());
+
+			//ログインへ戻る処理を書く
 		} else {
 			log.info(LogEnum.FALSE.getLogValue());
 		}
@@ -64,12 +66,14 @@ public class ScheduleController {
 
 		// テストデータ
 		user = new Users(1, "pass", "山田 太郎", 1, 0);
-		room = new Trainings(3, "Java研修", 2, "");
+		room = new Trainings(2, "Java研修", 2, "");
 
 		// ユーザー情報を確認(未完成)
 		log.info(LogEnum.IF.getLogValue() + "user == null");
 		if (user == null) {
 			log.info(LogEnum.TRUE.getLogValue());
+
+			//ログインへ戻る処理を書く
 		} else {
 			log.info(LogEnum.FALSE.getLogValue());
 		}
@@ -78,6 +82,8 @@ public class ScheduleController {
 		log.info(LogEnum.IF.getLogValue() + "room == null");
 		if (room == null) {
 			log.info(LogEnum.TRUE.getLogValue());
+
+			//インデックスへ戻る処理を書く
 		} else {
 			log.info(LogEnum.FALSE.getLogValue());
 		}

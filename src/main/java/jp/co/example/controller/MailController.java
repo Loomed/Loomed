@@ -42,4 +42,8 @@ public class MailController {
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return JspPage.MAIL.getPageName();
 	}
+
+	//検索
+
+
 }

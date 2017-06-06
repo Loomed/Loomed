@@ -1,10 +1,11 @@
 package jp.co.example.dao;
 
-import jp.co.example.entity.*;
+import jp.co.example.entity.Maps;
+import jp.co.example.entity.Users;
 
 public interface MapsDao {
 
-	int getUserTrainigs(Users user);
+	Maps getUserTrainigs(Users user);
 
 	int update(int userId, int trainingId);
 

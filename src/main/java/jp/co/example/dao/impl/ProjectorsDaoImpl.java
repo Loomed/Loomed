@@ -21,7 +21,7 @@ public class ProjectorsDaoImpl implements ProjectorsDao{
 			"SELECT * FROM projectors WHERE training_id = ? AND reserve_time BETWEEN ? AND ? ORDER BY reserve_time, projector_number";
 	private static final String SQL_SELECT_PROJECTORS_WHERE_TRAININGID_AND_DATETIME =
 			"SELECT * FROM projectors WHERE training_id = ? AND reserve_time = ? ORDER BY reserve_time, projector_number";
-
+//
 	@Autowired
 	JdbcTemplate jt;
 

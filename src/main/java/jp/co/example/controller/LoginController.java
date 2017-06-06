@@ -10,7 +10,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.support.SessionStatus;
 
+import enums.ForwardController;
 import enums.JspPage;
 import enums.LogEnum;
 import enums.ScopeKey;
@@ -30,6 +32,10 @@ public class LoginController {
 
 	@ModelAttribute("loginForm")
 	private LoginForm setUpForm() {
+
+		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return new LoginForm();
 	}
 
@@ -49,26 +55,26 @@ public class LoginController {
 //	 }
 
 
-//	//ログアウト処理、loginへ遷移
-//	@RequestMapping("/logout")
-//	public String postLogout(SessionStatus sessionStatus) {
-//		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
-//
+	//ログアウト処理、loginへ遷移
+	@RequestMapping("/logout")
+	public String postLogout(SessionStatus sessionStatus) {
+		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+
 //		HttpSession session = request.getSession(false);
 //		 if(session != null){
 //		 session.invalidate();
 //		 session = request.getSession(false);
 //		 }
-//
-////		sessionStatus.setComplete();
-//
-//		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
-//		return JspPage.LOGIN.getPageName();
-//	}
+
+		sessionStatus.setComplete();
+
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
+		return JspPage.LOGIN.getPageName();
+	}
 
 
 
-	// login.jspからの遷移
+	// login.jspへの遷移
 	@RequestMapping("/login")
 	public String getLogin() {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
@@ -92,12 +98,12 @@ public class LoginController {
 
 			session.setAttribute(ScopeKey.LOGINUSER.getScopeKey(), users);
 
-			return "/index";
+			return ForwardController.INDEX.getForwardName();
 		}
 
 		model.addAttribute("msg", "IDまたはPASSが間違っています");
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
-		return JspPage.LOGIN.getPageName();
+		return JspPage.LOGIN.getPageName();//
 	}
 
 }

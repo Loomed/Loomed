@@ -30,14 +30,14 @@
 <body>
 
 	<%@ include file="common/header.jsp"%>
-	<form action="home" method="post">
+	<form action="home" >
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-4">
 					<div class="card">
 						<ul class="nav nav-tabs" role="tablist">
 							<li role="presentation"><a aria-controls="home" role="tab"
-								data-toggle="tab">ようこそ ${user.getUserName()} さん</a></li>
+								data-toggle="tab">${fn:escapeXml(sessionScope.loginuser.userName)} さん</a></li>
 						</ul>
 						<!-- Tab panes -->
 						<div class="tab-content">
@@ -46,7 +46,7 @@
 									<label>教室</label>
 								</div>
 								<div class="col-xs-9">
-									<label>${tr.getTrainingName()}</label>
+									<label>${sessionScope.tr.getTrainingName()}</label>
 								</div>
 							</h4>
 							<p>
@@ -68,7 +68,7 @@
 									data-toggle="tab"><i class="fa fa-envelope-o fa-5x"
 										style="margin-right: 20px; margin-left: 20px;"></i></a></li>
 								<p class="announcement-heading" style="margin-top: 10px;">
-									<span class="badge">{}</span>
+									<span class="badge">${cnt}</span>
 								</p>
 							</ul>
 							<a href="mail">
@@ -113,34 +113,23 @@
 										<article class="row">
 											<div class="col-md-10 col-sm-10">
 												<div class="panel panel-default arrow left">
-													<div class="panel-body">
-														<header class="text-left">
-															<div class="comment-user">
-																<i></i>
+													<c:forEach var="list" items="${list}" varStatus="status">
+														<div class="panel-body">
+															<header class="text-left">
+																<div class="comment-user">
+																	<i></i>
+																</div>
+																<time class="comment-date" datetime="${list.uploadDatetime}">
+																	<i class="fa fa-clock-o"></i>${list.uploadDatetime}
+																</time>
+															</header>
+															<div class="comment-post">
+																<p>連絡内容:{list.scheduleContents}</p>
 															</div>
-															<time class="comment-date" datetime="2017:05:31">
-																<i class="fa fa-clock-o"></i>{}
-															</time>
-														</header>
-														<div class="comment-post">
-															<p>連絡内容:{}</p>
+															<!--<p class="text-right"><a href="#" class="btn btn-default btn-sm"><i class="fa fa-reply"></i> reply</a></p>-->
 														</div>
-														<!--<p class="text-right"><a href="#" class="btn btn-default btn-sm"><i class="fa fa-reply"></i> reply</a></p>-->
-													</div>
-													<div class="panel-body">
-														<header class="text-left">
-															<div class="comment-user">
-																<i></i>
-															</div>
-															<time class="comment-date" datetime="2017:05:30">
-																<i class="fa fa-clock-o"></i>{}
-															</time>
-														</header>
-														<div class="comment-post">
-															<p>連絡内容:{}</p>
-														</div>
-														<!--<p class="text-right"><a href="#" class="btn btn-default btn-sm"><i class="fa fa-reply"></i> reply</a></p>-->
-													</div>
+													</c:forEach>
+
 
 												</div>
 											</div>
@@ -209,7 +198,7 @@
 															</div>
 														</header>
 														<div class="comment-post">
-															<p>研修内容：{}</p>
+															<p>研修内容：{tr.getTraining_Info()}</p>
 														</div>
 													</div>
 												</div>

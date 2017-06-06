@@ -36,7 +36,7 @@ public class IndexController {
 		String LoginPass = "";
 		int LoginRoom = 0;
 
-
+/*
 		// 入力されたidがintかどうか判定
 		log.info(LogEnum.IF.getLogValue() + "IndexService.isNum(id)");
 		if (IndexService.isNum(id)) {
@@ -56,10 +56,18 @@ public class IndexController {
 			log.info(LogEnum.FALSE.getLogValue() + "/login");
 			return "/login";
 		}
-
+*/
 
 		//ログイン処理：未作成（id,passを送り、Usersを受け取る。nullが戻ることも）
-		Users LoginUser = IndexService.LoginJudge(LoginId, LoginPass);
+		//Users LoginUser = IndexService.LoginJudge(LoginId, LoginPass);
+		Users LoginUser;
+
+		try{
+			LoginUser = (Users) session.getAttribute(ScopeKey.LOGINUSER.getScopeKey());
+		}catch(Error e){
+			LoginUser = null;
+		}
+
 
 		// ログイン成否判定：未作成（LoginUserがnullでなければRoom番号を受け取る）
 		log.info(LogEnum.IF.getLogValue() + "LoginUser == null");
@@ -86,7 +94,7 @@ public class IndexController {
 		List<Trainings> AllTrainings = IndexService.AllTrainings();
 
 
-
+//
 		//判定処理
 		log.info(LogEnum.IF.getLogValue() + "LoginUser == null || LoginRoom == 0");
 		if(LoginUser == null || LoginRoom == 0){

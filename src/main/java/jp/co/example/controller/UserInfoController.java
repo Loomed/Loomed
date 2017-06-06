@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import enums.*;
 import jp.co.example.entity.*;
 import jp.co.example.form.*;
+import jp.co.example.myTest.*;
 import jp.co.example.service.*;
 import lombok.extern.slf4j.*;
 import util.*;
@@ -21,7 +22,9 @@ import util.*;
 public class UserInfoController {
 
 	@Autowired
-	private UserInfoService userInfoSerice;
+	private MyUserService myUserService;
+	@Autowired
+	private MyUsersService myUsersService;
 
 	@ModelAttribute("userChangeForm")
 	private UserChangeForm setUpForm() {
@@ -39,7 +42,8 @@ public class UserInfoController {
 		//本来ならセッションのユーザ値を使用する
 		Users user = new Users();
 		user.setUserId(1);
-		Users user2 = userInfoSerice.getUser(user);
+		Users user2 = myUsersService.getUser(user);
+
 
 		List<Trainings> trainigs = userInfoSerice.getTrainig();
 		model.addAttribute("rooms", trainigs);
@@ -53,7 +57,7 @@ public class UserInfoController {
 	/**
 	 * userinfoへの遷移 2017/06/05
 	 * userchangeから遷移
-	 * usersテーブル、mapテーブルそれぞれに更新をかける
+	 *
 	 * @Author sakata
 	 */
 	@RequestMapping(value = "/userinfo", method = RequestMethod.POST)
@@ -62,10 +66,9 @@ public class UserInfoController {
 		//ログ表示
 		getUserLog(userChangeForm);
 
-		Maps map = new Maps(userChangeForm.getUserId(), userChangeForm.getTrainingId());
 
-		//users と mapを更新する
-		userInfoSerice.Update(userChangeForm, map);
+
+		myUserService.Update(userChangeForm);
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return JspPage.USERINFO.getPageName();
@@ -78,7 +81,8 @@ public class UserInfoController {
 		log.info("user userName : " + user.getUserName());
 		log.info("user authority: " + user.getAuthority());
 		log.info("user companyId: " + user.getCompanyId());
-		log.info("user training : " + user.getTrainingId());
+		log.info("user training : " + user.getTraining());
 
 	}
+
 }

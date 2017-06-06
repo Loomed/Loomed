@@ -8,7 +8,7 @@
                     1.セッションに値がなければindex
                     2.セッションに値があればそれぞれのhome
                     今回はルートなのでroothome.jspとする
-            　  -->
+            　   -->
 			<a class="navbar-brand" href=""> </a>
 			<p class="navbar-text navbar-right">
 				<a href="index" class="navbar-link">研修教室名一覧</a> <a type="button"
@@ -34,8 +34,9 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
-				<button type="button" class="btn btn-primary" data-dismiss="modal"
-					onclick="location.href='login';">OK</button>
+				<button type="submit" class="btn btn-primary" data-dismiss="modal" onclick="location.href='logout';">OK</button>
+
+
 			</div>
 		</div>
 	</div>
