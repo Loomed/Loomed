@@ -28,7 +28,7 @@ public class TrainingsDaoImpl implements TrainingsDao{
 
 	@Override
 	public Trainings getTraining(int tr) {
-		return jdbcTemplate.queryForObject(SQL_SELECT__TRAININGS_WHERE_TRAININGID, new BeanPropertyRowMapper<Trainings>(Trainings.class), tr);
+		return jdbcTemplate.queryForObject(SQL_SELECT__TRAININGS_WHERE_TRAININGID, new BeanPropertyRowMapper<Trainings>(Trainings.class),tr);
 	}
 
 

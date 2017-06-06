@@ -34,7 +34,7 @@ public class HomeController {
 		//セッションの受け取りと必要なデータ生成
 		//Users user = (Users) session.getAttribute(ScopeKey.LOGINUSER.getScopeKey());
 		Trainings tr = new Trainings();
-		int cnt = 0;
+		String cnt = null;
 		//Maps maps =0;
 		List<Schedules> list = new ArrayList<Schedules>();
 		// テストデータ
@@ -46,6 +46,9 @@ public class HomeController {
 		list = HS.getInpoSche();
 		//tr = HS.getTrainingName();
 
+		if(cnt ==null){
+			cnt ="新着無し";
+		}
 		// ボタンで遷移先を決定
 		/*
 		 * if ("userinfo".equals(button)) { return

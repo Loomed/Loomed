@@ -6,6 +6,6 @@ import jp.co.example.entity.Users;
 public interface MailsDao {
 	Mails findByIdAndTitleAndContents(Integer mailID, String mailTitle, String mailContents);
 
-	int getNewMails(Users user);
+	Mails getNewMails(Users user);
 
 }

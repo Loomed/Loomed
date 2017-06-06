@@ -1,6 +1,7 @@
 package jp.co.example.dao.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -21,9 +22,8 @@ public class MailsDaoImpl implements MailsDao {
 	}
 
 	@Override
-	public int getNewMails(Users user) {
-		int cnt =0;
-		return cnt;
+	public Mails getNewMails(Users user) {
+		return jt.queryForObject(SQL_SELECT_MAILS_WHERE_OPENFLAG, new BeanPropertyRowMapper<Mails>(Mails.class));
 	}
 }
 

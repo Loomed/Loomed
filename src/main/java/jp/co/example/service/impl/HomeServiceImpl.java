@@ -24,10 +24,12 @@ public class HomeServiceImpl implements HomeService {
 	TrainingsDao trainingsdao;
 	SchedulesDao schedulesdao;
 
-	public int getNewMails(Users user) {
-		int cnt = 0;
+	public String getNewMails(Users user) {
+		Integer cnt = 0;
+		String mailcnt = null;
 		cnt = mailsdao.getNewMails(user);
-		return cnt;
+		mailcnt = Integer.toString(cnt);
+		return mailcnt;
 	}
 
 	public List<Schedules> getInpoSche() {
