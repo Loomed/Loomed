@@ -47,12 +47,14 @@ public class ScheduleServiceImpl implements ScheduleService {
 		// TODO 自動生成されたメソッド・スタブ
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
+		List<ScheduleForm> listForm = null;
 		try {
+			//スケジュールを取得
 			Timestamp dateMin = new Timestamp(SDF_DATETIME.parse(date + " 0:0:0").getTime());
 			Timestamp dateMax = new Timestamp(SDF_DATETIME.parse(date + " 23:59:59").getTime());
 			List<Schedules> list = sd.selectScheduleWhereUserIdAndDate(userId, dateMin, dateMax);
 
-			List<ScheduleForm> listForm = new ArrayList<>();
+			listForm = new ArrayList<>();
 			Timestamp ts = null;
 			// jsp用にtimestampをStringに変換
 			for (int i = 0; i < list.size(); i++) {
@@ -60,15 +62,14 @@ public class ScheduleServiceImpl implements ScheduleService {
 				listForm.add(new ScheduleForm(SDF_TIME.format(ts), list.get(i).getScheduleContents(),
 						list.get(i).isImportant()));
 			}
-
-			log.info(Util.getMethodName() + LogEnum.END.getLogValue());
-			return listForm;
 		} catch (ParseException e) {
 			// TODO 自動生成された catch ブロック
 			log.info(Util.getMethodName() + LogEnum.EXCEPTION.getLogValue());
 			e.printStackTrace();
 		}
-		return null;
+
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
+		return listForm;
 	}
 
 	@Override
@@ -200,6 +201,17 @@ public class ScheduleServiceImpl implements ScheduleService {
 		log.info(LogEnum.FOR.getLogValue() + "int i = 0; i < TIME_SPAN.length; i++" + LogEnum.END.getLogValue());
 
 		return listForm;
+	}
+
+	/**
+	 * プロジェクタの参照権限があるか判断するメソッド
+	 * @return
+	 * true...権限あり
+	 * false...権限なし
+	 */
+	@Override
+	public boolean isProjectorAuthority() {
+		return false;
 	}
 
 }

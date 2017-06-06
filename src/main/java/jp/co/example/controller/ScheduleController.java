@@ -45,10 +45,14 @@ public class ScheduleController {
 			log.info(LogEnum.FALSE.getLogValue());
 		}
 
+		//スケジュールを取得
 		List<ScheduleForm> list = ss.getSchedule(user.getUserId(), date);
 		model.addAttribute("list", list);
 
-		log.info(list.get(0).toString());
+		//プロジェクタ参照権限があるかチェック
+		boolean projectorAuthority =  ss.isProjectorAuthority();
+		model.addAttribute("projectorAuthority", projectorAuthority);
+
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return JspPage.SCHEDULE.getPageName();
 	}

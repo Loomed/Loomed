@@ -9,4 +9,6 @@ public interface ScheduleService {
 	List<ScheduleForm> getSchedule(Integer userId, String date);
 
 	List<ProjectorForm> getProjectorJson(Integer trainingId, String date, String time);
+
+	boolean isProjectorAuthority();
 }
