@@ -52,7 +52,7 @@ public class UserInfoController {
 	/**
 	 * userinfoへの遷移 2017/06/05
 	 * userchangeから遷移
-	 *
+	 * usersテーブル、mapテーブルそれぞれに更新をかける
 	 * @Author sakata
 	 */
 	@RequestMapping(value = "/userinfo", method = RequestMethod.POST)
@@ -60,8 +60,6 @@ public class UserInfoController {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 		//ログ表示
 		getUserLog(userChangeForm);
-
-
 
 		myUserService.Update(userChangeForm);
 
@@ -79,5 +77,4 @@ public class UserInfoController {
 		log.info("user training : " + user.getTraining());
 
 	}
-
 }
