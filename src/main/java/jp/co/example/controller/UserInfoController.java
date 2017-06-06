@@ -49,7 +49,8 @@ public class UserInfoController {
 
 		List<Trainings> trainigs = userInfoService.getTrainig();
 		model.addAttribute("rooms", trainigs);
-		log.info(trainigs.get(0).getTrainingName());
+
+
 		model.addAttribute("user", user2);
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());

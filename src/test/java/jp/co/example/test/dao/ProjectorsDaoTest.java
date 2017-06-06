@@ -1,11 +1,32 @@
 package jp.co.example.test.dao;
 
-import java.sql.Timestamp;
-import java.util.List;
+import static org.junit.Assert.*;
 
-import jp.co.example.entity.Projectors;
+import org.junit.*;
+import org.junit.runner.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.boot.test.context.*;
+import org.springframework.test.context.junit4.*;
 
-public interface ProjectorsDaoTest {
-	List<Projectors> selectProjectorsWhereTrainingIdAndDate(Integer trainingId, Timestamp dateMin, Timestamp dateMax);
-	List<Projectors> selectProjectorsWhereTrainingIdAndDateTime(Integer trainingId, Timestamp dateTime);
+import jp.co.example.dao.*;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class ProjectorsDaoTest {
+//	List<Projectors> selectProjectorsWhereTrainingIdAndDate(Integer trainingId, Timestamp dateMin, Timestamp dateMax);
+//	List<Projectors> selectProjectorsWhereTrainingIdAndDateTime(Integer trainingId, Timestamp dateTime);
+
+
+	@Autowired
+	private ProjectorsDao projectorsDao;
+
+	@Test
+	public void メールが取得できる() throws Exception{
+		assertTrue(true);
+	}
+
+	@Test
+	public void メールが取得できない() throws Exception{
+		assertTrue(true);
+	}
 }
