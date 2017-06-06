@@ -39,32 +39,12 @@ public class LoginController {
 		return new LoginForm();
 	}
 
-//	 //ログアウトボタン->loginへの遷移
-//	 @RequestMapping("/logout")
-//	 public String getLogout() {
-//	 log.info(Util.getMethodName() + LogEnum.START.getLogValue());
-//
-//	 HttpSession session = request.getSession(false);
-//	 if(session != null){
-//	 session.invalidate();
-//	 session = request.getSession(false);
-//	 }
-//
-//	 log.info(Util.getMethodName() + LogEnum.END.getLogValue());
-//	 return JspPage.LOGIN.getPageName();
-//	 }
 
 
 	//ログアウト処理、loginへ遷移
 	@RequestMapping("/logout")
 	public String postLogout(SessionStatus sessionStatus) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
-
-//		HttpSession session = request.getSession(false);
-//		 if(session != null){
-//		 session.invalidate();
-//		 session = request.getSession(false);
-//		 }
 
 		sessionStatus.setComplete();
 
