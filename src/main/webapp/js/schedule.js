@@ -1,4 +1,5 @@
 $(function() {
+	console.log($('#loginUserAuthority').val());
 
 	// 削除クリック
 	$('.delete').click(function() {
