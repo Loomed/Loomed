@@ -1,12 +1,11 @@
 package jp.co.example.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.stereotype.*;
+import org.springframework.web.bind.annotation.*;
 
-import enums.JspPage;
-import enums.LogEnum;
-import lombok.extern.slf4j.Slf4j;
-import util.Util;
+import enums.*;
+import lombok.extern.slf4j.*;
+import util.*;
 
 @Slf4j
 @Controller
@@ -21,7 +20,11 @@ public class UserconfigController {
 		return JspPage.USERCONFIG.getPageName();
 	}
 
+<<<<<<< HEAD
 	// 氏名←コメント解除するとエラー出る
+=======
+//	// 氏名
+>>>>>>> 9bbf5f2acb340bb9e0da93c2c022913be0f89620
 //	@RequestMapping(value = "/userinfo")
 //	public String getName() {
 //		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
