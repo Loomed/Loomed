@@ -1,22 +1,42 @@
 package jp.co.example.service.impl;
 
-import java.util.List;
+import java.util.*;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
 
-import jp.co.example.dao.MailsDao;
-import jp.co.example.entity.Mails;
-import jp.co.example.entity.Users;
-import jp.co.example.service.MailService;
+import enums.*;
+import jp.co.example.dao.*;
+import jp.co.example.entity.*;
+import jp.co.example.form.*;
+import jp.co.example.service.*;
+import lombok.extern.slf4j.*;
+import util.*;
 
+@Slf4j
 @Service
 public class MailServiceImpl implements MailService{
 	@Autowired
-	private MailsDao MailsDao;
+	private MailsDao mailsDao;
 
 	@Override
-	public List<Mails> getMails(Users user) {
-		return MailsDao.findByReUserId(user.getUserId());
+	public List<MailsEx> getMails(Users user) {
+		mailsDao.findByReUserId(user.getUserId());
+	}
+
+	@Override
+	public int delete(Mails mail) {
+		return mailsDao.delete(mail.getMailId());
+	}
+
+	@Override
+	public int insert(MailInsertForm mailInsertForm) {
+		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+		for(int i = 0; i < mailInsertForm.getReceptionUserIds().length; i++)
+		{
+			mailsDao.insert(mailInsertForm.getReceptionUserIds()[i], mailInsertForm.getTransmissionUserId(), mailInsertForm.getMailTitle(), mailInsertForm.getMailContents());
+		}
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
+		return 0;
 	}
 }

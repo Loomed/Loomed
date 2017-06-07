@@ -15,8 +15,12 @@ public class TrainingChangeServiceImpl implements TrainingChangeService{
 
 	@Override
 	public Trainings OneRoom(int id){
+		try{
+			return TrainingsDao.getTraining(id);
+		}catch(Error e){
+			return null;
+		}
 
-		return null;
 	}
 
 }

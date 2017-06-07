@@ -21,7 +21,20 @@ table>td>input {
 </style>
 <script>
 	$(function() {
-		jQuery("#changeForm").validationEngine();
+// 		jQuery("#changeForm").validationEngine();
+		$('#change')
+		.click(
+				function() {
+					// セレクトボックスで選んだ値のtextを取得
+					var pro = $("[name=proNum] option:selected").val();
+					$('#pro').text(pro);
+
+					var roomName = $("[name=roomName]").val();
+					$('#roomName').text(roomName);
+
+					$('#change-modal').modal();
+				});
+
 	});
 </script>
 </head>
@@ -35,26 +48,29 @@ table>td>input {
 					<div class="panel-heading">
 						<h3 class="panel-title">研修教室情報変更</h3>
 					</div>
+
+					<c:set var="LookRoom" value="${sessionScope.LookRoom}" />
+
 					<div class="panel-body">
 						<form id="changeForm" class="form-horizontal"
 							action="trainingconfig">
 							<div class="form-group">
 								<label for="intputUserId" class="col-sm-3 control-label">教室ID</label>
 								<div class="col-sm-9">
-									<label for="intputUserId" class="control-label">000001</label>
+									<label for="intputUserId" class="control-label" id="roomId" name="roomId"><fmt:formatNumber value="${LookRoom.trainingId}" pattern="000000" /></label>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputTrainingName" class="col-sm-3 control-label">研修教室名</label>
 								<div class="col-sm-9">
-									<input type="text" class="form-control" id="inputTrainingName"
-										value="経験者Java品川教室" required>
+									<input type="text" class="form-control" id="inputTrainingName" name="roomName"
+										value="${LookRoom.trainingName}" required>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputProNum" class="col-sm-3 control-label">プロジェクタ数</label>
 								<div class="col-sm-9">
-									<select class="form-control" id="inputProNum"
+									<select class="form-control" id="inputProNum" name="proNum"
 										style="width: auto;">
 										<option>1</option>
 										<option>2</option>
@@ -69,9 +85,9 @@ table>td>input {
 							<div class="form-group">
 								<div class="col-sm-offset-1 col-sm-10">
 									<button type="button" class="btn btn-default"
-										onclick="location.href='trainingconfig';">前の画面に戻る</button>
+										onclick="location.href='trainingConfig';">前の画面に戻る</button>
 									<button type="button" class="btn btn-primary pull-right"
-										onclick="$('#change-modal').modal();">変更</button>
+										id="change">変更</button>
 								</div>
 							</div>
 						</form>
@@ -92,12 +108,23 @@ table>td>input {
 					<h4 class="modal-title">変更確認</h4>
 				</div>
 				<div class="modal-body">
-					以下の内容で変更します<br>...<br>お間違いがなければ[OK]ボタンを押してください
+					以下の内容で変更します<br><br>
+					<div>
+						研修教室ID：<span>${LookRoom.trainingId}</span>
+					</div>
+					<div>
+						研修教室名：<span id="roomName"></span>
+					</div>
+					<div>
+						プロジェクタ数：<span id="pro"></span>
+					</div>
+					<br>
+					お間違いがなければ[OK]ボタンを押してください
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
 					<button type="button" class="btn btn-default btn-primary"
-						data-dismiss="modal" onclick="location.href='trainingconfig';">OK</button>
+						data-dismiss="modal" onclick="location.href='trainingConfig';">OK</button>
 				</div>
 			</div>
 		</div>
