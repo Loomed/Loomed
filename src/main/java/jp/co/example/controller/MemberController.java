@@ -43,6 +43,7 @@ public class MemberController implements Serializable {
 		Trainings nowTraining =null;
 		List<Maps> UserMap = new ArrayList<>();
 		List<Companies> CompList = new ArrayList<>();
+		Companies MyComp = null;
 
 		LoginUser = (Users) session.getAttribute(ScopeKey.LOGINUSER.getScopeKey());
 		nowTraining = (Trainings) session.getAttribute(ScopeKey.LOGINROOM.getScopeKey());
@@ -66,6 +67,7 @@ public class MemberController implements Serializable {
 		List<Users> members = new ArrayList<>();
 		members = MemberService.Member(UserMap, LoginUser.getCompanyId(), nowTraining.getTrainingId());
 		CompList = MemberService.getMemberComp();
+
 		System.out.println(members.size());
 
 		request.setAttribute(ScopeKey.MEMBERS.getScopeKey(),members);
