@@ -3,6 +3,7 @@ package jp.co.example.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import enums.LogEnum;
@@ -21,20 +22,24 @@ import util.Util;
 @Service
 @Slf4j
 public class HomeServiceImpl implements HomeService {
-
+	@Autowired
 	MailsDao mailsdao;
+	@Autowired
 	SharesDao sharesdao;
+	@Autowired
 	MapsDao mapsdao;
+	@Autowired
 	TrainingsDao trainingsdao;
+	@Autowired
 	SchedulesDao schedulesdao;
 
 	public String getNewMails(Users user) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 		Integer mails = 0;
 		String mailcnt;
-		try{
-		mails = mailsdao.getNewMails(user);
-		}catch(Exception e){
+		try {
+			mails = mailsdao.getNewMails(user);
+		} catch (Exception e) {
 			mailcnt = null;
 		}
 		mailcnt = Integer.toString(mails);
@@ -45,9 +50,9 @@ public class HomeServiceImpl implements HomeService {
 	public List<Schedules> getInpoSche() {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 		List<Schedules> list = new ArrayList<Schedules>();
-		try{
-		list = schedulesdao.getInpoSche();
-		}catch(Exception e){
+		try {
+			list = schedulesdao.getInpoSche();
+		} catch (Exception e) {
 			list = null;
 		}
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
@@ -55,10 +60,12 @@ public class HomeServiceImpl implements HomeService {
 
 	}
 
-	public Trainings getTrainingName(Integer tr){
+	public Trainings getTrainingName(int tr) {
+		System.out.println(tr);
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
-		Trainings tra = null;
-		tra = trainingsdao.getTraining(tr);
+		Trainings tra ;
+			tra = trainingsdao.getTraining(tr);
+			System.out.println(tra);
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return tra;
 

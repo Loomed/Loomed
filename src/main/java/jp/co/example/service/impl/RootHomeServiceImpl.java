@@ -3,6 +3,7 @@ package jp.co.example.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import enums.LogEnum;
@@ -21,10 +22,15 @@ import util.Util;
 @Service
 @Slf4j
 public class RootHomeServiceImpl implements RootHomeService {
+	@Autowired
 	MailsDao mailsdao;
+	@Autowired
 	SharesDao sharesdao;
+	@Autowired
 	MapsDao mapsdao;
+	@Autowired
 	TrainingsDao trainingsdao;
+	@Autowired
 	SchedulesDao schedulesdao;
 
 	public String getNewMails(Users user) {
@@ -55,9 +61,11 @@ public class RootHomeServiceImpl implements RootHomeService {
 	}
 
 	public Trainings getTrainingName(int tr) {
+		System.out.println(tr);
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
-		Trainings tra = null;
-		tra = trainingsdao.getTraining(tr);
+		Trainings tra ;
+			tra = trainingsdao.getTraining(tr);
+			System.out.println(tra);
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return tra;
 

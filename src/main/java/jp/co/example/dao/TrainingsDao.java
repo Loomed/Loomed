@@ -8,5 +8,5 @@ public interface TrainingsDao {
 
 	List<Trainings> AllRooms() ;
 
-	Trainings getTraining(Integer tr);
+	Trainings getTraining(int tr);
 }
