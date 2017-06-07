@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="common/taglibs.jsp"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -18,7 +19,10 @@
 
 		$('.change').click(function() {
 			//Javasctiptからの遷移？（「.jsp」消した）
-			location.href = "trainingchange";
+			var id = $(this).attr('id');
+			var array = id.split(':');
+
+			location.href = "trainingChange?page=" + array[1];
 		});
 	});
 </script>
@@ -102,62 +106,35 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>1</td>
-									<td>000001</td>
-									<td><a href="home">経験者Java品川教室</a></td>
-									<td><button class="btn btn-primary change">変更</button></td>
-									<td><button class="btn btn-danger delete">削除</button></td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td>000002</td>
-									<td><a href="#">未経験者Java品川教室</a></td>
-									<td><button class="btn btn-primary change">変更</button></td>
-									<td><button class="btn btn-danger delete">削除</button></td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td>000003</td>
-									<td><a href="#">経験者C#田町教室</a></td>
-									<td><button class="btn btn-primary change">変更</button></td>
-									<td><button class="btn btn-danger delete">削除</button></td>
-								</tr>
-								<tr>
-									<td>4</td>
-									<td>000004</td>
-									<td><a href="#">未経験者C#品川教室</a></td>
-									<td><button class="btn btn-primary change">変更</button></td>
-									<td><button class="btn btn-danger delete">削除</button></td>
-								</tr>
-								<tr>
-									<td>5</td>
-									<td>000005</td>
-									<td><a href="#">経験者C#品川教室</a></td>
-									<td><button class="btn btn-primary change">変更</button></td>
-									<td><button class="btn btn-danger delete">削除</button></td>
-								</tr>
-								<tr>
-									<td>6</td>
-									<td>000006</td>
-									<td><a href="#">未経験者Java江戸川教室</a></td>
-									<td><button class="btn btn-primary change">変更</button></td>
-									<td><button class="btn btn-danger delete">削除</button></td>
-								</tr>
-								<tr>
-									<td>7</td>
-									<td>000007</td>
-									<td><a href="#">経験者Java江戸川教室</a></td>
-									<td><button class="btn btn-primary change">変更</button></td>
-									<td><button class="btn btn-danger delete">削除</button></td>
-								</tr>
-								<tr>
-									<td>8</td>
-									<td>000008</td>
-									<td><a href="#">経験者C#練馬教室</a></td>
-									<td><button class="btn btn-primary change">変更</button></td>
-									<td><button class="btn btn-danger delete">削除</button></td>
-								</tr>
+
+								<%
+								%>
+								<c:forEach var="AllRooms" items="${sessionScope.AllTrainings}">
+									<c:set var="count" value="${count+1}" />
+									<c:set var="page" value="${AllRooms.trainingId}" />
+									<%
+										// スクリプトレットでpageスコープのpageContextにアクセスし変数を取得.
+										int pageNum = (int) pageContext.findAttribute("page");
+									%>
+
+									<c:if test="${AllRooms.trainingId==1}">
+										<c:set var="count" value="${count-1}" />
+									</c:if>
+
+									<c:if test="${AllRooms.trainingId!=1}">
+										<tr>
+											<td>${count}</td>
+											<td><fmt:formatNumber value="${AllRooms.trainingId}" pattern="000000" /></td>
+											<td><a href="home?page=<%=pageNum%>">${AllRooms.trainingName}</a></td>
+											<td><button id="change:<%=pageNum%>" class="btn btn-primary change">変更</button></td>
+											<td><button id="delete:<%=pageNum%>" class="btn btn-danger delete">削除</button></td>
+										</tr>
+									</c:if>
+
+
+								</c:forEach>
+
+
 							</tbody>
 						</table>
 

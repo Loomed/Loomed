@@ -45,7 +45,17 @@
 									<c:forEach var="members" items="${sessionScope.members}">
 										<c:set var="count" value="${count+1}" />
 
-										<c:forEach var="membersComp" items="${sessionScope.membersComp}">
+ 										<c:forEach var="membersComp" items="${sessionScope.membersComp}">
+
+<%-- 											<c:choose> --%>
+<%-- 												<c:when test="${members.companyId==membersComp.companyId}"> --%>
+<%-- 													<c:set var="comName" value="${membersComp.companyName}" /> --%>
+<%-- 												</c:when> --%>
+<%-- 												<c:otherwise> --%>
+<%-- 													<c:set var="comName" value="未所属" /> --%>
+<%-- 												</c:otherwise> --%>
+
+<%-- 											</c:choose> --%>
 
 											<c:if test="${members.companyId==membersComp.companyId}">
 												<c:set var="comName" value="${membersComp.companyName}" />
