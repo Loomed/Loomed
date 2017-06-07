@@ -24,6 +24,8 @@ import util.Util;
 public class ScheduleServiceImpl implements ScheduleService {
 	private static final SimpleDateFormat SDF_DATETIME = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 	private static final SimpleDateFormat SDF_TIME = new SimpleDateFormat("HH:mm");
+	private static final String SCHEDULE_IMPORTANT = "important";
+	private static final String SCHEDULE_NORMAL = "normal";
 	private static final String SELECT_ALL = "All";
 	private static final String[] TIME_SPAN = { "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30",
 			"13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30",
@@ -248,6 +250,67 @@ public class ScheduleServiceImpl implements ScheduleService {
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return list;
+	}
+
+	@Override
+	public int scheduleApdate(String scheduleId, String date, String hour, String minute, String content, String important) {
+		// TODO 自動生成されたメソッド・スタブ
+		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+
+		try {
+			//タイムスタンプに変換
+			Timestamp dateTime = new Timestamp(SDF_DATETIME.parse(date + " " + hour + ":" + minute).getTime());
+
+			//スケジュールが重要だったらtrue
+			boolean isImportant = SCHEDULE_IMPORTANT.equals(important) ? true : false;
+
+			int updateCount = sd.updateScheduleWhereScheduleId(Integer.valueOf(scheduleId), content, dateTime, isImportant);
+
+			log.info(Util.getMethodName() + LogEnum.END.getLogValue());
+			return  updateCount;
+		} catch (ParseException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
+		return 0;
+	}
+
+	@Override
+	public int scheduleDelete(String scheduleId) {
+		// TODO 自動生成されたメソッド・スタブ
+		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+
+		int updateCount = sd.deleteScheduleWhereScheduleId(Integer.valueOf(scheduleId));
+
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
+		return updateCount;
+	}
+
+	@Override
+	public int scheduleInsert(Integer userId, String date, String hour, String minute, String content, String important) {
+		// TODO 自動生成されたメソッド・スタブ
+		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+
+		//タイムスタンプに変換
+		try {
+			Timestamp dateTime = new Timestamp(SDF_DATETIME.parse(date + " " + hour + ":" + minute).getTime());
+
+			//スケジュールが重要だったらtrue
+			boolean isImportant = SCHEDULE_IMPORTANT.equals(important) ? true : false;
+
+			int updateCount = sd.insertSchedule(userId, content, dateTime, isImportant);
+
+			log.info(Util.getMethodName() + LogEnum.END.getLogValue());
+			return updateCount;
+		} catch (ParseException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
+		return 0;
 	}
 
 }

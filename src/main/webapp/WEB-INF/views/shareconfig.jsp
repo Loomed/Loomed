@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ include file="common/taglibs.jsp"%>
 
 <!DOCTYPE html>
@@ -21,6 +23,44 @@
 		$('.reserve').click(function() {
 			$('#configReserveModal').modal();
 		});
+	});
+</script>
+<script>
+	//主処理部
+	$(function() {
+
+		// アップロードボタンを押下した
+		$("#data_upload_form").submit(
+				function(event) {
+					// 要素規定の動作をキャンセルする
+					event.preventDefault();
+
+					var ajaxUrl = "file/upload?";
+					// ファイル種類
+					ajaxUrl += "filetype="
+							+ $("#select_file_type option:selected").val();
+
+					if (window.FormData) {
+						var formData = new FormData($(this)[0]);
+
+						$.ajax({
+							type : "POST", // HTTP通信の種類
+							url : ajaxUrl, // リクエストを送信する先のURL
+							dataType : "text", // サーバーから返されるデータの型
+							data : formData, // サーバーに送信するデータ
+							processData : false,
+							contentType : false,
+						}).done(function(data) { // Ajax通信が成功した時の処理
+							alert("アップロードが完了しました。");
+						}).fail(
+								function(XMLHttpRequest, textStatus,
+										errorThrown) { // Ajax通信が失敗した時の処理
+									alert("アップロードが失敗しました。");
+								});
+					} else {
+						alert("アップロードに対応できていないブラウザです。");
+					}
+				});
 	});
 </script>
 </head>
@@ -55,46 +95,47 @@
 								<div id="collapseOne" class="panel-collapse collapse"
 									role="tabpanel" aria-labelledby="headingOne">
 									<div class="panel-body">
-										<form id="changeForm" class="form-horizontal" action="#">
-											<div class="form-group">
-												<label for="inputName" class="col-sm-2 control-label">表示名</label>
-												<div class="col-sm-10">
-													<input type="text" class="form-control" id="inputName"
-														required>
-												</div>
-											</div>
-											<div class="form-group">
-												<label for="inputFile" class="col-sm-2 control-label">ファイル</label>
-												<div class="col-sm-10">
-													<div class="input-group">
-														<label class="input-group-btn"> <span
-															class="btn btn-default"> ファイル選択<input type="file"
-																style="display: none">
-														</span>
-														</label> <input type="text" class="form-control" readonly>
+										<form id="data_upload_form" enctype="multipart/form-data"
+											method="post">
+												<div class="form-group">
+													<label for="inputName" class="col-sm-2 control-label">表示名</label>
+													<div class="col-sm-10">
+														<input type="text" class="form-control" id="inputName"
+															required>
 													</div>
 												</div>
-											</div>
-											<div class="form-group">
-												<p class="col-sm-2 control-label">
-													<b>表示/非表示</b>
-												</p>
-												<div class="col-sm-10">
-													<div class="radio-inline">
-														<input type="radio" value="1" name="gender" id="man"
-															checked> <label for="man">表示</label>
-													</div>
-													<div class="radio-inline">
-														<input type="radio" value="2" name="gender" id="woman">
-														<label for="woman">非表示</label>
+												<div class="form-group">
+													<label for="inputFile" class="col-sm-2 control-label">ファイル</label>
+													<div class="col-sm-10">
+														<div class="input-group">
+															<label class="input-group-btn"> <span
+																class="btn btn-default"> ファイル選択<input type="file"id="upload_file" name="upload_file"
+																	style="display: none">
+															</span>
+															</label> <input type="text" class="form-control" readonly>
+														</div>
 													</div>
 												</div>
-											</div>
-											<div class="form-group">
-												<div class="col-sm-offset-1 col-sm-10">
-													<button type="submit" class="btn btn-primary btn-block">登録</button>
+												<div class="form-group">
+													<p class="col-sm-2 control-label">
+														<b>表示/非表示</b>
+													</p>
+													<div class="col-sm-10">
+														<div class="radio-inline">
+															<input type="radio" value="1" name="rad1" value="visible" id="man"
+																checked> <label for="man">表示</label>
+														</div>
+														<div class="radio-inline">
+															<input type="radio" value="2" name="rad1" value="invisible" id="woman">
+															<label for="woman">非表示</label>
+														</div>
+													</div>
 												</div>
-											</div>
+												<div class="form-group">
+													<div class="col-sm-offset-1 col-sm-10">
+														<button type="submit" class="btn btn-primary btn-block">登録</button>
+													</div>
+												</div>
 										</form>
 									</div>
 								</div>
@@ -116,65 +157,27 @@
 										</tr>
 									</thead>
 									<tbody>
+										<!-- ここからリスト処理 -->
+
 										<tr>
+
 											<th>1</th>
 											<th><a>04月11日_Webサイト制作_HTML/CSS</a></th>
 											<th>4月11日</th>
 											<th>
 												<div class="form-group">
-													<input type="radio" name="r1" value="表示" checked>
-													表示 <input type="radio" name="r1" value="非表示"> 非表示
-													<button class="btn btn-primary">更新</button>
+													<form action="shareupdate" method="post">
+														<input type="radio" name="r1" value="表示" checked>
+														表示 <input type="radio" name="r1" value="非表示"> 非表示
+														<input type="hidden" name="updateid" value="">
+														<button class="btn btn-primary">更新</button>
+													</form>
 												</div>
 											</th>
 											<th>
 												<button class="btn btn-danger delete">削除</button>
 											</th>
-										</tr>
-										<tr>
-											<th>2</th>
-											<th><a>04月12日_Webサイト制作_タグ/プロパティ/フォーム部品</a></th>
-											<th>4月12日</th>
-											<th>
-												<div class="form-group">
-													<input type="radio" name="r2" value="表示" checked>
-													表示 <input type="radio" name="r2" value="非表示"> 非表示
-													<button class="btn btn-primary">更新</button>
-												</div>
-											</th>
-											<th>
-												<button class="btn btn-danger delete">削除</button>
-											</th>
-										</tr>
-										<tr>
-											<th>3</th>
-											<th><a>04月13日_Webサイト制作_JavaScript/jQuery</a></th>
-											<th>4月13日</th>
-											<th>
-												<div class="form-group">
-													<input type="radio" name="r3" value="表示" checked>
-													表示 <input type="radio" name="r3" value="非表示"> 非表示
-													<button class="btn btn-primary">更新</button>
-												</div>
-											</th>
-											<th>
-												<button class="btn btn-danger delete">削除</button>
-											</th>
-										</tr>
-										<tr>
-											<th>4</th>
-											<th><a>Webサイト制作_確認テスト</a></th>
-											<th>4月14日</th>
-											<th>
-												<div class="form-group">
-													<input type="radio" name="r4" value="表示" checked>
-													表示 <input type="radio" name="r4" value="非表示"> 非表示
-													<button class="btn btn-primary">更新</button>
-												</div>
-											</th>
-											<th>
-												<button class="btn btn-danger delete">削除</button>
-											</th>
+
 										</tr>
 									</tbody>
 								</table>
@@ -196,7 +199,10 @@
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default"
 										data-dismiss="modal">キャンセル</button>
-									<button type="button" class="btn btn-danger">削除</button>
+									<form action="sharedelete" method="post">
+										<button type="submit" name="delete" value="delete"
+											class="btn btn-danger">削除</button>
+									</form>
 								</div>
 							</div>
 						</div>

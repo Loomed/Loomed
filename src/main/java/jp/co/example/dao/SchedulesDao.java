@@ -10,5 +10,9 @@ public interface SchedulesDao {
 
 	List<Schedules> getInpoSche();
 
+	int updateScheduleWhereScheduleId(Integer scheduleId, String content, Timestamp dateTime, boolean important);
 
+	int deleteScheduleWhereScheduleId(Integer scheduleId);
+
+	int insertSchedule(Integer userId, String content, Timestamp dateTime, boolean important);
 }
