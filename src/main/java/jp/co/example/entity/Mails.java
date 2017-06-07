@@ -2,7 +2,10 @@ package jp.co.example.entity;
 
 import java.sql.Timestamp;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -16,4 +19,5 @@ public class Mails {
 	private String mailContents;
 	private Timestamp mailDate;
 	private boolean openFlag;
+
 }

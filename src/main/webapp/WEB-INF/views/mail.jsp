@@ -124,7 +124,8 @@
 											<div class="form-group has-feedback">
 												<label for="inputName" class="control-label"> <span
 													class="label label-danger"></span> 件名
-												</label> <input type="text" id ="title" name ="title" class="form-control" placeholder="件名"
+												</label>
+												<input type="text" id ="title" name ="title" class="form-control" placeholder="件名"
 													data-required-error="件名が未入力です" required/> <span
 													class="glyphicon form-control-feedback" aria-hidden="true"></span>
 												<div class="help-block with-errors"></div>
