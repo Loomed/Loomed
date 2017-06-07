@@ -97,45 +97,52 @@
 									<div class="panel-body">
 										<form id="data_upload_form" enctype="multipart/form-data"
 											method="post">
-												<div class="form-group">
-													<label for="inputName" class="col-sm-2 control-label">表示名</label>
-													<div class="col-sm-10">
-														<input type="text" class="form-control" id="inputName"
-															required>
+											<div class="form-group">
+												<label for="inputName" class="col-sm-2 control-label">表示名</label>
+												<div class="col-sm-10">
+													<input type="text" class="form-control" id="inputName"
+														name="inputName" required>
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="inputFile" class="col-sm-2 control-label">ファイル</label>
+												<div class="col-sm-10">
+													<div class="input-group">
+														<label>ファイル種類：</label> <select id="select_file_type"
+															name="select_file_type" required="">
+															<option value="login-user">ログインユーザー</option>
+															<!-- アップロードするファイルを定義していく -->
+														</select> <label class="input-group-btn"> <span
+															class="btn btn-default"> ファイル選択<input type="file"
+																id="upload_file" name="upload_file"
+																style="display: none">
+														</span>
+														</label>
+														<!--<input type="text" class="form-control" readonly>-->
 													</div>
 												</div>
-												<div class="form-group">
-													<label for="inputFile" class="col-sm-2 control-label">ファイル</label>
-													<div class="col-sm-10">
-														<div class="input-group">
-															<label class="input-group-btn"> <span
-																class="btn btn-default"> ファイル選択<input type="file"id="upload_file" name="upload_file"
-																	style="display: none">
-															</span>
-															</label> <input type="text" class="form-control" readonly>
-														</div>
+											</div>
+											<div class="form-group">
+												<p class="col-sm-2 control-label">
+													<b>表示/非表示</b>
+												</p>
+												<div class="col-sm-10">
+													<div class="radio-inline">
+														<input type="radio" value="1" name="rad">
+														<label for="man">表示</label>
+													</div>
+													<div class="radio-inline">
+														<input type="radio" value="2" name="rad"> <label
+															for="woman">非表示</label>
 													</div>
 												</div>
-												<div class="form-group">
-													<p class="col-sm-2 control-label">
-														<b>表示/非表示</b>
-													</p>
-													<div class="col-sm-10">
-														<div class="radio-inline">
-															<input type="radio" value="1" name="rad1" value="visible" id="man"
-																checked> <label for="man">表示</label>
-														</div>
-														<div class="radio-inline">
-															<input type="radio" value="2" name="rad1" value="invisible" id="woman">
-															<label for="woman">非表示</label>
-														</div>
-													</div>
+											</div>
+											<div class="form-group">
+												<div class="col-sm-offset-1 col-sm-10">
+													<input type="hidden" name="dummy">
+													<button type="submit" class="btn btn-primary btn-block">登録</button>
 												</div>
-												<div class="form-group">
-													<div class="col-sm-offset-1 col-sm-10">
-														<button type="submit" class="btn btn-primary btn-block">登録</button>
-													</div>
-												</div>
+											</div>
 										</form>
 									</div>
 								</div>
