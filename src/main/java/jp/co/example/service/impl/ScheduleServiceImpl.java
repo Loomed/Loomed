@@ -61,7 +61,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 			// jsp用にtimestampをStringに変換
 			for (int i = 0; i < list.size(); i++) {
 				ts = list.get(i).getUploadDatetime();
-				listForm.add(new ScheduleForm(SDF_TIME.format(ts), list.get(i).getScheduleContents(),
+				listForm.add(new ScheduleForm(list.get(i).getScheduleId(), SDF_TIME.format(ts), list.get(i).getScheduleContents(),
 						list.get(i).isImportant()));
 			}
 		} catch (ParseException e) {

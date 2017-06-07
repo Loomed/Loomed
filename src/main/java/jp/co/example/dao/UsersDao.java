@@ -1,14 +1,17 @@
 package jp.co.example.dao;
 
-import java.util.List;
+import java.util.*;
 
-import jp.co.example.entity.Users;
+import jp.co.example.entity.*;
 
 public interface UsersDao {
 	Users findByIdAndPass(Integer userId, String password);
+
 	Users findById(Integer userId);
 
-	int update(Integer userId, String password, String userName, Integer companyId, Integer authority);
+	int updateAll(Integer userId, String password, String userName, Integer companyId, Integer authority);
+
+	int updatePass(Integer userId, String password);
 
 	public List<Users> FindCompMember(int comId);
 

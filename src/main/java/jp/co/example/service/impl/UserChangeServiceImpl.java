@@ -22,6 +22,9 @@ public class UserChangeServiceImpl implements UserChangeService {
 	@Autowired
 	private CompaniesDao companyDao;
 
+	@Autowired
+	private MapsDao mapDao;
+
 	@Override
 	public List<Companies> getCompanies() {
 		return companyDao.getCompanis();
@@ -30,5 +33,10 @@ public class UserChangeServiceImpl implements UserChangeService {
 	@Override
 	public List<Trainings> getTrainig() {
 		return trainigDao.AllRooms();
+	}
+
+	@Override
+	public List<Maps> getMaps(Users user) {
+		return mapDao.selectWhereUserId(user.getUserId());
 	}
 }
