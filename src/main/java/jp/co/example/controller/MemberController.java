@@ -45,11 +45,10 @@ public class MemberController {
 		LoginUser = (Users) session.getAttribute(ScopeKey.LOGINUSER.getScopeKey());
 		nowTraining = (Trainings) session.getAttribute(ScopeKey.LOGINROOM.getScopeKey());
 		UserMap = (List<Maps>) session.getAttribute(ScopeKey.USERMAP.getScopeKey());
-
 */
 		//テストデータ
 		Users LoginUser = IndexService.LoginJudge(10,"test");
-		Trainings nowTraining = new Trainings(5,"test",2,"てすてす");
+		Trainings nowTraining = new Trainings(5,"お試し研修：まこっちゃん",2,"てすてす");
 		List<Maps> UserMap = IndexService.RoomJudge(10);
 		List<Companies> CompList = new ArrayList<>();
 
