@@ -51,7 +51,14 @@ td {
 	<%@ include file="common/header.jsp"%>
 
 	<!-- ログインユーザの権限を保持 -->
-	<input type="hidden" id="loginUserAuthority" value="${fn:escapeXml(loginUserAuthority) }" />
+	<input type="hidden" id="loginUserName"
+		value="${fn:escapeXml(loginuser.userName) }" />
+	<input type="hidden" id="loginUserAuthority"
+		value="${fn:escapeXml(loginuser.authority) }" />
+	<input type="hidden" id="loginRoom"
+		value="${fn:escapeXml(loginroom.trainingId) }" />
+	<input type="hidden" id="loginUserId"
+		value="${fn:escapeXml(loginuser.userId) }" />
 
 	<div class="container mycontainer">
 		<div class="row">
@@ -71,7 +78,7 @@ td {
 										<th class="col-xs-1">削除</th>
 									</tr>
 								</thead>
-								<tbody>
+								<tbody id="scheduleBody">
 									<c:forEach var="list" items="${list}" varStatus="status">
 										<tr>
 											<td id="timeScheduleTable${status.index}"
@@ -202,6 +209,7 @@ td {
 		</div>
 	</div>
 
+	<!--  スケジュール削除モーダル -->
 	<div class="modal fade" id="configDeleteModal" tabindex="-1">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -211,9 +219,28 @@ td {
 					</button>
 					<h4 class="modal-title">削除確認</h4>
 				</div>
+
 				<div class="modal-body">
-					元に戻すことは出来ません<br> 削除しますか？
+					この内容のスケジュールを削除しますか？<br> <br>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">時間</h3>
+						</div>
+						<div class="panel-body">
+							<div id="timeDeleteModal"></div>
+						</div>
+					</div>
+
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">内容</h3>
+						</div>
+						<div class="panel-body">
+							<textarea id="contentDeleteModal" class="col-xs-10" readonly></textarea>
+						</div>
+					</div>
 				</div>
+
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
 					<button type="button" class="btn btn-danger">削除</button>
@@ -222,6 +249,57 @@ td {
 		</div>
 	</div>
 
+	<!--  プロジェクタ予約解除モーダル -->
+	<div class="modal fade" id="reserveReleaseModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<div class="modal-header modal-header-modify">
+					<button type="button" class="close" data-dismiss="modal">
+						<span>×</span>
+					</button>
+					<h4 class="modal-title">予約解除確認</h4>
+				</div>
+
+				<div class="modal-body">
+					この内容の予約を解除しますか？<br> <br>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">時間</h3>
+						</div>
+						<div class="panel-body">
+							<div id="releaseTimeModal"></div>
+						</div>
+					</div>
+
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">プロジェクタ</h3>
+						</div>
+						<div class="panel-body">
+							<div id="releaseProjectorModal"></div>
+						</div>
+					</div>
+
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">予約ユーザ</h3>
+						</div>
+						<div class="panel-body">
+							<div id="releaseReserveUserModal"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+					<button type="button" class="btn btn-danger">解除</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- スケジュール変更モーダル -->
 	<div class="modal fade" id="configChangeModal" tabindex="-1">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -252,8 +330,7 @@ td {
 							</div>
 							<div class="panel-body">
 								<!--<input id="contentChangeModal" size="70" type="text" value="" required>-->
-								<textarea id="contentChangeModal" class="col-xs-10" value="#"
-									required></textarea>
+								<textarea id="contentChangeModal" class="col-xs-10" required></textarea>
 							</div>
 						</div>
 
@@ -280,6 +357,7 @@ td {
 		</div>
 	</div>
 
+	<!-- 予約確認モーダル -->
 	<div class="modal fade" id="configReserveModal" tabindex="-1">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -290,22 +368,22 @@ td {
 					<h4 class="modal-title">予約確認</h4>
 				</div>
 				<div class="modal-body">
-					これでよろしいですか?<br> <br>
+					項目を入力し、予約を完了してください<br> <br>
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h3 class="panel-title">時間</h3>
+							<h3 class="panel-title">予約ユーザ</h3>
 						</div>
 						<div class="panel-body">
-							<div id="timeModal"></div>
+							<div id="reserveUserModal"></div>
 						</div>
 					</div>
 
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h3 class="panel-title">プロジェクタ</h3>
+							<h3 class="panel-title">予約内容</h3>
 						</div>
 						<div class="panel-body">
-							<div id="projectorModal"></div>
+							<div id="timeModal"></div>
 						</div>
 					</div>
 

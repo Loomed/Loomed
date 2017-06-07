@@ -17,8 +17,8 @@
 		});
 
 		$('.change').click(function() {
-			//Javasctiptからの遷移？
-			location.href = "trainingchange.jsp";
+			//Javasctiptからの遷移？（「.jsp」消した）
+			location.href = "trainingchange";
 		});
 	});
 </script>
@@ -180,7 +180,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
-					<button type="button" class="btn btn-danger">削除</button>
+					<button type="button" class="btn btn-danger" onclick="location.href='trainingConfig';">削除</button>
 				</div>
 			</div>
 		</div>
@@ -199,7 +199,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
-					<button type="button" class="btn btn-primary">削除</button>
+					<button type="button" class="btn btn-primary" >削除</button>
 				</div>
 			</div>
 		</div>
