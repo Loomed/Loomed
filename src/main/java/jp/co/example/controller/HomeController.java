@@ -45,7 +45,7 @@ public class HomeController {
 			training_id = Integer.parseInt(id);
 			System.out.println(training_id);
 			tr = HS.getTrainingName(training_id);
-			model.addAttribute("tr", tr);
+			session.setAttribute(ScopeKey.LOGINROOM.getScopeKey(), tr);
 
 		// サービスへ
 		cnt = HS.getNewMails(user);
@@ -59,6 +59,7 @@ public class HomeController {
 		session.setAttribute("user", user);
 		model.addAttribute("list", list);
 		model.addAttribute("cnt", cnt);
+
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return JspPage.HOME.getPageName();
 	}
