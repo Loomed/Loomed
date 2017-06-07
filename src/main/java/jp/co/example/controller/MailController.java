@@ -31,12 +31,14 @@ public class MailController {
 	public String getMail(Model model) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
-		// 本来はセッションから値を取得する
+		// 本来はセッションからログイン値を取得する
 		Users user = new Users();
 		user.setUserId(1);
+
+		model.addAttribute(ScopeKey.LOGINUSER.getScopeKey(), user);
 		// 終わり
 
-		List<Mails> mails = mailService.getMails(user);
+		List<MailsEx> mails = mailService.getMails(user);
 
 		model.addAttribute("mails", mails);
 
@@ -44,13 +46,20 @@ public class MailController {
 		return JspPage.MAIL.getPageName();
 	}
 
-	// 送信したらmail.jspへ遷移。
 	@RequestMapping(value = "/mail", method = RequestMethod.POST)
-	public String postMail(MailDeleteForm mailDeleteForm) {
+	public String postMail(MailDeleteForm mailDeleteForm, MailInsertForm mailInsertForm) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
 		log.info("delete");
-		mailService.delete(mailDeleteForm);
+		//mailService.delete(mailDeleteForm);
+
+		log.info("insert");
+		log.info("insert myid : " + mailInsertForm.getTransmissionUserId());
+		log.info("insert ids  : " + mailInsertForm.getReceptionUserIds().length);
+		log.info("insert title: " + mailInsertForm.getMailTitle());
+		log.info("insert ctxt : " + mailInsertForm.getMailContents());
+
+		mailService.insert(mailInsertForm);
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return JspPage.MAIL.getPageName();
