@@ -14,6 +14,11 @@
 <script>
 	$(function() {
 		$('.delete').click(function() {
+			var id = $(this).attr('id');
+			var strarray = id.split(':');
+			var param = strarray[1];
+			$('#param').text(param);
+
 			$('#deleteModal').modal();
 		});
 
@@ -24,6 +29,7 @@
 
 			location.href = "trainingChange?page=" + array[1];
 		});
+
 	});
 </script>
 </head>
@@ -157,7 +163,11 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
-					<button type="button" class="btn btn-danger" onclick="location.href='trainingConfig';">削除</button>
+
+					<input type="button" class="btn btn-danger" onclick="location.href='trainingDelete';">削除</button>
+
+ 					<button type="button" class="btn btn-danger" onclick="location.href='trainingDelete';">削除</button>
+
 				</div>
 			</div>
 		</div>
