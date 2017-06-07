@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import jp.co.example.dao.TrainingsDao;
 import jp.co.example.entity.Trainings;
 import jp.co.example.service.TrainingChangeService;
+
 @Service
 public class TrainingChangeServiceImpl implements TrainingChangeService{
 
@@ -14,8 +15,12 @@ public class TrainingChangeServiceImpl implements TrainingChangeService{
 
 	@Override
 	public Trainings OneRoom(int id){
+		try{
+			return TrainingsDao.getTraining(id);
+		}catch(Error e){
+			return null;
+		}
 
-		return null;
 	}
 
 }

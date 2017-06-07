@@ -1,15 +1,18 @@
 package jp.co.example.service;
 
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import java.util.*;
 
-import jp.co.example.entity.Mails;
+import org.springframework.boot.autoconfigure.*;
+
+import jp.co.example.entity.*;
 
 //@Slf4j
 @SpringBootApplication
 public interface MailService {
-	public Mails findByIdAndTitleAndContents(Integer mailID, String mailTitle, String mailContents);
+	public List<Mails> getMails(Users user);
 
-	//ここまで送信に関する入力部分
+	public int delete(Mails mail);
+}
 
 
 
@@ -18,4 +21,4 @@ public interface MailService {
 //		SpringApplication.run(MailService.class, args);
 //		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 //	}
-}
+

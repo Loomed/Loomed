@@ -22,6 +22,7 @@ public class UsersDaoImpl implements UsersDao {
 	private static final String UPDATE_ALL ="UPDATE users SET password = ?, user_name = ?, company_id = ?, authority = ? WHERE user_id = ?";
 	private static final String SQL_MEMBER_SELECT_COMP ="SELECT * FROM users WHERE company_id = ?";
 	private static final String SQL_MEMBER_SELECT_ROOM ="SELECT * FROM maps WHERE training_id = ?";
+	private static final String SQL_SELECT_ALL = "SELECT * FROM users";
 
 	@Autowired
  	private JdbcTemplate jdbcTemplate;
@@ -100,6 +101,11 @@ public class UsersDaoImpl implements UsersDao {
 		}
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return member;
+	}
+
+	@Override
+	public List<Users> fingAllUsers() {
+		return jdbcTemplate.query(SQL_SELECT_ALL, new BeanPropertyRowMapper<Users>(Users.class));
 	}
 
 }

@@ -33,7 +33,7 @@
 <body>
 
 	<%@ include file="common/header.jsp"%>
-	<form action="roothome" method="get">
+ 	<form action="roothome" method="get">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-4">
@@ -67,7 +67,7 @@
 							</p>
 							<p>
 								<button type="submit" class="btn btn-primary btn-block"
-									value="trainingconfig">研修管理</button>
+									onclick="location.href='trainingConfig'" value="trainingConfig">研修管理</button>
 							</p>
 							<p>
 								<button type="submit" class="btn btn-primary btn-block" value="shareconfig">共有ファイルアップロード</button>
