@@ -45,8 +45,8 @@
 									<a href="roothome">全体管理</a>
 								</h2>
 								<c:forEach var="room" items="${sessionScope.AllTrainings}">
-									<c:forEach var="loginroom" items="${sessionScope.loginroom}">
-										<c:if test="${loginroom.trainingId==room.trainingId}">
+									<c:forEach var="usermap" items="${sessionScope.usermap}">
+										<c:if test="${usermap.trainingId==room.trainingId}">
 											<c:set var="page" value="${room.trainingId}" />
 											<%
 												// スクリプトレットでpageスコープのpageContextにアクセスし変数を取得.
@@ -62,8 +62,8 @@
 							<c:when
 								test="${sessionScope.loginuser.authority!=0 && sessionScope.loginuser.authority!=1}">
 								<c:forEach var="room" items="${sessionScope.AllTrainings}">
-									<c:forEach var="loginroom" items="${sessionScope.loginroom}">
-										<c:if test="${loginroom.trainingId==room.trainingId}">
+									<c:forEach var="usermap" items="${sessionScope.usermap}">
+										<c:if test="${usermap.trainingId==room.trainingId}">
 											<c:set var="page" value="${room.trainingId}" />
 											<%
 												// スクリプトレットでpageスコープのpageContextにアクセスし変数を取得.
@@ -114,10 +114,10 @@
 
 												<c:when
 													test="${sessionScope.loginuser.authority==1 && (rooms.trainingId)!=1}">
-													<c:forEach var="loginroom"
-														items="${sessionScope.loginroom}">
+													<c:forEach var="usermap"
+														items="${sessionScope.usermap}">
 														<c:if
-															test="${loginroom.trainingId!=rooms.trainingId && (rooms.trainingId)!=1}">
+															test="${usermap.trainingId!=rooms.trainingId && (rooms.trainingId)!=1}">
 															<c:set var="page" value="${rooms.trainingId}" />
 															<%
 																// スクリプトレットでpageスコープのpageContextにアクセスし変数を取得.
@@ -138,10 +138,10 @@
 
 
 												<c:otherwise>
-													<c:forEach var="loginroom"
-														items="${sessionScope.loginroom}">
+													<c:forEach var="usermap"
+														items="${sessionScope.usermap}">
 														<c:if
-															test="${loginroom.trainingId!=rooms.trainingId && (rooms.trainingId)!=1}">
+															test="${usermap.trainingId!=rooms.trainingId && (rooms.trainingId)!=1}">
 															<c:set var="page" value="${rooms.trainingId}" />
 															<%
 																// スクリプトレットでpageスコープのpageContextにアクセスし変数を取得.
