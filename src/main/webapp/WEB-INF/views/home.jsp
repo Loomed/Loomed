@@ -48,16 +48,16 @@
 								<label>教室</label>
 							</div>
 							<div class="col-xs-9">
-								<label>${sessionScope.tr.gettrainingName}</label>
+								<label>${fn:escapeXml(loginroom.trainingName)}</label>
 							</div>
 						</h4>
-						<pt>
+						<p>
 						<button type="submit" class="btn btn-primary btn-block"
 							value="userinfo">ユーザ情報</button>
 						</p>
 						<p>
 							<button type="submit" class="btn btn-primary btn-block"
-								value="member">研修参加者一覧ページへ</button>
+								onclick="location.href='member'" value="member">研修参加者一覧ページへ</button>
 						</p>
 						<p>
 							<button type="submit" class="btn btn-primary btn-block"
@@ -116,25 +116,25 @@
 									<article class="row">
 										<div class="col-md-10 col-sm-10">
 											<div class="panel panel-default arrow left">
-												<div class="panel-body">
 												<c:forEach var="list" items="${list}" varStatus="status">
-													<header class="text-left">
+													<div class="panel-body">
 
-														<div class="comment-user">
-															<i></i>
+														<header class="text-left">
+
+															<div class="comment-user">
+																<i></i>
+															</div>
+
+															<time class="comment-date"
+																datetime="${list.uploadDatetime}">
+																<i class="fa fa-clock-o"></i>${list.uploadDatetime}
+															</time>
+														</header>
+														<div class="comment-post">
+															<p>連絡内容:{list.scheduleContents}</p>
 														</div>
-
-														<time class="comment-date"
-															datetime="${list.uploadDatetime}">
-															<i class="fa fa-clock-o"></i>${list.uploadDatetime}
-														</time>
-													</header>
-													<div class="comment-post">
-														<p>連絡内容:{list.scheduleContents}</p>
 													</div>
-													</c:forEach>
-													<!--<p class="text-right"><a href="#" class="btn btn-default btn-sm"><i class="fa fa-reply"></i> reply</a></p>-->
-												</div>
+												</c:forEach>
 											</div>
 										</div>
 									</article>
@@ -202,7 +202,7 @@
 														</div>
 													</header>
 													<div class="comment-post">
-														<p>研修内容：{tr.gettraining_Info()}</p>
+														<p>研修内容：${fn:escapeXml(tr.trainingInfo)}</p>
 													</div>
 												</div>
 											</div>

@@ -13,5 +13,5 @@ public class Trainings {
 	private Integer trainingId;
 	private String trainingName;
 	private Integer projectorCount;
-	private String trainigInfo;
+	private String trainingInfo;
 }

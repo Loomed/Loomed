@@ -1,5 +1,6 @@
 package jp.co.example.controller;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,7 @@ import util.Util;
 @Slf4j
 @Controller
 @Getter
-public class MemberController {
+public class MemberController implements Serializable {
 	@Autowired
 	MemberService MemberService;
 	@Autowired
@@ -36,7 +37,8 @@ public class MemberController {
 	@RequestMapping("/member")
 	public String getMember(HttpServletRequest request, HttpSession session) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
-/*
+		log.info(session.getAttribute(ScopeKey.USERMAP.getScopeKey()).toString());
+
 		Users LoginUser = null;
 		Trainings nowTraining =null;
 		List<Maps> UserMap = new ArrayList<>();
@@ -44,14 +46,23 @@ public class MemberController {
 
 		LoginUser = (Users) session.getAttribute(ScopeKey.LOGINUSER.getScopeKey());
 		nowTraining = (Trainings) session.getAttribute(ScopeKey.LOGINROOM.getScopeKey());
-		UserMap = (List<Maps>) session.getAttribute(ScopeKey.USERMAP.getScopeKey());
-*/
+		UserMap = (ArrayList<Maps>) session.getAttribute(ScopeKey.USERMAP.getScopeKey());
+		ArrayList obj = (ArrayList<Object>)session.getAttribute(ScopeKey.USERMAP.getScopeKey());
+		for (Object object : obj) {
+			Maps aaaa = (Maps)object;
+			System.out.println("data:" + aaaa.getUserId());
+		}
+
+		if(UserMap==null){
+			System.out.println("なんでや");
+		}
+/*
 		//テストデータ
 		Users LoginUser = IndexService.LoginJudge(10,"test");
 		Trainings nowTraining = new Trainings(5,"お試し研修：まこっちゃん",2,"てすてす");
 		List<Maps> UserMap = IndexService.RoomJudge(10);
 		List<Companies> CompList = new ArrayList<>();
-
+*/
 		List<Users> members = new ArrayList<>();
 		members = MemberService.Member(UserMap, LoginUser.getCompanyId(), nowTraining.getTrainingId());
 		CompList = MemberService.getMemberComp();

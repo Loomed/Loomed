@@ -87,6 +87,8 @@ public class IndexController {
 			session.setAttribute(ScopeKey.LOGINUSER.getScopeKey(), LoginUser);
 			session.setAttribute(ScopeKey.USERMAP.getScopeKey(), LoginRoom);
 			session.setAttribute("AllTrainings", AllTrainings);
+
+			log.info(session.getAttribute(ScopeKey.USERMAP.getScopeKey()).toString());
 			log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 			return "index";
 		}

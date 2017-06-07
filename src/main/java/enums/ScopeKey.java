@@ -15,7 +15,9 @@ public enum ScopeKey {
 	// MEMBERS<List<Users>>:member.jspで表示するリスト
 	MEMBERS("members"),
 	// MEMBERSCOMP<List<Companies>>:member.jspで表示するリスト
-		MEMBERSCOMP("memberscomp"),
+	MEMBERSCOMP("memberscomp"),
+	//String:スケジュールに遷移するときに日付を記憶します
+	SCHEDULE_DATE("scheduleDate"),
 	;
 
 	final String scopeKey;

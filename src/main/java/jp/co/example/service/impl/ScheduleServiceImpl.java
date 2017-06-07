@@ -13,8 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import enums.LogEnum;
 import jp.co.example.dao.*;
 import jp.co.example.entity.*;
-import jp.co.example.form.ProjectorForm;
-import jp.co.example.form.ScheduleForm;
+import jp.co.example.form.*;
 import jp.co.example.service.ScheduleService;
 import lombok.extern.slf4j.Slf4j;
 import util.Util;
@@ -62,7 +61,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 			// jsp用にtimestampをStringに変換
 			for (int i = 0; i < list.size(); i++) {
 				ts = list.get(i).getUploadDatetime();
-				listForm.add(new ScheduleForm(SDF_TIME.format(ts), list.get(i).getScheduleContents(),
+				listForm.add(new ScheduleForm(list.get(i).getScheduleId(), SDF_TIME.format(ts), list.get(i).getScheduleContents(),
 						list.get(i).isImportant()));
 			}
 		} catch (ParseException e) {
@@ -238,6 +237,17 @@ public class ScheduleServiceImpl implements ScheduleService {
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return false;
+	}
+
+	@Override
+	public List<ReserveUserNameForm> getReserveUserNameJson(Integer userId, Integer trainingId) {
+		// TODO 自動生成されたメソッド・スタブ
+		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+
+		List<ReserveUserNameForm> list = md.selectUserIDAndUserNameJoinUsers(userId, trainingId);
+
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
+		return list;
 	}
 
 }

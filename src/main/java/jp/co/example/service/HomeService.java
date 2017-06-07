@@ -9,5 +9,5 @@ import jp.co.example.entity.Users;
 public interface HomeService {
 	public String getNewMails(Users user);
 	public List<Schedules> getInpoSche();
-	public Trainings getTrainingName(Integer tr);
+	public Trainings getTrainingName(int tr);
 }

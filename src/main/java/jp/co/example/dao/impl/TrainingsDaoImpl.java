@@ -32,11 +32,11 @@ public class TrainingsDaoImpl implements TrainingsDao{
 	}
 
 	@Override
-	public Trainings getTraining(Integer tr) {
+	public Trainings getTraining(int tr) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
-
+		Trainings tra = jdbcTemplate.queryForObject(SQL_SELECT__TRAININGS_WHERE_TRAININGID, new BeanPropertyRowMapper<Trainings>(Trainings.class), tr);
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
-		return jdbcTemplate.queryForObject(SQL_SELECT__TRAININGS_WHERE_TRAININGID, new BeanPropertyRowMapper<Trainings>(Trainings.class), tr);
+		return tra;
 	}
 
 
