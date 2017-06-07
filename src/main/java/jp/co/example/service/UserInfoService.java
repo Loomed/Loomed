@@ -10,4 +10,6 @@ public interface UserInfoService {
 	UsersEx getUser(Users user);
 
 	List<Trainings> getTrainig();
+
+	List<Companies> getComapnies(String company);
 }

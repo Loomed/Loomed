@@ -8,4 +8,6 @@ public interface UserChangeService {
 	List<Companies> getCompanies();
 
 	List<Trainings> getTrainig();
+
+	List<Maps> getMaps(Users user);
 }

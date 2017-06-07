@@ -18,11 +18,84 @@ table>tbody>tr>td, .table>tbody>tr>th {
 table>td>input {
 	width: 100px;
 }
+
+.combo_wrapper div {
+	position: relative;
+	margin-right: 30px;
+	top: -34px;
+}
+
+.combo_text {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-right: 0px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+}
 </style>
 
 <script>
 	$(function() {
 		$('.combobox').combobox();
+
+		$('#trainingId').multiselect(
+				{
+					buttonWidth : '400px',
+					//buttonClass: '',
+					nonSelectedText : '選択してください',
+					filterPlaceholder : '検索',
+					includeSelectAllOption : true,
+					enableFiltering : true,
+					selectAllText : 'すべて選択',
+					selectedClass : '',
+					enableClickableOptGroups : true,
+					enableCollapsibleOptGroups : true,
+					buttonText : function(options, select) {
+
+						// First consider the simple cases, i.e. disabled and empty.
+						if (this.disabledText.length > 0
+								&& (this.disableIfEmpty || select
+										.prop('disabled'))
+								&& options.length == 0) {
+
+							return this.disabledText;
+						} else if (options.length === 0) {
+							return this.nonSelectedText;
+						}
+
+						var $select = $(select);
+						var $optgroups = $('optgroup', $select);
+
+						var delimiter = this.delimiterText;
+						var text = '';
+
+						// Go through groups.
+						$optgroups.each(function() {
+							var $selectedOptions = $('option:selected', this);
+							var $options = $('option', this);
+
+							if ($selectedOptions.length == $options.length) {
+								text += $(this).attr('label') + delimiter;
+							} else {
+								$selectedOptions.each(function() {
+									text += $(this).text() + delimiter;
+								});
+							}
+						});
+
+						var $remainingOptions = $('option:selected', $select)
+								.not('optgroup option');
+						$remainingOptions.each(function() {
+							text += $(this).text() + delimiter;
+						});
+
+						return text.substr(0, text.length - 2);
+					}
+				});
+
+		$('#companyName').val($('#companies option:selected').val());
+
 	});
 </script>
 </head>
@@ -44,14 +117,16 @@ table>td>input {
 								<label for="userId" class="col-sm-2 control-label">ユーザID</label>
 								<div class="col-sm-10">
 									<input name="userId" id="userId" class="form-control"
-										value="${ fn:escapeXml(user.userId) }" readonly>
+										value="<fmt:formatNumber
+											pattern="000000" value="${user.userId}" />"
+										readonly>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="password" class="col-sm-2 control-label">パスワード</label>
 								<div class="col-sm-10">
-									<input id="password" name="password" class="form-control"
-										value="${ fn:escapeXml(user.password) }" />
+									<input type="password" id="password" name="password"
+										class="form-control" value="${ fn:escapeXml(user.password) }" />
 								</div>
 							</div>
 
@@ -75,19 +150,40 @@ table>td>input {
 								<div class="form-group">
 									<label for="companyId" class="col-sm-2 control-label">企業名</label>
 									<div class="col-sm-10 select-container">
-
-										<select id="companyId" name="companyId"
-											class="combobox form-control">
-
-											<c:forEach var="companie" items="${companies}">
+										<input type="text" class="form-control" id="companyName"
+											name="companyName" list="companies">
+										<datalist id="companies">
+											<c:forEach var="company" items="${companies}">
 												<c:choose>
-													<c:when test="${companie.companyId == user.companyId }">
-														<option value="${ fn:escapeXml(companie.companyId) }"
-															selected><c:out value="${companie.companyName }" /></option>
+													<c:when test="${company.companyId == user.companyId }">
+														<option value="<c:out value="${company.companyName }" />"
+															selected></option>
 													</c:when>
 													<c:otherwise>
-														<option value="${ fn:escapeXml(companie.companyId) }"><c:out
-																value="${companie.companyName }" /></option>
+														<option
+															value="<c:out
+																value="${company.companyName }" />"></option>
+													</c:otherwise>
+												</c:choose>
+											</c:forEach>
+										</datalist>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-sm-2 control-label">権限</label>
+									<div class="col-sm-10">
+										<select id="authority" name="authority" class="form-control">
+											<c:forEach var="authority" items="ルートユーザ, 講師, 担当者, 研修生"
+												varStatus="status">
+												<c:choose>
+													<c:when test="${status.index == user.authority }">
+														<option value="${status.index}" selected><c:out
+																value="${authority}" /></option>
+													</c:when>
+													<c:otherwise>
+														<option value="${status.index}"><c:out
+																value="${authority}" /></option>
 													</c:otherwise>
 												</c:choose>
 											</c:forEach>
@@ -96,29 +192,22 @@ table>td>input {
 								</div>
 
 								<div class="form-group">
-									<label class="col-sm-2 control-label">権限</label>
-									<div class="col-sm-10">
-										<select id="authority" name="authority" class="form-control">
-											<c:forEach var="authority" items="${'ルートユーザ','講師', '担当者', '研修生'}">
-												<option value="${authority}"><c:out
-														value="${authority}" /></option>
-											</c:forEach>
-<!-- 											<option value="0" selected>ルートユーザ</option> -->
-<!-- 											<option value="1">講師</option> -->
-<!-- 											<option value="2">担当者</option> -->
-<!-- 											<option value="3">研修生</option> -->
-										</select>
-									</div>
-								</div>
-
-								<div class="form-group">
 									<label for="trainingId" class="col-sm-2 control-label">配属研修教室</label>
 									<div class="col-sm-10">
-										<select id="trainingId" name="trainingId" class="form-control">
-											<option>研修教室選択なし</option>
+										<select id="trainingId" name="trainingId" multiple size="4">
 											<c:forEach var="room" items="${rooms}">
-												<option value="${room.trainingId}"><c:out
-														value="${room.trainingName}" /></option>
+												<c:choose>
+													<c:when test="${maps.contains(room.trainingId)}">
+														<option value="${room.trainingId}" selected>
+															<c:out value="${room.trainingName}" />
+														</option>
+													</c:when>
+													<c:otherwise>
+														<option value="${room.trainingId}">
+															<c:out value="${room.trainingName}" />
+														</option>
+													</c:otherwise>
+												</c:choose>
 											</c:forEach>
 										</select>
 									</div>
@@ -177,6 +266,14 @@ table>td>input {
 		$('#change-modal').on('show.bs.modal', function(e) {
 			$('form').attr('submit-flag', 'false');
 		});
+
+		$('.combo_select').change(
+				function() {
+					currentCombo = $(this).parents('.combo_wrapper');
+					$('.combo_text', currentCombo).val(
+							$('.combo_select option:selected').text());
+					$('.combo_select', currentCombo).blur();
+				});
 	</script>
 </body>
 

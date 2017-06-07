@@ -67,7 +67,7 @@ public class UserInfoController {
 
 
 
-		myUserService.Update(userChangeForm);
+		//myUserService.Update(userChangeForm);
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return JspPage.USERINFO.getPageName();
@@ -79,8 +79,8 @@ public class UserInfoController {
 		log.info("user password : " + user.getPassword());
 		log.info("user userName : " + user.getUserName());
 		log.info("user authority: " + user.getAuthority());
-		log.info("user companyId: " + user.getCompanyId());
-		log.info("user training : " + user.getTraining());
+		log.info("user companyName: " + user.getCompanyName());
+		log.info("user trainingId : " + user.getTrainingId());
 
 	}
 
