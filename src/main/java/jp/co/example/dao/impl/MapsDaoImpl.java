@@ -1,17 +1,16 @@
 package jp.co.example.dao.impl;
 
-import java.util.List;
+import java.util.*;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.jdbc.core.*;
+import org.springframework.stereotype.*;
 
-import enums.LogEnum;
-import jp.co.example.dao.MapsDao;
-import jp.co.example.entity.Maps;
-import lombok.extern.slf4j.Slf4j;
-import util.Util;
+import enums.*;
+import jp.co.example.dao.*;
+import jp.co.example.entity.*;
+import lombok.extern.slf4j.*;
+import util.*;
 
 @Repository
 @Slf4j
@@ -39,7 +38,10 @@ public class MapsDaoImpl implements MapsDao{
 	 */
 	@Override
 	public int update(int userId, int trainingId) {
-		return jt.update(UPDATE, trainingId, userId);//
+		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
+		return jt.update(UPDATE, trainingId, userId);
 	}
 
 }
