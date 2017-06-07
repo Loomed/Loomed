@@ -14,6 +14,8 @@ public enum ScopeKey {
 	USERMAP("usermap"),
 	// MEMBERS<List<Users>>:member.jspで表示するリスト
 	MEMBERS("members"),
+	// MEMBERSCOMP<List<Companies>>:member.jspで表示するリスト
+		MEMBERSCOMP("memberscomp"),
 	;
 
 	final String scopeKey;
