@@ -70,7 +70,7 @@
 									value="trainingconfig">研修管理</button>
 							</p>
 							<p>
-								<button class="btn btn-primary btn-block" value="shareconfig">共有ファイルアップロード</button>
+								<button type="submit" class="btn btn-primary btn-block" value="shareconfig">共有ファイルアップロード</button>
 							</p>
 						</div>
 					</div>
