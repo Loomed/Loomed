@@ -18,7 +18,10 @@ import util.*;
 public class UserChangeController {
 
 	@Autowired
-	private UserInfoService userInfoSerice;
+	private UserChangeService userChangeService;
+
+	@Autowired
+	private UserInfoService userInfoService;
 
 	/**
 	* userchangeへの遷移
@@ -29,10 +32,22 @@ public class UserChangeController {
 	public String getUserChange(Model model) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
+		//本来ならセッションのユーザ値を使用する
+		Users user = new Users();
+		user.setUserId(9);
+		UsersEx user2 = userInfoService.getUser(user);
 
-		List<Trainings> trainigs = userInfoSerice.getTrainig();
+		model.addAttribute("user", user2);
+
+		//##テスト用処理
+
+		List<Trainings> trainigs = userChangeService.getTrainig();
+		List<Companies> companies= userChangeService.getCompanies();
+
 		model.addAttribute("rooms", trainigs);
-		log.info(trainigs.get(0).getTrainingName());
+		model.addAttribute("companies", companies);
+
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 
 		return JspPage.USERCHANGE.getPageName();
 	}

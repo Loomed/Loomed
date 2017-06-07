@@ -71,7 +71,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 		}
 
 		userEx.setTrainings(trainings);
-		userEx.setAuthName(this.getAuthorityName(tmp.getAuthority()));
+		userEx.setAuthName(Util.getAuthorityName(tmp.getAuthority()));
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return userEx;
@@ -80,27 +80,5 @@ public class UserInfoServiceImpl implements UserInfoService {
 	@Override
 	public List<Trainings> getTrainig() {
 		return trainigDao.AllRooms();
-	}
-
-	private String getAuthorityName(int id)
-	{
-		String authorityName = null;
-
-		switch(id){
-		case 0:
-			authorityName = "ルートユーザ";
-			break;
-		case 1:
-			authorityName = "講師";
-			break;
-		case 2:
-			authorityName = "担当者";
-			break;
-		case 3:
-			authorityName = "研修生";
-			break;
-		}
-
-		return authorityName;
 	}
 }

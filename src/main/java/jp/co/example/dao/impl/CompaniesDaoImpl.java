@@ -1,16 +1,23 @@
 package jp.co.example.dao.impl;
 
+import java.util.*;
+
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.dao.*;
 import org.springframework.jdbc.core.*;
 import org.springframework.stereotype.*;
 
+import enums.*;
 import jp.co.example.dao.*;
 import jp.co.example.entity.*;
+import lombok.extern.slf4j.*;
+import util.*;
 
+@Slf4j
 @Repository
 public class CompaniesDaoImpl implements CompaniesDao {
 	private static final String SQL_SELECT = "SELECT * FROM companies WHERE company_id = ?";
+	private static final String SQL_SELECT_ALL = "SELECT * FROM companies";
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -22,6 +29,20 @@ public class CompaniesDaoImpl implements CompaniesDao {
 		} catch (DataAccessException e) {
 			return null;
 		}
+	}
+
+	/**
+	 *  会社情報をすべて取得する
+	 *
+	 *  2017/06/07
+	 *  @author sakata
+	 */
+	@Override
+	public List<Companies> getCompanis() {
+		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
+		return jdbcTemplate.query(SQL_SELECT_ALL, new BeanPropertyRowMapper<Companies>(Companies.class));
 	}
 
 }

@@ -39,12 +39,15 @@ public class UserInfoController {
 	public String getUserInfo(Model model) { // 引数の
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
+		//テスト用処理
 		//本来ならセッションのユーザ値を使用する
 		Users user = new Users();
 		user.setUserId(5);
 		UsersEx user2 = userInfoService.getUser(user);
 
 		model.addAttribute("user", user2);
+
+		//##テスト用処理
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return JspPage.USERINFO.getPageName();
