@@ -38,16 +38,26 @@ public class UserInfoServiceImpl implements UserInfoService {
 	 * @return 成功 1、 失敗 0
 	 */
 	@Override
-	public int Update(Users user, Maps map){
+	public int update(Users auth, UsersEx user, Maps[] maps) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
-		try{
-			userDao.update(user.getUserId(), user.getPassword(), user.getUserName(), user.getCompanyId(), user.getAuthority());
-			mapsDao.update(map.getUserId(), map.getTrainingId());
+		try {
+			if (auth.getAuthority() <= 1) {
+				if(user.getCompanyId() == null)
+				{
+					companyDao.insert(user.getCompanyName());
+					user.setCompanyId(companyDao.findCompanyId(user.getCompanyName()).get(0).getCompanyId());
+				}
+				userDao.updateAll(user.getUserId(), user.getPassword(), user.getUserName(), user.getCompanyId(),
+						user.getAuthority());
+				for (Maps map : maps) {
+					mapsDao.update(map.getUserId(), map.getTrainingId());
+				}
+			} else {
+				userDao.updatePass(user.getUserId(), user.getPassword());
+			}
 			log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 			return 1;
-		}
-		catch(DataAccessException e)
-		{
+		} catch (DataAccessException e) {
 			log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 			return 0;
 		}
@@ -58,15 +68,15 @@ public class UserInfoServiceImpl implements UserInfoService {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
 		Users tmp = userDao.findById(user.getUserId());
-		//log.info("trainig id :" + mapsDao.selectWhereUserId(u.getUserId()).size());
+		// log.info("trainig id :" +
+		// mapsDao.selectWhereUserId(u.getUserId()).size());
 
 		UsersEx userEx = new UsersEx(tmp);
-		userEx.setCompanyName(companyDao.getCompanieName(tmp.getCompanyId()).getCompanyName());
+		userEx.setCompanyName(companyDao.findCompany(tmp.getCompanyId()).getCompanyName());
 		List<Maps> maps = mapsDao.selectWhereUserId(tmp.getUserId());
 
 		List<Trainings> trainings = new ArrayList<>();
-		for(Maps map : maps)
-		{
+		for (Maps map : maps) {
 			trainings.add(trainigDao.getTraining(map.getTrainingId()));
 		}
 
@@ -80,5 +90,10 @@ public class UserInfoServiceImpl implements UserInfoService {
 	@Override
 	public List<Trainings> getTrainig() {
 		return trainigDao.AllRooms();
+	}
+
+	@Override
+	public List<Companies> getComapnies(String company) {
+		return companyDao.findCompanyId(company);
 	}
 }

@@ -12,7 +12,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class UserChangeForm extends Users {
+public class UserChangeForm extends UsersEx {
 	@NotNull
 	private Integer userId;//
 	@NotBlank
@@ -26,7 +26,7 @@ public class UserChangeForm extends Users {
 	@NotNull
 	private Integer authority;
 
-	private Integer trainingId;
+	private Integer[] trainingId;
 
 	private String training;
 

@@ -18,12 +18,14 @@ import util.*;
 public class CompaniesDaoImpl implements CompaniesDao {
 	private static final String SQL_SELECT = "SELECT * FROM companies WHERE company_id = ?";
 	private static final String SQL_SELECT_ALL = "SELECT * FROM companies";
+	private static final String SQL_SELECT_BY_NAME = "SELECT * FROM companies WHERE company_name = ?";
+	private static final String SQL_INSERT = "INSERT INTO companies(company_name) VALUES(?)";
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public Companies getCompanieName(Integer companieId) {
+	public Companies findCompany(Integer companieId) {
 		try {
 			return jdbcTemplate.queryForObject(SQL_SELECT, new BeanPropertyRowMapper<Companies>(Companies.class), companieId);
 		} catch (DataAccessException e) {
@@ -65,5 +67,20 @@ public class CompaniesDaoImpl implements CompaniesDao {
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return jdbcTemplate.query(SQL_SELECT_ALL, new BeanPropertyRowMapper<Companies>(Companies.class));
 	}
+
+	@Override
+	public List<Companies> findCompanyId(String companyName) {
+		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
+		return jdbcTemplate.query(SQL_SELECT_BY_NAME, new BeanPropertyRowMapper<Companies>(Companies.class), companyName);
+	}
+
+	@Override
+	public int insert(String companyName) {
+		return jdbcTemplate.update(SQL_INSERT, companyName);
+	}
+
+
 
 }
