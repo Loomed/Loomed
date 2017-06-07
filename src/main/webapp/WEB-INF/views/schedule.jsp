@@ -68,32 +68,42 @@ td {
 						<h3 class="panel-title">スケジュール</h3>
 					</div>
 					<div class="panel-body">
-						<div class="panel panel-default">
-							<table class="table" style="table-layout: fixed; width: 100%;">
-								<thead>
-									<tr>
-										<th class="col-xs-1">時間</th>
-										<th class="col-xs-7">内容</th>
-										<th class="col-xs-1">変更</th>
-										<th class="col-xs-1">削除</th>
-									</tr>
-								</thead>
-								<tbody id="scheduleBody">
-									<c:forEach var="list" items="${list}" varStatus="status">
-										<tr>
-											<td id="timeScheduleTable${status.index}"
-												class="important${fn:escapeXml(list.important) }">${fn:escapeXml(list.time) }</td>
-											<td id="contentScheduleTable${status.index}"
-												class="important${fn:escapeXml(list.important) }">${fn:escapeXml(list.content) }</td>
-											<td><button id="change:${status.index}"
-													class="btn btn-primary change">変更</button></td>
-											<td><button id="delete:${status.index}"
-													class="btn btn-danger delete">削除</button></td>
-										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-						</div>
+						<!-- スケジュールあるなしで分岐 -->
+						<c:choose>
+							<c:when test="${not empty list}">
+								<div class="panel panel-default">
+									<table class="table" style="table-layout: fixed; width: 100%;">
+										<thead>
+											<tr>
+												<th class="col-xs-1">時間</th>
+												<th class="col-xs-7">内容</th>
+												<th class="col-xs-1">変更</th>
+												<th class="col-xs-1">削除</th>
+											</tr>
+										</thead>
+										<tbody id="scheduleBody">
+											<c:forEach var="list" items="${list}" varStatus="status">
+												<input type="hidden" id="scheduleId${status.index}"
+													value="${fn:escapeXml(list.scheduleId) }" />
+												<tr>
+													<td id="timeScheduleTable${status.index}"
+														class="important${fn:escapeXml(list.important) }">${fn:escapeXml(list.time) }</td>
+													<td id="contentScheduleTable${status.index}"
+														class="important${fn:escapeXml(list.important) }">${fn:escapeXml(list.content) }</td>
+													<td><button id="change:${status.index}"
+															class="btn btn-primary change">変更</button></td>
+													<td><button id="delete:${status.index}"
+															class="btn btn-danger delete">削除</button></td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<h4 style="text-align: center;">予定はありません</h4>
+							</c:otherwise>
+						</c:choose>
 					</div>
 				</div>
 			</div>
@@ -112,25 +122,24 @@ td {
 								<table class="table">
 									<thead>
 										<tr>
-											<th class="col-xs-2">時間</th>
-											<th class="col-xs-8">内容</th>
+											<th class="col-xs-3">時間</th>
+											<th class="col-xs-9">内容</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
-											<td><input type="number" name="#" size="2" min="0"
+											<td><input type="number" name="hour" size="2" min="0"
 												max="23" required style="text-align: right;">時<input
-												type="number" name="#" size="2" min="0" max="59" required
+												type="number" name="minute" size="2" min="0" max="59" required
 												style="text-align: right;">分</td>
 											<td>
 												<!--<input type="text" name="#" placeholder="ここに内容を入れて下さい。" required>-->
-												<textarea name="#" class="col-xs-10"
+												<textarea name="content" class="col-xs-12"
 													placeholder="ここに内容を入力してください" required></textarea>
 											</td>
 										</tr>
 									</tbody>
 								</table>
-
 							</div>
 							<label for="normal"><input type="radio" id="normal"
 								name="important" value="normal" checked />通常</label> <label
@@ -220,7 +229,8 @@ td {
 						</button>
 						<h4 class="modal-title">削除確認</h4>
 					</div>
-
+					<input id="scheduleIdDeleteModal" name="scheduleIdDelete"
+						type="hidden" value="" />
 					<div class="modal-body">
 						この内容のスケジュールを削除しますか？<br> <br>
 						<div class="panel panel-default">
@@ -313,17 +323,21 @@ td {
 						</button>
 						<h4 class="modal-title">変更内容</h4>
 					</div>
+					<input id="scheduleIdChangeModal" name="scheduleIdChange"
+						type="hidden" value="" />
 					<div class="modal-body">
-						変更する項目を編集してください<br> <br>
+						変更する項目を編集してください
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h3 class="panel-title">時間</h3>
 							</div>
 							<div class="panel-body">
-								<input id="hourChangeModal" type="number" name="#" size="2"
-									min="0" max="23" required style="text-align: right;">時
-								<input id="minuteChangeModal" type="number" name="#" size="2"
-									min="0" max="59" required style="text-align: right;">分
+								<input id="hourChangeModal" name="hourChange" type="number"
+									name="#" size="2" min="0" max="23" required
+									style="text-align: right;">時 <input
+									id="minuteChangeModal" name="minuteChange" type="number"
+									name="#" size="2" min="0" max="59" required
+									style="text-align: right;">分
 							</div>
 						</div>
 
@@ -333,7 +347,8 @@ td {
 							</div>
 							<div class="panel-body">
 								<!--<input id="contentChangeModal" size="70" type="text" value="" required>-->
-								<textarea id="contentChangeModal" class="col-xs-10" required></textarea>
+								<textarea id="contentChangeModal" name="contentChange"
+									class="col-xs-10" required></textarea>
 							</div>
 						</div>
 
@@ -343,10 +358,9 @@ td {
 							</div>
 							<div class="panel-body">
 								<label for="normalModal"><input type="radio"
-									id="normalModal" name="importantModal" value="normalModal" />通常</label>
-								<label for="importantModal"><input type="radio"
-									id="importantModal" name="importantModal"
-									value="importantModal" />重要</label>
+									id="normalModal" name="important" value="normal" />通常</label> <label
+									for="importantModal"><input type="radio"
+									id="importantModal" name="important" value="important" />重要</label>
 							</div>
 						</div>
 					</div>

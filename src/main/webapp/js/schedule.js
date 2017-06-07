@@ -21,6 +21,8 @@ $(function() {
 						var changeId = id.split(':');
 						console.log(changeId[1]);
 
+						$('#scheduleIdChangeModal').val($('#scheduleId' + changeId[1]).val());
+						console.log($('#scheduleIdChangeModal').val());
 						var array = $('#timeScheduleTable' + changeId[1])
 								.text().split(':');
 						console.log(array[0]);
@@ -54,6 +56,8 @@ $(function() {
 		var deleteId = id.split(':');
 		console.log(deleteId[1]);
 
+		$('#scheduleIdDeleteModal').val($('#scheduleId' + deleteId[1]).val());
+		console.log($('#scheduleIdDeleteModal').val());
 		$('#timeDeleteModal').text($('#timeScheduleTable' + deleteId[1]).text());
 		$('#contentDeleteModal').text($('#contentScheduleTable' + deleteId[1]).text());
 

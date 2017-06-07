@@ -12,4 +12,10 @@ public interface ScheduleService {
 	boolean isProjectorAuthority(Integer userId, Integer trainingId);
 
 	List<ReserveUserNameForm> getReserveUserNameJson(Integer userId, Integer trainingId);
+
+	int scheduleApdate(String scheduleId, String date, String hour, String minute, String content, String important);
+
+	int scheduleDelete(String scheduleId);
+
+	int scheduleInsert(Integer userId, String date, String hour, String minute, String content, String important);
 }

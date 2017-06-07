@@ -21,6 +21,7 @@ import util.Util;
 
 /**
  * スケジュールコントローラ
+ *
  * @author Yukihiro Yoshida
  *
  */
@@ -35,6 +36,7 @@ public class ScheduleController {
 
 	/**
 	 * スケジュールへ遷移する際に情報を取得しjspに反映させる
+	 *
 	 * @param session
 	 * @param model
 	 * @param date
@@ -45,7 +47,7 @@ public class ScheduleController {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 		log.info(LogEnum.METHOD_PARAM.getLogValue() + date);
 
-		//飛びなおすために日付を記憶
+		// 飛びなおすために日付を記憶
 		session.setAttribute(ScopeKey.SCHEDULE_DATE.getScopeKey(), date);
 
 		Users user = (Users) session.getAttribute(ScopeKey.LOGINUSER.getScopeKey());
@@ -81,6 +83,7 @@ public class ScheduleController {
 		// スケジュールを取得
 		List<ScheduleForm> list = ss.getSchedule(user.getUserId(), date);
 		model.addAttribute("list", list);
+
 		boolean projectorAuthority;
 
 		// プロジェクタ参照権限があるかチェック
@@ -108,54 +111,89 @@ public class ScheduleController {
 
 	/**
 	 * スケジュールの変更を行う際に使うコントローラ
+	 *
 	 * @param redirectAttributes
 	 * @param session
 	 * @return
 	 */
 	@RequestMapping(value = "/scheduleUpdate", method = RequestMethod.POST)
-	public String scheduleUpdate(RedirectAttributes redirectAttributes, HttpSession session) {
+	public String scheduleUpdate(RedirectAttributes redirectAttributes, HttpSession session,
+			@RequestParam("scheduleIdChange") String scheduleId, @RequestParam("hourChange") String hour,
+			@RequestParam("minuteChange") String minute, @RequestParam("contentChange") String content,
+			@RequestParam("important") String important) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+		log.info(LogEnum.METHOD_PARAM.getLogValue() + scheduleId + hour + minute + content + important);
+
+		// セッションから今参照している日付を取得
+		String date = (String) session.getAttribute(ScopeKey.SCHEDULE_DATE.getScopeKey());
+
+		ss.scheduleApdate(scheduleId, date, hour, minute, content, important);
 
 		redirectAttributes.addAttribute(redirectKeyDate, session.getAttribute(ScopeKey.SCHEDULE_DATE.getScopeKey()));
 
-		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return RedirectController.SCHEDULE.getRedirectName();
 	}
 
 	/**
 	 * スケジュールの削除を行う際に通るコントローラ
+	 *
 	 * @param redirectAttributes
 	 * @param session
 	 * @return
 	 */
 	@RequestMapping(value = "/scheduleDelete", method = RequestMethod.POST)
-	public String scheduleDelete(RedirectAttributes redirectAttributes, HttpSession session) {
+	public String scheduleDelete(RedirectAttributes redirectAttributes, HttpSession session,
+			@RequestParam("scheduleIdDelete") String scheduleId) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+
+		ss.scheduleDelete(scheduleId);
 
 		redirectAttributes.addAttribute(redirectKeyDate, session.getAttribute(ScopeKey.SCHEDULE_DATE.getScopeKey()));
 
-		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return RedirectController.SCHEDULE.getRedirectName();
 	}
 
 	/**
 	 * スケジュールの追加を行う際に通るコントローラ
+	 *
 	 * @param redirectAttributes
 	 * @param session
 	 * @return
 	 */
 	@RequestMapping(value = "/scheduleInsert", method = RequestMethod.POST)
-	public String scheduleInsert(RedirectAttributes redirectAttributes, HttpSession session) {
+	public String scheduleInsert(RedirectAttributes redirectAttributes, HttpSession session,
+			@RequestParam("hour") String hour, @RequestParam("minute") String minute,
+			@RequestParam("content") String content, @RequestParam("important") String important) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+
+		Users user = (Users) session.getAttribute(ScopeKey.LOGINUSER.getScopeKey());
+
+		// ユーザー情報を確認(未完成)
+		log.info(LogEnum.IF.getLogValue() + "user == null");
+		if (user == null) {
+			log.info(LogEnum.TRUE.getLogValue());
+
+			// ログインへ戻る処理を書く
+		} else {
+			log.info(LogEnum.FALSE.getLogValue());
+		}
+
+		// セッションから今参照している日付を取得
+		String date = (String) session.getAttribute(ScopeKey.SCHEDULE_DATE.getScopeKey());
+
+		ss.scheduleInsert(user.getUserId(), date, hour, minute, content, important);
 
 		redirectAttributes.addAttribute(redirectKeyDate, session.getAttribute(ScopeKey.SCHEDULE_DATE.getScopeKey()));
 
-		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return RedirectController.SCHEDULE.getRedirectName();
 	}
 
 	/**
 	 * プロジェクタの予約をする際に通るコントローラ
+	 *
 	 * @param redirectAttributes
 	 * @param session
 	 * @return
@@ -166,12 +204,13 @@ public class ScheduleController {
 
 		redirectAttributes.addAttribute(redirectKeyDate, session.getAttribute(ScopeKey.SCHEDULE_DATE.getScopeKey()));
 
-		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return RedirectController.SCHEDULE.getRedirectName();
 	}
 
 	/**
 	 * プロジェクタの予約解除をする際に通るコントローラ
+	 *
 	 * @param redirectAttributes
 	 * @param session
 	 * @return
@@ -182,12 +221,13 @@ public class ScheduleController {
 
 		redirectAttributes.addAttribute(redirectKeyDate, session.getAttribute(ScopeKey.SCHEDULE_DATE.getScopeKey()));
 
-		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return RedirectController.SCHEDULE.getRedirectName();
 	}
 
 	/**
 	 * プロジェクタ予約を取得するときに通るAjax用コントローラ
+	 *
 	 * @param session
 	 * @param time
 	 * @param date
@@ -208,13 +248,13 @@ public class ScheduleController {
 		}
 
 		// sessionLOGINLOOMは一時的
-		//session.removeAttribute(ScopeKey.LOGINROOM.getScopeKey());
+		// session.removeAttribute(ScopeKey.LOGINROOM.getScopeKey());
 		Users user = (Users) session.getAttribute(ScopeKey.LOGINUSER.getScopeKey());
 		Trainings room = (Trainings) session.getAttribute(ScopeKey.LOGINROOM.getScopeKey());
 
 		// テストデータ
-		//user = new Users(1, "pass", "山田 太郎", 1, 0);
-		//room = new Trainings(2, "Java研修", 2, "");
+		// user = new Users(1, "pass", "山田 太郎", 1, 0);
+		// room = new Trainings(2, "Java研修", 2, "");
 
 		// ユーザー情報を確認(未完成)
 		log.info(LogEnum.IF.getLogValue() + "user == null");
@@ -244,6 +284,7 @@ public class ScheduleController {
 
 	/**
 	 * プロジェクタ予約で名前を取得するときに通るAjax用コントローラ
+	 *
 	 * @param session
 	 * @param time
 	 * @param date
@@ -254,8 +295,8 @@ public class ScheduleController {
 	public List<ReserveUserNameForm> projector(HttpSession session) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
-		Integer trainingId = ((Trainings)session.getAttribute(ScopeKey.LOGINROOM.getScopeKey())).getTrainingId();
-		Integer userId = ((Users)session.getAttribute(ScopeKey.LOGINUSER.getScopeKey())).getUserId();
+		Integer trainingId = ((Trainings) session.getAttribute(ScopeKey.LOGINROOM.getScopeKey())).getTrainingId();
+		Integer userId = ((Users) session.getAttribute(ScopeKey.LOGINUSER.getScopeKey())).getUserId();
 
 		List<ReserveUserNameForm> list = ss.getReserveUserNameJson(trainingId, userId);
 
