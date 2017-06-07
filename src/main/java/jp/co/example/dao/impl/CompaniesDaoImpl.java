@@ -1,31 +1,31 @@
 package jp.co.example.dao.impl;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.dao.*;
+import org.springframework.jdbc.core.*;
+import org.springframework.stereotype.*;
 
-import enums.LogEnum;
-import jp.co.example.dao.CompaniesDao;
-import jp.co.example.entity.Companies;
-import jp.co.example.entity.Users;
-import lombok.extern.slf4j.Slf4j;
-import util.Util;
+import enums.*;
+import jp.co.example.dao.*;
+import jp.co.example.entity.*;
+import lombok.extern.slf4j.*;
+import util.*;
 
 @Slf4j
 @Repository
 public class CompaniesDaoImpl implements CompaniesDao {
 	private static final String SQL_SELECT = "SELECT * FROM companies WHERE company_id = ?";
+	private static final String SQL_SELECT_ALL = "SELECT * FROM companies";
+	private static final String SQL_SELECT_BY_NAME = "SELECT * FROM companies WHERE company_name = ?";
+	private static final String SQL_INSERT = "INSERT INTO companies(company_name) VALUES(?)";
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public Companies getCompanieName(Integer companieId) {
+	public Companies findCompany(Integer companieId) {
 		try {
 			return jdbcTemplate.queryForObject(SQL_SELECT, new BeanPropertyRowMapper<Companies>(Companies.class), companieId);
 		} catch (DataAccessException e) {
@@ -53,5 +53,34 @@ public class CompaniesDaoImpl implements CompaniesDao {
 			return null;
 		}
 	}
+
+	/**
+	 *  会社情報をすべて取得する
+	 *
+	 *  2017/06/07
+	 *  @author sakata
+	 */
+	@Override
+	public List<Companies> getCompanis() {
+		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
+		return jdbcTemplate.query(SQL_SELECT_ALL, new BeanPropertyRowMapper<Companies>(Companies.class));
+	}
+
+	@Override
+	public List<Companies> findCompanyId(String companyName) {
+		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
+		return jdbcTemplate.query(SQL_SELECT_BY_NAME, new BeanPropertyRowMapper<Companies>(Companies.class), companyName);
+	}
+
+	@Override
+	public int insert(String companyName) {
+		return jdbcTemplate.update(SQL_INSERT, companyName);
+	}
+
+
 
 }

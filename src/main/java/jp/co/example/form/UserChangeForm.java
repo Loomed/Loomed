@@ -1,32 +1,32 @@
 package jp.co.example.form;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 
-import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.*;
 
-import jp.co.example.entity.Users;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import jp.co.example.entity.*;
+import lombok.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class UserChangeForm extends Users {
+public class UserChangeForm extends UsersEx {
 	@NotNull
 	private Integer userId;//
 	@NotBlank
 	private String password;
 	@NotBlank
 	private String userName;
-	@NotNull
+
 	private Integer companyId;
+	@NotBlank
+	private String companyName;
 	@NotNull
 	private Integer authority;
+
+	private Integer[] trainingId;
 
 	private String training;
 

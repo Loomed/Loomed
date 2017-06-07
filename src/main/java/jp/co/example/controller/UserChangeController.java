@@ -34,7 +34,7 @@ public class UserChangeController {
 
 		//本来ならセッションのユーザ値を使用する
 		Users user = new Users();
-		user.setUserId(9);
+		user.setUserId(6);
 		UsersEx user2 = userInfoService.getUser(user);
 
 		model.addAttribute("user", user2);
@@ -43,9 +43,17 @@ public class UserChangeController {
 
 		List<Trainings> trainigs = userChangeService.getTrainig();
 		List<Companies> companies= userChangeService.getCompanies();
+		List<Maps> maps = userChangeService.getMaps(user);
+
+		List<Integer> myMaps = new ArrayList();
+		for(Maps map : maps)
+		{
+			myMaps.add(map.getTrainingId());
+		}
 
 		model.addAttribute("rooms", trainigs);
 		model.addAttribute("companies", companies);
+		model.addAttribute("maps", myMaps);
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 

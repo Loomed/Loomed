@@ -1,5 +1,10 @@
 package jp.co.example.service;
 
+import java.util.List;
+
+import jp.co.example.entity.Trainings;
+
 public interface TrainingConfigService {
 
+	public  List<Trainings> AllTrainings();
 }

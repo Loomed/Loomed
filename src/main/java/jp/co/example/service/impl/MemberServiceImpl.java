@@ -53,10 +53,13 @@ public class MemberServiceImpl implements MemberService {
 		switch(nowRoomFlag){
 			case 0:
 				members = UsersDao.FindCompMember(userComId);
+				memberComp = CompaniesDao.FindRoomMemberComp(members);
+				log.info("member:switch:0:"+members.size());
 				break;
 			case 1:
 				members = UsersDao.FindRoomMember(nowTrainingId);
 				memberComp = CompaniesDao.FindRoomMemberComp(members);
+				log.info("member:switch:1:"+members.size());
 				break;
 			default:
 				break;
