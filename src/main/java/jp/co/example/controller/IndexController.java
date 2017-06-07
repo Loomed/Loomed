@@ -85,7 +85,7 @@ public class IndexController {
 			// 判定処理
 			log.info(LogEnum.FALSE.getLogValue() + "index.jsp");
 			session.setAttribute(ScopeKey.LOGINUSER.getScopeKey(), LoginUser);
-			session.setAttribute(ScopeKey.LOGINROOM.getScopeKey(), LoginRoom);
+			session.setAttribute(ScopeKey.USERMAP.getScopeKey(), LoginRoom);
 			session.setAttribute("AllTrainings", AllTrainings);
 			log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 			return "index";

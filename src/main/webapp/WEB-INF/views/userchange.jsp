@@ -44,21 +44,30 @@ table>td>input {
 								<label for="userId" class="col-sm-2 control-label">ユーザID</label>
 								<div class="col-sm-10">
 									<input name="userId" id="userId" class="form-control"
-										value="000001" readonly>
+										value="${ fn:escapeXml(user.userId) }" readonly>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="password" class="col-sm-2 control-label">パスワード</label>
 								<div class="col-sm-10">
 									<input id="password" name="password" class="form-control"
-										value="●●●●●●" />
+										value="${ fn:escapeXml(user.password) }" />
 								</div>
 							</div>
+
 							<div class="form-group">
 								<label for="userName" class="col-sm-2 control-label">氏 名</label>
 								<div class="col-sm-10">
-									<input id="userName" name="userName" class="form-control"
-										value="田中太郎" required />
+									<c:choose>
+										<c:when test="${loginuser.authority <= 1}">
+											<input id="userName" name="userName" class="form-control"
+												value="${ fn:escapeXml(user.userName) }" required />
+										</c:when>
+										<c:otherwise>
+											<input id="userName" name="userName" class="form-control"
+												value="${ fn:escapeXml(user.userName) }" readonly />
+										</c:otherwise>
+									</c:choose>
 								</div>
 							</div>
 
@@ -66,14 +75,22 @@ table>td>input {
 								<div class="form-group">
 									<label for="companyId" class="col-sm-2 control-label">企業名</label>
 									<div class="col-sm-10 select-container">
+
 										<select id="companyId" name="companyId"
 											class="combobox form-control">
-											<option value=""></option>
-											<option value="1">株式会社Axiz</option>
-											<option value="2">株式会社コンピュータ・ハイテック・ビジュアルソリューション・グローバルパワー</option>
-											<option value="3">株式会社プリウス</option>
-											<option value="4">クラウン株式会社</option>
-											<option value="5">ソニーグループ株式会社</option>
+
+											<c:forEach var="companie" items="${companies}">
+												<c:choose>
+													<c:when test="${companie.companyId == user.companyId }">
+														<option value="${ fn:escapeXml(companie.companyId) }"
+															selected><c:out value="${companie.companyName }" /></option>
+													</c:when>
+													<c:otherwise>
+														<option value="${ fn:escapeXml(companie.companyId) }"><c:out
+																value="${companie.companyName }" /></option>
+													</c:otherwise>
+												</c:choose>
+											</c:forEach>
 										</select>
 									</div>
 								</div>
@@ -82,10 +99,14 @@ table>td>input {
 									<label class="col-sm-2 control-label">権限</label>
 									<div class="col-sm-10">
 										<select id="authority" name="authority" class="form-control">
-											<option value="0" selected>ルートユーザ</option>
-											<option value="1">講師</option>
-											<option value="2">担当者</option>
-											<option value="3">研修生</option>
+											<c:forEach var="authority" items="${'ルートユーザ','講師', '担当者', '研修生'}">
+												<option value="${authority}"><c:out
+														value="${authority}" /></option>
+											</c:forEach>
+<!-- 											<option value="0" selected>ルートユーザ</option> -->
+<!-- 											<option value="1">講師</option> -->
+<!-- 											<option value="2">担当者</option> -->
+<!-- 											<option value="3">研修生</option> -->
 										</select>
 									</div>
 								</div>

@@ -44,7 +44,7 @@
 									<label class="col-sm-2 control-label">権限</label>
 									<div class="col-sm-10">
 										<label class="control-label"><c:out
-												value="${user.authority}" /></label>
+												value="${user.authName}" /></label>
 									</div>
 								</div>
 							</c:if>
@@ -52,13 +52,17 @@
 								<label for="inputCompany" class="col-sm-2 control-label">企業名</label>
 								<div class="col-sm-10">
 									<label for="inputCompany" class="control-label"><c:out
-											value="${user.companyId}" /></label>
+											value="${user.companyName}" /></label>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">所属研修教室</label>
 								<div class="col-sm-10">
-									<label for="intputUserName" class="control-label"></label>
+									<ul>
+										<c:forEach var="room" items="${user.trainings}">
+											<li class="h4"><c:out value="${room.trainingName }" /></li>
+										</c:forEach>
+									</ul>
 								</div>
 							</div>
 							<div class="form-group">

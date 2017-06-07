@@ -1,7 +1,5 @@
 package jp.co.example.controller;
 
-import java.util.*;
-
 import javax.validation.*;
 
 import org.springframework.beans.factory.annotation.*;
@@ -41,16 +39,15 @@ public class UserInfoController {
 	public String getUserInfo(Model model) { // 引数の
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
+		//テスト用処理
 		//本来ならセッションのユーザ値を使用する
 		Users user = new Users();
-		user.setUserId(1);
-		Users user2 = myUsersService.getUser(user);
+		user.setUserId(5);
+		UsersEx user2 = userInfoService.getUser(user);
 
-
-		List<Trainings> trainigs = userInfoService.getTrainig();
-		model.addAttribute("rooms", trainigs);
-		log.info(trainigs.get(0).getTrainingName());
 		model.addAttribute("user", user2);
+
+		//##テスト用処理
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return JspPage.USERINFO.getPageName();

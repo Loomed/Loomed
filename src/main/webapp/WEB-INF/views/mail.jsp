@@ -97,7 +97,7 @@
 								<div id="collapseOne" class="panel-collapse collapse"
 									role="tabpanel" aria-labelledby="headingOne">
 									<div class="panel-body">
-										<form id="changeForm" class="form-horizontal" action="#">
+										<form id="changeForm" class="form-horizontal" action="mail" method="post">
 											<div class="form-group has-feedback">
 												<label for="inputName" class="control-label"> <span
 													class="label label-danger"></span> 宛先
@@ -120,11 +120,12 @@
 												<div class="help-block with-errors"></div>
 											</div>
 
+                                            <!-- フレームワーク課題 insert.jspを参考に -->
 											<div class="form-group has-feedback">
 												<label for="inputName" class="control-label"> <span
 													class="label label-danger"></span> 件名
-												</label> <input type="text" class="form-control" placeholder="件名"
-													data-required-error="件名が未入力です" required> <span
+												</label> <input type="text" id ="title" name ="title" class="form-control" placeholder="件名"
+													data-required-error="件名が未入力です" required/> <span
 													class="glyphicon form-control-feedback" aria-hidden="true"></span>
 												<div class="help-block with-errors"></div>
 											</div>
@@ -143,8 +144,9 @@
 															class="label label-danger"></span> 本文
 														</label>
 														<textarea rows="10" type="text" class="form-control"
-															id="inputName" placeholder="本文"
-															data-required-error="本文が未入力です" required></textarea>
+															id="inputName" name="inputName"  placeholder="本文"
+															data-required-error="本文が未入力です" required/></textarea>
+
 													</div>
 													<div class="tab-pane fade" id="tab2">
 
@@ -152,14 +154,14 @@
 															<label for="inputTime" class="col-sm-2 control-label">到着時間</label>
 															<div class="col-sm-7">
 																<input type="text" class="form-control" id="inputTime"
-																	value="10分" required>
+																	value="10分" required/>
 															</div>
 														</div>
 														<div class="form-group">
 															<label for="inputReason" class="col-sm-2 control-label">理由</label>
 															<div class="col-sm-7">
 																<input type="text" class="form-control" id="inputReason"
-																	value="電車遅延のため" required>
+																	value="電車遅延のため" required/>
 															</div>
 														</div>
 													</div>
@@ -168,7 +170,7 @@
 															<label for="inputReason2" class="col-sm-2 control-label">理由</label>
 															<div class="col-sm-7">
 																<input type="text" class="form-control"
-																	id="inputReason2" value="体調不良のため" required>
+																	id="inputReason2" value="体調不良のため" required/>
 															</div>
 														</div>
 													</div>
@@ -177,14 +179,14 @@
 															<label for="inputTime2" class="col-sm-2 control-label">残業時間</label>
 															<div class="col-sm-7">
 																<input type="text" class="form-control" id="inputTime2"
-																	value="10分" required>
+																	value="10分" required/>
 															</div>
 														</div>
 														<div class="form-group">
 															<label for="inputReason3" class="col-sm-2 control-label">理由</label>
 															<div class="col-sm-7">
 																<input type="text" class="form-control"
-																	id="inputReason3" value="進捗遅れの対応のため" required>
+																	id="inputReason3" value="進捗遅れの対応のため" required/>
 															</div>
 														</div>
 													</div>
@@ -200,10 +202,8 @@
 
 
 												<div class="form-group">
- 												<form:form action="mail" method="post">
 													<button type="submit" class="btn btn-primary">送信</button>
- 												</form:form>
-												</div>
+ 										       </div>
 
 											<!--　入力フォーム -->
 										</form>

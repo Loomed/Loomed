@@ -34,42 +34,32 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<th>1</th>
-										<th>山田太郎</th>
-										<th>経験者Java品川教室</th>
-										<th>株式会社Axiz</th>
-									</tr>
-									<tr>
-										<th>2</th>
-										<th>鈴木太郎</th>
-										<th>経験者Java品川教室</th>
-										<th>コンピュータ・ハイテックホールディングスジャパン株式会社</th>
-									</tr>
-									<tr>
-										<th>3</th>
-										<th>高橋太郎</th>
-										<th>経験者Java品川教室</th>
-										<th>コンピュータ・ハイテックホールディングスジャパン株式会社</th>
-									</tr>
-									<tr>
-										<th>4</th>
-										<th>田中太郎</th>
-										<th>経験者Java品川教室</th>
-										<th>株式会社プリウス</th>
-									</tr>
-									<tr>
-										<th>5</th>
-										<th>渡辺太郎</th>
-										<th>経験者Java品川教室</th>
-										<th>株式会社フィット</th>
-									</tr>
-									<tr>
-										<th>6</th>
-										<th>中村次郎</th>
-										<th>経験者Java品川教室</th>
-										<th>株式会社ヴェルファイア</th>
-									</tr>
+
+
+									<%
+									session.setAttribute("nowRoom",request.getAttribute("loginroom"));
+									session.setAttribute("members",request.getAttribute("members"));
+									session.setAttribute("membersComp",request.getAttribute("memberscomp"));
+
+									%>
+									<c:forEach var="members" items="${sessionScope.members}">
+										<c:set var="count" value="${count+1}" />
+
+										<c:forEach var="membersComp" items="${sessionScope.membersComp}">
+
+											<c:if test="${members.companyId==membersComp.companyId}">
+												<c:set var="comName" value="${membersComp.companyName}" />
+
+											</c:if>
+										</c:forEach>
+										<tr>
+										<th>${count}</th>
+										<th>${members.userName}</th>
+										<th>${nowRoom.trainingName}</th>
+										<th>${comName}</th>
+										</tr>
+
+									</c:forEach>
 								</tbody>
 							</table>
 						</div>

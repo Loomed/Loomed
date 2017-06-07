@@ -10,5 +10,7 @@ public interface UsersDao {
 
 	int update(Integer userId, String password, String userName, Integer companyId, Integer authority);
 
-	public List<Users> FindMember(int roomId, int comId);
+	public List<Users> FindCompMember(int comId);
+
+	public List<Users> FindRoomMember(int roomId);
 }
