@@ -17,8 +17,18 @@ import util.Util;
 @Repository
 @Slf4j
 public class SchedulesDaoImpl implements SchedulesDao {
-	private static final String SQL_SELECT_SCHEDULES_WHERE_USERID_AND_DATE = "SELECT * FROM schedules WHERE user_id = ? AND upload_datetime BETWEEN ? AND ?";
-	private static final String SQL_SELECT_SCHEDULES_WHERE_IMPORTANT = "SELECT * FROM schedules WHERE important = true ORDER BY upload_datetime desc";
+
+	private static final String SQL_SELECT_SCHEDULES_WHERE_USERID_AND_DATE =
+			"SELECT * FROM schedules WHERE user_id = ? AND upload_datetime BETWEEN ? AND ? ORDER BY upload_datetime";
+	private static final String SQL_SELECT_SCHEDULES_WHERE_IMPORTANT =
+			"SELECT * FROM schedules WHERE important = true ORDER BY upload_datetime desc";
+	private static final String SQL_UPDATE_WHERE_SCHEDULEID =
+			"UPDATE schedules SET schedule_contents = ?, upload_datetime = ?, important = ? WHERE schedule_id = ?";
+	private static final String SQL_DELETE_WHERE_SCHEDULEID =
+			"DELETE FROM schedules WHERE schedule_id = ?";
+	private static final String SQL_INSERT =
+			"INSERT INTO schedules(user_id, schedule_contents, upload_datetime, important) VALUES(?, ?, ?, ?)";
+
 	@Autowired
 	JdbcTemplate jt;
 
@@ -40,6 +50,41 @@ public class SchedulesDaoImpl implements SchedulesDao {
 				new BeanPropertyRowMapper<Schedules>(Schedules.class));
 
 		return list;
+	}
+
+	@Override
+	public int updateScheduleWhereScheduleId(Integer scheduleId, String content, Timestamp dateTime,
+			boolean important) {
+		// TODO 自動生成されたメソッド・スタブ
+		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+
+		int updateCount = jt.update(SQL_UPDATE_WHERE_SCHEDULEID,
+				content, dateTime, important, scheduleId);
+
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
+		return updateCount;
+	}
+
+	@Override
+	public int deleteScheduleWhereScheduleId(Integer scheduleId) {
+		// TODO 自動生成されたメソッド・スタブ
+		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+
+		int updateCount = jt.update(SQL_DELETE_WHERE_SCHEDULEID, scheduleId);
+
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
+		return updateCount;
+	}
+
+	@Override
+	public int insertSchedule(Integer userId, String content, Timestamp dateTime, boolean important) {
+		// TODO 自動生成されたメソッド・スタブ
+		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+
+		int updateCount = jt.update(SQL_INSERT, userId, content, dateTime, important);
+
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
+		return updateCount;
 	}
 
 }
