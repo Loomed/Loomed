@@ -48,16 +48,16 @@
 								<label>教室</label>
 							</div>
 							<div class="col-xs-9">
-								<label>${fn:escapeXml(tr.trainingName)}</label>
+								<label>${fn:escapeXml(loginroom.trainingName)}</label>
 							</div>
 						</h4>
-						<pt>
+						<p>
 						<button type="submit" class="btn btn-primary btn-block"
 							value="userinfo">ユーザ情報</button>
 						</p>
 						<p>
 							<button type="submit" class="btn btn-primary btn-block"
-								value="member">研修参加者一覧ページへ</button>
+								onclick="location.href='member'" value="member">研修参加者一覧ページへ</button>
 						</p>
 						<p>
 							<button type="submit" class="btn btn-primary btn-block"
