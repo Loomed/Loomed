@@ -272,7 +272,8 @@ td {
 						</button>
 						<h4 class="modal-title">予約解除確認</h4>
 					</div>
-
+					<input id="projectorIdReleaseModal" name="projectorId"
+						type="hidden" value="" />
 					<div class="modal-body">
 						この内容の予約を解除しますか？<br> <br>
 						<div class="panel panel-default">
@@ -385,6 +386,8 @@ td {
 						</button>
 						<h4 class="modal-title">予約確認</h4>
 					</div>
+					<input id="projectorIdModal" name="projectorId"
+						type="hidden" value="" />
 					<div class="modal-body">
 						項目を入力し、予約を完了してください<br> <br>
 						<div class="panel panel-default">
@@ -393,6 +396,7 @@ td {
 							</div>
 							<div class="panel-body">
 								<div id="reserveUserModal"></div>
+								<input id="reserveUserIdHidden" type="hidden" name="userId" value="#" />
 							</div>
 						</div>
 
@@ -402,6 +406,8 @@ td {
 							</div>
 							<div class="panel-body">
 								<div id="timeModal"></div>
+								<input id="reserveNumberHidden" type="hidden" name="number" value="#" />
+								<input id="reserveTimeHidden" type="hidden" name="time" value="#" />
 							</div>
 						</div>
 
@@ -410,7 +416,7 @@ td {
 								<h3 class="panel-title">予約目的</h3>
 							</div>
 							<div class="panel-body">
-								<textarea class="col-xs-10"></textarea>
+								<textarea class="col-xs-12" name="content"></textarea>
 							</div>
 						</div>
 					</div>

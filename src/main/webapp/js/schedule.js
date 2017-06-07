@@ -1,13 +1,15 @@
 $(function() {
 	// ログインユーザの権限を格納
+	var userId = $('#loginUserId').val();
 	var userName = $('#loginUserName').val();
 	var authority = $('#loginUserAuthority').val();
 
 	// 権限の数字を変数名と紐付け
 	var root = '0';// ルート
 	var lecturer = '1';// 講師
-	var student = '2';// 生徒
-	var charge = '3';// 担当者
+	var charge = '2';// 担当者
+	var student = '3';// 生徒
+
 
 	console.log(userName);
 	console.log(authority);
@@ -88,13 +90,20 @@ $(function() {
 			//生徒の場合そのまま表示
 			console.log("student");
 			$('#reserveUserModal').text(userName);
+			$('#reserveUserIdHidden').val(userId);
 		} else {
 			//担当者の場合
 			console.log("charge");
 			console.log("error");
 		}
 
+		//予約内容
 		$('#timeModal').text($('#timeTable' + reserveId[1]).text() + "#" + $('#projectorTable' + reserveId[1]).text());
+
+		$('#reserveNumberHidden').val($('#projectorTable' + reserveId[1]).text());
+		$('#reserveTimeHidden').val($('#timeTable' + reserveId[1]).text());
+		console.log($('#reserveNumberHidden').val());
+		console.log($('#reserveTimeHidden').val());
 		$('#configReserveModal').modal();
 	});
 
@@ -108,12 +117,19 @@ $(function() {
 		var releaseId = id.split(':');
 		console.log(releaseId[1]);
 
-		console.log($('#timeTable' + releaseId[1]).text());
+		$('#projectorIdReleaseModal').val($('#projectorIdTable' + releaseId[1]).val());
+		console.log($('#projectorIdReleaseModal').val());
 		$('#releaseTimeModal').text($('#timeTable' + releaseId[1]).text());
 		$('#releaseProjectorModal').text($('#projectorTable' + releaseId[1]).text());
 		$('#releaseReserveUserModal').text($('#reserveNameTable' + releaseId[1]).text());
 
 		$('#reserveReleaseModal').modal();
+	});
+
+	$('#reserveUserModal').on('change', '#selectReserveName', function() {
+		// セレクトボックスで選んだ値のvauleををhiddenに格納
+		$('#reserveUserIdHidden').val($("[name=selectReserveName] option:selected").val());
+		console.log($('#reserveUserIdHidden').val());
 	});
 
 	// プロジェクタ非同期通信
@@ -167,11 +183,13 @@ function projectorAjaxSuccess(data, authority) {
 		$("#projectorBody").html(
 				$("#projectorBody").html() +
 				'<tr>' +
+					'<input id="projectorIdTable' + cnt + '" type="hidden" value="' + data[cnt].projectorId + '" />' +
 					'<td id="timeTable' + cnt + '">' + data[cnt].time+ '</td>' +
 					'<td id="projectorTable' + cnt + '">' + data[cnt].projectorNumber + '</td>' +
 					'<td id="reserveNameTable' + cnt + '">' + data[cnt].userName + '</td>'+
 					'<td>' + reserveButton(data[cnt], authority, cnt) + '</td>' +
 				"</tr>");
+		//console.log($('#projectorIdTable' + cnt).val());
 
 	}
 }
@@ -204,14 +222,16 @@ function getReserveNameListSuccess(data) {
 	var userId = $('#loginUserId').val();
 	var userName = $('#loginUserName').val();
 
-	var selectHtml = '<select id="selectReserveName" name="selectReserveName">';
+
+	var selectHtml = '<select name="selectReserveName" id="selectReserveName">';
 
 	selectHtml +=
-		'<option "value=reserveUser:' + userId + '">' + userName + "</option>";
+		'<option "value=' + userId + '">' + userName + "</option>";
+	$('#reserveUserIdHidden').val(userId);
 
 	for(var index = 0; index < data.length; index++) {
 		selectHtml +=
-			'<option "value=reserveUser:' + data[index].userId + '">' + data[index].userName + "</option>";
+			'<option value="' + data[index].userId + '">' + data[index].userName + "</option>";
 	}
 
 	selectHtml += '</select>';
@@ -233,11 +253,14 @@ function reserveButton(data, authority, cnt) {
 	console.log("reserveButton: start");
 	console.log(data);
 
+	var userName = $('#loginUserName').val();
+
 	// 権限の数字を変数名と紐付け
 	var root = '0';// ルート
 	var lecturer = '1';// 講師
-	var student = '2';// 生徒
-	var charge = '3';// 担当者
+	var charge = '2';// 担当者
+	var student = '3';// 生徒
+
 
 	var reserve = '<button id="reserve:' + cnt
 			+ '" class="btn btn-primary reserve">予約する</button>';
