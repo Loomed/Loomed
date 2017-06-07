@@ -1,11 +1,12 @@
 package jp.co.example.dao;
 
-import java.util.*;
+import java.util.List;
 
-import jp.co.example.entity.*;
+import jp.co.example.entity.Companies;
+import jp.co.example.entity.Users;
 
 public interface CompaniesDao {
 	Companies getCompanieName(Integer userId);
 
-	List<Companies> getCompanis();
+	List<Companies> FindRoomMemberComp(List<Users> members);
 }

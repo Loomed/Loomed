@@ -34,13 +34,17 @@
 									</tr>
 								</thead>
 								<tbody>
-								<c:set var="nowRoom" value="${request.getAttribute(ScopeKey.LOGINROOM.getScopeKey())}" />
-									<c:forEach var="member" items="${request.getAttribute(ScopeKey.MEMBERS.getScopeKey())}">
+
+
+									<%
+									session.setAttribute("nowRoom",request.getAttribute("loginroom"));
+									session.setAttribute("members",request.getAttribute("members"));
+									%>
+									<c:forEach var="members" items="${sessionScope.members}">
 										<c:set var="count" value="${count+1}" />
-										<out value="${count}" />
 										<tr>
 											<th>${count}</th>
-											<th>${member.userName}</th>
+											<th>${members.userName}</th>
 											<th>${nowRoom.trainingName}</th>
 											<th>会社名どうする？</th>
 										</tr>

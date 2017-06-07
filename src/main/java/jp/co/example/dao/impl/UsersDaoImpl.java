@@ -1,5 +1,6 @@
 package jp.co.example.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import enums.LogEnum;
 import jp.co.example.dao.UsersDao;
+import jp.co.example.entity.Maps;
 import jp.co.example.entity.Users;
 import lombok.extern.slf4j.Slf4j;
 import util.Util;
@@ -75,10 +77,20 @@ public class UsersDaoImpl implements UsersDao {
 	@Override
 	public List<Users> FindRoomMember(int roomId){
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
-		List<Users> member = null;
+		List<Users> member = new ArrayList<>(); ;
+		List<Maps> mapsUserId = null;
+		Users memberOne = null;
 		try {
-			member = jdbcTemplate.query(SQL_MEMBER_SELECT_ROOM, new BeanPropertyRowMapper<Users>(Users.class),
+			mapsUserId = jdbcTemplate.query(SQL_MEMBER_SELECT_ROOM, new BeanPropertyRowMapper<Maps>(Maps.class),
 					roomId);
+			for(int i=0; i<mapsUserId.size();i++){
+				memberOne = jdbcTemplate.queryForObject(SQL_SELECT_ID, new BeanPropertyRowMapper<Users>(Users.class),
+						mapsUserId.get(i).getUserId());
+				if(memberOne != null){
+					member.add(memberOne);
+				}
+			}
+
 		} catch (DataAccessException e) {
 			member = null;
 		}
