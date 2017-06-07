@@ -16,4 +16,6 @@ public interface UsersDao {
 	public List<Users> FindCompMember(int comId);
 
 	public List<Users> FindRoomMember(int roomId);
+
+	List<Users> fingAllUsers();
 }
