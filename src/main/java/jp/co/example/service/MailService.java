@@ -1,16 +1,17 @@
 package jp.co.example.service;
 
-import java.util.List;
+import java.util.*;
 
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.*;
 
-import jp.co.example.entity.Mails;
-import jp.co.example.entity.Users;
+import jp.co.example.entity.*;
 
 //@Slf4j
 @SpringBootApplication
 public interface MailService {
 	public List<Mails> getMails(Users user);
+
+	public int delete(Mails mail);
 }
 
 
