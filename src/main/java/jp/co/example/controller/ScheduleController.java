@@ -29,18 +29,18 @@ import util.Util;
 @Slf4j
 public class ScheduleController {
 
-	private final String redirectKeyDate = "date";
+	private static final String REDIRECT_KEY_DATE = "date";
 
 	@Autowired
 	ScheduleService ss;
 
 	/**
-	 * スケジュールへ遷移する際に情報を取得しjspに反映させる
+	 * スケジュールへ遷移する際に通るコントローラ
 	 *
 	 * @param session
 	 * @param model
 	 * @param date
-	 * @return
+	 * @return スケジュール画面へ遷移
 	 */
 	@RequestMapping("/schedule")
 	public String schedule(HttpSession session, Model model, @RequestParam("date") String date) {
@@ -53,12 +53,37 @@ public class ScheduleController {
 		Users user = (Users) session.getAttribute(ScopeKey.LOGINUSER.getScopeKey());
 		Trainings room = (Trainings) session.getAttribute(ScopeKey.LOGINROOM.getScopeKey());
 
-		// テストデータ
-		//ルート
+		// テストデータ------
+
+		// ユーザデータ
+
+		// ルート
 		user = new Users(1, "pass", "山田 太郎", 1, 0);
-		//生徒
-		//user = new Users(12, "test", "内田 初美", 2, 3);
-		room = new Trainings(2, "Java研修", 2, "");
+		// user = new Users(2, "pass", "山田 次郎", 1, 0);
+		// 講師
+		// user = new Users(3, "pass", "山田 三郎", 1, 1);
+		// user = new Users(4, "pass", "山田 四郎", 1, 1);
+		// user = new Users(25, "pass", "橋爪 陽治", 2, 1);
+		// 担当者
+		// user = new Users(6, "test", "高橋 六郎", 3, 3);
+		// user = new Users(9, "test", "田代 治行", 6, 3);
+		// 生徒
+		// user = new Users(12, "test", "内田 初美", 2, 3);
+		// user = new Users(13, "test", "吉野 成夫", 2, 3);
+		// user = new Users(14, "test", "角野 一人", 3, 3);
+		// user = new Users(15, "test", "浅野 季孝", 3, 3);
+		// user = new Users(16, "test", "新谷 利人", 4, 3);
+
+		// 教室データ
+		room = new Trainings(1, "全体管理", 0, "");
+		// room = new Trainings(2, "Java研修", 2, "");
+		// room = new Trainings(3, "PHP研修", 3, "");
+		// room = new Trainings(4, "ビジネスマナー研修", 1, "");
+		// room = new Trainings(5, "セキュリティ講座", 1, "");
+		// room = new Trainings(6, "プレゼンテーション講座", 6, "");
+
+		// -----テストデータ
+
 		session.setAttribute(ScopeKey.LOGINUSER.getScopeKey(), user);
 		session.setAttribute(ScopeKey.LOGINROOM.getScopeKey(), room);
 		log.info(room.toString());
@@ -132,7 +157,7 @@ public class ScheduleController {
 
 		ss.scheduleApdate(scheduleId, date, hour, minute, content, important);
 
-		redirectAttributes.addAttribute(redirectKeyDate, session.getAttribute(ScopeKey.SCHEDULE_DATE.getScopeKey()));
+		redirectAttributes.addAttribute(REDIRECT_KEY_DATE, session.getAttribute(ScopeKey.SCHEDULE_DATE.getScopeKey()));
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return RedirectController.SCHEDULE.getRedirectName();
@@ -152,7 +177,7 @@ public class ScheduleController {
 
 		ss.scheduleDelete(scheduleId);
 
-		redirectAttributes.addAttribute(redirectKeyDate, session.getAttribute(ScopeKey.SCHEDULE_DATE.getScopeKey()));
+		redirectAttributes.addAttribute(REDIRECT_KEY_DATE, session.getAttribute(ScopeKey.SCHEDULE_DATE.getScopeKey()));
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return RedirectController.SCHEDULE.getRedirectName();
@@ -188,7 +213,7 @@ public class ScheduleController {
 
 		ss.scheduleInsert(user.getUserId(), date, hour, minute, content, important);
 
-		redirectAttributes.addAttribute(redirectKeyDate, session.getAttribute(ScopeKey.SCHEDULE_DATE.getScopeKey()));
+		redirectAttributes.addAttribute(REDIRECT_KEY_DATE, session.getAttribute(ScopeKey.SCHEDULE_DATE.getScopeKey()));
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return RedirectController.SCHEDULE.getRedirectName();
@@ -203,19 +228,17 @@ public class ScheduleController {
 	 */
 	@RequestMapping(value = "/projectorReserve", method = RequestMethod.POST)
 	public String projectorReserve(RedirectAttributes redirectAttributes, HttpSession session,
-			@RequestParam("userId") String userId,
-			@RequestParam("number") String number,
-			@RequestParam("time") String time,
-			@RequestParam("content") String content) {
+			@RequestParam("userId") String userId, @RequestParam("number") String number,
+			@RequestParam("time") String time, @RequestParam("content") String content) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 		log.info(userId + number + time + content);
 
-		Integer trainingId = ((Trainings)session.getAttribute(ScopeKey.LOGINROOM.getScopeKey())).getTrainingId();
+		Integer trainingId = ((Trainings) session.getAttribute(ScopeKey.LOGINROOM.getScopeKey())).getTrainingId();
 		String date = (String) session.getAttribute(ScopeKey.SCHEDULE_DATE.getScopeKey());
 
 		ss.projectorReserve(trainingId, number, userId, date, time, content);
 
-		redirectAttributes.addAttribute(redirectKeyDate, session.getAttribute(ScopeKey.SCHEDULE_DATE.getScopeKey()));
+		redirectAttributes.addAttribute(REDIRECT_KEY_DATE, session.getAttribute(ScopeKey.SCHEDULE_DATE.getScopeKey()));
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return RedirectController.SCHEDULE.getRedirectName();
@@ -235,7 +258,7 @@ public class ScheduleController {
 		log.info(projectorId);
 
 		ss.projectorReserveRelease(projectorId);
-		redirectAttributes.addAttribute(redirectKeyDate, session.getAttribute(ScopeKey.SCHEDULE_DATE.getScopeKey()));
+		redirectAttributes.addAttribute(REDIRECT_KEY_DATE, session.getAttribute(ScopeKey.SCHEDULE_DATE.getScopeKey()));
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return RedirectController.SCHEDULE.getRedirectName();

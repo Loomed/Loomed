@@ -21,19 +21,42 @@ public class TrainingConfigServiceImpl implements TrainingConfigService {
 	TrainingsDao TrainingsDao;
 
 	@Override
-	public  List<Trainings> AllTrainings(){
+	public List<Trainings> AllTrainings() {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
 		List<Trainings> AllRoom = new ArrayList<>();
 
-		AllRoom =  TrainingsDao.AllRooms();
-//		AllRoom.add(new Trainings(0,"全体管理",6,"test:root"));
-//		AllRoom.add(new Trainings(1,"経験者Java(品川教室)",1,"test:a"));
-//		AllRoom.add(new Trainings(2,"未経験者Java(品川教室)",2,"test:b"));
-//		AllRoom.add(new Trainings(3,"未経験者Java(A教室)",3,"test:c"));
+		AllRoom = TrainingsDao.AllRooms();
+		// AllRoom.add(new Trainings(0,"全体管理",6,"test:root"));
+		// AllRoom.add(new Trainings(1,"経験者Java(品川教室)",1,"test:a"));
+		// AllRoom.add(new Trainings(2,"未経験者Java(品川教室)",2,"test:b"));
+		// AllRoom.add(new Trainings(3,"未経験者Java(A教室)",3,"test:c"));
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return AllRoom;
 
+	}
+
+	@Override
+	public void InsTrainings(int pro, String name) {
+
+		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+
+		int TraMaxNum = 0;
+		TraMaxNum = TrainingsDao.getTrainingId() + 1;
+
+		int res = TrainingsDao.InsTraining(pro, name, TraMaxNum);
+
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
+	}
+
+	@Override
+	public void DelTrainings(int id) {
+
+		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+
+		int res = TrainingsDao.DelTraining(id);
+
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 	}
 }

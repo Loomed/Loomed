@@ -9,4 +9,10 @@ public interface TrainingsDao {
 	List<Trainings> AllRooms() ;
 
 	Trainings getTraining(int tr);
+
+	int getTrainingId();
+
+	int InsTraining(int pro,String name,int TraMaxNum);
+
+	int DelTraining(int id);
 }
