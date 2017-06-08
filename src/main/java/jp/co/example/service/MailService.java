@@ -11,7 +11,11 @@ import jp.co.example.form.*;
 public interface MailService {
 	List<MailsEx> getMails(Users user);
 
+	List<MailsEx> getMails();
+
 	int delete(Mails mail);
 
 	int insert(MailInsertForm mailInsertForm);
+
+	List<List<Users>> getUsersButAuth();
 }

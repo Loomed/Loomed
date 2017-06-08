@@ -18,14 +18,15 @@ import util.*;
 public class UsersDaoImpl implements UsersDao {
 	private static final String SQL_SELECT_ID_AND_PASS = "SELECT * FROM users WHERE user_id = ? AND password = ?";
 	private static final String SQL_SELECT_ID = "SELECT * FROM users WHERE user_id = ?";
-	private static final String UPDATE_PASS ="UPDATE users SET password = ? WHERE user_id = ?";
-	private static final String UPDATE_ALL ="UPDATE users SET password = ?, user_name = ?, company_id = ?, authority = ? WHERE user_id = ?";
-	private static final String SQL_MEMBER_SELECT_COMP ="SELECT * FROM users WHERE company_id = ?";
-	private static final String SQL_MEMBER_SELECT_ROOM ="SELECT * FROM maps WHERE training_id = ?";
+	private static final String UPDATE_PASS = "UPDATE users SET password = ? WHERE user_id = ?";
+	private static final String UPDATE_ALL = "UPDATE users SET password = ?, user_name = ?, company_id = ?, authority = ? WHERE user_id = ?";
+	private static final String SQL_MEMBER_SELECT_COMP = "SELECT * FROM users WHERE company_id = ?";
+	private static final String SQL_MEMBER_SELECT_ROOM = "SELECT * FROM maps WHERE training_id = ?";
 	private static final String SQL_SELECT_ALL = "SELECT * FROM users";
+	private static final String SQL_SELECT_AUTH = "SELECT * FROM users WHERE authority = ?";
 
 	@Autowired
- 	private JdbcTemplate jdbcTemplate;
+	private JdbcTemplate jdbcTemplate;
 
 	@Override
 	public Users findByIdAndPass(Integer userId, String password) {
@@ -46,8 +47,7 @@ public class UsersDaoImpl implements UsersDao {
 	}
 
 	@Override
-	public int updatePass(Integer userId, String password)
-	{
+	public int updatePass(Integer userId, String password) {
 		return jdbcTemplate.update(UPDATE_PASS, password);
 	}
 
@@ -56,8 +56,7 @@ public class UsersDaoImpl implements UsersDao {
 		// TODO 自動生成されたメソッド・スタブ
 		Users users = null;
 		try {
-			users = jdbcTemplate.queryForObject(SQL_SELECT_ID, new BeanPropertyRowMapper<Users>(Users.class),
-					userId);
+			users = jdbcTemplate.queryForObject(SQL_SELECT_ID, new BeanPropertyRowMapper<Users>(Users.class), userId);
 		} catch (DataAccessException e) {
 			users = null;
 		}
@@ -66,12 +65,11 @@ public class UsersDaoImpl implements UsersDao {
 	}
 
 	@Override
-	public List<Users> FindCompMember(int comId){
+	public List<Users> FindCompMember(int comId) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 		List<Users> member = null;
 		try {
-			member = jdbcTemplate.query(SQL_MEMBER_SELECT_COMP, new BeanPropertyRowMapper<Users>(Users.class),
-					comId);
+			member = jdbcTemplate.query(SQL_MEMBER_SELECT_COMP, new BeanPropertyRowMapper<Users>(Users.class), comId);
 		} catch (DataAccessException e) {
 			member = null;
 		}
@@ -80,18 +78,19 @@ public class UsersDaoImpl implements UsersDao {
 	}
 
 	@Override
-	public List<Users> FindRoomMember(int roomId){
+	public List<Users> FindRoomMember(int roomId) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
-		List<Users> member = new ArrayList<>(); ;
+		List<Users> member = new ArrayList<>();
+		;
 		List<Maps> mapsUserId = null;
 		Users memberOne = null;
 		try {
 			mapsUserId = jdbcTemplate.query(SQL_MEMBER_SELECT_ROOM, new BeanPropertyRowMapper<Maps>(Maps.class),
 					roomId);
-			for(int i=0; i<mapsUserId.size();i++){
+			for (int i = 0; i < mapsUserId.size(); i++) {
 				memberOne = jdbcTemplate.queryForObject(SQL_SELECT_ID, new BeanPropertyRowMapper<Users>(Users.class),
 						mapsUserId.get(i).getUserId());
-				if(memberOne != null){
+				if (memberOne != null) {
 					member.add(memberOne);
 				}
 			}
@@ -106,6 +105,11 @@ public class UsersDaoImpl implements UsersDao {
 	@Override
 	public List<Users> fingAllUsers() {
 		return jdbcTemplate.query(SQL_SELECT_ALL, new BeanPropertyRowMapper<Users>(Users.class));
+	}
+
+	@Override
+	public List<Users> findAuthUsers(int authority) {
+		return jdbcTemplate.query(SQL_SELECT_AUTH, new BeanPropertyRowMapper<Users>(Users.class), authority);
 	}
 
 }

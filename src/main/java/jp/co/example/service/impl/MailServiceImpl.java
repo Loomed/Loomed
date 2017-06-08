@@ -15,7 +15,7 @@ import util.*;
 
 @Slf4j
 @Service
-public class MailServiceImpl implements MailService{
+public class MailServiceImpl implements MailService {
 	@Autowired
 	private MailsDao mailsDao;
 
@@ -27,8 +27,7 @@ public class MailServiceImpl implements MailService{
 
 		List<MailsEx> mails = new ArrayList<>();
 
-		for(Mails mail : mailsDao.findByReUserId(user.getUserId()))
-		{
+		for (Mails mail : mailsDao.findByReUserId(user.getUserId())) {
 			MailsEx mailsEx = new MailsEx(mail);
 			mailsEx.setTransmissionUserName(userDao.findById(mail.getTransmissionUserId()).getUserName());
 			mails.add(mailsEx);
@@ -45,11 +44,35 @@ public class MailServiceImpl implements MailService{
 	@Override
 	public int insert(MailInsertForm mailInsertForm) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
-		for(int i = 0; i < mailInsertForm.getReceptionUserIds().length; i++)
-		{
-			mailsDao.insert(mailInsertForm.getReceptionUserIds()[i], mailInsertForm.getTransmissionUserId(), mailInsertForm.getMailTitle(), mailInsertForm.getMailContents());
+		for (int i = 0; i < mailInsertForm.getReceptionUserIds().length; i++) {
+			mailsDao.insert(mailInsertForm.getReceptionUserIds()[i], mailInsertForm.getTransmissionUserId(),
+					mailInsertForm.getMailTitle(), mailInsertForm.getMailContents());
 		}
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return 0;
+	}
+
+	@Override
+	public List<List<Users>> getUsersButAuth() {
+		List<List<Users>> users = new ArrayList<>();
+
+		for (int i = 0; i < 4; i++) {
+			users.add(userDao.findAuthUsers(i));
+		}
+
+		return users;
+	}
+
+	@Override
+	public List<MailsEx> getMails() {
+		List<MailsEx> mails = new ArrayList<>();
+
+		for (Mails mail : mailsDao.findAllMails()) {
+			MailsEx mailsEx = new MailsEx(mail);
+			mailsEx.setTransmissionUserName(userDao.findById(mail.getTransmissionUserId()).getUserName());
+			mails.add(mailsEx);
+		}
+
+		return mails;
 	}
 }

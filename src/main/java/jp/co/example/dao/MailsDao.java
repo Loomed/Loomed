@@ -1,12 +1,13 @@
 package jp.co.example.dao;
 
-import java.util.List;
+import java.util.*;
 
-import jp.co.example.entity.Mails;
-import jp.co.example.entity.Users;
+import jp.co.example.entity.*;
 
 public interface MailsDao {
 	List<Mails> findByReUserId(int receptionUserId);
+
+	List<Mails> findAllMails();
 
 	Integer getNewMails(Users user);
 
