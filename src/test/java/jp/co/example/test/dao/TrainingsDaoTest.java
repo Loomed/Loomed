@@ -37,7 +37,7 @@ public class TrainingsDaoTest {
 	@Test
 
 	public void テスト69() throws Exception {
-		Users user = trainingDao.getTrainingId(1);
+		Users user = trainingDao.getTraining(1);
 
 		assertEquals("1", user.getUserId());
 		assertEquals(Integer.valueOf(1), user.getCompanyId());

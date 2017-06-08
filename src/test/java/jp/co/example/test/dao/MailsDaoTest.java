@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import jp.co.example.LoomedApplication;
 import jp.co.example.dao.MailsDao;
 import jp.co.example.entity.Mails;
+import jp.co.example.entity.Users;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -38,24 +40,24 @@ public class MailsDaoTest {
 
 		List<Mails> mails = mailsDao.findByReUserId(99);
 
-		assertEquals(null, mails);
+		assertEquals(0, mails.size());
 	}
 
 	@Test
 	public void テスト18() {
-//
-//		 Mails Mails = mailsDao.getNewMails(null);
-//
-//		 assertEquals(Integer.valueOf(1), Mails.getCompanyId());
+
+		 Integer count = mailsDao.getNewMails(new Users(3, null, null, null, null));
+
+		 assertEquals(Integer.valueOf(1), count);
 	}
 
 	@Test
 	public void テスト19() {
 
-		mailsDao.delete(1);
+		int count = mailsDao.delete(1);
 
 		// 実際のテーブルで確認
-		assertTrue(false);
+		assertEquals(1, count);
 	}
 
 	@Test
@@ -75,31 +77,29 @@ public class MailsDaoTest {
 		// // mail.setMailDate(20170512);
 		// mail.setOpenFlag(false);
 
-		mailsDao.insert(11, 22, "欠席確認", "降谷さんお疲れ様です、風見です。");
+		int count = mailsDao.insert(11, 22, "欠席確認", "降谷さんお疲れ様です、風見です。");
 
-		// データベース目視
-		assertTrue(false);
+		assertEquals(1, count);
 	}
 
-	@Test
+	@Test(expected=DataAccessException.class)
 	public void テスト22() {
+		int count = mailsDao.insert(0, 0, null, null);
 	}
 
-	@Test
-	public void テスト23() {
-		mailsDao.insert(1, 2,
-				"123456789022345678903234567890423456789052345678906234567890723456789082345678909234567890123456789023これで128",
-				null);
+//	@Test
+//	public void テスト23() {
+//		mailsDao.insert(1, 2,
+//				"123456789022345678903234567890423456789052345678906234567890723456789082345678909234567890123456789023これで128",
+//				null);
+//
+//		// データベース目視
+//		assertTrue(false);
+//	}
 
-		// データベース目視
-		assertTrue(false);
-	}
-
-	@Test
+	@Test(expected=DataAccessException.class)
 	public void テスト26() {
 
-		int cnt = mailsDao.insert(99, 88, null, null);
-
-		assertEquals(0, cnt);
+		int cnt = mailsDao.insert(99, 88, "aa", "ii");
 	}
 }
