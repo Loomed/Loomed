@@ -28,11 +28,13 @@
 }
 </style>
 <script>
-function aaa(){
-	var pro =$(':hidden[name="title"]').val();
-	location.href = "C:"+ pro;
-	return( false );
-	}
+var downloadAsFile = function(content) {
+	var fileName = document.getElementById("");
+    var a = document.createElement('a');
+    a.download = fileName;
+    a.href = 'data:application/octet-stream,'+encodeURIComponent(content);
+    a.click();
+};
 </script>
 </head>
 
@@ -68,7 +70,7 @@ function aaa(){
 						</p>
 						<p>
 							<button type="submit" class="btn btn-primary btn-block"
-								value="shareconfig">共有ファイルアップロード</button>
+								onclick="location.href='shareconfig'">共有ファイルアップロード</button>
 						</p>
 					</div>
 					<div class="card">
@@ -171,10 +173,11 @@ function aaa(){
 																<i class="fa fa-clock-o"></i>作成日:${sl.uploadDate}
 															</time>
 														</header>
+
 														<div class="comment-post">
 															<p>
 																<input type="hidden" name="title" value="${sl.shareContents}">
-																<a href="javascript:" onClick="aaa();">${sl.title}</a>
+																<a href="file:///c:${sl.shareContents}" download="${sl.shareContents}">${sl.title}</a>
 															</p>
 														</div>
 													</div>

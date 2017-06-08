@@ -40,10 +40,8 @@ public class HomeController {
 		Users user =(Users)session.getAttribute(ScopeKey.LOGINUSER.getScopeKey());
 		Trainings tr = null;
 		String cnt = null;
-		String maps = null;
 		String id = reques.getParameter("page");
 		int training_id = 0;
-		int id2 =0;
 		List<Shares> sl = new ArrayList<Shares>();
 		List<Schedules> list = new ArrayList<Schedules>();
 		//データに色々格納中
@@ -52,7 +50,7 @@ public class HomeController {
 			tr = HS.getTrainingName(training_id);
 			sl = SS.selectlist(tr.getTrainingId());
 			session.setAttribute(ScopeKey.LOGINROOM.getScopeKey(), tr);
-
+			HS.setOutPutStream(sl);
 		// サービスへ
 		cnt = HS.getNewMails(user);
 		list = HS.getInpoSche();
