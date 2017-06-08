@@ -23,7 +23,7 @@ public class UsersDaoImpl implements UsersDao {
 	private static final String SQL_SELECT_ID = "SELECT * FROM users WHERE user_id = ?";
 	private static final String UPDATE_PASS = "UPDATE users SET password = ? WHERE user_id = ?";
 	private static final String UPDATE_ALL = "UPDATE users SET password = ?, user_name = ?, company_id = ?, authority = ? WHERE user_id = ?";
-	private static final String SQL_MEMBER_SELECT_COMP = "SELECT * FROM users WHERE company_id = ?";
+	//private static final String SQL_MEMBER_SELECT_COMP = "SELECT * FROM users WHERE company_id = ?";
 	private static final String SQL_MEMBER_SELECT_ROOM = "SELECT * FROM maps WHERE training_id = ?";
 	private static final String SQL_SELECT_ALL = "SELECT * FROM users";
 	private static final String SQL_SELECT_AUTH = "SELECT * FROM users WHERE authority = ?";
@@ -70,7 +70,7 @@ public class UsersDaoImpl implements UsersDao {
 	@Override
 	public List<Users> FindCompMember(int comId, int roomId) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
-		List<Users> member = null;
+		List<Users> member = new ArrayList<>();
 		List<Maps> mapsUserId = null;
 		Users memberOne = null;
 		try {
