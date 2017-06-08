@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import enums.LogEnum;
 import enums.ScopeKey;
-import jp.co.example.entity.*;
+import jp.co.example.entity.Maps;
+import jp.co.example.entity.Trainings;
+import jp.co.example.entity.Users;
 import jp.co.example.service.IndexService;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -67,7 +69,7 @@ public class IndexController {
 		log.info(LogEnum.IF.getLogValue() + "LoginUser == null");
 		if (LoginUser == null) {
 			log.info(LogEnum.TRUE.getLogValue() + "/login");
-			return "/login";
+			return "redirect:/login";
 		} else {
 			log.info(LogEnum.FALSE.getLogValue() + "MapsよりRoom番号をうけとる");
 			// 教室判定
