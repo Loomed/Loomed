@@ -32,8 +32,7 @@
 
 <body>
 
-	<%@ include file="common/header.jsp"%>
- 	<form action="roothome" method="get">
+	<%@ include file="common/header.jsp"%>F
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-4">
@@ -224,7 +223,6 @@
 			</div>
 		</div>
 		</div>
-	</form>
 	<script type="text/javascript">
 		$(function() {
 			$('#datepicker').datepicker({
