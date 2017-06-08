@@ -8,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class ProjectorForm {
+	private Integer projectorId;
 	private String time;
 	private String projectorNumber;
 	private String userName;

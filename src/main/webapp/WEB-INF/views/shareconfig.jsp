@@ -25,12 +25,26 @@
 		});
 	});
 </script>
+<script type="text/javascript">
+  window.onload = function() {
+    document.getElementById("insert").disabled = true;
+  }
+  function selectFile() {
+    if (document.getElementById("upload_file").value === "") {
+      document.getElementById("insert").disabled = true;
+    }
+    else {
+      document.getElementById("insert").disabled = false;
+    }
+  }
+</script>
 <script>
 	//主処理部
 	$(function() {
 
 		// アップロードボタンを押下した
 		$("#data_upload_form").submit(
+
 				function(event) {
 					// 要素規定の動作をキャンセルする
 					event.preventDefault();
@@ -51,7 +65,7 @@
 							processData : false,
 							contentType : false,
 						}).done(function(data) { // Ajax通信が成功した時の処理
-							alert("アップロードが完了しました。");
+							alert(data);
 						}).fail(
 								function(XMLHttpRequest, textStatus,
 										errorThrown) { // Ajax通信が失敗した時の処理
@@ -98,7 +112,7 @@
 										<form id="data_upload_form" enctype="multipart/form-data"
 											method="post">
 											<div class="form-group">
-												<label for="inputName" class="col-sm-2 control-label">表示名</label>
+												<label for="inputName" class="col-sm-2 control-label">ファイル名</label>
 												<div class="col-sm-10">
 													<input type="text" class="form-control" id="inputName"
 														name="inputName" required>
@@ -109,13 +123,18 @@
 												<div class="col-sm-10">
 													<div class="input-group">
 														<label>ファイル種類：</label> <select id="select_file_type"
-															name="select_file_type" required="">
-															<option value="login-user">ログインユーザー</option>
+															name="select_file_type">
+															<option value=".xlsx">エクセル</option>
+															<option value=".pptx">パワーポイント</option>
+															<option value=".docx">ワード</option>
+															<option value=".txt">テキスト</option>
 															<!-- アップロードするファイルを定義していく -->
-														</select> <label class="input-group-btn"> <span
+														</select>
+														<p>※ファイルサイズは1MBまでです。</p>
+														 <label class="input-group-btn"> <span
 															class="btn btn-default"> ファイル選択<input type="file"
 																id="upload_file" name="upload_file"
-																style="display: none">
+																 onchange="selectFile()" style="display:none">
 														</span>
 														</label>
 														<!--<input type="text" class="form-control" readonly>-->
@@ -140,7 +159,7 @@
 											<div class="form-group">
 												<div class="col-sm-offset-1 col-sm-10">
 													<input type="hidden" name="dummy">
-													<button type="submit" class="btn btn-primary btn-block">登録</button>
+													<button type="submit" id="insert" class="btn btn-primary btn-block">登録</button>
 												</div>
 											</div>
 										</form>

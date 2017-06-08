@@ -19,9 +19,22 @@ public class MailServiceImpl implements MailService{
 	@Autowired
 	private MailsDao mailsDao;
 
+	@Autowired
+	private UsersDao userDao;
+
 	@Override
 	public List<MailsEx> getMails(Users user) {
-		mailsDao.findByReUserId(user.getUserId());
+
+		List<MailsEx> mails = new ArrayList<>();
+
+		for(Mails mail : mailsDao.findByReUserId(user.getUserId()))
+		{
+			MailsEx mailsEx = new MailsEx(mail);
+			mailsEx.setTransmissionUserName(userDao.findById(mail.getTransmissionUserId()).getUserName());
+			mails.add(mailsEx);
+		}
+
+		return mails;
 	}
 
 	@Override
