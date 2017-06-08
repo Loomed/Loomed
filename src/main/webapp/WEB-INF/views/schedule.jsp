@@ -60,6 +60,7 @@ td {
 	<input type="hidden" id="loginUserId"
 		value="${fn:escapeXml(loginuser.userId) }" />
 
+	<!-- スケジュール項目の表示 -->
 	<div class="container mycontainer">
 		<div class="row">
 			<div class="col-md-10 col-md-offset-1">
@@ -109,6 +110,8 @@ td {
 			</div>
 		</div>
 	</div>
+
+	<!-- スケジュールの追加項目 -->
 	<div class="container mycontainer">
 		<div class="row">
 			<div class="col-md-10 col-md-offset-1">
@@ -130,8 +133,8 @@ td {
 										<tr>
 											<td><input type="number" name="hour" size="2" min="0"
 												max="23" required style="text-align: right;">時<input
-												type="number" name="minute" size="2" min="0" max="59" required
-												style="text-align: right;">分</td>
+												type="number" name="minute" size="2" min="0" max="59"
+												required style="text-align: right;">分</td>
 											<td>
 												<!--<input type="text" name="#" placeholder="ここに内容を入れて下さい。" required>-->
 												<textarea name="content" class="col-xs-12"
@@ -152,71 +155,75 @@ td {
 			</div>
 		</div>
 	</div>
-	<div class="container mycontainer">
-		<div class="row">
-			<div class="col-md-10 col-md-offset-1">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">プロジェクタ予約状況</h3>
-						<!-- プロジェクタの権限がある場合セレクトボックス表示 -->
-						<c:if test="${fn:escapeXml(projectorAuthority) }">
-							<br> 閲覧したい時間 <select id="selectTime" name="selectTime">
-								<option></option>
-								<option value="9:00">9:00</option>
-								<option value="9:30">9:30</option>
-								<option value="10:00">10:00</option>
-								<option value="10:30">10:30</option>
-								<option value="11:00">11:00</option>
-								<option value="11:30">11:30</option>
-								<option value="12:00">12:00</option>
-								<option value="12:30">12:30</option>
-								<option value="13:00">13:00</option>
-								<option value="13:30">13:30</option>
-								<option value="14:00">14:00</option>
-								<option value="14:30">14:30</option>
-								<option value="15:00">15:00</option>
-								<option value="15:30">15:30</option>
-								<option value="16:00">16:00</option>
-								<option value="16:30">16:30</option>
-								<option value="17:00">17:00</option>
-								<option value="17:30">17:30</option>
-								<option value="18:00">18:00</option>
-								<option value="18:30">18:30</option>
-								<option value="19:00">19:00</option>
-								<option value="19:30">19:30</option>
-								<option value="0:00">All</option>
-							</select>
-						</c:if>
-					</div>
-					<div class="panel-body">
+	<!-- プロジェクタ項目の表示 -->
+	<!-- プロジェクタがない教室はプロジェクタ項目を表示しない -->
+	<c:if test="${loginroom.projectorCount ne 0 }">
+		<div class="container mycontainer">
+			<div class="row">
+				<div class="col-md-10 col-md-offset-1">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">プロジェクタ予約状況</h3>
+							<!-- プロジェクタの権限がある場合セレクトボックス表示 -->
+							<c:if test="${fn:escapeXml(projectorAuthority) }">
+								<br> 閲覧したい時間 <select id="selectTime" name="selectTime">
+									<option></option>
+									<option value="9:00">9:00</option>
+									<option value="9:30">9:30</option>
+									<option value="10:00">10:00</option>
+									<option value="10:30">10:30</option>
+									<option value="11:00">11:00</option>
+									<option value="11:30">11:30</option>
+									<option value="12:00">12:00</option>
+									<option value="12:30">12:30</option>
+									<option value="13:00">13:00</option>
+									<option value="13:30">13:30</option>
+									<option value="14:00">14:00</option>
+									<option value="14:30">14:30</option>
+									<option value="15:00">15:00</option>
+									<option value="15:30">15:30</option>
+									<option value="16:00">16:00</option>
+									<option value="16:30">16:30</option>
+									<option value="17:00">17:00</option>
+									<option value="17:30">17:30</option>
+									<option value="18:00">18:00</option>
+									<option value="18:30">18:30</option>
+									<option value="19:00">19:00</option>
+									<option value="19:30">19:30</option>
+									<option value="0:00">All</option>
+								</select>
+							</c:if>
+						</div>
+						<div class="panel-body">
 
-						<!-- プロジェクタの権限がある場合セレクトボックス表示 -->
-						<c:choose>
-							<c:when test="${fn:escapeXml(projectorAuthority) }">
-								<div class="panel panel-default">
-									<table class="table">
-										<thead>
-											<tr>
-												<th>予約時間</th>
-												<th>プロジェクタ</th>
-												<th>予約ユーザ</th>
-												<th>予約</th>
-											</tr>
-										</thead>
-										<tbody id="projectorBody">
-										</tbody>
-									</table>
-								</div>
-							</c:when>
-							<c:when test="${!fn:escapeXml(projectorAuthority) }">
-								<h4 style="text-align: center;">権限がありません</h4>
-							</c:when>
-						</c:choose>
+							<!-- プロジェクタの権限がある場合セレクトボックス表示 -->
+							<c:choose>
+								<c:when test="${fn:escapeXml(projectorAuthority) }">
+									<div class="panel panel-default">
+										<table class="table">
+											<thead>
+												<tr>
+													<th>予約時間</th>
+													<th>プロジェクタ</th>
+													<th>予約ユーザ</th>
+													<th>予約</th>
+												</tr>
+											</thead>
+											<tbody id="projectorBody">
+											</tbody>
+										</table>
+									</div>
+								</c:when>
+								<c:when test="${!fn:escapeXml(projectorAuthority) }">
+									<h4 style="text-align: center;">権限がありません</h4>
+								</c:when>
+							</c:choose>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	</c:if>
 
 	<!--  スケジュール削除モーダル -->
 	<div class="modal fade" id="configDeleteModal" tabindex="-1">
@@ -386,8 +393,8 @@ td {
 						</button>
 						<h4 class="modal-title">予約確認</h4>
 					</div>
-					<input id="projectorIdModal" name="projectorId"
-						type="hidden" value="" />
+					<input id="projectorIdModal" name="projectorId" type="hidden"
+						value="" />
 					<div class="modal-body">
 						項目を入力し、予約を完了してください<br> <br>
 						<div class="panel panel-default">
@@ -396,7 +403,8 @@ td {
 							</div>
 							<div class="panel-body">
 								<div id="reserveUserModal"></div>
-								<input id="reserveUserIdHidden" type="hidden" name="userId" value="#" />
+								<input id="reserveUserIdHidden" type="hidden" name="userId"
+									value="#" />
 							</div>
 						</div>
 
@@ -406,8 +414,9 @@ td {
 							</div>
 							<div class="panel-body">
 								<div id="timeModal"></div>
-								<input id="reserveNumberHidden" type="hidden" name="number" value="#" />
-								<input id="reserveTimeHidden" type="hidden" name="time" value="#" />
+								<input id="reserveNumberHidden" type="hidden" name="number"
+									value="#" /> <input id="reserveTimeHidden" type="hidden"
+									name="time" value="#" />
 							</div>
 						</div>
 

@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import enums.LogEnum;
 import enums.ScopeKey;
-import jp.co.example.entity.Maps;
-import jp.co.example.entity.Trainings;
-import jp.co.example.entity.Users;
+import jp.co.example.entity.*;
 import jp.co.example.service.IndexService;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -29,8 +27,10 @@ public class IndexController {
 	HttpServletRequest request;
 
 	@RequestMapping("/index")
-	public String getIndex(HttpServletRequest request, HttpSession session) {
+	public String getIndex(HttpSession session) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+
+		session.removeAttribute(ScopeKey.LOGINROOM.getScopeKey());
 
 		//int LoginId = 0;
 		//String LoginPass = "";

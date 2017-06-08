@@ -9,7 +9,7 @@
                     2.セッションに値があればそれぞれのhome
                     今回はルートなのでroothome.jspとする
             　   -->
-			<a class="navbar-brand" href=""> </a>
+			<a class="navbar-brand" href="logo"> </a>
 			<p class="navbar-text navbar-right">
 				<a href="index" class="navbar-link">研修教室名一覧</a> <a type="button"
 					class="btn btn-defaul btn-info navbar-btn navbar-btn-modify"
@@ -35,8 +35,6 @@
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
 				<button type="submit" class="btn btn-primary" data-dismiss="modal" onclick="location.href='login';">OK</button>
-
-
 			</div>
 		</div>
 	</div>

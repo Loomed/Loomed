@@ -11,8 +11,8 @@ $(function() {
 	var student = '3';// 生徒
 
 
-	console.log(userName);
-	console.log(authority);
+	//console.log(userName);
+	//console.log(authority);
 
 	// 変更クリック
 	$('.change')
@@ -21,14 +21,14 @@ $(function() {
 						console.log("change click");
 						var id = $(this).attr("id");
 						var changeId = id.split(':');
-						console.log(changeId[1]);
+						//console.log(changeId[1]);
 
 						$('#scheduleIdChangeModal').val($('#scheduleId' + changeId[1]).val());
-						console.log($('#scheduleIdChangeModal').val());
+						//console.log($('#scheduleIdChangeModal').val());
 						var array = $('#timeScheduleTable' + changeId[1])
 								.text().split(':');
-						console.log(array[0]);
-						console.log(array[1]);
+						//console.log(array[0]);
+						//console.log(array[1]);
 						$('#hourChangeModal').val(array[0]);
 						$('#minuteChangeModal').val(array[1]);
 						$('#contentChangeModal')
@@ -53,13 +53,13 @@ $(function() {
 
 	// 削除クリック
 	$('#scheduleBody').on('click', '.delete', function() {
-		console.log("delete click");
+		//console.log("delete click");
 		var id = $(this).attr("id");
 		var deleteId = id.split(':');
-		console.log(deleteId[1]);
+		//console.log(deleteId[1]);
 
 		$('#scheduleIdDeleteModal').val($('#scheduleId' + deleteId[1]).val());
-		console.log($('#scheduleIdDeleteModal').val());
+		//console.log($('#scheduleIdDeleteModal').val());
 		$('#timeDeleteModal').text($('#timeScheduleTable' + deleteId[1]).text());
 		$('#contentDeleteModal').text($('#contentScheduleTable' + deleteId[1]).text());
 
@@ -73,11 +73,11 @@ $(function() {
 		console.log("reserve: click");
 
 		var id = $(this).attr("id");
-		console.log(id);
+		//console.log(id);
 		var reserveId = id.split(':');
-		console.log(reserveId[1]);
+		//console.log(reserveId[1]);
 
-		console.log($('#timeTable' + reserveId[1]).text());
+		//console.log($('#timeTable' + reserveId[1]).text());
 
 		//モーダルに値を入力
 		//権限分岐
@@ -102,8 +102,8 @@ $(function() {
 
 		$('#reserveNumberHidden').val($('#projectorTable' + reserveId[1]).text());
 		$('#reserveTimeHidden').val($('#timeTable' + reserveId[1]).text());
-		console.log($('#reserveNumberHidden').val());
-		console.log($('#reserveTimeHidden').val());
+		//console.log($('#reserveNumberHidden').val());
+		//console.log($('#reserveTimeHidden').val());
 		$('#configReserveModal').modal();
 	});
 
@@ -113,12 +113,12 @@ $(function() {
 		console.log("reserveRelease: click");
 
 		var id = $(this).attr("id");
-		console.log(id);
+		//console.log(id);
 		var releaseId = id.split(':');
-		console.log(releaseId[1]);
+		//console.log(releaseId[1]);
 
 		$('#projectorIdReleaseModal').val($('#projectorIdTable' + releaseId[1]).val());
-		console.log($('#projectorIdReleaseModal').val());
+		//console.log($('#projectorIdReleaseModal').val());
 		$('#releaseTimeModal').text($('#timeTable' + releaseId[1]).text());
 		$('#releaseProjectorModal').text($('#projectorTable' + releaseId[1]).text());
 		$('#releaseReserveUserModal').text($('#reserveNameTable' + releaseId[1]).text());
@@ -129,13 +129,13 @@ $(function() {
 	$('#reserveUserModal').on('change', '#selectReserveName', function() {
 		// セレクトボックスで選んだ値のvauleををhiddenに格納
 		$('#reserveUserIdHidden').val($("[name=selectReserveName] option:selected").val());
-		console.log($('#reserveUserIdHidden').val());
+		//console.log($('#reserveUserIdHidden').val());
 	});
 
 	// プロジェクタ非同期通信
 	$("#selectTime").change(function() {
 		console.log("selectTime: change");
-		console.log(authority);
+		//console.log(authority);
 
 		// セレクトボックスで選んだ値のtextを取得
 		var time = $("[name=selectTime] option:selected").text();
@@ -147,8 +147,8 @@ $(function() {
 			date = decodeURIComponent(match[1]);
 		}
 
-		console.log(time);
-		console.log(date);
+		//console.log(time);
+		//console.log(date);
 		$.ajax({
 			url : "projectorJson",
 			dataType : "json",
@@ -161,7 +161,7 @@ $(function() {
 			success : function(data) {
 				// プロジェクタ予約状況を空に初期化
 				$("#projectorBody").html("");
-				console.log(authority);
+				//console.log(authority);
 				projectorAjaxSuccess(data, authority);
 			},
 			error : function() {
@@ -177,8 +177,8 @@ $(function() {
 // projectorAjax通信成功時処理
 function projectorAjaxSuccess(data, authority) {
 	console.log("success: start");
-	console.log(data);
-	console.log(typeof authority == "undefined");
+	//console.log(data);
+	//console.log(typeof authority == "undefined");
 	for (var cnt = 0; cnt < data.length; cnt++) {
 		$("#projectorBody").html(
 				$("#projectorBody").html() +
@@ -236,7 +236,7 @@ function getReserveNameListSuccess(data) {
 
 	selectHtml += '</select>';
 
-	console.log(selectHtml);
+	//console.log(selectHtml);
 
 	$('#reserveUserModal').html(selectHtml);
 }
@@ -250,8 +250,8 @@ function getReserveNameListError() {
 // プロジェクタ一覧のボタンの振り分け処理
 // 引数...プロジェクタリストの1行分のデータ、権限、インデックス
 function reserveButton(data, authority, cnt) {
-	console.log("reserveButton: start");
-	console.log(data);
+	//console.log("reserveButton: start");
+	//console.log(data);
 
 	var userName = $('#loginUserName').val();
 
@@ -270,11 +270,11 @@ function reserveButton(data, authority, cnt) {
 	var notReserve = '予約なし';
 
 	// 権限振り分け
-	console.log(authority);
+	//console.log(authority);
 	switch (authority) {
 	case root:
 		// ルートの場合
-		console.log("switch--->root");
+		//console.log("switch--->root");
 
 		if (data.userName == notReserve) {
 			return reserve;
@@ -285,7 +285,7 @@ function reserveButton(data, authority, cnt) {
 		break;
 	case lecturer:
 		// 講師の場合
-		console.log("switch--->lecturer");
+		//console.log("switch--->lecturer");
 
 		if (data.userName == notReserve) {
 			return reserve;
@@ -296,7 +296,7 @@ function reserveButton(data, authority, cnt) {
 		break;
 	case student:
 		// 生徒の場合
-		console.log("switch--->student");
+		//console.log("switch--->student");
 
 		if (data.userName == notReserve) {
 			return reserve;
@@ -309,10 +309,10 @@ function reserveButton(data, authority, cnt) {
 		break;
 	case charge:
 		// 担当者の場合
-		console.log("switch--->charge");
-		console.log("error");
+		//console.log("switch--->charge");
+		//console.log("error");
 
 		break;
 	}
-	console.log("switch--->default");
+	//console.log("switch--->default");
 }
