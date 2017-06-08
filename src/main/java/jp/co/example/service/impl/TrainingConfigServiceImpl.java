@@ -38,14 +38,14 @@ public class TrainingConfigServiceImpl implements TrainingConfigService {
 	}
 
 	@Override
-	public void InsTrainings(int pro, String name) {
+	public void InsTrainings(int pro, String name,String info) {
 
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
 		int TraMaxNum = 0;
 		TraMaxNum = TrainingsDao.getTrainingId() + 1;
 
-		int res = TrainingsDao.InsTraining(pro, name, TraMaxNum);
+		int res = TrainingsDao.InsTraining(pro, name, TraMaxNum,info);
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 	}

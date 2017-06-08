@@ -27,10 +27,12 @@ table>td>input {
 				function() {
 					// セレクトボックスで選んだ値のtextを取得
 					var pro = $("[name=proNum] option:selected").val();
-					$('#pro').text(pro);
+					$('#newPros').val(pro);
+					$('#newPros_01').text(pro);
 
-					var roomName = $("[name=roomName]").val();
-					$('#roomName').text(roomName);
+					var roomName = $('#inputTrainingName').val();
+					$('#roomNames').val(roomName);
+					$('#newNames_01').text(roomName);
 
 					$('#change-modal').modal();
 				});
@@ -113,18 +115,23 @@ table>td>input {
 						研修教室ID：<span>${LookRoom.trainingId}</span>
 					</div>
 					<div>
-						研修教室名：<span id="roomName"></span>
+						研修教室名：<span id="newNames_01"></span>
 					</div>
 					<div>
-						プロジェクタ数：<span id="pro"></span>
+						プロジェクタ数：<span id="newPros_01"></span>
 					</div>
 					<br>
 					お間違いがなければ[OK]ボタンを押してください
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
-					<button type="button" class="btn btn-default btn-primary"
-						data-dismiss="modal" onclick="location.href='trainingConfig';">OK</button>
+					<form action="trainingChangeInsert">
+
+						<input type="hidden" id="roomNames" value="aaa" name="roomName">
+						<input type="hidden" id="newPros" value="aaa" name="newPro">
+						<input type="submit" class="btn btn-primary" id="update"
+							value="OK">
+					</form>
 				</div>
 			</div>
 		</div>

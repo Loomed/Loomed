@@ -12,7 +12,9 @@ public interface TrainingsDao {
 
 	int getTrainingId();
 
-	int InsTraining(int pro,String name,int TraMaxNum);
+	int InsTraining(int pro,String name,int TraMaxNum, String info);
 
 	int DelTraining(int id);
+
+	int UpdTraining(int id,String name,int pro,String info);
 }
