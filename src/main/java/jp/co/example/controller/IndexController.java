@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import enums.LogEnum;
+import enums.RedirectController;
 import enums.ScopeKey;
 import jp.co.example.entity.Maps;
 import jp.co.example.entity.Trainings;
@@ -69,7 +70,7 @@ public class IndexController {
 		log.info(LogEnum.IF.getLogValue() + "LoginUser == null");
 		if (LoginUser == null) {
 			log.info(LogEnum.TRUE.getLogValue() + "/login");
-			return "redirect:/login";
+			return RedirectController.LOGIN.getRedirectName();
 		} else {
 			log.info(LogEnum.FALSE.getLogValue() + "MapsよりRoom番号をうけとる");
 			// 教室判定

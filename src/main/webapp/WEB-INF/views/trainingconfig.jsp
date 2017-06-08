@@ -13,6 +13,7 @@
 
 <script>
 	$(function() {
+
 		$('.delete').click(function() {
 			var id = $(this).attr('id');
 			var strarray = id.split(':');
@@ -24,19 +25,7 @@
 		});
 
 		$('#newRoom').click(function() {
-			console.log("newRoom: click");
-			// セレクトボックスで選んだ値のtextを取得
-			var pro = $("[name=proNum] option:selected").val();
-			$('#newPros').val(pro);
 
-			var roomName = $("[name=roomName]").val();
-			$('#newNames').val(roomName);
-
-
-			$('#newInfo').val($('#inputInfo').val());
-			console.log($('#newInfo').val());
-
-			$('#insertModal').modal();
 		});
 
 		// 		//ここからー
@@ -66,6 +55,21 @@
 		});
 
 	});
+
+	function hoge() {
+		console.log("newRoom: click");
+		// セレクトボックスで選んだ値のtextを取得
+		var pro = $("[name=proNum] option:selected").val();
+		$('#newPros').val(pro);
+
+		var roomName = $("[name=roomName]").val();
+		$('#newNames').val(roomName);
+
+		$('#newInfo').val($('#inputInfo').val());
+		console.log($('#newInfo').val());
+
+		$('#insertModal').modal();
+	}
 </script>
 </head>
 
@@ -96,7 +100,7 @@
 								<div id="collapseOne" class="panel-collapse collapse"
 									role="tabpanel" aria-labelledby="headingOne">
 									<div class="panel-body">
-
+										<form action="javascript:hoge()">
 											<div class="form-group">
 												<label for="intputUserId" class="col-sm-3 control-label">教室ID</label>
 												<div class="col-sm-9">
@@ -113,7 +117,8 @@
 											<div class="form-group">
 												<label for="inputProNum" class="col-sm-3 control-label">プロジェクタ数</label>
 												<div class="col-sm-9">
-													<select class="form-control" id="inputProNum" name="proNum" style="width: auto;">
+													<select class="form-control" id="inputProNum" name="proNum"
+														style="width: auto;">
 														<option>1</option>
 														<option>2</option>
 														<option>3</option>
@@ -133,9 +138,11 @@
 											</div>
 											<div class="form-group">
 												<div class="col-sm-offset-1 col-sm-10">
-													<button class="btn btn-default btn-block" id="newRoom">新規研修教室立ち上げ</button>
+													<button type="submit" class="btn btn-default btn-block"
+														id="newRoom">新規研修教室立ち上げ</button>
 												</div>
 											</div>
+										</form>
 									</div>
 								</div>
 							</div>
@@ -209,9 +216,10 @@
 					元に戻すことは出来ません<br> 削除しますか？
 				</div>
 				<div class="modal-footer">
+				<form action="trainingDelete">
 					<button type="button" class="btn btn-default" data-dismiss="modal"
 						id="notdel">キャンセル</button>
-					<form action="trainingDelete">
+
 						<input type="hidden" id="hiddenPg" value="aaa" name="hiddenName">
 						<input type="submit" class="btn btn-danger" id="deldel" value="削除">
 					</form>
@@ -234,8 +242,9 @@
 					以下の内容で登録します<br> お間違いはありませんか？
 				</div>
 				<div class="modal-footer">
+				<form action="trainingInsert">
 					<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
-					<form action="trainingInsert">
+
 						<input type="hidden" id="newNames" value="aaa" name="newName">
 						<input type="hidden" id="newPros" value="aaa" name="newPro">
 						<input type="hidden" id="newInfo" value="#" name="newInfo">

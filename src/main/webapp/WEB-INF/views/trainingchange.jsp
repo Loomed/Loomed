@@ -23,25 +23,28 @@ table>td>input {
 	$(function() {
 // 		jQuery("#changeForm").validationEngine();
 		$('#change')
-		.click(
-				function() {
-					// セレクトボックスで選んだ値のtextを取得
-					var pro = $("[name=proNum] option:selected").val();
-					$('#newPros').val(pro);
-					$('#newPros_01').text(pro);
+		.click(function() {
 
-					var roomName = $('#inputTrainingName').val();
-					$('#roomNames').val(roomName);
-					$('#newNames_01').text(roomName);
-
-					var info = $('#inputInfo').val();
-					$('#newInfo').val(info);
-					$('#newInfo_01').text(info);
-
-					$('#change-modal').modal();
 				});
 
+
 	});
+	function hoge() {
+		// セレクトボックスで選んだ値のtextを取得
+		var pro = $("[name=proNum] option:selected").val();
+		$('#newPros').val(pro);
+		$('#newPros_01').text(pro);
+
+		var roomName = $('#inputTrainingName').val();
+		$('#roomNames').val(roomName);
+		$('#newNames_01').text(roomName);
+
+		var info = $('#inputInfo').val();
+		$('#newInfo').val(info);
+		$('#newInfo_01').text(info);
+
+		$('#change-modal').modal();
+	}
 </script>
 </head>
 
@@ -58,8 +61,9 @@ table>td>input {
 					<c:set var="LookRoom" value="${sessionScope.LookRoom}" />
 
 					<div class="panel-body">
-						<form id="changeForm" class="form-horizontal"
-							action="trainingconfig">
+<!-- 						<form id="changeForm" class="form-horizontal" -->
+<!-- 							action="trainingconfig"> -->
+						<form action="javascript:hoge()">
 							<div class="form-group">
 								<label for="intputUserId" class="col-sm-3 control-label">教室ID</label>
 								<div class="col-sm-9">
@@ -100,7 +104,7 @@ table>td>input {
 								<div class="col-sm-offset-1 col-sm-10">
 									<button type="button" class="btn btn-default"
 										onclick="location.href='trainingConfig';">前の画面に戻る</button>
-									<button type="button" class="btn btn-primary pull-right"
+									<button type="submit" class="btn btn-primary pull-right"
 										id="change">変更</button>
 								</div>
 							</div>
@@ -139,8 +143,9 @@ table>td>input {
 					お間違いがなければ[OK]ボタンを押してください
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
 					<form action="trainingChangeInsert">
+					<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+
 						<input type="hidden" id="newInfo" value="#" name="newInfo">
 						<input type="hidden" id="roomNames" value="aaa" name="roomName">
 						<input type="hidden" id="newPros" value="aaa" name="newPro">
