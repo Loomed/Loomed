@@ -1,17 +1,20 @@
 package jp.co.example.dao.impl;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.dao.*;
-import org.springframework.jdbc.core.*;
-import org.springframework.stereotype.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
-import enums.*;
-import jp.co.example.dao.*;
-import jp.co.example.entity.*;
-import lombok.extern.slf4j.*;
-import util.*;
+import enums.LogEnum;
+import jp.co.example.dao.UsersDao;
+import jp.co.example.entity.Maps;
+import jp.co.example.entity.Users;
+import lombok.extern.slf4j.Slf4j;
+import util.Util;
 
 @Slf4j
 @Repository
@@ -65,11 +68,23 @@ public class UsersDaoImpl implements UsersDao {
 	}
 
 	@Override
-	public List<Users> FindCompMember(int comId) {
+	public List<Users> FindCompMember(int comId, int roomId) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 		List<Users> member = null;
+		List<Maps> mapsUserId = null;
+		Users memberOne = null;
 		try {
-			member = jdbcTemplate.query(SQL_MEMBER_SELECT_COMP, new BeanPropertyRowMapper<Users>(Users.class), comId);
+			mapsUserId = jdbcTemplate.query(SQL_MEMBER_SELECT_ROOM, new BeanPropertyRowMapper<Maps>(Maps.class),
+					roomId);
+			for (int i = 0; i < mapsUserId.size(); i++) {
+				memberOne = jdbcTemplate.queryForObject(SQL_SELECT_ID, new BeanPropertyRowMapper<Users>(Users.class),
+						mapsUserId.get(i).getUserId());
+				if (memberOne != null && memberOne.getCompanyId()==comId) {
+					member.add(memberOne);
+				}
+			}
+
+			//member = jdbcTemplate.query(SQL_MEMBER_SELECT_COMP, new BeanPropertyRowMapper<Users>(Users.class), comId);
 		} catch (DataAccessException e) {
 			member = null;
 		}
