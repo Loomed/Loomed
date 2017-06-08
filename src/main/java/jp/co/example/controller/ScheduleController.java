@@ -65,10 +65,10 @@ public class ScheduleController {
 		// user = new Users(4, "pass", "山田 四郎", 1, 1);
 		// user = new Users(25, "pass", "橋爪 陽治", 2, 1);
 		// 担当者
-		// user = new Users(6, "test", "高橋 六郎", 3, 3);
-		// user = new Users(9, "test", "田代 治行", 6, 3);
+		user = new Users(6, "test", "高橋 六郎", 3, 2);
+		// user = new Users(9, "test", "田代 治行", 6, 2);
 		// 生徒
-		user = new Users(12, "test", "内田 初美", 2, 3);
+		//user = new Users(12, "test", "内田 初美", 2, 3);
 		// user = new Users(13, "test", "吉野 成夫", 2, 3);
 		// user = new Users(14, "test", "角野 一人", 3, 3);
 		// user = new Users(15, "test", "浅野 季孝", 3, 3);
@@ -76,9 +76,9 @@ public class ScheduleController {
 
 		// 教室データ
 		//room = new Trainings(1, "全体管理", 0, "");
-		room = new Trainings(2, "Java研修", 2, "");
+		//room = new Trainings(2, "Java研修", 2, "");
 		// room = new Trainings(3, "PHP研修", 3, "");
-		// room = new Trainings(4, "ビジネスマナー研修", 1, "");
+		 room = new Trainings(4, "ビジネスマナー研修", 1, "");
 		// room = new Trainings(5, "セキュリティ講座", 1, "");
 		// room = new Trainings(6, "プレゼンテーション講座", 6, "");
 
