@@ -85,7 +85,6 @@
 						<h3 class="panel-title">研修教室管理</h3>
 					</div>
 					<div class="panel-body">
-
 						<div class="panel-group" id="accordion" role="tablist"
 							aria-multiselectable="true">
 							<div class="panel panel-default">
@@ -100,7 +99,7 @@
 								<div id="collapseOne" class="panel-collapse collapse"
 									role="tabpanel" aria-labelledby="headingOne">
 									<div class="panel-body">
-										<form action="javascript:hoge()">
+										<form action="javascript:hoge()"  class="form-horizontal insert">
 											<div class="form-group">
 												<label for="intputUserId" class="col-sm-3 control-label">教室ID</label>
 												<div class="col-sm-9">
