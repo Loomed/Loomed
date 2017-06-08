@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import enums.JspPage;
 import enums.LogEnum;
 import enums.RedirectController;
+import enums.ScopeKey;
 import jp.co.example.entity.Shares;
 import jp.co.example.entity.Trainings;
 import jp.co.example.service.ShareService;
@@ -34,8 +35,7 @@ public class ShareconfigController {
 	public String getShare(HttpSession session, HttpServletRequest reques, Model model) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 		List<Shares> list = new ArrayList<Shares>();
-		//Trainings tra = (Trainings)session.getAttribute(ScopeKey.LOGINROOM.getScopeKey());
-		Trainings tra = new Trainings(5, "セキュリティ講座", 1, "セキュリティ講座としてSEA/J資格受験");
+		Trainings tra = (Trainings)session.getAttribute(ScopeKey.LOGINROOM.getScopeKey());
 		try{
 		list = SS.selectlist(tra.getTrainingId());
 		}catch(NullPointerException e){

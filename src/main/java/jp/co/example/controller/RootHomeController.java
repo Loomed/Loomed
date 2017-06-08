@@ -15,9 +15,10 @@ import enums.JspPage;
 import enums.LogEnum;
 import enums.ScopeKey;
 import jp.co.example.entity.Schedules;
-import jp.co.example.entity.Trainings;
+import jp.co.example.entity.Shares;
 import jp.co.example.entity.Users;
 import jp.co.example.service.RootHomeService;
+import jp.co.example.service.ShareService;
 import lombok.extern.slf4j.Slf4j;
 import util.Util;
 @Slf4j
@@ -25,20 +26,20 @@ import util.Util;
 public class RootHomeController {
 	@Autowired
 	private RootHomeService RHS;
+	@Autowired
+	private ShareService SS;
 
 	@RequestMapping(value = "/roothome")
 	public String Home(HttpSession session, HttpServletRequest reques, Model model) {
 
 		// セッションの受け取りと必要なデータ生成
 		Users user =(Users)session.getAttribute(ScopeKey.LOGINUSER.getScopeKey());
-		Trainings tr = null;
 		String cnt = null;
-		String maps = null;
-		int tid = 0;
-		int training_id = 0;
 		List<Schedules> list = new ArrayList<Schedules>();
+		List<Shares> sl = new ArrayList<Shares>();
 		//データに色々格納中
 		// サービスへ
+		sl = SS.selectlist(1);
 		cnt = RHS.getNewMails(user);
 		list = RHS.getInpoSche();
 		//tr = HS.getTrainingName(training_id);
@@ -47,6 +48,7 @@ public class RootHomeController {
 			cnt = "新着無し";
 		}
 		//基本セッションとかはここ
+		model.addAttribute("sl",sl);
 		session.setAttribute("user", user);
 		model.addAttribute("list", list);
 		model.addAttribute("cnt", cnt);

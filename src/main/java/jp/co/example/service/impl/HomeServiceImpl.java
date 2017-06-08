@@ -13,6 +13,7 @@ import jp.co.example.dao.SchedulesDao;
 import jp.co.example.dao.SharesDao;
 import jp.co.example.dao.TrainingsDao;
 import jp.co.example.entity.Schedules;
+import jp.co.example.entity.Shares;
 import jp.co.example.entity.Trainings;
 import jp.co.example.entity.Users;
 import jp.co.example.service.HomeService;
@@ -68,6 +69,12 @@ public class HomeServiceImpl implements HomeService {
 			System.out.println(tra);
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return tra;
+
+	}
+
+	@Override
+	public void setOutPutStream(List<Shares> sl) {
+		List<Shares> list = sl;
 
 	}
 }

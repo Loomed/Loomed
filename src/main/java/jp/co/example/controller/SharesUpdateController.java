@@ -22,6 +22,7 @@ import org.springframework.web.multipart.support.MultipartFilter;
 
 import enums.LogEnum;
 import enums.RedirectController;
+import enums.ScopeKey;
 import jp.co.example.entity.Shares;
 import jp.co.example.entity.Trainings;
 import jp.co.example.service.ShareService;
@@ -58,11 +59,10 @@ public class SharesUpdateController {
 		} else {
 			rad = false;
 		}
-		//Trainings tra = (Trainings)session.getAttribute(ScopeKey.LOGINROOM.getScopeKey());
+		Trainings tra = (Trainings)session.getAttribute(ScopeKey.LOGINROOM.getScopeKey());
 		// ファイル種類から決まる値をセットする
 		// ファイルパス
 		StringBuffer filePath = new StringBuffer("/uploadfile").append(File.separator).append(fileType);
-		Trainings tra = new Trainings(5, "セキュリティ講座", 1, "セキュリティ講座としてSEA/J資格受験");
 		// アップロードファイルを格納するディレクトリを作成する
 		File uploadDir = mkdirs(filePath);
 		try {
