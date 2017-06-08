@@ -14,7 +14,7 @@ import lombok.extern.slf4j.*;
 @Transactional
 @Service
 @Slf4j
-public class UserConfigServiceImpl implements UserConfigService {
+public class UserConfigServiceImpl implements UserConfigService{
 
 	@Autowired
 	private UsersDao userDao;
