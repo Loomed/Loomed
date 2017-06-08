@@ -58,14 +58,14 @@ public class ScheduleController {
 		// ユーザデータ
 
 		// ルート
-		//user = new Users(1, "pass", "山田 太郎", 1, 0);
+		user = new Users(1, "pass", "山田 太郎", 1, 0);
 		// user = new Users(2, "pass", "山田 次郎", 1, 0);
 		// 講師
 		// user = new Users(3, "pass", "山田 三郎", 1, 1);
 		// user = new Users(4, "pass", "山田 四郎", 1, 1);
 		// user = new Users(25, "pass", "橋爪 陽治", 2, 1);
 		// 担当者
-		user = new Users(6, "test", "高橋 六郎", 3, 2);
+		//user = new Users(6, "test", "高橋 六郎", 3, 2);
 		// user = new Users(9, "test", "田代 治行", 6, 2);
 		// 生徒
 		//user = new Users(12, "test", "内田 初美", 2, 3);

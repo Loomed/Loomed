@@ -9,7 +9,8 @@ public enum RedirectController {
 	SCHEDULE ("redirect:/schedule"),
 	HOME ("redirect:/home"),
 	INDEX ("redirect:/index"),
-	SHARECONFIG("redirect:/shareconfig");
+	SHARECONFIG("redirect:/shareconfig"),
+	LOGIN("redirect:/login"),
 	;
 
 	final String redirectName;
