@@ -18,6 +18,12 @@ import jp.co.example.service.ScheduleService;
 import lombok.extern.slf4j.Slf4j;
 import util.Util;
 
+/**
+ * スケジュールサービスの実装
+ *
+ * @author Yukihiro Yoshida
+ *
+ */
 @Slf4j
 @Service
 @Transactional
@@ -33,19 +39,15 @@ public class ScheduleServiceImpl implements ScheduleService {
 			"19:00", "19:30", };//
 
 	@Autowired
-	SchedulesDao sd;
-
+	private SchedulesDao sd;
 	@Autowired
-	ProjectorsDao pd;
-
+	private ProjectorsDao pd;
 	@Autowired
-	UsersDao ud;
-
+	private UsersDao ud;
 	@Autowired
-	TrainingsDao td;
-
+	private TrainingsDao td;
 	@Autowired
-	MapsDao md;
+	private MapsDao md;
 
 	@Override
 	public List<ScheduleForm> getSchedule(Integer userId, String date) {
@@ -127,112 +129,6 @@ public class ScheduleServiceImpl implements ScheduleService {
 		return null;
 	}
 
-	/**
-	 * 時間を指定した際 プロジェクタ予約をSchedule.jspに表示できるリストに置き換える
-	 *
-	 * @param list
-	 *            SELECTしたプロジェクタ
-	 * @param ud
-	 *            ユーザーDAO
-	 * @param time
-	 *            プロジェクタの時刻
-	 * @param projectorCount
-	 *            プロジェクタの数
-	 * @return Schedule.jspに表示させるリスト
-	 */
-	private static List<ProjectorForm> valueOfProjectorFormTimeSelect(List<Projectors> list, UsersDao ud, String time,
-			int projectorCount) {
-		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
-
-		List<ProjectorForm> listForm = new ArrayList<>();
-		Users projectorUser;
-		int listIndex = 0;
-
-		for (int i = 0; i < projectorCount; i++) {
-			// プロジェクタの数だけまわす
-			log.info(LogEnum.IF.getLogValue() + "list.get(listIndex).getProjectorNumber() == i + 1");
-			if (list.get(listIndex).getProjectorNumber() == i + 1) {
-				// プロジェクタ番号がレコードがある場合
-				log.info(LogEnum.TRUE.getLogValue());
-
-				projectorUser = ud.findById(list.get(listIndex).getUserId());
-				listForm.add(new ProjectorForm(list.get(listIndex).getProjectorId(), time, "プロジェクタ" + (i + 1),
-						projectorUser.getUserName()));
-				listIndex++;
-			} else {
-				log.info(LogEnum.FALSE.getLogValue());
-
-				listForm.add(new ProjectorForm(NOT_PROJECTOR_ID, time, "プロジェクタ" + (i + 1), "予約なし"));
-			}
-		}
-
-		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
-		return listForm;
-	}
-
-	/**
-	 * 全てを参照した際 プロジェクタ予約をSchedule.jspに表示できるリストに置き換える
-	 *
-	 * @param list
-	 *            SELECTしたプロジェクタ
-	 * @param ud
-	 *            ユーザーDAO
-	 * @param time
-	 *            プロジェクタの時刻
-	 * @param projectorCount
-	 *            プロジェクタの数
-	 * @return Schedule.jspに表示させるリスト
-	 */
-	private static List<ProjectorForm> valueOfProjectorFormTimeAll(List<Projectors> list, UsersDao ud, String time,
-			int projectorCount) {
-		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
-
-		List<ProjectorForm> listForm = new ArrayList<>();
-		Users projectorUser;
-		int listIndex = 0;
-
-		log.info(LogEnum.FOR.getLogValue() + "int i = 0; i < TIME_SPAN.length; i++" + LogEnum.START.getLogValue());
-		for (int i = 0; i < TIME_SPAN.length; i++) {
-			// 時間ごとにループをする
-			// jsp用にtimestampをStringに変換
-			log.info(LogEnum.FOR.getLogValue() + "int j = 0; j < projectorCount; j++" + LogEnum.START.getLogValue());
-			for (int j = 0; j < projectorCount; j++) {
-				String timeForm = SDF_TIME.format(list.get(listIndex).getReserveTime());
-				log.info(timeForm);
-				// プロジェクタの数だけループ
-				// テーブルがない場合予約なしを追加する
-				log.info(LogEnum.IF.getLogValue()
-						+ "TIME_SPAN[i].equals(timeForm) && list.get(listIndex).getProjectorNumber() == j + 1");
-				if (TIME_SPAN[i].equals(timeForm) && list.get(listIndex).getProjectorNumber() == j + 1) {
-					// Projectorのlistに時間が同じなおかつ、プロジェクタ番号が同じの場合のレコードがある場合
-					log.info(LogEnum.TRUE.getLogValue());
-
-					projectorUser = ud.findById(list.get(listIndex).getUserId());
-					listForm.add(new ProjectorForm(list.get(listIndex).getProjectorId(), timeForm, "プロジェクタ" + (j + 1),
-							projectorUser.getUserName()));
-					listIndex++;
-				} else {
-					// ない場合
-					log.info(LogEnum.FALSE.getLogValue());
-
-					listForm.add(new ProjectorForm(NOT_PROJECTOR_ID, TIME_SPAN[i], "プロジェクタ" + (j + 1), "予約なし"));
-				}
-			}
-			log.info(LogEnum.FOR.getLogValue() + "int j = 0; j < projectorCount; j++" + LogEnum.END.getLogValue());
-		}
-		log.info(LogEnum.FOR.getLogValue() + "int i = 0; i < TIME_SPAN.length; i++" + LogEnum.END.getLogValue());
-
-		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
-		return listForm;
-	}
-
-	/**
-	 * プロジェクタの参照権限があるか判断するメソッド
-	 *
-	 * @param userId
-	 *            ユーザ情報や教室情報が格納されているセッション
-	 * @return true...権限あり false...権限なし
-	 */
 	@Override
 	public boolean isProjectorAuthority(Integer userId, Integer trainingId) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
@@ -344,32 +240,128 @@ public class ScheduleServiceImpl implements ScheduleService {
 		// TODO 自動生成されたメソッド・スタブ]
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
-
 		int updateCount = 0;
 		try {
 			// タイムスタンプに変換
 			Timestamp dateTime = new Timestamp(SDF_DATETIME.parse(date + " " + time).getTime());
-			//プロジェクタの数字を抽出
+			// プロジェクタの数字を抽出
 			Integer projectorNumber = Integer.valueOf(String.valueOf(number.charAt(number.length() - 1)));
 
-			//プロジェクタに予約
+			// プロジェクタに予約
 			updateCount = pd.insertProjectoReserve(trainingId, projectorNumber, Integer.valueOf(userId), dateTime);
 
 			log.info(projectorNumber.toString());
 			log.info(number);
 
-			//スケジュールに追加
+			// スケジュールに追加
 			sd.insertSchedule(Integer.valueOf(userId), content + "#" + number + "予約", dateTime, true);
 		} catch (ParseException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
 
-
-
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 
 		return updateCount;
+	}
+
+	/**
+	 * 時間を指定した際 プロジェクタ予約をSchedule.jspに表示できるリストに置き換える
+	 *
+	 * @param list
+	 *            SELECTしたプロジェクタ
+	 * @param ud
+	 *            ユーザーDAO
+	 * @param time
+	 *            プロジェクタの時刻
+	 * @param projectorCount
+	 *            プロジェクタの数
+	 * @return Schedule.jspに表示させるリスト
+	 */
+	private static List<ProjectorForm> valueOfProjectorFormTimeSelect(List<Projectors> list, UsersDao ud, String time,
+			int projectorCount) {
+		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+
+		List<ProjectorForm> listForm = new ArrayList<>();
+		Users projectorUser;
+		int listIndex = 0;
+
+		for (int i = 0; i < projectorCount; i++) {
+			// プロジェクタの数だけまわす
+			log.info(LogEnum.IF.getLogValue() + "list.get(listIndex).getProjectorNumber() == i + 1");
+			if (list.get(listIndex).getProjectorNumber() == i + 1) {
+				// プロジェクタ番号がレコードがある場合
+				log.info(LogEnum.TRUE.getLogValue());
+
+				projectorUser = ud.findById(list.get(listIndex).getUserId());
+				listForm.add(new ProjectorForm(list.get(listIndex).getProjectorId(), time, "プロジェクタ" + (i + 1),
+						projectorUser.getUserName()));
+				listIndex++;
+			} else {
+				log.info(LogEnum.FALSE.getLogValue());
+
+				listForm.add(new ProjectorForm(NOT_PROJECTOR_ID, time, "プロジェクタ" + (i + 1), "予約なし"));
+			}
+		}
+
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
+		return listForm;
+	}
+
+	/**
+	 * 全てを参照した際 プロジェクタ予約をSchedule.jspに表示できるリストに置き換える
+	 *
+	 * @param list
+	 *            SELECTしたプロジェクタ
+	 * @param ud
+	 *            ユーザーDAO
+	 * @param time
+	 *            プロジェクタの時刻
+	 * @param projectorCount
+	 *            プロジェクタの数
+	 * @return Schedule.jspに表示させるリスト
+	 */
+	private static List<ProjectorForm> valueOfProjectorFormTimeAll(List<Projectors> list, UsersDao ud, String time,
+			int projectorCount) {
+		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+
+		List<ProjectorForm> listForm = new ArrayList<>();
+		Users projectorUser;
+		int listIndex = 0;
+
+		log.info(LogEnum.FOR.getLogValue() + "int i = 0; i < TIME_SPAN.length; i++" + LogEnum.START.getLogValue());
+		for (int i = 0; i < TIME_SPAN.length; i++) {
+			// 時間ごとにループをする
+			// jsp用にtimestampをStringに変換
+			log.info(LogEnum.FOR.getLogValue() + "int j = 0; j < projectorCount; j++" + LogEnum.START.getLogValue());
+			for (int j = 0; j < projectorCount; j++) {
+				String timeForm = SDF_TIME.format(list.get(listIndex).getReserveTime());
+				log.info(timeForm);
+				// プロジェクタの数だけループ
+				// テーブルがない場合予約なしを追加する
+				log.info(LogEnum.IF.getLogValue()
+						+ "TIME_SPAN[i].equals(timeForm) && list.get(listIndex).getProjectorNumber() == j + 1");
+				if (TIME_SPAN[i].equals(timeForm) && list.get(listIndex).getProjectorNumber() == j + 1) {
+					// Projectorのlistに時間が同じなおかつ、プロジェクタ番号が同じの場合のレコードがある場合
+					log.info(LogEnum.TRUE.getLogValue());
+
+					projectorUser = ud.findById(list.get(listIndex).getUserId());
+					listForm.add(new ProjectorForm(list.get(listIndex).getProjectorId(), timeForm, "プロジェクタ" + (j + 1),
+							projectorUser.getUserName()));
+					listIndex++;
+				} else {
+					// ない場合
+					log.info(LogEnum.FALSE.getLogValue());
+
+					listForm.add(new ProjectorForm(NOT_PROJECTOR_ID, TIME_SPAN[i], "プロジェクタ" + (j + 1), "予約なし"));
+				}
+			}
+			log.info(LogEnum.FOR.getLogValue() + "int j = 0; j < projectorCount; j++" + LogEnum.END.getLogValue());
+		}
+		log.info(LogEnum.FOR.getLogValue() + "int i = 0; i < TIME_SPAN.length; i++" + LogEnum.END.getLogValue());
+
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
+		return listForm;
 	}
 
 }
