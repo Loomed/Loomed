@@ -6,7 +6,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>ユーザ管理 </title>
+<title>ユーザ管理</title>
 
 <%@ include file="common/head.jsp"%>
 
@@ -20,13 +20,69 @@
 			location.href = "userchange";
 		});
 		$('.combobox').combobox();
+
+		$('#trainingId').multiselect(
+				{
+					buttonWidth : '400px',
+					//buttonClass: '',
+					nonSelectedText : '選択してください',
+					filterPlaceholder : '検索',
+					includeSelectAllOption : true,
+					enableFiltering : true,
+					selectAllText : 'すべて選択',
+					selectedClass : '',
+					enableClickableOptGroups : true,
+					enableCollapsibleOptGroups : true,
+					buttonText : function(options, select) {
+
+						// First consider the simple cases, i.e. disabled and empty.
+						if (this.disabledText.length > 0
+								&& (this.disableIfEmpty || select
+										.prop('disabled'))
+								&& options.length == 0) {
+
+							return this.disabledText;
+						} else if (options.length === 0) {
+							return this.nonSelectedText;
+						}
+
+						var $select = $(select);
+						var $optgroups = $('optgroup', $select);
+
+						var delimiter = this.delimiterText;
+						var text = '';
+
+						// Go through groups.
+						$optgroups.each(function() {
+							var $selectedOptions = $('option:selected', this);
+							var $options = $('option', this);
+
+							if ($selectedOptions.length == $options.length) {
+								text += $(this).attr('label') + delimiter;
+							} else {
+								$selectedOptions.each(function() {
+									text += $(this).text() + delimiter;
+								});
+							}
+						});
+
+						var $remainingOptions = $('option:selected', $select)
+								.not('optgroup option');
+						$remainingOptions.each(function() {
+							text += $(this).text() + delimiter;
+						});
+
+						return text.substr(0, text.length - 2);
+					}
+				});
+
 	});
 </script>
 </head>
 
 <body>
 
-<%@ include file="common/header.jsp"%>
+	<%@ include file="common/header.jsp"%>
 
 	<div class="container mycontainer">
 		<div class="row">
@@ -50,73 +106,103 @@
 								<div id="collapseOne" class="panel-collapse collapse"
 									role="tabpanel" aria-labelledby="headingOne">
 									<div class="panel-body">
-										<form id="changeForm" class="form-horizontal"
-											action="userconfig">
+
+
+
+
+										<form:form id="changeForm" modelAttribute="userChangeForm"
+											class="form-horizontal" action="userinfo" method="POST"
+											submit-flag="false">
 											<div class="form-group">
-												<label for="intputUserId" class="col-sm-2 control-label">ユーザID</label>
+												<label for="userId" class="col-sm-2 control-label">ユーザID</label>
 												<div class="col-sm-10">
-													<label for="intputUserId" class="control-label">自動採番</label>
+													<input name="userId" id="userId" class="form-control"
+														value="自動採番" readonly>
 												</div>
 											</div>
 											<div class="form-group">
-												<label for="inputPassword" class="col-sm-2 control-label">パスワード</label>
+												<label for="password" class="col-sm-2 control-label">パスワード</label>
 												<div class="col-sm-10">
-													<input type="password" class="form-control"
-														id="inputPassword" required>
+													<input type="password" id="password" name="password"
+														class="form-control" />
 												</div>
 											</div>
+
 											<div class="form-group">
-												<label for="inputPassword" class="col-sm-2 control-label">権限</label>
-												<div class="col-sm-10">
-													<select class="form-control">
-														<option selected>ルートユーザ</option>
-														<option>講師</option>
-														<option>担当者</option>
-														<option>研修生</option>
-													</select>
-												</div>
-											</div>
-											<div class="form-group">
-												<label for="inputName" class="col-sm-2 control-label">氏
+												<label for="userName" class="col-sm-2 control-label">氏
 													名</label>
 												<div class="col-sm-10">
-													<input type="text" class="form-control" id="inputName"
-														required>
+													<input id="userName" name="userName" class="form-control"
+														required />
 												</div>
 											</div>
+
+
 											<div class="form-group">
-												<label for="inputCompany" class="col-sm-2 control-label">企業名</label>
+												<label for="companyId" class="col-sm-2 control-label">企業名</label>
 												<div class="col-sm-10 select-container">
-													<select class="combobox form-control">
-														<option value=""></option>
-														<option>株式会社Axiz</option>
-														<option>株式会社コンピュータ・ハイテック・ビジュアルソリューション・グローバルパワー</option>
-														<option>株式会社プリウス</option>
-														<option>クラウン株式会社</option>
-														<option>ソニーグループ株式会社</option>
-													</select>
+													<input type="text" class="form-control" id="companyName"
+														name="companyName" list="companies">
+													<datalist id="companies">
+														<c:forEach var="company" items="${companies}">
+															<c:choose>
+																<c:when test="${company.companyId == user.companyId }">
+																	<option
+																		value="<c:out value="${company.companyName }" />"
+																		selected></option>
+																</c:when>
+																<c:otherwise>
+																	<option
+																		value="<c:out
+																value="${company.companyName }" />"></option>
+																</c:otherwise>
+															</c:choose>
+														</c:forEach>
+													</datalist>
 												</div>
 											</div>
+
 											<div class="form-group">
-												<label for="inputTraining" class="col-sm-2 control-label">配属研修教室</label>
+												<label class="col-sm-2 control-label">権限</label>
 												<div class="col-sm-10">
-													<select class="form-control">
-														<option>研修教室選択なし</option>
-														<option>研修教室管理</option>
-														<option>経験者Java品川教室</option>
-														<option>未経験者Java品川教室</option>
-														<option>経験者C#田町教室</option>
-														<option>未経験者C#品川教室</option>
-														<option>経験者C#品川教室</option>
+													<select id="authority" name="authority"
+														class="form-control">
+														<c:forEach var="authority" items="ルートユーザ, 講師, 担当者, 研修生"
+															varStatus="status">
+															<c:choose>
+																<c:when test="${status.index == user.authority }">
+																	<option value="${status.index}" selected><c:out
+																			value="${authority}" /></option>
+																</c:when>
+																<c:otherwise>
+																	<option value="${status.index}"><c:out
+																			value="${authority}" /></option>
+																</c:otherwise>
+															</c:choose>
+														</c:forEach>
 													</select>
 												</div>
 											</div>
+
+											<div class="form-group">
+												<label for="trainingId" class="col-sm-2 control-label">配属研修教室</label>
+												<div class="col-sm-10">
+													<select id="trainingId" name="trainingId" multiple size="4">
+														<c:forEach var="room" items="${rooms}">
+															<option value="${room.trainingId}">
+																<c:out value="${room.trainingName}" />
+															</option>
+														</c:forEach>
+													</select>
+												</div>
+											</div>
+
 											<div class="form-group">
 												<div class="col-sm-offset-1 col-sm-10">
 													<button type="submit" class="btn btn-primary btn-block">登録</button>
 												</div>
 											</div>
-										</form>
+										</form:form>
 									</div>
 								</div>
 							</div>
@@ -264,7 +350,7 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
 					<a href="userdelete">
-					<button type="button" class="btn btn-danger">削除</button>
+						<button type="button" class="btn btn-danger">削除</button>
 					</a>
 				</div>
 			</div>
