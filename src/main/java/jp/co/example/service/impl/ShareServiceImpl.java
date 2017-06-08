@@ -17,7 +17,7 @@ public class ShareServiceImpl implements ShareService{
 	@Autowired
 	SharesDao sd;
 
-	public void InsertFile(Trainings tra, StringBuffer filePath,String filename, boolean radio){
+	public void InsertFile(Trainings tra, String filePath,String filename, boolean radio){
 		Timestamp upload = new Timestamp(System.currentTimeMillis());
 		sd.insertFilepass(tra,filePath,upload,filename,radio);
 	}
