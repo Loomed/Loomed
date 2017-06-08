@@ -1,6 +1,7 @@
 package util;
 
-import enums.*;
+import enums.LogEnum;
+import enums.RedirectController;
 import jp.co.example.entity.Trainings;
 import jp.co.example.entity.Users;
 import lombok.extern.slf4j.Slf4j;
@@ -81,7 +82,7 @@ public class Util {
 			log.info(LogEnum.TRUE.getLogValue());
 
 			log.info(Util.getMethodName() + LogEnum.END.getLogValue());
-			return ForwardController.INDEX.getForwardName();
+			return RedirectController.INDEX.getRedirectName();
 			// インデックスへ戻る処理を書く
 		} else {
 			log.info(LogEnum.FALSE.getLogValue());
@@ -107,7 +108,7 @@ public class Util {
 			log.info(LogEnum.TRUE.getLogValue());
 
 			log.info(Util.getMethodName() + LogEnum.END.getLogValue());
-			return JspPage.LOGIN.getPageName();
+			return RedirectController.LOGIN.getRedirectName();
 		} else {
 			log.info(LogEnum.FALSE.getLogValue());
 
