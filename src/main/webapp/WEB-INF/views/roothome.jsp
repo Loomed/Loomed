@@ -32,7 +32,7 @@
 
 <body>
 
-	<%@ include file="common/header.jsp"%>F
+	<%@ include file="common/header.jsp"%>
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-4">

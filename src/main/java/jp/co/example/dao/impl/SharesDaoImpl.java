@@ -22,7 +22,7 @@ public class SharesDaoImpl implements SharesDao{
 	@Autowired
 	JdbcTemplate jt;
 	@Override
-	public void insertFilepass(Trainings tra, StringBuffer filePath,Timestamp uploaddate, String filename, boolean radio) {
+	public void insertFilepass(Trainings tra, String filePath,Timestamp uploaddate, String filename, boolean radio) {
 		jt.update(INSERT_INTO_SHARES,tra.getTrainingId(),filePath,uploaddate,radio,filename);
 
 	}

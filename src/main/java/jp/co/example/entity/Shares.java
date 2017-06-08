@@ -2,7 +2,10 @@ package jp.co.example.entity;
 
 import java.sql.Date;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -11,7 +14,7 @@ import lombok.*;
 public class Shares {
 	private Integer shareId;
 	private Integer trainingId;
-	private byte[] shareContents;
+	private String shareContents;
 	private Date uploadDate;
 	private boolean visible;
 	private String title;

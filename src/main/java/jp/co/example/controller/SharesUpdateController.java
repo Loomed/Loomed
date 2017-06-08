@@ -69,11 +69,13 @@ public class SharesUpdateController {
 			// アップロードファイルを置く
 			File uploadFile = new File(uploadDir.getPath() + "/" + filename + fileType);
 			StringBuffer path = new StringBuffer(uploadDir.getPath() + "/" + filename + fileType);
+			String dlpath = new String(path);
 			byte[] bytes = multipartFile.getBytes();
+			System.out.println(dlpath);
 			BufferedOutputStream uploadFileStream = new BufferedOutputStream(new FileOutputStream(uploadFile));
 			uploadFileStream.write(bytes);
 			uploadFileStream.close();
-			SS.InsertFile(tra, path, filename, rad);
+			SS.InsertFile(tra, dlpath, filename, rad);
 			list = SS.selectlist(tra.getTrainingId());
 			session.setAttribute("list", list);
 			return "アップロードが成功しました。リスト更新のためしばらくお待ち下さい。";
@@ -98,13 +100,12 @@ public class SharesUpdateController {
 	private File mkdirs(StringBuffer filePath) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 		File uploadDir = new File(filePath.toString());
-		// 既に存在する場合はプレフィックスをつける
-		int prefix = 0;
-		while (uploadDir.exists()) {
-			prefix++;
-			uploadDir = new File(filePath.toString() + String.valueOf(prefix));
+		// 既に存在する場合はそのフォルダにぶち込む
+		if (uploadDir.exists()) {
+			uploadDir = new File(filePath.toString());
+		}else{
+			uploadDir.mkdirs();
 		}
-
 		// フォルダ作成
 		uploadDir.mkdirs();
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
