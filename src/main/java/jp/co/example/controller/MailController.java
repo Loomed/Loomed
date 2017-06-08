@@ -2,6 +2,8 @@ package jp.co.example.controller;
 
 import java.util.*;
 
+import javax.servlet.http.*;
+
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
@@ -23,22 +25,50 @@ public class MailController {
 	private MailService mailService;
 
 	@ModelAttribute("deleteForm")
-	private MailDeleteForm setUpForm(){
+	private MailDeleteForm setUpForm() {
 		return new MailDeleteForm();
 	}
 
 	@RequestMapping(value = "/mail")
-	public String getMail(Model model) {
+	public String getMail(Model model, HttpSession session) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
-		// 本来はセッションからログイン値を取得する
-		Users user = new Users();
-		user.setUserId(1);
-
-		model.addAttribute(ScopeKey.LOGINUSER.getScopeKey(), user);
-		// 終わり
+		Users user = (Users) session.getAttribute(ScopeKey.LOGINUSER.getScopeKey());
 
 		List<MailsEx> mails = mailService.getMails(user);
+
+		model.addAttribute("mails", mails);
+
+		this.init(model);
+		model.addAttribute("flag", false);
+
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
+		return JspPage.MAIL.getPageName();
+	}
+
+	@RequestMapping(value = "/mail", method = RequestMethod.POST)
+	public String postMail(MailDeleteForm mailDeleteForm, MailInsertForm mailInsertForm, WatchForm watchForm,
+			Model model, HttpSession session) {
+		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+
+		Users user = (Users) session.getAttribute(ScopeKey.LOGINUSER.getScopeKey());
+
+		List<MailsEx> mails = new ArrayList<>();
+
+		if (mailDeleteForm.getMailId() != null) {
+			mailService.delete(mailDeleteForm);
+		} else if (mailInsertForm.getTransmissionUserId() != null) {
+			mailService.insert(mailInsertForm);
+		}
+
+		if (!watchForm.isAllMail()) {
+			mails = mailService.getMails(user);
+		} else {
+			mails = mailService.getMails();
+		}
+		model.addAttribute("flag", watchForm.isAllMail());
+
+		this.init(model);
 
 		model.addAttribute("mails", mails);
 
@@ -46,22 +76,19 @@ public class MailController {
 		return JspPage.MAIL.getPageName();
 	}
 
-	@RequestMapping(value = "/mail", method = RequestMethod.POST)
-	public String postMail(MailDeleteForm mailDeleteForm, MailInsertForm mailInsertForm) {
-		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+	private void init(Model model) {
 
-		log.info("delete");
-		mailService.delete(mailDeleteForm);
+		List<List<Users>> users = mailService.getUsersButAuth();
 
-		log.info("insert");
-		log.info("insert myid : " + mailInsertForm.getTransmissionUserId());
-		log.info("insert ids  : " + mailInsertForm.getReceptionUserIds().length);
-		log.info("insert title: " + mailInsertForm.getMailTitle());
-		log.info("insert ctxt : " + mailInsertForm.getMailContents());
+		log.info(" ルート : " + users.get(0).size());
+		log.info(" 講師　 : " + users.get(1).size());
+		log.info(" 担当者 : " + users.get(2).size());
+		log.info(" 研修生 : " + users.get(3).size());
 
-		//mailService.insert(mailInsertForm);
+		model.addAttribute("auth0", users.get(0));
+		model.addAttribute("auth1", users.get(1));
+		model.addAttribute("auth2", users.get(2));
+		model.addAttribute("auth3", users.get(3));
 
-		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
-		return JspPage.MAIL.getPageName();
 	}
 }

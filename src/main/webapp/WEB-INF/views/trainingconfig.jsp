@@ -17,10 +17,41 @@
 			var id = $(this).attr('id');
 			var strarray = id.split(':');
 			var param = strarray[1];
-			$('#param').text(param);
+			// 			$('#param').text(param);
+			$('#hiddenPg').val(param);
 
 			$('#deleteModal').modal();
 		});
+
+		$('#newRoom').click(function() {
+			console.log("newRoom: click");
+			// セレクトボックスで選んだ値のtextを取得
+			var pro = $("[name=proNum] option:selected").val();
+			$('#newPros').val(pro);
+
+			var roomName = $("[name=roomName]").val();
+			$('#newNames').val(roomName);
+
+			$('#insertModal').modal();
+		});
+
+		// 		//ここからー
+		// 		$('.delete').submit(function() {
+		// 			$('#deleteModal').modal();
+		// 			if($('form').sttr('submit-flag') == 'false'){
+		// 				return false;
+		// 			}
+		// 		});
+
+		// 		$('#deldel').click(function() {
+		// 			$('#del').attr('submit-flag','true');
+		// 			$('#del').submit();
+		// 		});
+
+		// 		$('#notdel').on('show.bs.modal' function(e) {
+		// 			$('#del').attr('submit-flag','false');
+		// 		});
+		//ここまでー
 
 		$('.change').click(function() {
 			//Javasctiptからの遷移？（「.jsp」消した）
@@ -36,7 +67,7 @@
 
 <body>
 
-<%@ include file="common/header.jsp"%>
+	<%@ include file="common/header.jsp"%>
 
 	<div class="container mycontainer">
 		<div class="row">
@@ -61,7 +92,7 @@
 								<div id="collapseOne" class="panel-collapse collapse"
 									role="tabpanel" aria-labelledby="headingOne">
 									<div class="panel-body">
-										<form class="form-horizontal insert">
+
 											<div class="form-group">
 												<label for="intputUserId" class="col-sm-3 control-label">教室ID</label>
 												<div class="col-sm-9">
@@ -72,14 +103,13 @@
 												<label for="inputPassword" class="col-sm-3 control-label">研修教室名</label>
 												<div class="col-sm-9">
 													<input type="text" class="form-control" id="inputPassword"
-														required>
+														name="roomName" required>
 												</div>
 											</div>
 											<div class="form-group">
 												<label for="inputProNum" class="col-sm-3 control-label">プロジェクタ数</label>
 												<div class="col-sm-9">
-													<select class="form-control" id="inputProNum"
-														style="width: auto;">
+													<select class="form-control" id="inputProNum" name="proNum" style="width: auto;">
 														<option>1</option>
 														<option>2</option>
 														<option>3</option>
@@ -91,10 +121,9 @@
 											</div>
 											<div class="form-group">
 												<div class="col-sm-offset-1 col-sm-10">
-													<button type="submit" class="btn btn-default btn-block">新規研修教室立ち上げ</button>
+													<button class="btn btn-default btn-block" id="newRoom">新規研修教室立ち上げ</button>
 												</div>
 											</div>
-										</form>
 									</div>
 								</div>
 							</div>
@@ -114,13 +143,14 @@
 							<tbody>
 
 								<%
+
 								%>
 								<c:forEach var="AllRooms" items="${sessionScope.AllTrainings}">
 									<c:set var="count" value="${count+1}" />
 									<c:set var="page" value="${AllRooms.trainingId}" />
 									<%
 										// スクリプトレットでpageスコープのpageContextにアクセスし変数を取得.
-										int pageNum = (int) pageContext.findAttribute("page");
+											int pageNum = (int) pageContext.findAttribute("page");
 									%>
 
 									<c:if test="${AllRooms.trainingId==1}">
@@ -130,10 +160,15 @@
 									<c:if test="${AllRooms.trainingId!=1}">
 										<tr>
 											<td>${count}</td>
-											<td><fmt:formatNumber value="${AllRooms.trainingId}" pattern="000000" /></td>
+											<td><fmt:formatNumber value="${AllRooms.trainingId}"
+													pattern="000000" /></td>
 											<td><a href="home?page=<%=pageNum%>">${AllRooms.trainingName}</a></td>
-											<td><button id="change:<%=pageNum%>" class="btn btn-primary change">変更</button></td>
-											<td><button id="delete:<%=pageNum%>" class="btn btn-danger delete">削除</button></td>
+											<td><button id="change:<%=pageNum%>"
+													class="btn btn-primary change">変更</button></td>
+											<td><button id="delete:<%=pageNum%>"
+													class="btn btn-danger delete">削除</button></td>
+
+
 										</tr>
 									</c:if>
 
@@ -162,11 +197,13 @@
 					元に戻すことは出来ません<br> 削除しますか？
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal"
+						id="notdel">キャンセル</button>
+					<form action="trainingDelete">
+						<input type="hidden" id="hiddenPg" value="aaa" name="hiddenName">
+						<input type="submit" class="btn btn-danger" id="deldel" value="削除">
+					</form>
 
-					<input type="button" class="btn btn-danger" onclick="location.href='trainingDelete';">削除</button>
-
- 					<button type="button" class="btn btn-danger" onclick="location.href='trainingDelete';">削除</button>
 
 				</div>
 			</div>
@@ -186,7 +223,13 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
-					<button type="button" class="btn btn-primary" >削除</button>
+					<form action="trainingInsert">
+						<input type="hidden" id="newNames" value="aaa" name="newName">
+						<input type="hidden" id="newPros" value="aaa" name="newPro">
+						<input type="submit" class="btn btn-primary" id="insert"
+							value="登録">
+					</form>
+
 				</div>
 			</div>
 		</div>

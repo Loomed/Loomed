@@ -6,5 +6,9 @@ import jp.co.example.entity.Trainings;
 
 public interface TrainingConfigService {
 
-	public  List<Trainings> AllTrainings();
+	public List<Trainings> AllTrainings();
+
+	void InsTrainings(int pro, String name);
+
+	void DelTrainings(int id);
 }

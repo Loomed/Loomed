@@ -18,4 +18,6 @@ public interface UsersDao {
 	public List<Users> FindRoomMember(int roomId);
 
 	List<Users> fingAllUsers();
+
+	List<Users> findAuthUsers(int authority);
 }

@@ -66,6 +66,7 @@
 						return text.substr(0, text.length - 2);
 					}
 				});
+
 	});
 </script>
 
@@ -97,25 +98,41 @@
 								<div id="collapseOne" class="panel-collapse collapse"
 									role="tabpanel" aria-labelledby="headingOne">
 									<div class="panel-body">
-										<form id="changeForm" class="form-horizontal" action="mail"
+										<form id="submitForm" class="form-horizontal" action="mail"
 											method="post">
 											<div class="form-group has-feedback">
 												<label for="inputName" class="control-label"> <span
 													class="label label-danger"></span> 宛先
-												</label><br>
-
-												<select id="receptionUserIds" name="receptionUserIds" multiple size="7">
-													<optgroup label="講師">
-														<option value="1">項目1</option>
-														<option value="2">項目2</option>
-														<option value="3">項目3</option>
-													</optgroup>
-													<optgroup label="生徒">
-														<option value="4">項目4</option>
-														<option value="5">項目5</option>
-														<option value="6">項目6</option>
-														<option value="7">項目7</option>
-													</optgroup>
+												</label><br> <select id="receptionUserIds"
+													name="receptionUserIds" multiple size="7">
+													<c:if test="${auth0.size() > 0 }">
+														<optgroup label="ルートユーザ">
+															<c:forEach var="user" items="${auth0}">
+																<option value="${user.userId}">${user.userName}</option>
+															</c:forEach>
+														</optgroup>
+													</c:if>
+													<c:if test="${auth1.size() > 0 }">
+														<optgroup label="講師">
+															<c:forEach var="user" items="${auth1}">
+																<option value="${user.userId}">${user.userName}</option>
+															</c:forEach>
+														</optgroup>
+													</c:if>
+													<c:if test="${auth2.size() > 0 }">
+														<optgroup label="担当者">
+															<c:forEach var="user" items="${auth2}">
+																<option value="${user.userId}">${user.userName}</option>
+															</c:forEach>
+														</optgroup>
+													</c:if>
+													<c:if test="${auth3.size() > 0 }">
+														<optgroup label="研修生">
+															<c:forEach var="user" items="${auth3}">
+																<option value="${user.userId}">${user.userName}</option>
+															</c:forEach>
+														</optgroup>
+													</c:if>
 												</select> <span class="glyphicon form-control-feedback"
 													aria-hidden="true"></span>
 												<div class="help-block with-errors"></div>
@@ -132,8 +149,10 @@
 												<div class="help-block with-errors"></div>
 											</div>
 
-											<input type="hidden" id="transmissionUserId" name="transmissionUserId" value="<c:out value="${loginuser.userId}" />">
-											<input type="hidden" id="mailContents" name="mailContents" value="">
+											<input type="hidden" id="transmissionUserId"
+												name="transmissionUserId"
+												value="<c:out value="${loginuser.userId}" />"> <input
+												type="hidden" id="mailContents" name="mailContents" value="">
 										</form>
 										<div class="form-group has-feedback">
 											<ul class="nav nav-tabs">
@@ -148,8 +167,8 @@
 													<label for="inputName" class="control-label"> <span
 														class="label label-danger"></span> 本文
 													</label>
-													<textarea rows="10"  class="form-control"
-														id="inputContent" name="inputName" placeholder="本文"
+													<textarea rows="10" class="form-control" id="inputContent"
+														name="inputName" placeholder="本文"
 														data-required-error="本文が未入力です" required /></textarea>
 
 												</div>
@@ -203,8 +222,9 @@
 											<div class="help-block with-errors"></div>
 										</div>
 
+										<input type="hidden" id="sendType" value="tab1" />
 										<div class="form-group">
-											<button type="submit" class="btn btn-primary" id="submit">送信</button>
+											<button class="btn btn-primary" id="submit">送信</button>
 										</div>
 
 										<!--　入力フォーム -->
@@ -217,22 +237,27 @@
 							<div class="panel-heading">
 								<h3 class="panel-title">
 									受信ボックス
-									<div class="btn-group" data-toggle="buttons">
-										<label class="btn btn-default active"> <input
-											type="radio" name="options" id="option1" autocomplete="off">
-											マイボックス
-										</label> <label class="btn btn-default"> <input type="radio"
-											name="options" id="option2" autocomplete="off">
-											すべてのメール
-										</label>
-									</div>
+									<form:form modelAttribute="watchForm" id="watchForm">
+										<div class="btn-group" data-toggle="buttons">
+											<label
+												class="btn btn-default <c:if test="${flag == false}">active</c:if>">
+												<input type="radio" name="allMail" id="myMail" value="false" />
+												マイボックス
+											</label> <label
+												class="btn btn-default <c:if test="${flag == true}">active</c:if>">
+												<input type="radio" name="allMail" id="allMail" value="true" />
+												すべてのメール
+											</label>
+										</div>
+									</form:form>
 								</h3>
 							</div>
 
 							<div class="panel-body">
 								<c:forEach var="mail" items="${mails}" varStatus="status">
 									<!--　アコーディオン用パネルグループ -->
-									<form:form modelAttribute="deleteForm">
+									<form:form modelAttribute="deleteForm"
+										id="deleteForm${status.index}" submit-flag="false">
 										<div class="panel-group" role="tablist"
 											aria-multiselectable="true">
 											<div class="panel panel-default">
@@ -248,7 +273,7 @@
 															type="hidden" id="openFlag" name="openFlag"
 															value="<c:out value="${mail.openFlag }" />">
 														<button type="submit" class="btn btn-danger delete"
-															data-toggle="modal" data-target="#modal-example">削除</button>
+															data-toggle="modal" data-target="#deleteModal">削除</button>
 
 													</h4>
 												</div>
@@ -270,39 +295,103 @@
 			</div>
 		</div>
 
-
-		<!-- 2.モーダルの配置 -->
-		<div class="modal" id="modal-example" tabindex="-1">
+		<!-- モーダル・ダイアログ -->
+		<div class="modal fade" id="sampleModal" tabindex="-1">
 			<div class="modal-dialog">
-
-				<!-- 3.モーダルのコンテンツ -->
 				<div class="modal-content">
-					<!-- 4.モーダルのヘッダ -->
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">
-							<span aria-hidden="true">&times;</span>
+							<span>×</span>
 						</button>
-						<h4 class="modal-title" id="modal-label">削除確認</h4>
+						<h4 class="modal-title">削除確認</h4>
 					</div>
-					<!-- 5.モーダルのボディ -->
 					<div class="modal-body">
 						元に戻すことは出来ません <br>削除しますか？
 					</div>
-					<!-- 6.モーダルのフッタ -->
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
-						<a href="messageDelete">
-							<button type="button" class="btn btn-danger">削除</button>
-						</a>
+						<button type="button" class="btn btn-danger" id="delBtn">削除</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<script>
-		$('#submit').on('click', function () {
-			$('#mailContents').val($('#inputContent').val());
-			$('#changeForm').submit();
+		// 		$(function() {
+		// 			$('#deleteModal').addClass("");
+		// 		});
+
+		$('input[name="allMail"]:radio').change(function() {
+			$('#watchForm').submit();
+		});
+
+		$('a[href="#tab1"]').click(function() {
+			$('#sendType').val("tab1");
+		});
+
+		$('a[href="#tab2"]').click(function() {
+			$('#sendType').val("tab2");
+		});
+
+		$('a[href="#tab3"]').click(function() {
+			$('#sendType').val("tab3");
+		});
+
+		$('a[href="#tab4"]').click(function() {
+			$('#sendType').val("tab4");
+		});
+
+		$('#submit').click(
+				function() {
+					switch ($('#sendType').val()) {
+					case 'tab1':
+						$('#mailContents').val($('#inputContent').val());
+						break;
+					case 'tab2':
+						$('#mailContents')
+								.val(
+										"遅刻報告 : \n到着時間 : "
+												+ $('#inputTime').val()
+												+ "\n遅刻理由 : "
+												+ $('#inputReason').val());
+						break;
+					case 'tab3':
+						$('#mailContents').val(
+								"欠席報告 : \n欠席理由 : " + $('#inputReason2').val());
+						break;
+					case 'tab4':
+						$('#mailContents').val(
+								"残業報告 : \n残業時間 : " + $('#inputTime2').val()
+										+ "\n残業理由 : "
+										+ $('#inputReason3').val());
+						break;
+					}
+
+					$('#submitForm').submit();
+				});
+
+		var id = "";
+
+		$("[ id ^= 'deleteForm' ]").submit(function() {
+
+			id = "#" + $(this).attr("id");
+			console.log("test " + $(id).attr('submit-flag'));
+
+			$('#sampleModal').modal('toggle');
+			if ($(this).attr('submit-flag') == 'false') {
+				console.log("comming");
+				return false;
+			}
+		});
+
+		$('#delBtn').click(function() {
+			console.log(id);
+			$(id).attr('submit-flag', 'true');
+			$(id).submit();
+		});
+
+		$('#deleteModal').on('show.bs.modal', function(e) {
+			$(id).attr('submit-flag', 'false');
 		});
 	</script>
 </body>
