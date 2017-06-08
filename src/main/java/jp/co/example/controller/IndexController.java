@@ -29,8 +29,10 @@ public class IndexController {
 	HttpServletRequest request;
 
 	@RequestMapping("/index")
-	public String getIndex(HttpServletRequest request, HttpSession session) {
+	public String getIndex(HttpSession session) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+
+		session.removeAttribute(ScopeKey.LOGINROOM.getScopeKey());
 
 		//int LoginId = 0;
 		//String LoginPass = "";
@@ -67,7 +69,7 @@ public class IndexController {
 		log.info(LogEnum.IF.getLogValue() + "LoginUser == null");
 		if (LoginUser == null) {
 			log.info(LogEnum.TRUE.getLogValue() + "/login");
-			return "/login";
+			return "redirect:/login";
 		} else {
 			log.info(LogEnum.FALSE.getLogValue() + "MapsよりRoom番号をうけとる");
 			// 教室判定

@@ -67,15 +67,15 @@ public class TrainingConfigController {
 	// 登録
 		@RequestMapping(value = "/trainingInsert")
 		public String getInsert(HttpServletRequest request, HttpSession session,
-				@RequestParam int newPro, @RequestParam String newName) {
+				@RequestParam int newPro, @RequestParam String newName, @RequestParam String newInfo) {
 			log.info(Util.getMethodName() + LogEnum.START.getLogValue());
-			log.info(newPro + ":" + newName);
+			log.info(newPro + ":" + newName+ ":" + newInfo);
 
 
 //			String param = request.getParameter("param");
 //			System.out.println(param);
 
-			tcs.InsTrainings(newPro, newName);
+			tcs.InsTrainings(newPro, newName, newInfo);
 
 			log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 			return "forward:trainingConfig";

@@ -14,6 +14,8 @@
 <script>
 	$(function() {
 		$('.delete').click(function() {
+			var pro =$(':hidden[name="updateid"]').val();
+			$(':hidden[name="deleteid"]').val(pro);
 			$('#configDeleteModal').modal();
 		});
 		$('.change').click(function() {
@@ -26,17 +28,17 @@
 	});
 </script>
 <script type="text/javascript">
-  window.onload = function() {
-    document.getElementById("insert").disabled = true;
-  }
-  function selectFile() {
-    if (document.getElementById("upload_file").value === "") {
-      document.getElementById("insert").disabled = true;
-    }
-    else {
-      document.getElementById("insert").disabled = false;
-    }
-  }
+	window.onload = function() {
+		document.getElementById("insert").disabled = true;
+	}
+	function selectFile() {
+		if (document.getElementById("upload_file").value === "") {
+			document.getElementById("insert").disabled = true;
+		} else {
+			document.getElementById("insert").disabled = false;
+		}
+	}
+
 </script>
 <script>
 	//主処理部
@@ -65,7 +67,11 @@
 							processData : false,
 							contentType : false,
 						}).done(function(data) { // Ajax通信が成功した時の処理
+
 							alert(data);
+						    setInterval(function(){
+						        location.reload();
+						    }, 2000);
 						}).fail(
 								function(XMLHttpRequest, textStatus,
 										errorThrown) { // Ajax通信が失敗した時の処理
@@ -131,10 +137,10 @@
 															<!-- アップロードするファイルを定義していく -->
 														</select>
 														<p>※ファイルサイズは1MBまでです。</p>
-														 <label class="input-group-btn"> <span
+														<label class="input-group-btn"> <span
 															class="btn btn-default"> ファイル選択<input type="file"
 																id="upload_file" name="upload_file"
-																 onchange="selectFile()" style="display:none">
+																onchange="selectFile()" style="display: none">
 														</span>
 														</label>
 														<!--<input type="text" class="form-control" readonly>-->
@@ -147,8 +153,8 @@
 												</p>
 												<div class="col-sm-10">
 													<div class="radio-inline">
-														<input type="radio" value="1" name="rad">
-														<label for="man">表示</label>
+														<input type="radio" value="1" name="rad"> <label
+															for="man">表示</label>
 													</div>
 													<div class="radio-inline">
 														<input type="radio" value="2" name="rad"> <label
@@ -159,7 +165,8 @@
 											<div class="form-group">
 												<div class="col-sm-offset-1 col-sm-10">
 													<input type="hidden" name="dummy">
-													<button type="submit" id="insert" class="btn btn-primary btn-block">登録</button>
+													<button type="submit" id="insert"
+														class="btn btn-primary btn-block">登録</button>
 												</div>
 											</div>
 										</form>
@@ -185,26 +192,42 @@
 									<tbody>
 										<!-- ここからリスト処理 -->
 
-										<tr>
+										<c:forEach var="list" items="${sessionScope.list}"
+											varStatus="status">
+											<tr>
 
-											<th>1</th>
-											<th><a>04月11日_Webサイト制作_HTML/CSS</a></th>
-											<th>4月11日</th>
-											<th>
-												<div class="form-group">
-													<form action="shareupdate" method="post">
-														<input type="radio" name="r1" value="表示" checked>
-														表示 <input type="radio" name="r1" value="非表示"> 非表示
-														<input type="hidden" name="updateid" value="">
-														<button class="btn btn-primary">更新</button>
-													</form>
-												</div>
-											</th>
-											<th>
-												<button class="btn btn-danger delete">削除</button>
-											</th>
+												<th>${list.shareId}</th>
+												<th><a>${list.title}</a></th>
+												<th>${list.uploadDate}</th>
+												<th>
+													<div class="form-group">
 
-										</tr>
+														<c:choose>
+															<c:when test="${list.visible == 'true'}">
+																<c:set var="r1">checked</c:set>
+															</c:when>
+															<c:otherwise>
+																<c:set var="r2">checked</c:set>
+															</c:otherwise>
+														</c:choose>
+														<form action="sharechange" method="post">
+															<input type="radio" id="0" name="r1" value="1"
+																<c:out value="${r1}" />> 表示 <input type="radio"
+																id="1" name="r1" value="2" <c:out value="${r2}" />>
+															非表示
+															<input type="hidden" name="updateid"
+													value="${list.shareId}">
+															<button type="submit" name="btn" value="1"
+																class="btn btn-primary">更新</button>
+														</form>
+													</div>
+
+												</th>
+												<th>
+													<button type="submit" name="btn" value="2"
+														class="btn btn-danger delete">削除</button></th>
+											</tr>
+										</c:forEach>
 									</tbody>
 								</table>
 							</div>
@@ -226,6 +249,7 @@
 									<button type="button" class="btn btn-default"
 										data-dismiss="modal">キャンセル</button>
 									<form action="sharedelete" method="post">
+										<input type="hidden" name="deleteid" value="">
 										<button type="submit" name="delete" value="delete"
 											class="btn btn-danger">削除</button>
 									</form>
