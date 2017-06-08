@@ -34,6 +34,10 @@ table>td>input {
 					$('#roomNames').val(roomName);
 					$('#newNames_01').text(roomName);
 
+					var info = $('#inputInfo').val();
+					$('#newInfo').val(info);
+					$('#newInfo_01').text(info);
+
 					$('#change-modal').modal();
 				});
 
@@ -85,6 +89,14 @@ table>td>input {
 								</div>
 							</div>
 							<div class="form-group">
+								<label for="inputInfo" class="col-sm-3 control-label">教室情報</label>
+								<div class="col-sm-9">
+									<textarea class="form-control" id="inputInfo" name="inputInfo" required>${LookRoom.trainingInfo }</textarea>
+									<!--<input type="text" class="form-control" id="inputTrainingName" name="roomName"
+										value="${LookRoom.trainingName}" required>-->
+								</div>
+							</div>
+							<div class="form-group">
 								<div class="col-sm-offset-1 col-sm-10">
 									<button type="button" class="btn btn-default"
 										onclick="location.href='trainingConfig';">前の画面に戻る</button>
@@ -120,13 +132,16 @@ table>td>input {
 					<div>
 						プロジェクタ数：<span id="newPros_01"></span>
 					</div>
+					<div>
+						教室情報：<span id="newInfo_01"></span>
+					</div>
 					<br>
 					お間違いがなければ[OK]ボタンを押してください
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
 					<form action="trainingChangeInsert">
-
+						<input type="hidden" id="newInfo" value="#" name="newInfo">
 						<input type="hidden" id="roomNames" value="aaa" name="roomName">
 						<input type="hidden" id="newPros" value="aaa" name="newPro">
 						<input type="submit" class="btn btn-primary" id="update"

@@ -14,6 +14,8 @@
 <script>
 	$(function() {
 		$('.delete').click(function() {
+			var pro =$(':hidden[name="updateid"]').val();
+			$(':hidden[name="deleteid"]').val(pro);
 			$('#configDeleteModal').modal();
 		});
 		$('.change').click(function() {
@@ -36,6 +38,7 @@
 			document.getElementById("insert").disabled = false;
 		}
 	}
+
 </script>
 <script>
 	//主処理部
@@ -64,7 +67,11 @@
 							processData : false,
 							contentType : false,
 						}).done(function(data) { // Ajax通信が成功した時の処理
+
 							alert(data);
+						    setInterval(function(){
+						        location.reload();
+						    }, 2000);
 						}).fail(
 								function(XMLHttpRequest, textStatus,
 										errorThrown) { // Ajax通信が失敗した時の処理
@@ -184,7 +191,9 @@
 									</thead>
 									<tbody>
 										<!-- ここからリスト処理 -->
-										<c:forEach var="list" items="${sessionScope.list}" varStatus="status">
+
+										<c:forEach var="list" items="${sessionScope.list}"
+											varStatus="status">
 											<tr>
 
 												<th>${list.shareId}</th>
@@ -192,28 +201,31 @@
 												<th>${list.uploadDate}</th>
 												<th>
 													<div class="form-group">
+
+														<c:choose>
+															<c:when test="${list.visible == 'true'}">
+																<c:set var="r1">checked</c:set>
+															</c:when>
+															<c:otherwise>
+																<c:set var="r2">checked</c:set>
+															</c:otherwise>
+														</c:choose>
 														<form action="sharechange" method="post">
-															<c:choose>
-																<c:when test="${list.visible == 'true'}">
-																	<c:set var="r1">checked</c:set>
-																</c:when>
-																<c:otherwise>
-																	<c:set var="r2">checked</c:set>
-																</c:otherwise>
-															</c:choose>
-															<input type="radio" id="0" name="r1" value="1"  <c:out value="${r1}" /> > 表示 <input
-																type="radio" id="1" name="r1" value="2"   <c:out value="${r2}" />> 非表示
+															<input type="radio" id="0" name="r1" value="1"
+																<c:out value="${r1}" />> 表示 <input type="radio"
+																id="1" name="r1" value="2" <c:out value="${r2}" />>
+															非表示
+															<input type="hidden" name="updateid"
+													value="${list.shareId}">
 															<button type="submit" name="btn" value="1"
 																class="btn btn-primary">更新</button>
-
+														</form>
 													</div>
+
 												</th>
 												<th>
-												<input
-																type="hidden" name="updateid" value="${list.shareId}">
 													<button type="submit" name="btn" value="2"
-														class="btn btn-danger delete">削除</button>
-												</th>
+														class="btn btn-danger delete">削除</button></th>
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -237,7 +249,7 @@
 									<button type="button" class="btn btn-default"
 										data-dismiss="modal">キャンセル</button>
 									<form action="sharedelete" method="post">
-									<input type="hidden" name="deleteid" value="${list.shareId}">
+										<input type="hidden" name="deleteid" value="">
 										<button type="submit" name="delete" value="delete"
 											class="btn btn-danger">削除</button>
 									</form>
