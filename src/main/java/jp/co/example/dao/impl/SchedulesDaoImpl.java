@@ -21,7 +21,7 @@ public class SchedulesDaoImpl implements SchedulesDao {
 	private static final String SQL_SELECT_SCHEDULES_WHERE_USERID_AND_DATE =
 			"SELECT * FROM schedules WHERE user_id = ? AND upload_datetime BETWEEN ? AND ? ORDER BY upload_datetime";
 	private static final String SQL_SELECT_SCHEDULES_WHERE_IMPORTANT =
-			"SELECT * FROM schedules WHERE important = true ORDER BY upload_datetime desc";
+			"SELECT * FROM schedules WHERE important = true AND user_id = 1 AND user_id = 2 ORDER BY upload_datetime ";
 	private static final String SQL_UPDATE_WHERE_SCHEDULEID =
 			"UPDATE schedules SET schedule_contents = ?, upload_datetime = ?, important = ? WHERE schedule_id = ?";
 	private static final String SQL_DELETE_WHERE_SCHEDULEID =

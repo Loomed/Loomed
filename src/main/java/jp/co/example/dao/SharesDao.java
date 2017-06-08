@@ -8,12 +8,12 @@ import jp.co.example.entity.Trainings;
 
 public interface SharesDao {
 
-	public void insertFilepass(Trainings tra, StringBuffer filePath,Timestamp upload, String filename, boolean radio);
-
 	public List<Shares> selectlist(Integer trainingid);
 
 	public void changeVisible(int id, boolean visible);
 
 	public void deleteShare(int id);
+
+	public void insertFilepass(Trainings tra, String filePath, Timestamp upload, String filename, boolean radio);
 
 }

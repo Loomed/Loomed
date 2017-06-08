@@ -6,7 +6,7 @@ import jp.co.example.entity.Shares;
 import jp.co.example.entity.Trainings;
 
 public interface ShareService {
-	public void InsertFile(Trainings tra, StringBuffer filePath,String filename, boolean radio);
+	public void InsertFile(Trainings tra, String dlpath,String filename, boolean radio);
 
 	public List<Shares> selectlist(Integer trainingid);
 
