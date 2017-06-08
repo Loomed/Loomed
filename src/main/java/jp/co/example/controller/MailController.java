@@ -51,7 +51,7 @@ public class MailController {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
 		log.info("delete");
-		//mailService.delete(mailDeleteForm);
+		mailService.delete(mailDeleteForm);
 
 		log.info("insert");
 		log.info("insert myid : " + mailInsertForm.getTransmissionUserId());
@@ -59,7 +59,7 @@ public class MailController {
 		log.info("insert title: " + mailInsertForm.getMailTitle());
 		log.info("insert ctxt : " + mailInsertForm.getMailContents());
 
-		mailService.insert(mailInsertForm);
+		//mailService.insert(mailInsertForm);
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return JspPage.MAIL.getPageName();
