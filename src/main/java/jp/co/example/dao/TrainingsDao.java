@@ -15,4 +15,6 @@ public interface TrainingsDao {
 	int InsTraining(int pro,String name,int TraMaxNum);
 
 	int DelTraining(int id);
+
+	int UpdTraining(int id,String name,int pro);
 }
