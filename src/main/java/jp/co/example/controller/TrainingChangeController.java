@@ -53,13 +53,15 @@ public class TrainingChangeController {
 	}
 
 	@RequestMapping("/trainingChangeInsert")
-	public String getTrainingChangeInsert(HttpServletRequest request, HttpSession session,@RequestParam String newPro, @RequestParam String roomName) {
+	public String getTrainingChangeInsert(HttpServletRequest request, HttpSession session,@RequestParam String newPro, @RequestParam String roomName,@RequestParam String newInfo) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
 		session.getAttribute("LookRoom");
 		int tes = ((Trainings)session.getAttribute("LookRoom")).getTrainingId();
 
-		tcs.UpdTrainings(tes, roomName, Integer.valueOf(newPro));
+		log.info(newPro + ":" + roomName+ ":" + newInfo+ ":" + tes);
+
+		tcs.UpdTrainings(tes, roomName, Integer.valueOf(newPro), newInfo);
 /*
 		// 研修教室一覧受け取り
 		List<Trainings> AllTrainings = tcs.AllTrainings();

@@ -28,11 +28,11 @@ public class TrainingChangeServiceImpl implements TrainingChangeService{
 	}
 
 	@Override
-	public void UpdTrainings(int id,String name,int pro) {
+	public void UpdTrainings(int id,String name,int pro, String info) {
 
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
-		int res = TrainingsDao.UpdTraining(id,name,pro);
+		int res = TrainingsDao.UpdTraining(id,name,pro,info);
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 	}
