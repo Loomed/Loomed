@@ -58,7 +58,7 @@ public class ScheduleController {
 		// ユーザデータ
 
 		// ルート
-		user = new Users(1, "pass", "山田 太郎", 1, 0);
+		//user = new Users(1, "pass", "山田 太郎", 1, 0);
 		// user = new Users(2, "pass", "山田 次郎", 1, 0);
 		// 講師
 		// user = new Users(3, "pass", "山田 三郎", 1, 1);
@@ -68,15 +68,15 @@ public class ScheduleController {
 		// user = new Users(6, "test", "高橋 六郎", 3, 3);
 		// user = new Users(9, "test", "田代 治行", 6, 3);
 		// 生徒
-		// user = new Users(12, "test", "内田 初美", 2, 3);
+		user = new Users(12, "test", "内田 初美", 2, 3);
 		// user = new Users(13, "test", "吉野 成夫", 2, 3);
 		// user = new Users(14, "test", "角野 一人", 3, 3);
 		// user = new Users(15, "test", "浅野 季孝", 3, 3);
 		// user = new Users(16, "test", "新谷 利人", 4, 3);
 
 		// 教室データ
-		room = new Trainings(1, "全体管理", 0, "");
-		// room = new Trainings(2, "Java研修", 2, "");
+		//room = new Trainings(1, "全体管理", 0, "");
+		room = new Trainings(2, "Java研修", 2, "");
 		// room = new Trainings(3, "PHP研修", 3, "");
 		// room = new Trainings(4, "ビジネスマナー研修", 1, "");
 		// room = new Trainings(5, "セキュリティ講座", 1, "");
@@ -86,26 +86,12 @@ public class ScheduleController {
 
 		session.setAttribute(ScopeKey.LOGINUSER.getScopeKey(), user);
 		session.setAttribute(ScopeKey.LOGINROOM.getScopeKey(), room);
-		log.info(room.toString());
+		//log.info(room.toString());
 
-		// ユーザー情報を確認(未完成)
-		log.info(LogEnum.IF.getLogValue() + "user == null");
-		if (user == null) {
-			log.info(LogEnum.TRUE.getLogValue());
-
-			// ログインへ戻る処理を書く
-		} else {
-			log.info(LogEnum.FALSE.getLogValue());
-		}
-
-		// 部屋情報を確認(未完成)
-		log.info(LogEnum.IF.getLogValue() + "room == null");
-		if (room == null) {
-			log.info(LogEnum.TRUE.getLogValue());
-
-			// インデックスへ戻る処理を書く
-		} else {
-			log.info(LogEnum.FALSE.getLogValue());
+		//データチェック
+		String page = util.Util.sessionDataCheck(user, room);
+		if(page != null) {
+			return page;
 		}
 
 		// スケジュールを取得
