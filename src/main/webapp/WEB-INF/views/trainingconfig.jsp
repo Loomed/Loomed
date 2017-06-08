@@ -32,6 +32,10 @@
 			var roomName = $("[name=roomName]").val();
 			$('#newNames').val(roomName);
 
+
+			$('#newInfo').val($('#inputInfo').val());
+			console.log($('#newInfo').val());
+
 			$('#insertModal').modal();
 		});
 
@@ -117,6 +121,14 @@
 														<option>5</option>
 														<option>6</option>
 													</select>
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="inputInfo" class="col-sm-3 control-label">教室情報</label>
+												<div class="col-sm-9">
+													<textarea id="inputInfo" class="form-control" required></textarea>
+													<!--<input type="text" class="form-control" id="inputPassword"
+														name="roomName" required>-->
 												</div>
 											</div>
 											<div class="form-group">
@@ -226,6 +238,7 @@
 					<form action="trainingInsert">
 						<input type="hidden" id="newNames" value="aaa" name="newName">
 						<input type="hidden" id="newPros" value="aaa" name="newPro">
+						<input type="hidden" id="newInfo" value="#" name="newInfo">
 						<input type="submit" class="btn btn-primary" id="insert"
 							value="登録">
 					</form>
