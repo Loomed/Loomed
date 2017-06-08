@@ -54,7 +54,10 @@ public class ScheduleController {
 		Trainings room = (Trainings) session.getAttribute(ScopeKey.LOGINROOM.getScopeKey());
 
 		// テストデータ
+		//ルート
 		user = new Users(1, "pass", "山田 太郎", 1, 0);
+		//生徒
+		//user = new Users(12, "test", "内田 初美", 2, 3);
 		room = new Trainings(2, "Java研修", 2, "");
 		session.setAttribute(ScopeKey.LOGINUSER.getScopeKey(), user);
 		session.setAttribute(ScopeKey.LOGINROOM.getScopeKey(), room);
@@ -199,8 +202,18 @@ public class ScheduleController {
 	 * @return
 	 */
 	@RequestMapping(value = "/projectorReserve", method = RequestMethod.POST)
-	public String projectorReserve(RedirectAttributes redirectAttributes, HttpSession session) {
+	public String projectorReserve(RedirectAttributes redirectAttributes, HttpSession session,
+			@RequestParam("userId") String userId,
+			@RequestParam("number") String number,
+			@RequestParam("time") String time,
+			@RequestParam("content") String content) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+		log.info(userId + number + time + content);
+
+		Integer trainingId = ((Trainings)session.getAttribute(ScopeKey.LOGINROOM.getScopeKey())).getTrainingId();
+		String date = (String) session.getAttribute(ScopeKey.SCHEDULE_DATE.getScopeKey());
+
+		ss.projectorReserve(trainingId, number, userId, date, time, content);
 
 		redirectAttributes.addAttribute(redirectKeyDate, session.getAttribute(ScopeKey.SCHEDULE_DATE.getScopeKey()));
 
@@ -216,9 +229,12 @@ public class ScheduleController {
 	 * @return
 	 */
 	@RequestMapping(value = "/projectorReserveRelease", method = RequestMethod.POST)
-	public String projectorReserveRelease(RedirectAttributes redirectAttributes, HttpSession session) {
+	public String projectorReserveRelease(RedirectAttributes redirectAttributes, HttpSession session,
+			@RequestParam("projectorId") String projectorId) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+		log.info(projectorId);
 
+		ss.projectorReserveRelease(projectorId);
 		redirectAttributes.addAttribute(redirectKeyDate, session.getAttribute(ScopeKey.SCHEDULE_DATE.getScopeKey()));
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
@@ -298,7 +314,7 @@ public class ScheduleController {
 		Integer trainingId = ((Trainings) session.getAttribute(ScopeKey.LOGINROOM.getScopeKey())).getTrainingId();
 		Integer userId = ((Users) session.getAttribute(ScopeKey.LOGINUSER.getScopeKey())).getUserId();
 
-		List<ReserveUserNameForm> list = ss.getReserveUserNameJson(trainingId, userId);
+		List<ReserveUserNameForm> list = ss.getReserveUserNameJson(userId, trainingId);
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return list;

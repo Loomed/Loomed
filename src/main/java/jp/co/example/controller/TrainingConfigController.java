@@ -46,9 +46,13 @@ public class TrainingConfigController {
 
 
 	// 削除
-	@RequestMapping(value = "/trainingdelete")
-	public String getDelete() {
+	@RequestMapping(value = "/trainingDelete")
+	public String getDelete(HttpServletRequest request, HttpSession session) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+
+		String param = request.getParameter("param");
+		System.out.println(param);
+
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return JspPage.TRAININGCONFIG.getPageName();
 	}

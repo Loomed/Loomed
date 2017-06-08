@@ -8,8 +8,8 @@ import lombok.RequiredArgsConstructor;
 public enum Authority {
 	ROOT(0),//ルート
 	LECTURER(1),//講師
-	STUDENT(2),//生徒
-	CHARGE(3),//担当者
+	CHARGE(2),//担当者
+	STUDENT(3),//生徒
 	;
 
 	final int authority;

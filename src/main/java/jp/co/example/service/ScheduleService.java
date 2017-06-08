@@ -18,4 +18,8 @@ public interface ScheduleService {
 	int scheduleDelete(String scheduleId);
 
 	int scheduleInsert(Integer userId, String date, String hour, String minute, String content, String important);
+
+	int projectorReserveRelease(String projectorId);
+
+	int projectorReserve(Integer trainingId, String number, String userId, String date, String time, String content);
 }

@@ -21,7 +21,11 @@ public class ProjectorsDaoImpl implements ProjectorsDao{
 			"SELECT * FROM projectors WHERE training_id = ? AND reserve_time BETWEEN ? AND ? ORDER BY reserve_time, projector_number";
 	private static final String SQL_SELECT_PROJECTORS_WHERE_TRAININGID_AND_DATETIME =
 			"SELECT * FROM projectors WHERE training_id = ? AND reserve_time = ? ORDER BY reserve_time, projector_number";
-//
+	private static final String SQL_DELETE_WHERE_PROJECTORID =
+			"DELETE FROM projectors WHERE projector_id = ?";
+	private static final String SQL_INSERT_RESERVE =
+			"INSERT INTO projectors(training_id, projector_number, user_id, reserve_time) VALUES (?, ?, ?, ?)";
+
 	@Autowired
 	JdbcTemplate jt;
 
@@ -48,6 +52,30 @@ public class ProjectorsDaoImpl implements ProjectorsDao{
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return list;
+	}
+
+	@Override
+	public int deleteWhereProjectorId(Integer projectorId) {
+		// TODO 自動生成されたメソッド・スタブ
+		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+
+		int updateCount = jt.update(SQL_DELETE_WHERE_PROJECTORID, projectorId);
+
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
+		return updateCount;
+	}
+
+	@Override
+	public int insertProjectoReserve(Integer trainingId, Integer projectorNumber, Integer userId,
+			Timestamp reserveTime) {
+		// TODO 自動生成されたメソッド・スタブ
+		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+
+		int updateCount = jt.update(SQL_INSERT_RESERVE, trainingId, projectorNumber, userId, reserveTime);
+
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
+
+		return updateCount;
 	}
 
 }
