@@ -2,44 +2,180 @@ package jp.co.example.test.dao;
 
 import static org.junit.Assert.*;
 
+import java.util.*;
+
 import org.junit.*;
 import org.junit.runner.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.boot.test.context.*;
+import org.springframework.test.context.*;
 import org.springframework.test.context.junit4.*;
+import org.springframework.transaction.annotation.*;
 
+import jp.co.example.*;
 import jp.co.example.dao.*;
+import jp.co.example.entity.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Transactional
+@ContextConfiguration(classes = LoomedApplication.class)
 public class UsersDaoTset {
-//	Users findByIdAndPass(Integer userId, String password);
-//	Users findById(Integer userId);
-//
-//	int update(Integer userId, String password, String userName, Integer companyId, Integer authority);
-//
-//	public List<Users> FindMember(int roomId, int comId);
 
 	@Autowired
-	private UsersDao UsersDao;
+	private UsersDao usersDao;
 
 	@Test
-	public void メールが取得できる() throws Exception{
-		assertTrue(true);
+	public void テスト72() throws Exception {
+		Users user = usersDao.findByIdAndPass(1, "pass");
+
+		assertEquals("山田 太郎", user.getUserId());
+		assertEquals(Integer.valueOf(1), user.getCompanyId());
+		assertEquals(Integer.valueOf(0), user.getAuthority());
 	}
 
 	@Test
-	public void メールが取得できない() throws Exception{
-		assertTrue(true);
+	public void テスト73() throws Exception {
+		Users user = usersDao.findByIdAndPass(99, "pass99");
+
+		assertEquals(null, user);
 	}
 
 	@Test
-	public void 最新のメール数を取得できる() throws Exception{
-		assertTrue(true);
+	public void テスト74() throws Exception {
+		Users user = usersDao.findById(2);
+
+		assertEquals("山田 次郎", user.getUserId());
+		assertEquals(Integer.valueOf(1), user.getCompanyId());
+		assertEquals(Integer.valueOf(0), user.getAuthority());
 	}
 
 	@Test
-	public void 最新のメール数を取得できない() throws Exception{
-		assertTrue(true);
+	public void テスト75() throws Exception {
+		Users user = usersDao.findById(99);
+
+		assertEquals(null, user);
 	}
+
+	@Test
+	public void テスト76() throws Exception {
+		usersDao.udpatePass(5, "aaa");
+
+		Users user = usersDao.findById(5);
+		assertEquals("aaa", user.getPassword());
+	}
+	@Test
+	public void テスト77() throws Exception {
+		usersDao.udpatePass(5, null);
+
+		Users user = usersDao.findById(5);
+		assertEquals(null, user.getPassword());
+	}
+
+	@Test
+	public void テスト78() throws Exception {
+		usersDao.udpatePass(5, null);
+
+		Users user = usersDao.findById(5);
+		assertEquals(null, user.getPassword());
+	}
+
+	@Test
+	public void テスト79() throws Exception {
+		int cnt = usersDao.udpatePass(6, "12345678902234567890323456789042345これで50");
+
+		assertEquals(1, cnt);
+	}
+
+	@Test
+	public void テスト80() throws Exception {
+		int cnt = usersDao.udpatePass(7, "123456789022345678903234567890423456これで51");
+
+		assertEquals(0, cnt);
+	}
+
+	@Test
+	public void テスト81() throws Exception {
+		usersDao.udpatePass(8, "pppp");
+
+		Users user = usersDao.findById(8);
+		assertEquals("pppp", user.getPassword());
+	}
+
+	@Test
+	public void テスト82() throws Exception {
+		usersDao.updateAll(5, "aaa", "羽田 秀吉", 3, 3);
+
+		Users user = usersDao.findById(5);
+		assertEquals("aaa", user.getPassword());
+		assertEquals("羽田 秀吉", user.getUserName());
+		assertEquals(Integer.valueOf(3), user.getCompanyId());
+		assertEquals(Integer.valueOf(3), user.getAuthority());
+	}
+
+	@Test
+	public void テスト83() throws Exception {
+		usersDao.updateAll(6, null, null, null, null);
+
+		Users user = usersDao.findById(6);
+		assertEquals(null, user.getPassword());
+		assertEquals(null, user.getUserName());
+		assertEquals(null, user.getCompanyId());
+		assertEquals(null, user.getAuthority());
+	}
+
+	@Test
+	public void テスト84() throws Exception {
+		int cnt = usersDao.updateAll(6, "12345678902234567890323456789042345これで50", "山田 武", 2, 1);
+
+		assertEquals(1, cnt);
+	}
+
+	@Test
+	public void テスト85() throws Exception {
+		int cnt = usersDao.updateAll(7, "123456789022345678903234567890423456これで51", "山田 武", 2, 1);
+
+		assertEquals(0, cnt);
+	}
+
+	@Test
+	public void テスト86() throws Exception {
+		int cnt = usersDao.updateAll(99, "aaa", "世良 真純", 3, 3);
+
+
+		assertEquals(0, cnt);
+	}
+
+
+	@Test
+	public void テスト87() throws Exception {
+		List list = usersDao.FindCompMember();
+
+
+		assertEquals(25, list.size());
+	}
+
+	@Test
+	public void テスト88() throws Exception {
+		List list = usersDao.FindCompMember();
+
+
+		assertEquals(25, list.size());
+	}
+
+	@Test
+	public void テスト89() throws Exception {
+		List list = usersDao.FindRoomMember();
+
+
+		assertEquals(25, list.size());
+	}
+
+	@Test
+	public void テスト90() throws Exception {
+		List<Users> list = usersDao.fingAllUsers();
+
+		assertEquals(25, list.size());
+	}
+
 }
