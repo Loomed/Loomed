@@ -7,7 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MailsEx extends Mails {
-	private String receptionUserName;
+	private String transmissionUserName;
 
 	public MailsEx(Mails mail)
 	{

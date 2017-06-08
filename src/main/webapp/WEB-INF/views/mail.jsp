@@ -241,7 +241,7 @@
 														<a role="button" data-toggle="collapse"
 															data-parent="#accordion" href="#collapse${status.index}"
 															aria-expanded="true" aria-controls="collapse01"> 宛先:<c:out
-																value="${mail.transmissionUserId}" /> 件名:<c:out
+																value="${mail.transmissionUserName}" /> 件名:<c:out
 																value="${mail.mailTitle }" />
 														</a> <input type="hidden" id="mailId" name="mailId"
 															value="<c:out value="${mail.mailId }" />"> <input
