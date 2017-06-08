@@ -2,19 +2,19 @@ package jp.co.example.test.dao;
 
 import static org.junit.Assert.*;
 
-import java.util.*;
+import java.util.List;
 
-import org.junit.*;
-import org.junit.runner.*;
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.boot.test.context.*;
-import org.springframework.test.context.*;
-import org.springframework.test.context.junit4.*;
-import org.springframework.transaction.annotation.*;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
-import jp.co.example.*;
-import jp.co.example.dao.*;
-import jp.co.example.entity.*;
+import jp.co.example.LoomedApplication;
+import jp.co.example.dao.MailsDao;
+import jp.co.example.entity.Mails;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -26,7 +26,7 @@ public class MailsDaoTest {
 	MailsDao mailsDao;
 
 	@Test
-	public void テスト１() {
+	public void テスト16() {
 
 		List<Mails> mails = mailsDao.findByReUserId(3);
 
@@ -34,7 +34,7 @@ public class MailsDaoTest {
 	}
 
 	@Test
-	public void テスト2() {
+	public void テスト17() {
 
 		List<Mails> mails = mailsDao.findByReUserId(99);
 
@@ -42,11 +42,11 @@ public class MailsDaoTest {
 	}
 
 	@Test
-	public void テスト3() {
-		//
-		// Mails Mails = mailsDao.getNewMails(1);
-		//
-		// assertEquals(Integer.valueOf(1), Mails.getCompanyId());
+	public void テスト18() {
+//
+//		 Mails Mails = mailsDao.getNewMails(null);
+//
+//		 assertEquals(Integer.valueOf(1), Mails.getCompanyId());
 	}
 
 	@Test
