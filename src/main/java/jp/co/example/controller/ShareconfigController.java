@@ -55,6 +55,7 @@ public class ShareconfigController {
 		String upid = reques.getParameter("updateid");
 		String radio = reques.getParameter("r1");
 		List<Shares> list = new ArrayList<Shares>();
+		String btn = reques.getParameter("btn");
 		boolean visible = true;
 		int id =Integer.parseInt(upid);
 		if("1".equals(radio)){
@@ -62,8 +63,13 @@ public class ShareconfigController {
 		}else{
 			visible = false;
 		}
+		if("1".equals(btn)){
+			SS.changeVisible(id,visible);
+		}else{
+			SS.deleteShare(id);
+		}
 
-		SS.changeVisible(id,visible);
+
 		list = SS.selectlist(tra.getTrainingId());
 		session.setAttribute("list", list);
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());

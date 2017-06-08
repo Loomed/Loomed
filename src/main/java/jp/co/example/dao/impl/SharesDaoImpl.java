@@ -16,7 +16,7 @@ import jp.co.example.entity.Trainings;
 @Repository
 public class SharesDaoImpl implements SharesDao{
 	private final String INSERT_INTO_SHARES ="INSERT INTO SHARES(training_id,share_contents,upload_date,visible,title)VALUES(?,?,?,?,?)";
-	private final String SELECT_FROM_SHARES_ALL = "SELECT * FROM shares WHERE training_id =?";
+	private final String SELECT_FROM_SHARES_ALL = "SELECT * FROM shares WHERE training_id =? ORDER BY share_id DESC";
 	private final String UPDATE_SHARES_SET_VISIBLE = "UPDATE shares SET visible =? WHERE share_id = ?";
 	private final String DELETE_FROM_SHARES_WHERE ="DELETE FROM shares WHERE share_id = ?";
 	@Autowired

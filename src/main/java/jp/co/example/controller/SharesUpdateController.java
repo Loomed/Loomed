@@ -4,6 +4,8 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.Filter;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +21,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.support.MultipartFilter;
 
 import enums.LogEnum;
+import enums.RedirectController;
+import jp.co.example.entity.Shares;
 import jp.co.example.entity.Trainings;
 import jp.co.example.service.ShareService;
 import lombok.extern.slf4j.Slf4j;
@@ -38,6 +42,8 @@ public class SharesUpdateController {
 			HttpSession session, HttpServletRequest reques) throws IOException {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
+		List<Shares> list = new ArrayList<Shares>();
+
 		// ファイルが空の場合は異常終了
 		if (multipartFile.isEmpty()) {
 			return "/shareconfig";
@@ -52,12 +58,10 @@ public class SharesUpdateController {
 		} else {
 			rad = false;
 		}
-		// Trainings tra = (Trainings)
-		// session.getAttribute(ScopeKey.LOGINROOM.getScopeKey());
+		//Trainings tra = (Trainings)session.getAttribute(ScopeKey.LOGINROOM.getScopeKey());
 		// ファイル種類から決まる値をセットする
 		// ファイルパス
 		StringBuffer filePath = new StringBuffer("/uploadfile").append(File.separator).append(fileType);
-
 		Trainings tra = new Trainings(5, "セキュリティ講座", 1, "セキュリティ講座としてSEA/J資格受験");
 		// アップロードファイルを格納するディレクトリを作成する
 		File uploadDir = mkdirs(filePath);
@@ -70,7 +74,9 @@ public class SharesUpdateController {
 			uploadFileStream.write(bytes);
 			uploadFileStream.close();
 			SS.InsertFile(tra, path, filename, rad);
-			return "アップロード成功";
+			list = SS.selectlist(tra.getTrainingId());
+			session.setAttribute("list", list);
+			return "アップロードが成功しました。リスト更新のためしばらくお待ち下さい。";
 		} catch (Exception e) {
 			// 異常終了時の処理
 			return "エラー";
@@ -78,8 +84,9 @@ public class SharesUpdateController {
 			// 異常終了時の処理
 		}
 
+
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
-		return "/shareconfig";
+		return RedirectController.SHARECONFIG.getRedirectName();
 	}
 
 	/**

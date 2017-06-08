@@ -1,7 +1,6 @@
 package jp.co.example.service.impl;
 
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +13,7 @@ import jp.co.example.entity.Trainings;
 import jp.co.example.service.ShareService;
 @Service
 public class ShareServiceImpl implements ShareService{
-	private static final SimpleDateFormat SDF_DATETIME = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+
 	@Autowired
 	SharesDao sd;
 
