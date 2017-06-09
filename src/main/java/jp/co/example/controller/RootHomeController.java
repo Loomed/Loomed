@@ -41,7 +41,7 @@ public class RootHomeController {
 		// サービスへ
 		sl = SS.selectlist(1);
 		cnt = RHS.getNewMails(user);
-		list = RHS.getInpoSche();
+		list = RHS.getInpoSche(user);
 		//tr = HS.getTrainingName(training_id);
 		//メールの新着無しを処理してます
 		if (cnt.equals("0")) {

@@ -68,10 +68,12 @@ var downloadAsFile = function(content) {
 							<button type="submit" class="btn btn-primary btn-block"
 								onclick="location.href='member'" value="member">研修参加者一覧ページへ</button>
 						</p>
+						<c:if test="${loginuser.authority == 0 || loginuser.authority == 1 }">
 						<p>
 							<button type="submit" class="btn btn-primary btn-block"
 								onclick="location.href='shareconfig'">共有ファイルアップロード</button>
 						</p>
+						</c:if>
 					</div>
 					<div class="card">
 						<ul class="nav nav-tabs" role="tablist">
