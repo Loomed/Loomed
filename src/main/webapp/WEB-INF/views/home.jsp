@@ -183,7 +183,7 @@
 																<input type="hidden" name="title"
 																	value="${sl.shareContents}"> <a
 																	href="file:///c:${sl.shareContents}"
-																	download="${sl.shareContents}">${sl.title}</a>
+																	download="${sl.title}">${sl.title}</a>
 															</p>
 														</div>
 													</div>
