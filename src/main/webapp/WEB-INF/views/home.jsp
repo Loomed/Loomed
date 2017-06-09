@@ -36,6 +36,17 @@
 		a.click();
 	};
 </script>
+<script>
+$(function(){
+    $("a.download").on("click", function(e){
+        $target = $(e.target);
+        $target.attr({
+            download: "file.png",
+            href:  ""
+        });
+    });
+});
+</script>
 </head>
 
 <body>
@@ -91,9 +102,11 @@
 							<li role="presentation"><a aria-controls="home" role="tab"
 								data-toggle="tab"><i class="fa fa-envelope-o fa-5x"
 									style="margin-right: 20px; margin-left: 20px;"></i></a></li>
+									<!--
 							<p class="announcement-heading" style="margin-top: 10px;">
 								<span class="badge">${cnt}</span>
 							</p>
+							-->
 						</ul>
 						<a href="mail">
 							<div class="tab-content">
@@ -194,10 +207,11 @@
 
 															<div class="comment-post">
 																<p>
-																	<input type="hidden" name="title"
-																		value="${sl.shareContents}"> <a
-																		href="file:///c:${sl.shareContents}"
-																		download="${sl.title}">${sl.title}</a>
+																<input type="hidden" name="path"
+																value="${sl.shareContents}">
+																<input type="hidden" name="title" value="${sl.title}"> <a
+																href="file:///c:${sl.shareContents}"
+																download="${sl.shareContents}">${sl.title}</a>
 																</p>
 															</div>
 														</div>

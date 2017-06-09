@@ -97,9 +97,11 @@
 						<li role="presentation"><a aria-controls="home" role="tab"
 							data-toggle="tab"><i class="fa fa-envelope-o fa-5x"
 								style="margin-right: 20px; margin-left: 20px;"></i></a></li>
+								<!--
 						<p class="announcement-heading" style="margin-top: 10px;">
 							<span class="badge">${cnt}</span>
 						</p>
+						-->
 					</ul>
 					<a href="mail">
 						<div class="tab-content">
