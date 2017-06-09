@@ -51,7 +51,7 @@ public class UsersDaoImpl implements UsersDao {
 
 	@Override
 	public int updatePass(Integer userId, String password) {
-		return jdbcTemplate.update(UPDATE_PASS, password);
+		return jdbcTemplate.update(UPDATE_PASS, password, userId);
 	}
 
 	@Override
