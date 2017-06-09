@@ -21,6 +21,7 @@ import util.Util;
 @Controller
 @Slf4j
 public class CommonsController {
+	private static final int ROOTHOME_ID = 1;
 
 	/**
 	 * ロゴをクリックしたときに通るコントローラ
@@ -43,8 +44,15 @@ public class CommonsController {
 		}
 		redirect.addAttribute("page", room.getTrainingId());
 
-		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
-		return RedirectController.HOME.getRedirectName();
+		if (room.getTrainingId() == ROOTHOME_ID) {
+			//入った教室がルートホームだった場合
+			log.info(Util.getMethodName() + LogEnum.END.getLogValue());
+			return RedirectController.ROOTHOME.getRedirectName();
+		} else {
+			//それ以外
+			log.info(Util.getMethodName() + LogEnum.END.getLogValue());
+			return RedirectController.HOME.getRedirectName();
+		}
 
 	}
 }

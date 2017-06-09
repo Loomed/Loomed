@@ -104,7 +104,7 @@
 												<label for="inputName" class="control-label"> <span
 													class="label label-danger"></span> 宛先
 												</label><br> <select id="receptionUserIds"
-													name="receptionUserIds" multiple size="7">
+													name="receptionUserIds" multiple size="7" required>
 													<c:if test="${auth0.size() > 0 }">
 														<optgroup label="ルートユーザ">
 															<c:forEach var="user" items="${auth0}">
@@ -152,7 +152,9 @@
 											<input type="hidden" id="transmissionUserId"
 												name="transmissionUserId"
 												value="<c:out value="${loginuser.userId}" />"> <input
-												type="hidden" id="mailContents" name="mailContents" value="">
+												type="hidden" id="mailContents" name="mailContents" value=""
+												required> <input type="submit" id="hiddenSubmit"
+												value="#" style="display: none" />
 										</form>
 										<div class="form-group has-feedback">
 											<ul class="nav nav-tabs">
@@ -170,6 +172,7 @@
 													<textarea rows="10" class="form-control" id="inputContent"
 														name="inputName" placeholder="本文"
 														data-required-error="本文が未入力です" required /></textarea>
+
 												</div>
 												<div class="tab-pane fade" id="tab2">
 													<div class="form-group">
@@ -259,24 +262,28 @@
 							<div class="panel-body">
 								<c:forEach var="mail" items="${mails}" varStatus="status">
 									<!--　アコーディオン用パネルグループ -->
-									<form:form modelAttribute="mailCheckForm" id="mailPanel${mail.mailId}Form" target="hiddenFrame${mail.mailId}">
+									<form:form modelAttribute="mailCheckForm"
+										id="mailPanel${mail.mailId}Form"
+										target="hiddenFrame${mail.mailId}">
 										<input type="hidden" value="${mail.mailId }">
 									</form:form>
-									<iframe name="hiddenFrame${mail.mailId}" style="width:0px;height:0px;border:0px;"></iframe>
+									<iframe name="hiddenFrame${mail.mailId}"
+										style="width: 0px; height: 0px; border: 0px;"></iframe>
 
 									<div class="panel-group" role="tablist"
 										aria-multiselectable="true">
 										<div class="panel panel-default">
 											<div class="panel-heading" role="tab">
 												<h4 class="panel-title">
-													<a id="mailPanel${mail.mailId}" role="button" data-toggle="collapse"
-														data-parent="#accordion" href="#collapse${status.index}"
-														aria-expanded="true" aria-controls="collapse01"> 宛先:<c:out
+													<a id="mailPanel${mail.mailId}" role="button"
+														data-toggle="collapse" data-parent="#accordion"
+														href="#collapse${status.index}" aria-expanded="true"
+														aria-controls="collapse01"> 宛先:<c:out
 															value="${mail.transmissionUserName}" /> 件名:<c:out
 															value="${mail.mailTitle }" />
 													</a>
 													<form:form modelAttribute="deleteForm"
-														id="deleteForm${status.index}" submit-flag="false" >
+														id="deleteForm${status.index}" submit-flag="false">
 														<input type="hidden" id="mailId" name="mailId"
 															value="<c:out value="${mail.mailId }" />">
 														<button type="submit" class="btn btn-danger delete"
@@ -375,7 +382,8 @@
 						break;
 					}
 
-					$('#submitForm').submit();
+					console.log("submit: click");
+					$('#hiddenSubmit').trigger('click');
 				});
 
 		var id = "";
@@ -402,10 +410,14 @@
 			$(id).attr('submit-flag', 'false');
 		});
 
-		$("[ id ^= 'mailPanel' ]").click(function () {
+		$("[ id ^= 'mailPanel' ]").click(function() {
 			var id = "#" + $(this).attr("id") + "Form";
 			$(id).submit();
 		});
+
+		function submitTrancemission() {
+			console.log("submitTrancemission: click");
+		}
 	</script>
 </body>
 

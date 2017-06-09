@@ -12,6 +12,7 @@ public enum RedirectController {
 	SHARECONFIG("redirect:/shareconfig"),
 	LOGIN("redirect:/login"),
 	TRAININGCONFIG("redirect:/trainingConfig"),
+	ROOTHOME ("redirect:/roothome"),
 	;
 
 	final String redirectName;
