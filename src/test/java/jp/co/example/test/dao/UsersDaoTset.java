@@ -2,19 +2,20 @@ package jp.co.example.test.dao;
 
 import static org.junit.Assert.*;
 
-import java.util.*;
+import java.util.List;
 
-import org.junit.*;
-import org.junit.runner.*;
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.boot.test.context.*;
-import org.springframework.test.context.*;
-import org.springframework.test.context.junit4.*;
-import org.springframework.transaction.annotation.*;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DataAccessException;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
-import jp.co.example.*;
-import jp.co.example.dao.*;
-import jp.co.example.entity.*;
+import jp.co.example.LoomedApplication;
+import jp.co.example.dao.UsersDao;
+import jp.co.example.entity.Users;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -25,7 +26,7 @@ public class UsersDaoTset {
 	@Autowired
 	private UsersDao usersDao;
 
-	@Test
+	@Test(expected=DataAccessException.class)
 	public void テスト72() throws Exception {
 		Users user = usersDao.findByIdAndPass(1, "pass");
 

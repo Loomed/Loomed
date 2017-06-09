@@ -58,7 +58,7 @@ public class ScheduleController {
 		// ユーザデータ
 
 		// ルート
-		user = new Users(1, "pass", "山田 太郎", 1, 0);
+		//user = new Users(1, "pass", "山田 太郎", 1, 0);
 		// user = new Users(2, "pass", "山田 次郎", 1, 0);
 		// 講師
 		// user = new Users(3, "pass", "山田 三郎", 1, 1);
@@ -78,7 +78,7 @@ public class ScheduleController {
 		//room = new Trainings(1, "全体管理", 0, "");
 		//room = new Trainings(2, "Java研修", 2, "");
 		// room = new Trainings(3, "PHP研修", 3, "");
-		 room = new Trainings(4, "ビジネスマナー研修", 1, "");
+		 //room = new Trainings(4, "ビジネスマナー研修", 1, "");
 		// room = new Trainings(5, "セキュリティ講座", 1, "");
 		// room = new Trainings(6, "プレゼンテーション講座", 6, "");
 

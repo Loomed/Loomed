@@ -11,19 +11,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import enums.JspPage;
-import enums.LogEnum;
-import enums.ScopeKey;
-import jp.co.example.entity.Schedules;
-import jp.co.example.entity.Shares;
-import jp.co.example.entity.Users;
-import jp.co.example.service.RootHomeService;
-import jp.co.example.service.ShareService;
+import enums.*;
+import jp.co.example.entity.*;
+import jp.co.example.service.*;
 import lombok.extern.slf4j.Slf4j;
 import util.Util;
 @Slf4j
 @Controller
 public class RootHomeController {
+	@Autowired
+	private HomeService HS;
 	@Autowired
 	private RootHomeService RHS;
 	@Autowired
@@ -50,6 +47,7 @@ public class RootHomeController {
 		//基本セッションとかはここ
 		model.addAttribute("sl",sl);
 		session.setAttribute("user", user);
+		session.setAttribute(ScopeKey.LOGINROOM.getScopeKey(), HS.getTrainingName(1));
 		model.addAttribute("list", list);
 		model.addAttribute("cnt", cnt);
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
