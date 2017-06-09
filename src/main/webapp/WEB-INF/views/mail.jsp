@@ -105,7 +105,8 @@
 													class="label label-danger"></span> 宛先
 												</label><br> <select id="receptionUserIds"
 													name="receptionUserIds" multiple size="7" required>
-													<c:if test="${auth0.size() > 0 && loginuser.authority <= 1 }">
+													<c:if
+														test="${auth0.size() > 0 && loginuser.authority <= 1 }">
 														<optgroup label="ルートユーザ">
 															<c:forEach var="user" items="${auth0}">
 																<option value="${user.userId}">${user.userName}</option>
@@ -242,8 +243,10 @@
 									受信ボックス
 									<c:if
 										test="${loginuser.authority == 0 || loginuser.authority == 1 }">
-										<form:form modelAttribute="watchForm" id="watchForm">
-											<div class="btn-group" data-toggle="buttons">
+
+
+										<form:form modelAttribute="watchForm" id="watchForm" class="btn-group" data-toggle="buttons">
+<!-- 											<div class="btn-group" data-toggle="buttons" style="margin-left:140px;"> -->
 												<label
 													class="btn btn-default <c:if test="${flag == false}">active</c:if>">
 													<input type="radio" name="allMail" id="myMail"
@@ -253,7 +256,8 @@
 													<input type="radio" name="allMail" id="allMail"
 													value="true" /> すべてのメール
 												</label>
-											</div>
+
+<!-- 											</div> -->
 										</form:form>
 									</c:if>
 								</h3>
@@ -265,7 +269,7 @@
 									<form:form modelAttribute="mailCheckForm"
 										id="mailPanel${mail.mailId}Form"
 										target="hiddenFrame${mail.mailId}">
-										<input type="hidden" value="${mail.mailId }">
+										<input type="hidden" name="mailId" id="mailId" value="${mail.mailId }">
 									</form:form>
 									<iframe name="hiddenFrame${mail.mailId}"
 										style="width: 0px; height: 0px; border: 0px;"></iframe>
@@ -274,16 +278,16 @@
 										aria-multiselectable="true">
 										<div class="panel panel-default">
 											<div class="panel-heading" role="tab">
-												<h4 class="panel-title">
+												<h4 class="panel-title clearfix">
 													<a id="mailPanel${mail.mailId}" role="button"
 														data-toggle="collapse" data-parent="#accordion"
 														href="#collapse${status.index}" aria-expanded="true"
-														aria-controls="collapse01"> 宛先:<c:out
-															value="${mail.transmissionUserName}" /> 件名:<c:out
+														aria-controls="collapse01" style="font-size: 130%;"> 宛先:<c:out
+															value="${mail.transmissionUserName}" />　　　件名:<c:out
 															value="${mail.mailTitle }" />
 													</a>
 													<form:form modelAttribute="deleteForm"
-														id="deleteForm${status.index}" submit-flag="false">
+														id="deleteForm${status.index}" submit-flag="false" class="pull-right" style="display: inline;">
 														<input type="hidden" id="mailId" name="mailId"
 															value="<c:out value="${mail.mailId }" />">
 														<button type="submit" class="btn btn-danger delete"
