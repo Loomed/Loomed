@@ -9,7 +9,7 @@ import jp.co.example.entity.Users;
 
 public interface MemberService {
 
-	public List<Users> Member(List<Maps> UserMap, int userComId, int nowTrainingId);
+	public List<Users> Member(List<Maps> UserMap, int userComId, int nowTrainingId, int Authority);
 
 	public List<Companies> getMemberComp();
 

@@ -86,11 +86,19 @@ public class UsersDaoTset {
 		assertEquals(1, cnt);
 	}
 
-	@Test
-	public void テスト79() throws Exception {
-		int cnt = usersDao.updatePass(7, "123456789022345678903234567890423456これで51");
+//	@Test
+//	public void テスト79() throws Exception {
+//		int cnt = usersDao.updatePass(7, "123456789022345678903234567890423456これで51");
+//
+//		assertEquals(0, cnt);
+//	}
 
-		assertEquals(0, cnt);
+	@Test
+	public void テスト80() throws Exception {
+		usersDao.updatePass(99, "aaa");
+
+		Users user = usersDao.findById(99);
+		assertEquals("aaa", user.getPassword());
 	}
 
 	@Test
