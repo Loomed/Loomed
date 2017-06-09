@@ -55,7 +55,6 @@
 					// ファイル種類
 					ajaxUrl += "filetype="
 							+ $("#select_file_type option:selected").val();
-
 					if (window.FormData) {
 						var formData = new FormData($(this)[0]);
 
@@ -71,7 +70,7 @@
 							alert(data);
 							setInterval(function() {
 								location.reload();
-							}, 2000);
+							}, 1000);
 						}).fail(
 								function(XMLHttpRequest, textStatus,
 										errorThrown) { // Ajax通信が失敗した時の処理
@@ -157,7 +156,7 @@
 															for="man">表示</label>
 													</div>
 													<div class="radio-inline">
-														<input type="radio" value="2" name="rad"> <label
+														<input type="radio" value="2" name="rad" checked> <label
 															for="woman">非表示</label>
 													</div>
 												</div>
