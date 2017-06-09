@@ -105,7 +105,7 @@
 													class="label label-danger"></span> 宛先
 												</label><br> <select id="receptionUserIds"
 													name="receptionUserIds" multiple size="7" required>
-													<c:if test="${auth0.size() > 0 }">
+													<c:if test="${auth0.size() > 0 && loginuser.authority <= 1 }">
 														<optgroup label="ルートユーザ">
 															<c:forEach var="user" items="${auth0}">
 																<option value="${user.userId}">${user.userName}</option>
