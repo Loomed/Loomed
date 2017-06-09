@@ -238,7 +238,7 @@
 					<h4 class="modal-title">登録確認</h4>
 				</div>
 				<div class="modal-body">
-					以下の内容で登録します<br> お間違いはありませんか？
+					新規登録します<br> お間違いはありませんか？
 				</div>
 				<div class="modal-footer">
 				<form action="trainingInsert">
