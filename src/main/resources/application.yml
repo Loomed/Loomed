@@ -1,5 +1,5 @@
 logging:
  level:
-  org.springframework.jdbc.core: TRACE
+  org.springframework.jdbc.core: INFO
  
   
