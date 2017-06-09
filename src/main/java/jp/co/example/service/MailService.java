@@ -18,4 +18,6 @@ public interface MailService {
 	int insert(MailInsertForm mailInsertForm);
 
 	List<List<Users>> getUsersButAuth();
+
+	int openMail(Integer mailId);
 }

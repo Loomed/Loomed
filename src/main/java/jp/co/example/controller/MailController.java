@@ -47,13 +47,18 @@ public class MailController {
 	}
 
 	@RequestMapping(value = "/mail", method = RequestMethod.POST)
-	public String postMail(MailDeleteForm mailDeleteForm, MailInsertForm mailInsertForm, WatchForm watchForm,
+	public String postMail(MailCheckForm mailCheck, MailDeleteForm mailDeleteForm, MailInsertForm mailInsertForm, WatchForm watchForm,
 			Model model, HttpSession session) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
 		Users user = (Users) session.getAttribute(ScopeKey.LOGINUSER.getScopeKey());
 
 		List<MailsEx> mails = new ArrayList<>();
+
+		if(mailCheck.getMailId() != null)
+		{
+			mailService.openMail(mailCheck.getMailId());
+		}
 
 		if (mailDeleteForm.getMailId() != null) {
 			mailService.delete(mailDeleteForm);

@@ -1,20 +1,18 @@
 package jp.co.example.dao.impl;
 
-import java.sql.Timestamp;
+import java.sql.*;
+import java.util.*;
 import java.util.Date;
-import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.jdbc.core.*;
+import org.springframework.stereotype.*;
 
-import enums.LogEnum;
-import jp.co.example.dao.MailsDao;
-import jp.co.example.entity.Mails;
-import jp.co.example.entity.Users;
-import lombok.extern.slf4j.Slf4j;
-import util.Util;
+import enums.*;
+import jp.co.example.dao.*;
+import jp.co.example.entity.*;
+import lombok.extern.slf4j.*;
+import util.*;
 
 @Slf4j
 @Repository
@@ -24,6 +22,7 @@ public class MailsDaoImpl implements MailsDao {
 	private static final String SQL_INSERT = "INSERT INTO mails (reception_user_id,transmission_user_id	,mail_title	,mail_contents,mail_date,open_flag)VALUES (?, ?, ?, ?, ?, ?)";
 	private static final String SQL_MAILS_DELETE = "DELETE FROM mails WHERE mail_id = ?";
 	private static final String SQL_SELECT_MAILS = "SELECT * FROM mails";
+	private static final String SQL_UPDATE_FLAG = "UPDATE mails SET open_flag = true WHERE mail_id = ?";
 	// フラッグ関連
 	@Autowired
 	JdbcTemplate jt;
@@ -66,6 +65,11 @@ public class MailsDaoImpl implements MailsDao {
 	@Override
 	public List<Mails> findAllMails() {
 		return jt.query(SQL_SELECT_MAILS, new BeanPropertyRowMapper<Mails>(Mails.class));
+	}
+
+	@Override
+	public int updateFlag(int mailId) {
+		return jt.update(SQL_UPDATE_FLAG, mailId);
 	}
 
 }

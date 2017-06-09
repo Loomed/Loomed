@@ -42,7 +42,7 @@ public class MapsDaoImpl implements MapsDao{
 	 */
 	@Override
 	public int update(int userId, int trainingId) {
-		return jt.update(INSERT, userId, trainingId, userId);//
+		return jt.update(INSERT, trainingId, userId);//
 	}
 
 	@Override

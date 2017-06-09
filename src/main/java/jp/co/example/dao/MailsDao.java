@@ -14,4 +14,6 @@ public interface MailsDao {
 	int delete(int mailId);
 
 	int insert(int receptionUserId, int transmissionUserId, String mailTitle, String mailContents);
+
+	int updateFlag(int mailId);
 }
