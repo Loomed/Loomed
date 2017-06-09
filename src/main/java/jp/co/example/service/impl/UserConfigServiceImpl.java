@@ -1,18 +1,19 @@
 package jp.co.example.service.impl;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.stereotype.*;
-import org.springframework.transaction.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import enums.*;
+import enums.LogEnum;
 import jp.co.example.dao.*;
 import jp.co.example.entity.*;
-import jp.co.example.form.*;
-import jp.co.example.service.*;
-import lombok.extern.slf4j.*;
-import util.*;
+import jp.co.example.form.UserConfigForm;
+import jp.co.example.service.UserConfigService;
+import lombok.extern.slf4j.Slf4j;
+import util.Util;
 
 @Transactional
 @Service
@@ -92,5 +93,11 @@ public class UserConfigServiceImpl implements UserConfigService {
 	@Override
 	public int delete(Users user) {
 		return userDao.delete(user.getUserId());
+	}
+
+	@Override
+	public List<List<Maps>> getUserListMaps(List<Users> userlist) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
 	}
 }

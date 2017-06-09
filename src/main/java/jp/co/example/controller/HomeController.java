@@ -48,7 +48,7 @@ public class HomeController {
 
 			training_id = Integer.parseInt(id);
 			tr = HS.getTrainingName(training_id);
-			sl = SS.selectlist(tr.getTrainingId());
+			sl = SS.selectvisiblelist(tr.getTrainingId());
 			session.setAttribute(ScopeKey.LOGINROOM.getScopeKey(), tr);
 			HS.setOutPutStream(sl);
 		// サービスへ

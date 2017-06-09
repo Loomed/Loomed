@@ -80,8 +80,7 @@
 								<button type="submit" class="btn btn-primary btn-block">ユーザ管理</button>
 							</p>
 						</form>
-						<c:if
-							test="${ (loginuser.authority == 1 || loginuser.authority == 0) && usermap.userId == sessionScope.user.userId}">
+						<c:if test="${loginuser.authority == 0 }">
 							<p>
 								<button type="submit" class="btn btn-primary btn-block"
 									onclick="location.href='trainingConfig'" value="trainingConfig">研修管理</button>

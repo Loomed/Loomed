@@ -16,4 +16,6 @@ public interface SharesDao {
 
 	public void insertFilepass(Trainings tra, String filePath, Timestamp upload, String filename, boolean radio);
 
+	List<Shares> selectvisiblelist(Integer trainingid);
+
 }
