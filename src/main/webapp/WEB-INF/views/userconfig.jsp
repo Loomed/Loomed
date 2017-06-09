@@ -20,7 +20,6 @@
 
 		$("#trainingId").removeAttr("required");
 
-
 		$('#trainingId').multiselect(
 				{
 					buttonWidth : '400px',
@@ -225,63 +224,76 @@
 							</thead>
 							<tbody>
 
+								<c:set var="index" value="1" />
 								<c:forEach var="user" items="${users}" varStatus="status">
-									<tr>
-										<td><c:out value="${status.index }" /></td>
-										<td><fmt:formatNumber pattern="000000"
-												value="${user.userId}" /></td>
-										<td><form:form modelAttribute="userForm"
-												action="userinfo" method="GET">
-												<input type="hidden" value="${user.userId }" id="userId"
-													name="userId" />
-												<button type="submit" class="btn btn-link">
-													<c:out value="${user.userName }" />
-												</button>
-											</form:form></td>
-										<td>
-											<ul>
-											<c:if test="${user.authority == 0 }">
-											<li><c:out value="全体管理" /></li>
+									<c:set var="flag" value="0" />
+									<c:if test="${loginuser.authority == 1 }">
+										<c:forEach var="training" items="${user.trainings}">
+											<c:if test="${training.trainingId == usermap[0].trainingId }">
+												<c:set var="flag" value="1" />
 											</c:if>
-												<c:forEach var="training" items="${user.trainings}"
-													varStatus="status">
-													<li><c:out value="${training.trainingName}" /></li>
-												</c:forEach>
-											</ul>
-										</td>
-										<td><c:out value="${user.authName }" /></td>
-										<td><form:form modelAttribute="userForm"
-												action="userchange">
-												<input type="hidden" value="${user.userId }" id="userId"
-													name="userId" />
-												<input type="submit" class="btn btn-primary change"
-													value="変更" />
-											</form:form></td>
-										<td><c:choose>
-												<c:when test="${loginuser.authority == 0 }">
-													<c:if test="${user.userId != loginuser.userId }">
-														<form:form modelAttribute="deleteForm"
-															id="deleteForm${user.userId }" submit-flag="false">
-															<input type="hidden" value="${user.userId }" id="userId"
-																name="userId" />
-															<input type="submit" class="btn btn-danger delete"
-																value="削除" />
-														</form:form>
+										</c:forEach>
+									</c:if>
+									<!-- 講師の場合自分と同じ教室の研修生と担当者の変更が出来る -->
+									<c:if test="${loginuser.authority == 0 || (flag == 1 && user.authName ne 講師) }">
+										<tr>
+											<td><c:out value="${index }" /></td>
+											<c:set var="index" value="${index + 1 }" />
+											<td><fmt:formatNumber pattern="000000"
+													value="${user.userId}" /></td>
+											<td><form:form modelAttribute="userForm"
+													action="userinfo" method="GET">
+													<input type="hidden" value="${user.userId }" id="userId"
+														name="userId" />
+													<button type="submit" class="btn btn-link">
+														<c:out value="${user.userName }" />
+													</button>
+												</form:form></td>
+											<td>
+												<ul>
+													<c:if test="${user.authority == 0 }">
+														<li><c:out value="全体管理" /></li>
 													</c:if>
-												</c:when>
-												<c:when test="${loginuser.authority == 1 }">
-													<c:if test="${user.authority >= 2}">
-														<form:form modelAttribute="deleteForm"
-															id="deleteForm${user.userId }" submit-flag="false">
-															<input type="hidden" value="${user.userId }" id="userId"
-																name="userId" />
-															<input type="submit" class="btn btn-danger delete"
-																value="削除" />
-														</form:form>
-													</c:if>
-												</c:when>
-											</c:choose></td>
-									</tr>
+													<c:forEach var="training" items="${user.trainings}"
+														varStatus="status">
+														<li><c:out value="${training.trainingName}" /></li>
+													</c:forEach>
+												</ul>
+											</td>
+											<td><c:out value="${user.authName }" /></td>
+											<td><form:form modelAttribute="userForm"
+													action="userchange">
+													<input type="hidden" value="${user.userId }" id="userId"
+														name="userId" />
+													<input type="submit" class="btn btn-primary change"
+														value="変更" />
+												</form:form></td>
+											<td><c:choose>
+													<c:when test="${loginuser.authority == 0 }">
+														<c:if test="${user.userId != loginuser.userId }">
+															<form:form modelAttribute="deleteForm"
+																id="deleteForm${user.userId }" submit-flag="false">
+																<input type="hidden" value="${user.userId }" id="userId"
+																	name="userId" />
+																<input type="submit" class="btn btn-danger delete"
+																	value="削除" />
+															</form:form>
+														</c:if>
+													</c:when>
+													<c:when test="${loginuser.authority == 1 }">
+														<c:if test="${user.authority >= 2}">
+															<form:form modelAttribute="deleteForm"
+																id="deleteForm${user.userId }" submit-flag="false">
+																<input type="hidden" value="${user.userId }" id="userId"
+																	name="userId" />
+																<input type="submit" class="btn btn-danger delete"
+																	value="削除" />
+															</form:form>
+														</c:if>
+													</c:when>
+												</c:choose></td>
+										</tr>
+									</c:if>
 								</c:forEach>
 							</tbody>
 						</table>
