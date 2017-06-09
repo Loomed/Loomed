@@ -14,4 +14,5 @@ public interface ShareService {
 
 	public void deleteShare(int id);
 
+	public List<Shares> selectvisiblelist(Integer trainingid);
 }

@@ -45,5 +45,12 @@ public class ShareServiceImpl implements ShareService{
 
 	}
 
+	@Override
+	public List<Shares> selectvisiblelist(Integer trainingid) {
+		List<Shares> list = new ArrayList<Shares>();
+		list = sd.selectvisiblelist(trainingid);
+		return list;
+	}
+
 
 }
