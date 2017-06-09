@@ -22,6 +22,7 @@ import org.springframework.web.multipart.support.MultipartFilter;
 
 import enums.LogEnum;
 import enums.RedirectController;
+import enums.ScopeKey;
 import jp.co.example.entity.Shares;
 import jp.co.example.entity.Trainings;
 import jp.co.example.service.ShareService;
@@ -58,22 +59,23 @@ public class SharesUpdateController {
 		} else {
 			rad = false;
 		}
-		//Trainings tra = (Trainings)session.getAttribute(ScopeKey.LOGINROOM.getScopeKey());
+		Trainings tra = (Trainings)session.getAttribute(ScopeKey.LOGINROOM.getScopeKey());
 		// ファイル種類から決まる値をセットする
 		// ファイルパス
 		StringBuffer filePath = new StringBuffer("/uploadfile").append(File.separator).append(fileType);
-		Trainings tra = new Trainings(5, "セキュリティ講座", 1, "セキュリティ講座としてSEA/J資格受験");
 		// アップロードファイルを格納するディレクトリを作成する
 		File uploadDir = mkdirs(filePath);
 		try {
 			// アップロードファイルを置く
 			File uploadFile = new File(uploadDir.getPath() + "/" + filename + fileType);
 			StringBuffer path = new StringBuffer(uploadDir.getPath() + "/" + filename + fileType);
+			String dlpath = new String(path);
 			byte[] bytes = multipartFile.getBytes();
+			System.out.println(dlpath);
 			BufferedOutputStream uploadFileStream = new BufferedOutputStream(new FileOutputStream(uploadFile));
 			uploadFileStream.write(bytes);
 			uploadFileStream.close();
-			SS.InsertFile(tra, path, filename, rad);
+			SS.InsertFile(tra, dlpath, filename, rad);
 			list = SS.selectlist(tra.getTrainingId());
 			session.setAttribute("list", list);
 			return "アップロードが成功しました。リスト更新のためしばらくお待ち下さい。";
@@ -98,13 +100,12 @@ public class SharesUpdateController {
 	private File mkdirs(StringBuffer filePath) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 		File uploadDir = new File(filePath.toString());
-		// 既に存在する場合はプレフィックスをつける
-		int prefix = 0;
-		while (uploadDir.exists()) {
-			prefix++;
-			uploadDir = new File(filePath.toString() + String.valueOf(prefix));
+		// 既に存在する場合はそのフォルダにぶち込む
+		if (uploadDir.exists()) {
+			uploadDir = new File(filePath.toString());
+		}else{
+			uploadDir.mkdirs();
 		}
-
 		// フォルダ作成
 		uploadDir.mkdirs();
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());

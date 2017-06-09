@@ -27,6 +27,15 @@
 	width: 100%;
 }
 </style>
+<script>
+var downloadAsFile = function(content) {
+	var fileName = document.getElementById("");
+    var a = document.createElement('a');
+    a.download = fileName;
+    a.href = 'data:application/octet-stream,'+encodeURIComponent(content);
+    a.click();
+};
+</script>
 </head>
 
 <body>
@@ -52,8 +61,8 @@
 							</div>
 						</h4>
 						<p>
-						<button type="submit" class="btn btn-primary btn-block"
-							value="userinfo">ユーザ情報</button>
+							<button type="submit" class="btn btn-primary btn-block"
+								value="userinfo">ユーザ情報</button>
 						</p>
 						<p>
 							<button type="submit" class="btn btn-primary btn-block"
@@ -61,7 +70,7 @@
 						</p>
 						<p>
 							<button type="submit" class="btn btn-primary btn-block"
-								value="shareconfig">共有ファイルアップロード</button>
+								onclick="location.href='shareconfig'">共有ファイルアップロード</button>
 						</p>
 					</div>
 					<div class="card">
@@ -131,7 +140,7 @@
 															</time>
 														</header>
 														<div class="comment-post">
-															<p>連絡内容:{list.scheduleContents}</p>
+															<p>連絡内容:${list.scheduleContents}</p>
 														</div>
 													</div>
 												</c:forEach>
@@ -157,21 +166,22 @@
 									<article class="row">
 										<div class="col-md-10 col-sm-10">
 											<div class="panel panel-default arrow left">
-												<div class="panel-body">
-													<header class="text-left">
-														<div class="comment-user">
-															<i class="fa fa-folder"></i>作成者:{}
+												<c:forEach var="sl" items="${sl}" varStatus="status">
+													<div class="panel-body">
+														<header class="text-left">
+															<time class="comment-date" datetime="2017:05:30">
+																<i class="fa fa-clock-o"></i>作成日:${sl.uploadDate}
+															</time>
+														</header>
+
+														<div class="comment-post">
+															<p>
+																<input type="hidden" name="title" value="${sl.shareContents}">
+																<a href="file:///c:${sl.shareContents}" download="${sl.shareContents}">${sl.title}</a>
+															</p>
 														</div>
-														<time class="comment-date" datetime="2017:05:30">
-															<i class="fa fa-clock-o"></i>作成日:{}
-														</time>
-													</header>
-													<div class="comment-post">
-														<p>
-															<a href="sharaconfig.jsp">研修日報_0月_株式会社Axiz_名前</a>
-														</p>
 													</div>
-												</div>
+												</c:forEach>
 											</div>
 										</div>
 									</article>

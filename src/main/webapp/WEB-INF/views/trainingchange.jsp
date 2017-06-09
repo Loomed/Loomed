@@ -63,7 +63,7 @@ table>td>input {
 					<div class="panel-body">
 <!-- 						<form id="changeForm" class="form-horizontal" -->
 <!-- 							action="trainingconfig"> -->
-						<form action="javascript:hoge()">
+						<form action="javascript:hoge()" class="form-horizontal" >
 							<div class="form-group">
 								<label for="intputUserId" class="col-sm-3 control-label">教室ID</label>
 								<div class="col-sm-9">
