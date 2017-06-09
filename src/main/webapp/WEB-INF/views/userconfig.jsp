@@ -120,7 +120,7 @@
 												<label for="password" class="col-sm-2 control-label">パスワード</label>
 												<div class="col-sm-10">
 													<input type="password" id="password" name="password"
-														class="form-control" />
+														class="form-control" required/>
 												</div>
 											</div>
 
@@ -138,7 +138,7 @@
 												<label for="companyId" class="col-sm-2 control-label">企業名</label>
 												<div class="col-sm-10 select-container">
 													<input type="text" class="form-control" id="companyName"
-														name="companyName" list="companies">
+														name="companyName" list="companies" required>
 													<datalist id="companies">
 														<c:forEach var="company" items="${companies}">
 															<c:choose>
@@ -163,12 +163,22 @@
 												<div class="col-sm-10">
 													<select id="authority" name="authority"
 														class="form-control">
-														<c:forEach var="authority" items="ルートユーザ, 講師, 担当者, 研修生"
-															varStatus="status">
-															<option value="${status.index}"><c:out
-																	value="${authority}" /></option>
-
-														</c:forEach>
+														<c:choose>
+															<c:when test="${loginuser.authority == 0 }">
+																<c:forEach var="authority" items="ルートユーザ, 講師, 担当者, 研修生"
+																	varStatus="status">
+																	<option value="${status.index }"><c:out
+																			value="${authority}" /></option>
+																</c:forEach>
+															</c:when>
+															<c:when test="${loginuser.authority == 1 }">
+																<c:forEach var="authority" items="担当者, 研修生"
+																	varStatus="status">
+																	<option value="${status.index + 2 }"><c:out
+																			value="${authority}" /></option>
+																</c:forEach>
+															</c:when>
+														</c:choose>
 													</select>
 												</div>
 											</div>
@@ -176,7 +186,7 @@
 											<div class="form-group">
 												<label for="trainingId" class="col-sm-2 control-label">配属研修教室</label>
 												<div class="col-sm-10">
-													<select id="trainingId" name="trainingId" multiple size="4">
+													<select id="trainingId" name="trainingId" multiple size="4" required>
 														<c:forEach var="room" items="${rooms}">
 															<option value="${room.trainingId}">
 																<c:out value="${room.trainingName}" />
