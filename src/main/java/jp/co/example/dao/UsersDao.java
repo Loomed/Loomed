@@ -1,8 +1,8 @@
 package jp.co.example.dao;
 
-import java.util.*;
+import java.util.List;
 
-import jp.co.example.entity.*;
+import jp.co.example.entity.Users;
 
 public interface UsersDao {
 	Users findByIdAndPass(Integer userId, String password);
