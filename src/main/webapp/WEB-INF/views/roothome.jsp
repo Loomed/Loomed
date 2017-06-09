@@ -56,10 +56,12 @@
 								<label>権限：ルート</label>
 							</div>
 						</h5>
+						<form:form modelAttribute="userForm" action="userinfo">
 						<p>
-							<button type="submit" class="btn btn-primary btn-block"
-								value="location.href='userinfo'">ユーザ情報</button>
+						<input type="hidden" id="userId" name="userId" value="${loginuser.userId}">
+							<input type="submit" value="ユーザ情報" class="btn btn-primary btn-block">
 						</p>
+						</form:form>
 						<p>
 							<button type="submit" class="btn btn-primary btn-block"
 								value="location.href='userconfig'">ユーザ管理</button>

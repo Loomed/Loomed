@@ -8,6 +8,6 @@ import jp.co.example.entity.Users;
 
 public interface RootHomeService {
 	public String getNewMails(Users user);
-	public List<Schedules> getInpoSche();
+	public List<Schedules> getInpoSche(Users user);
 	public Trainings getTrainingName(int tr);
 }
