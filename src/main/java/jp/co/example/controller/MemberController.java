@@ -11,12 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import enums.LogEnum;
-import enums.ScopeKey;
-import jp.co.example.entity.Companies;
-import jp.co.example.entity.Maps;
-import jp.co.example.entity.Trainings;
-import jp.co.example.entity.Users;
+import enums.*;
+import jp.co.example.entity.*;
 import jp.co.example.service.IndexService;
 import jp.co.example.service.MemberService;
 import lombok.Getter;
@@ -78,6 +74,6 @@ public class MemberController implements Serializable {
 
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
-		return "member";
+		return JspPage.MEMBER.getPageName();
 	}
 }

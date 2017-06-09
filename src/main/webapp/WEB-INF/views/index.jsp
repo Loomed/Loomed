@@ -138,10 +138,34 @@
 
 
 												<c:otherwise>
+
+													<c:set var="Flag" value="0" />
+
+
 													<c:forEach var="usermap"
 														items="${sessionScope.usermap}">
 														<c:if
-															test="${usermap.trainingId!=rooms.trainingId && (rooms.trainingId)!=1}">
+															test="${usermap.trainingId==rooms.trainingId && (rooms.trainingId)!=1}">
+<%-- 															<c:set var="page" value="${rooms.trainingId}" />
+															<%
+																// スクリプトレットでpageスコープのpageContextにアクセスし変数を取得.
+																					int pageNum = (int) pageContext.findAttribute("page");
+															%>
+															<li>
+																<h3>
+
+																	<a href="home?page=<%=pageNum%>">${rooms.trainingName}</a>
+																</h3>
+
+															</li> --%>
+
+															<c:set var="Flag" value="1" />
+
+
+														</c:if>
+													</c:forEach>
+
+													<c:if test="${Flag!=1}">
 															<c:set var="page" value="${rooms.trainingId}" />
 															<%
 																// スクリプトレットでpageスコープのpageContextにアクセスし変数を取得.
@@ -154,8 +178,9 @@
 																</h3>
 
 															</li>
-														</c:if>
-													</c:forEach>
+													</c:if>
+
+
 												</c:otherwise>
 											</c:choose>
 

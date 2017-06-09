@@ -53,7 +53,19 @@
 						</h4>
 						<h5>
 							<div class="col-xs-9">
-								<label>権限：ルート</label>
+								<label>権限:
+									<c:choose>
+									<c:when test="${loginuser.authority == 0}">
+										ルート
+									</c:when>
+									<c:when test="${loginuser.authority == 1}">
+										講師
+									</c:when>
+									<c:otherwise>
+										エラー
+									</c:otherwise>
+									</c:choose>
+								</label>
 							</div>
 						</h5>
 						<form:form modelAttribute="userForm" action="userinfo">
@@ -66,8 +78,7 @@
 
 						<form action="userconfig" method="GET">
 							<p>
-								<button type="submit" class="btn btn-primary btn-block"
-									>ユーザ管理</button>
+								<button type="submit" class="btn btn-primary btn-block">ユーザ管理</button>
 							</p>
 						</form>
 
@@ -146,93 +157,89 @@
 													<div class="comment-post">
 														<p>連絡内容:${list.scheduleContents}</p>
 													</div>
+												</div>
 											</c:forEach>
-										</div>
-									</div>
-						</div>
-						</article>
-						</section>
-					</div>
-				</div>
-			</div>
-			<!-- tabs -->
-			<div class="card">
-				<ul class="nav nav-tabs" role="tablist1">
-					<li role="presentation"><a href="shareconfig"
-						aria-controls="file" role="tab" data-toggle="tab">ファイル共有</a></li>
-				</ul>
-				<!-- Tab panes -->
-				<div class="tab-content">
-					<div role="tabpanel2" class="tab-pane active" id="file">
-						<!--<h2 class="page-header">Search Results</h2>-->
-						<section class="comment-list">
-							<!-- First Comment -->
-							<article class="row">
-								<div class="col-md-10 col-sm-10">
-									<div class="panel panel-default arrow left">
-										<c:forEach var="sl" items="${sl}" varStatus="status">
-											<div class="panel-body">
-												<header class="text-left">
-													<time class="comment-date" datetime="2017:05:30">
-														<i class="fa fa-clock-o"></i>作成日:${sl.uploadDate}
-													</time>
-												</header>
-
-												<div class="comment-post">
-													<p>
-														<input type="hidden" name="title"
-															value="${sl.shareContents}"> <a
-															href="file:///c:${sl.shareContents}"
-															download="${sl.shareContents}">${sl.title}</a>
-													</p>
-												</div>
-											</div>
-										</c:forEach>
-									</div>
-								</div>
-							</article>
-						</section>
-					</div>
-					<div role="tabpanel2" class="tab-pane">共有ファイル</div>
-				</div>
-			</div>
-			<!-- tabs -->
-			<!--<div class="card">
-					<ul class="nav nav-tabs" role="tablist1">
-						<li role="presentation"><a href="#training"
-							aria-controls="training" role="tab" data-toggle="tab">研修情報</a></li>
-					</ul>-->
-			<!-- Tab panes -->
-			<!--
-					<div class="tab-content">
-						<div role="tabpanel1" class="tab-pane active" id="training">-->
-			<!--<h2 class="page-header">Search Results</h2>-->
-			<!--
-							<section class="comment-list">-->
-			<!-- First Comment -->
-			<!--<article class="row">
-									<div class="col-md-10 col-sm-10">
-										<div class="panel panel-default arrow left">
-											<div class="panel-body">
-												<header class="text-left">
-													<div class="comment-user">
-														<i class="fa fa-graduation-cap"></i>研修情報
-													</div>
-												</header>
-												<div class="comment-post">
-													<p>研修内容：経験者向けのJava研修</p>
-												</div>
-											</div>
 										</div>
 									</div>
 								</article>
 							</section>
 						</div>
-						<div role="tabpanel1" class="tab-pane" id="traning">研修情報</div>
 					</div>
-				</div>-->
+				</div>
+				<!-- tabs -->
+				<div class="card">
+					<ul class="nav nav-tabs" role="tablist1">
+						<li role="presentation"><a href="shareconfig"
+							aria-controls="file" role="tab" data-toggle="tab">ファイル共有</a></li>
+					</ul>
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<div role="tabpanel2" class="tab-pane active" id="file">
+							<!--<h2 class="page-header">Search Results</h2>-->
+							<section class="comment-list">
+								<!-- First Comment -->
+								<article class="row">
+									<div class="col-md-10 col-sm-10">
+										<div class="panel panel-default arrow left">
+											<c:forEach var="sl" items="${sl}" varStatus="status">
+												<div class="panel-body">
+													<header class="text-left">
+														<time class="comment-date" datetime="2017:05:30">
+															<i class="fa fa-clock-o"></i>作成日:${sl.uploadDate}
+														</time>
+													</header>
+
+													<div class="comment-post">
+														<p>
+															<input type="hidden" name="title"
+																value="${sl.shareContents}"> <a
+																href="file:///c:${sl.shareContents}"
+																download="${sl.shareContents}">${sl.title}</a>
+														</p>
+													</div>
+												</div>
+											</c:forEach>
+										</div>
+									</div>
+								</article>
+							</section>
+						</div>
+						<div role="tabpanel2" class="tab-pane">共有ファイル</div>
+					</div>
+				</div>
+				<!-- tabs -->
+				<!-- tabs
+					<div class="card">
+						<ul class="nav nav-tabs" role="tablist1">
+							<li role="presentation"><a href="#training"
+								aria-controls="training" role="tab" data-toggle="tab">研修情報</a></li>
+						</ul>
+						<div class="tab-content">
+							<div role="tabpanel1" class="tab-pane active" id="training">
+								<section class="comment-list">
+									<article class="row">
+										<div class="col-md-10 col-sm-10">
+											<div class="panel panel-default arrow left">
+												<div class="panel-body">
+													<header class="text-left">
+														<div class="comment-user">
+															<i class="fa fa-graduation-cap"></i>研修情報
+														</div>
+													</header>
+													<div class="comment-post">
+														<p>研修内容：${fn:escapeXml(tr.trainingInfo)}</p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</article>
+								</section>
+							</div>
+							<div role="tabpanel1" class="tab-pane" id="traning">研修情報</div>
+						</div>
+					</div>-->
+			</div>
 		</div>
-	</div>
 	</div>
 	<script type="text/javascript">
 		$(function() {
@@ -265,7 +272,7 @@
 				'changeDate',
 				function() {
 					//Javasctiptからの遷移？
-					location.href = 'schedule.jsp?date='
+					location.href = 'schedule?date='
 							+ $('#datepicker').datepicker('getFormattedDate');
 				});
 	</script>
