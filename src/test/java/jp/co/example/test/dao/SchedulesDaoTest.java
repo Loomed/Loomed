@@ -56,7 +56,7 @@ public class SchedulesDaoTest {
 
 		// テストデータ作成
 		List<Schedules> schedule = scheduleDao.getInpoSche();
-
+		System.out.println("tes:"+schedule.size());
 		assertEquals(4, schedule.size());
 	}
 
@@ -73,9 +73,12 @@ public class SchedulesDaoTest {
 	public void テスト49() throws Exception {
 
 		// テストデータ作成
-		int cnt = scheduleDao.updateScheduleWhereScheduleId();
+		final SimpleDateFormat SDF_DATETIME = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 
-		assertTrue(false);
+		int cnt = scheduleDao.updateScheduleWhereScheduleId(1, "aaaaa", new Timestamp(SDF_DATETIME.parse("2016/1/1 0:0:0").getTime()),
+				false);
+
+		assertEquals(1, cnt);
 	}
 
 	@Test
