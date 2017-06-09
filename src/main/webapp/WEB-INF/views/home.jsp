@@ -29,7 +29,7 @@
 </style>
 <script>
 	var downloadAsFile = function(content) {
-		var fileName = document.getElementById("");
+		var fileName = document.getElementById("title");
 		var a = document.createElement('a');
 		a.download = fileName;
 		a.href = 'data:application/octet-stream,' + encodeURIComponent(content);
@@ -180,10 +180,10 @@
 
 														<div class="comment-post">
 															<p>
-																<input type="hidden" name="title"
+																<input type="hidden" id="title"
 																	value="${sl.shareContents}"> <a
 																	href="file:///c:${sl.shareContents}"
-																	download="${sl.title}">${sl.title}</a>
+																	download="${sl.shareContents}">${sl.title}</a>
 															</p>
 														</div>
 													</div>

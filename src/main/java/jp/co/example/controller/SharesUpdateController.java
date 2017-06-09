@@ -66,8 +66,8 @@ public class SharesUpdateController {
 		File uploadDir = mkdirs(filePath);
 		try {
 			// アップロードファイルを置く
-			File uploadFile = new File(uploadDir.getPath() + "\\" + filename + fileType);
-			StringBuffer path = new StringBuffer(uploadDir.getPath() + "\\" + filename + fileType);
+			File uploadFile = new File(uploadDir.getPath() + "/" + filename + fileType);
+			StringBuffer path = new StringBuffer(uploadDir.getPath() + "/" + filename + fileType);
 			String dlpath = new String(path);
 			byte[] bytes = multipartFile.getBytes();
 			System.out.println(dlpath);
