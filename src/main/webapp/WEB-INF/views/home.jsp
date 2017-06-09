@@ -61,8 +61,11 @@ var downloadAsFile = function(content) {
 							</div>
 						</h4>
 						<p>
+						<form:form modelAttribute="userForm" action="userinfo">
+						<input type="hidden" id="userId" name="userId" value="${loginuser.userId }">
 							<button type="submit" class="btn btn-primary btn-block"
 								value="userinfo">ユーザ情報</button>
+								</form:form>
 						</p>
 						<p>
 							<button type="submit" class="btn btn-primary btn-block"

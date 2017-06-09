@@ -57,15 +57,20 @@
 							</div>
 						</h5>
 						<form:form modelAttribute="userForm" action="userinfo">
-						<p>
-						<input type="hidden" id="userId" name="userId" value="${loginuser.userId}">
-							<input type="submit" value="ユーザ情報" class="btn btn-primary btn-block">
-						</p>
+							<p>
+								<input type="hidden" id="userId" name="userId"
+									value="${loginuser.userId}"> <input type="submit"
+									value="ユーザ情報" class="btn btn-primary btn-block">
+							</p>
 						</form:form>
-						<p>
-							<button type="submit" class="btn btn-primary btn-block"
-								value="location.href='userconfig'">ユーザ管理</button>
-						</p>
+
+						<form action="userconfig" method="GET">
+							<p>
+								<button type="submit" class="btn btn-primary btn-block"
+									>ユーザ管理</button>
+							</p>
+						</form>
+
 						<p>
 							<button type="submit" class="btn btn-primary btn-block"
 								onclick="location.href='trainingConfig'" value="trainingConfig">研修管理</button>
@@ -260,9 +265,8 @@
 				'changeDate',
 				function() {
 					//Javasctiptからの遷移？
-					location.href =  'schedule.jsp?date='
-						+ $('#datepicker').datepicker(
-						'getFormattedDate');
+					location.href = 'schedule.jsp?date='
+							+ $('#datepicker').datepicker('getFormattedDate');
 				});
 	</script>
 

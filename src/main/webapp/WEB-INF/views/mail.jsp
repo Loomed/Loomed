@@ -179,7 +179,8 @@
 																placeholder="例:9時10分" required />
 														</div>
 													</div>
-													<br><br>
+													<br>
+													<br>
 													<div class="form-group">
 														<label for="inputReason" class="col-sm-3 control-label">理由</label>
 														<div class="col-sm-9">
@@ -205,7 +206,8 @@
 																placeholder="例:1時間" required />
 														</div>
 													</div>
-													<br><br>
+													<br>
+													<br>
 													<div class="form-group">
 														<label for="inputReason3" class="col-sm-3 control-label">理由</label>
 														<div class="col-sm-9">
@@ -237,19 +239,22 @@
 							<div class="panel-heading">
 								<h3 class="panel-title">
 									受信ボックス
-									<form:form modelAttribute="watchForm" id="watchForm">
-										<div class="btn-group" data-toggle="buttons">
-											<label
-												class="btn btn-default <c:if test="${flag == false}">active</c:if>">
-												<input type="radio" name="allMail" id="myMail" value="false" />
-												マイボックス
-											</label> <label
-												class="btn btn-default <c:if test="${flag == true}">active</c:if>">
-												<input type="radio" name="allMail" id="allMail" value="true" />
-												すべてのメール
-											</label>
-										</div>
-									</form:form>
+									<c:if
+										test="${loginuser.authority == 0 || loginuser.authority == 1 }">
+										<form:form modelAttribute="watchForm" id="watchForm">
+											<div class="btn-group" data-toggle="buttons">
+												<label
+													class="btn btn-default <c:if test="${flag == false}">active</c:if>">
+													<input type="radio" name="allMail" id="myMail"
+													value="false" /> マイボックス
+												</label> <label
+													class="btn btn-default <c:if test="${flag == true}">active</c:if>">
+													<input type="radio" name="allMail" id="allMail"
+													value="true" /> すべてのメール
+												</label>
+											</div>
+										</form:form>
+									</c:if>
 								</h3>
 							</div>
 
