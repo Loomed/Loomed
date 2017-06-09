@@ -12,9 +12,6 @@
 
 <script>
 	$(function() {
-		$('.delete').click(function() {
-			$('#configModal').modal();
-		});
 		$('.change').click(function() {
 			//Javasctiptからの遷移？
 			location.href = "userchange";
@@ -110,14 +107,13 @@
 
 
 
-										<form:form id="changeForm" modelAttribute="userChangeForm"
-											class="form-horizontal" action="userinfo" method="POST"
-											submit-flag="false">
+										<form:form id="changeForm" modelAttribute="userConfigForm"
+											class="form-horizontal" method="POST" submit-flag="false">
 											<div class="form-group">
 												<label for="userId" class="col-sm-2 control-label">ユーザID</label>
 												<div class="col-sm-10">
-													<input name="userId" id="userId" class="form-control"
-														value="自動採番" readonly>
+													<input id="userId" class="form-control" value="自動採番"
+														readonly>
 												</div>
 											</div>
 											<div class="form-group">
@@ -169,16 +165,9 @@
 														class="form-control">
 														<c:forEach var="authority" items="ルートユーザ, 講師, 担当者, 研修生"
 															varStatus="status">
-															<c:choose>
-																<c:when test="${status.index == user.authority }">
-																	<option value="${status.index}" selected><c:out
-																			value="${authority}" /></option>
-																</c:when>
-																<c:otherwise>
-																	<option value="${status.index}"><c:out
-																			value="${authority}" /></option>
-																</c:otherwise>
-															</c:choose>
+															<option value="${status.index}"><c:out
+																	value="${authority}" /></option>
+
 														</c:forEach>
 													</select>
 												</div>
@@ -199,7 +188,8 @@
 
 											<div class="form-group">
 												<div class="col-sm-offset-1 col-sm-10">
-													<button type="submit" class="btn btn-primary btn-block">登録</button>
+													<input type="submit" class="btn btn-primary btn-block"
+														value="登録" />
 												</div>
 											</div>
 										</form:form>
@@ -220,95 +210,45 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>1</td>
-									<td>000001</td>
-									<td><a href="userinfo">山田太郎</a></td>
-									<td>経験者Java品川教室</td>
-									<td><select class="form-control">
-											<option>ルートユーザ</option>
-											<option>講師</option>
-											<option>担当者</option>
-											<option>研修生</option>
-									</select></td>
-									<td><button class="btn btn-primary change">変更</button></td>
-									<td><button class="btn btn-danger delete">削除</button></td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td>000002</td>
-									<td><a href="#">鈴木太郎</a></td>
-									<td>経験者Java品川教室</td>
-									<td><select class="form-control">
-											<option selected>ルートユーザ</option>
-											<option>講師</option>
-											<option>担当者</option>
-											<option>研修生</option>
-									</select></td>
 
-									<td><button class="btn btn-primary change">変更</button></td>
-									<td><button class="btn btn-danger delete">削除</button></td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td>000003</td>
-									<td><a href="#">高橋太郎</a></td>
-									<td>経験者Java品川教室</td>
-									<td><select class="form-control">
-											<option>ルートユーザ</option>
-											<option selected>講師</option>
-											<option>担当者</option>
-											<option>研修生</option>
-									</select></td>
-
-									<td><button class="btn btn-primary change">変更</button></td>
-									<td><button class="btn btn-danger delete">削除</button></td>
-								</tr>
-								<tr>
-									<td>4</td>
-									<td>000004</td>
-									<td><a href="root#">田中太郎</a></td>
-									<td>経験者Java品川教室</td>
-									<td><select class="form-control">
-											<option>ルートユーザ</option>
-											<option selected>講師</option>
-											<option>担当者</option>
-											<option>研修生</option>
-									</select></td>
-
-									<td><button class="btn btn-primary change">変更</button></td>
-									<td><button class="btn btn-danger delete">削除</button></td>
-								</tr>
-								<tr>
-									<td>5</td>
-									<td>000005</td>
-									<td><a href="#">伊藤太郎</a></td>
-									<td>未経験者Java品川教室</td>
-									<td><select class="form-control">
-											<option>ルートユーザ</option>
-											<option selected>講師</option>
-											<option>担当者</option>
-											<option>研修生</option>
-									</select></td>
-
-									<td><button class="btn btn-primary change">変更</button></td>
-									<td><button class="btn btn-danger delete">削除</button></td>
-								</tr>
-								<tr>
-									<td>6</td>
-									<td>000006</td>
-									<td><a href="#">山本太郎</a></td>
-									<td>未経験者Java品川教室</td>
-									<td><select class="form-control">
-											<option>ルートユーザ</option>
-											<option selected>講師</option>
-											<option>担当者</option>
-											<option>研修生</option>
-									</select></td>
-
-									<td><button class="btn btn-primary change">変更</button></td>
-									<td><button class="btn btn-danger delete">削除</button></td>
-								</tr>
+								<c:forEach var="user" items="${users}" varStatus="status">
+									<tr>
+										<td><c:out value="${status.index }" /></td>
+										<td><fmt:formatNumber pattern="000000"
+												value="${user.userId}" /></td>
+										<td><form:form modelAttribute="userForm"
+												action="userinfo" method="GET">
+												<input type="hidden" value="${user.userId }" id="userId"
+													name="userId" />
+												<button type="submit" class="btn btn-link">
+													<c:out value="${user.userName }" />
+												</button>
+											</form:form></td>
+										<td>
+											<ul>
+												<c:forEach var="training" items="${user.trainings}"
+													varStatus="status">
+													<li><c:out value="${training.trainingName}" /></li>
+												</c:forEach>
+											</ul>
+										</td>
+										<td><c:out value="${user.authName }" /></td>
+										<td><form:form modelAttribute="userForm"
+												action="userchange">
+												<input type="hidden" value="${user.userId }" id="userId"
+													name="userId" />
+												<input type="submit" class="btn btn-primary change"
+													value="変更" />
+											</form:form></td>
+										<td><form:form modelAttribute="deleteForm"
+												id="deleteForm${status.index}" submit-flag="false">
+												<input type="hidden" value="${user.userId }" id="userId"
+													name="userId" />
+												<input type="submit" class="btn btn-danger delete"
+													value="削除" />
+											</form:form></td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>
@@ -356,6 +296,50 @@
 			</div>
 		</div>
 	</div>
+
+	<!-- モーダル・ダイアログ -->
+	<div class="modal fade" id="sampleModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span>×</span>
+					</button>
+					<h4 class="modal-title">削除確認</h4>
+				</div>
+				<div class="modal-body">
+					元に戻すことは出来ません <br>削除しますか？
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+					<button type="button" class="btn btn-danger" id="delBtn">削除</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		$("[ id ^= 'deleteForm' ]").submit(function() {
+
+			id = "#" + $(this).attr("id");
+			console.log("test " + $(id).attr('submit-flag'));
+
+			$('#sampleModal').modal('toggle');
+			if ($(this).attr('submit-flag') == 'false') {
+				console.log("comming");
+				return false;
+			}
+		});
+
+		$('#delBtn').click(function() {
+			console.log(id);
+			$(id).attr('submit-flag', 'true');
+			$(id).submit();
+		});
+
+		$('#deleteModal').on('show.bs.modal', function(e) {
+			$(id).attr('submit-flag', 'false');
+		});
+	</script>
 </body>
 
 </html>

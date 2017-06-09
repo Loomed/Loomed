@@ -1,8 +1,8 @@
 package jp.co.example.dao;
 
-import java.util.List;
+import java.util.*;
 
-import jp.co.example.entity.Users;
+import jp.co.example.entity.*;
 
 public interface UsersDao {
 	Users findByIdAndPass(Integer userId, String password);
@@ -20,4 +20,8 @@ public interface UsersDao {
 	List<Users> fingAllUsers();
 
 	List<Users> findAuthUsers(int authority);
+
+	Integer insert(String userName, String password,  Integer companyId, Integer authority);
+
+	int delete(Integer userId);
 }

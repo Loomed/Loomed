@@ -170,47 +170,47 @@
 													<textarea rows="10" class="form-control" id="inputContent"
 														name="inputName" placeholder="本文"
 														data-required-error="本文が未入力です" required /></textarea>
-
 												</div>
 												<div class="tab-pane fade" id="tab2">
-
 													<div class="form-group">
-														<label for="inputTime" class="col-sm-2 control-label">到着時間</label>
-														<div class="col-sm-7">
+														<label for="inputTime" class="col-sm-3 control-label">到着時間</label>
+														<div class="col-sm-9">
 															<input type="text" class="form-control" id="inputTime"
-																value="10分" required />
+																placeholder="例:9時10分" required />
 														</div>
 													</div>
+													<br><br>
 													<div class="form-group">
-														<label for="inputReason" class="col-sm-2 control-label">理由</label>
-														<div class="col-sm-7">
+														<label for="inputReason" class="col-sm-3 control-label">理由</label>
+														<div class="col-sm-9">
 															<input type="text" class="form-control" id="inputReason"
-																value="電車遅延のため" required />
+																placeholder="例:電車遅延のため" required />
 														</div>
 													</div>
 												</div>
 												<div class="tab-pane fade" id="tab3">
 													<div class="form-group">
-														<label for="inputReason2" class="col-sm-2 control-label">理由</label>
-														<div class="col-sm-7">
+														<label for="inputReason2" class="col-sm-3 control-label">理由</label>
+														<div class="col-sm-9">
 															<input type="text" class="form-control" id="inputReason2"
-																value="体調不良のため" required />
+																placeholder="例:体調不良のため" required />
 														</div>
 													</div>
 												</div>
 												<div class="tab-pane fade" id="tab4">
 													<div class="form-group">
-														<label for="inputTime2" class="col-sm-2 control-label">残業時間</label>
-														<div class="col-sm-7">
+														<label for="inputTime2" class="col-sm-3 control-label">残業時間</label>
+														<div class="col-sm-9">
 															<input type="text" class="form-control" id="inputTime2"
-																value="10分" required />
+																placeholder="例:1時間" required />
 														</div>
 													</div>
+													<br><br>
 													<div class="form-group">
-														<label for="inputReason3" class="col-sm-2 control-label">理由</label>
-														<div class="col-sm-7">
+														<label for="inputReason3" class="col-sm-3 control-label">理由</label>
+														<div class="col-sm-9">
 															<input type="text" class="form-control" id="inputReason3"
-																value="進捗遅れの対応のため" required />
+																placeholder="例:進捗遅れの対応のため" required />
 														</div>
 													</div>
 												</div>
