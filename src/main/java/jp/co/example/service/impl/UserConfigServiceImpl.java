@@ -17,7 +17,7 @@ import util.*;
 @Transactional
 @Service
 @Slf4j
-public class UserConfigServiceImpl implements UserConfigService{
+public class UserConfigServiceImpl implements UserConfigService {
 
 	@Autowired
 	private UsersDao userDao;
@@ -35,15 +35,13 @@ public class UserConfigServiceImpl implements UserConfigService{
 	public List<UsersEx> getUser() {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
-
 		List<UsersEx> usersEx = new ArrayList<>();
 
 		List<Users> users = userDao.fingAllUsers();
-		for(Users tmp : users){
+		for (Users tmp : users) {
 			UsersEx userEx = new UsersEx(tmp);
 
 			List<Maps> maps = mapsDao.selectWhereUserId(tmp.getUserId());
-
 
 			List<Trainings> trainings = new ArrayList<>();
 			for (Maps map : maps) {
@@ -59,7 +57,6 @@ public class UserConfigServiceImpl implements UserConfigService{
 		return usersEx;
 	}
 
-
 	@Override
 	public List<Companies> getCompanies() {
 		return companyDao.getCompanis();
@@ -71,16 +68,26 @@ public class UserConfigServiceImpl implements UserConfigService{
 	}
 
 	@Override
-	public int insert(UserConfigForm user , Maps[] maps) {
-		Integer userId = userDao.insert(user.getUserName(), user.getPassword(), user.getCompanyId(), user.getAuthority());
+	public int insert(UserConfigForm user, Maps[] maps) {
 
-		for (Maps map : maps) {
-			mapsDao.update(userId, map.getTrainingId());
+		if (user.getCompanyId() == null) {
+			companyDao.insert(user.getCompanyName());
+			user.setCompanyId(companyDao.findCompanyId(user.getCompanyName()).get(0).getCompanyId());
+		}
+		Integer userId = userDao.insert(user.getUserName(), user.getPassword(), user.getCompanyId(),
+				user.getAuthority());
+
+		// ユーザのマップをすべて削除してから複数のマップを登録する
+		mapsDao.delete(userId);
+
+		if (maps != null) {
+			for (Maps map : maps) {
+				mapsDao.update(map.getUserId(), map.getTrainingId());
+			}
 		}
 
 		return 0;
 	}
-
 
 	@Override
 	public int delete(Users user) {

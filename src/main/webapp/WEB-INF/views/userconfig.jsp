@@ -20,6 +20,7 @@
 
 		$("#trainingId").removeAttr("required");
 
+
 		$('#trainingId').multiselect(
 				{
 					buttonWidth : '400px',
