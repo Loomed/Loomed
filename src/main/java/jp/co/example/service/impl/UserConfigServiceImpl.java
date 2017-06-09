@@ -82,7 +82,7 @@ public class UserConfigServiceImpl implements UserConfigService {
 
 		if (maps != null) {
 			for (Maps map : maps) {
-				mapsDao.update(map.getUserId(), map.getTrainingId());
+				mapsDao.update(userId, map.getTrainingId());
 			}
 		}
 

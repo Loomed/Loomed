@@ -240,6 +240,9 @@
 											</form:form></td>
 										<td>
 											<ul>
+											<c:if test="${user.authority == 0 }">
+											<li><c:out value="全体管理" /></li>
+											</c:if>
 												<c:forEach var="training" items="${user.trainings}"
 													varStatus="status">
 													<li><c:out value="${training.trainingName}" /></li>
