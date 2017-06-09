@@ -156,8 +156,8 @@
 															for="man">表示</label>
 													</div>
 													<div class="radio-inline">
-														<input type="radio" value="2" name="rad" checked> <label
-															for="woman">非表示</label>
+														<input type="radio" value="2" name="rad" checked>
+														<label for="woman">非表示</label>
 													</div>
 												</div>
 											</div>
@@ -245,9 +245,9 @@
 									元に戻すことは出来ません<br> 削除しますか？
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-default"
-										data-dismiss="modal">キャンセル</button>
 									<form action="sharedelete" method="post">
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">キャンセル</button>
 										<input type="hidden" name="deleteid" value="">
 										<button type="submit" name="delete" value="delete"
 											class="btn btn-danger">削除</button>

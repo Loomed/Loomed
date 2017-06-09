@@ -175,9 +175,16 @@
 								<article class="row">
 									<div class="col-md-10 col-sm-10">
 										<div class="panel panel-default arrow left">
-											<c:forEach var="map" items="${usermap}" varStatus="staus">
-												<c:forEach var="sl" items="${sl}" varStatus="status">
-													<c:if test="${map.trainingId == loginroom.trainingId }">
+
+											<c:set var="flag" value="0" />
+											<c:forEach var="map" items="${usermap}" varStatus="status">
+												<c:if test="${map.trainingId == loginroom.trainingId }">
+													<c:set var="flag" value="1" />
+												</c:if>
+											</c:forEach>
+											<c:choose>
+												<c:when test="${loginuser.authority == 0 || flag == 1 }">
+													<c:forEach var="sl" items="${sl}" varStatus="status">
 														<div class="panel-body">
 															<header class="text-left">
 																<time class="comment-date" datetime="2017:05:30">
@@ -194,9 +201,12 @@
 																</p>
 															</div>
 														</div>
-													</c:if>
-												</c:forEach>
-											</c:forEach>
+													</c:forEach>
+												</c:when>
+												<c:otherwise>
+													<h4 style="text-align: center;">権限がありません</h4>
+												</c:otherwise>
+											</c:choose>
 										</div>
 									</div>
 								</article>
