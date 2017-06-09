@@ -17,7 +17,8 @@ import util.*;
 @Slf4j
 public class MapsDaoImpl implements MapsDao{
 	private final String SQL_SELECT_MAPS_WHERE_USERID_AND_TRAININGID ="SELECT * FROM maps WHERE user_id = ? ; ";
-	private final String INSERT = "DELETE FROM maps WHERE user_id = ? ;INSERT INTO maps(training_id, user_id) VALUES(?, ?)";
+	private final String INSERT = "INSERT INTO maps(training_id, user_id) VALUES(?, ?)";
+	private final String DELETE = "DELETE FROM maps WHERE user_id = ? ;";
 	private final String SQL_SELECT_USERID_USERNAME_JOIN_USERS =
 			"SELECT maps.user_id, user_name FROM maps JOIN users ON maps.user_id = users.user_id WHERE maps.user_id <> ? AND training_id = ?";
 
@@ -54,6 +55,11 @@ public class MapsDaoImpl implements MapsDao{
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return rUserNameForm;
+	}
+
+	@Override
+	public int delete(int userId) {
+		return jt.update(DELETE, userId);
 	}
 
 }
