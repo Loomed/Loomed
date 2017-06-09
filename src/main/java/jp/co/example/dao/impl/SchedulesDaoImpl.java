@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import enums.LogEnum;
 import jp.co.example.dao.SchedulesDao;
 import jp.co.example.entity.Schedules;
+import jp.co.example.entity.Users;
 import lombok.extern.slf4j.Slf4j;
 import util.Util;
 
@@ -21,7 +22,7 @@ public class SchedulesDaoImpl implements SchedulesDao {
 	private static final String SQL_SELECT_SCHEDULES_WHERE_USERID_AND_DATE =
 			"SELECT * FROM schedules WHERE user_id = ? AND upload_datetime BETWEEN ? AND ? ORDER BY upload_datetime";
 	private static final String SQL_SELECT_SCHEDULES_WHERE_IMPORTANT =
-			"SELECT * FROM schedules WHERE important = true AND user_id = 1 AND user_id = 2 ORDER BY upload_datetime ";
+			"SELECT * FROM schedules WHERE important = true AND user_id = ? ORDER BY upload_datetime ";
 	private static final String SQL_UPDATE_WHERE_SCHEDULEID =
 			"UPDATE schedules SET schedule_contents = ?, upload_datetime = ?, important = ? WHERE schedule_id = ?";
 	private static final String SQL_DELETE_WHERE_SCHEDULEID =
@@ -45,9 +46,11 @@ public class SchedulesDaoImpl implements SchedulesDao {
 	}
 
 	@Override
-	public List<Schedules> getInpoSche() {
+	public List<Schedules> getInpoSche(Users user) {
+		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 		List<Schedules> list = jt.query(SQL_SELECT_SCHEDULES_WHERE_IMPORTANT,
-				new BeanPropertyRowMapper<Schedules>(Schedules.class));
+				new BeanPropertyRowMapper<Schedules>(Schedules.class),user.getUserId());
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 
 		return list;
 	}
