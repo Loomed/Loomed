@@ -218,7 +218,7 @@ table>td>input {
 									<button type="button" class="btn btn-default"
 										onclick="javascript:history.back();">前の画面に戻る</button>
 									<button type="button" class="btn btn-primary pull-right"
-										onclick="$('#change-modal').modal();">変更</button>
+										onclick="changeSubmit();">変更</button>
 								</div>
 							</div>
 						</form:form>
@@ -239,7 +239,25 @@ table>td>input {
 					<h4 class="modal-title">変更確認</h4>
 				</div>
 				<div class="modal-body">
-					以下の内容で変更します<br>...<br>お間違いがなければ[OK]ボタンを押してください
+					以下の内容で変更します<br> <br>
+					<div class="form-group">
+						<label>ユーザID:</label><span id="idModal"></span>
+					</div>
+					<div class="form-group">
+						<label>パスワード:</label><span id="passwordModal"></span>
+					</div>
+					<div class="form-group">
+						<label>名前:</label><span id="nameModal"></span>
+					</div>
+					<div class="form-group">
+						<label>企業名:</label><span id="companyModal"></span>
+					</div>
+					<div class="form-group">
+						<label>権限:</label><span id="authorityModal"></span>
+					</div>
+					<div class="form-group">
+						<label>所属研修教室:</label><span id="trainingModal"></span>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
@@ -249,9 +267,30 @@ table>td>input {
 			</div>
 		</div>
 	</div>
+	<c:if test="${loginuser.authority == 1 && loginuser.userId != user.userId}">
+		<script>
+			$(function () {
+				$("#password").attr("readonly", true);
+			});
+		</script>
+	</c:if>
 
 	<script>
+		function changeSubmit() {
+			console.log("changeSubmit: submit");
+			$('#idModal').text($('#userId').val());
+			$('#passwordModal').text($('#password').val());
+			$('#nameModal').text($('#userName').val());
+			$('#companyModal').text($('#companyName').val());
+			$('#authorityModal').text($('#authority').val());
+			$('#trainingModal').text(
+					$('[name=trainingId] option:selected').text());
+
+			$('#change-modal').modal();
+		}
+
 		$('#changeForm').submit(function() {
+
 			$('#change-modal').modal('toggle');
 			if ($('#changeForm').attr('submit-flag') == 'false') {
 				return false;
