@@ -11,6 +11,7 @@ public enum RedirectController {
 	INDEX ("redirect:/index"),
 	SHARECONFIG("redirect:/shareconfig"),
 	LOGIN("redirect:/login"),
+	TRAININGCONFIG("redirect:/trainingConfig"),
 	;
 
 	final String redirectName;

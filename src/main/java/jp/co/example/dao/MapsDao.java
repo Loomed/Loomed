@@ -1,9 +1,9 @@
 package jp.co.example.dao;
 
-import java.util.List;
+import java.util.*;
 
-import jp.co.example.entity.Maps;
-import jp.co.example.form.ReserveUserNameForm;
+import jp.co.example.entity.*;
+import jp.co.example.form.*;
 
 public interface MapsDao {
 
@@ -20,5 +20,7 @@ public interface MapsDao {
 	List<ReserveUserNameForm> selectUserIDAndUserNameJoinUsers(Integer userId, Integer trainingId);
 
 	int update(int userId, int trainingId);
+
+	int delete(int userId);
 
 }

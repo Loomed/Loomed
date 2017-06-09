@@ -2,19 +2,17 @@ package jp.co.example.test.dao;
 
 import static org.junit.Assert.*;
 
-import java.util.List;
+import org.junit.*;
+import org.junit.runner.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.boot.test.context.*;
+import org.springframework.dao.*;
+import org.springframework.test.context.*;
+import org.springframework.test.context.junit4.*;
+import org.springframework.transaction.annotation.*;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
-
-import jp.co.example.LoomedApplication;
-import jp.co.example.dao.MapsDao;
-import jp.co.example.entity.Maps;
+import jp.co.example.*;
+import jp.co.example.dao.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -26,34 +24,43 @@ public class MapsDaoTest {
 	private MapsDao mapDao;
 
 	@Test
-	public void テスト27() throws Exception{
-		//assertEquals(1, mapDao.update(9, 99));
-		fail();
+	public void MapsDaoTest_1() throws Exception{
+		assertEquals(2, mapDao.selectWhereUserId(5).size());
 	}
 
 	@Test
-	public void テスト28() throws Exception{
-		//assertEquals(1, mapDao.update(10, 99));
-		fail();
+	public void MapsDaoTest_2() throws Exception{
+		assertEquals(0, mapDao.selectWhereUserId(99).size());
 	}
 
 	@Test
-	public void テスト29() throws Exception{
-		//assertEquals(0, mapDao.update(77, 77));
-		fail();
+	public void MapsDaoTest_3() throws Exception{
+		assertEquals(4, mapDao.selectUserIDAndUserNameJoinUsers(8, 4).size());
 	}
 
 	@Test
-	public void テスト30() throws Exception{
-		List<Maps> maps = mapDao.selectWhereUserId(6);
-
-		assertEquals(2, maps.size());
+	public void MapsDaoTest_4() throws Exception{
+		assertEquals(0, mapDao.selectUserIDAndUserNameJoinUsers(99, 99).size());
 	}
 
 	@Test
-	public void テスト31() throws Exception{
-		List<Maps> maps = mapDao.selectWhereUserId(99);
+	public void MapsDaoTest_5() throws Exception{
+		assertEquals(1, mapDao.update(4, 3));
+	}
 
-		assertEquals(0, maps.size());
+	@Test(expected=DataAccessException.class)
+	public void MapsDaoTest_6() throws Exception{
+		mapDao.update(99, 99);
+	}
+
+	@Test
+	public void MapsDaoTest_7() throws Exception{
+
+		assertEquals(1, mapDao.delete(3));
+	}
+
+	@Test
+	public void MapsDaoTest_8() throws Exception{
+		assertEquals(0, mapDao.delete(99));
 	}
 }
