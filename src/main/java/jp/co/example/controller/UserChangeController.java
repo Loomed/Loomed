@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import enums.*;
 import jp.co.example.entity.*;
+import jp.co.example.form.*;
 import jp.co.example.service.*;
 import lombok.extern.slf4j.*;
 import util.*;
@@ -29,17 +30,10 @@ public class UserChangeController {
 	* @Author sakata
 	*/
 	@RequestMapping("/userchange")
-	public String getUserChange(Model model) {
+	public String getUserChange(UserForm user, Model model) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
-		//本来ならセッションのユーザ値を使用する
-		Users user = new Users();
-		user.setUserId(6);
-		UsersEx user2 = userInfoService.getUser(user);
-
-		model.addAttribute("user", user2);
-
-		//##テスト用処理
+		UsersEx userEx = userInfoService.getUser(user);
 
 		List<Trainings> trainigs = userChangeService.getTrainig();
 		List<Companies> companies= userChangeService.getCompanies();
@@ -54,6 +48,7 @@ public class UserChangeController {
 		model.addAttribute("rooms", trainigs);
 		model.addAttribute("companies", companies);
 		model.addAttribute("maps", myMaps);
+		model.addAttribute("user", userEx);
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 

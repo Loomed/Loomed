@@ -1,7 +1,6 @@
 package jp.co.example.controller;
 
 import javax.servlet.http.*;
-import javax.validation.*;
 
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
@@ -33,16 +32,14 @@ public class UserInfoController {
 	 * @Author sakata
 	 */
 	@RequestMapping("/userinfo")
-	public String getUserInfo(Model model) { // 引数の
+	public String getUserInfo(UserForm user, Model model) { // 引数の
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
 		// テスト用処理
 		// 本来ならセッションのユーザ値を使用する
-		Users user = new Users();
-		user.setUserId(5);
-		UsersEx user2 = userInfoService.getUser(user);
+		UsersEx userEx = userInfoService.getUser(user);
 
-		model.addAttribute("user", user2);
+		model.addAttribute("user", userEx);
 
 		// ##テスト用処理
 
@@ -56,27 +53,39 @@ public class UserInfoController {
 	 * @Author sakata
 	 */
 	@RequestMapping(value = "/userinfo", method = RequestMethod.POST)
-	public String postUserInfo(@Valid UserChangeForm userChangeForm, Model model, HttpSession session) {
+	public String postUserInfo(UserForm user, UserChangeForm userChangeForm, Model model, HttpSession session) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 		// ログ表示
-		getUserLog(userChangeForm);
+		if (user.getUserId() != null) {
+			UsersEx userEx = userInfoService.getUser(user);
 
-		Users auth = (Users) session.getAttribute(ScopeKey.LOGINUSER.getScopeKey());
+			model.addAttribute("user", userEx);
 
-		// 作成ミス 本来ならサービス層で行う処理
-		Maps[] maps = null;
-		if (auth.getAuthority() <= 1) {
-			if (!userInfoService.getComapnies(userChangeForm.getCompanyName()).isEmpty()) {
-				userChangeForm.setCompanyId(
-						userInfoService.getComapnies(userChangeForm.getCompanyName()).get(0).getCompanyId());
+		} else if (userChangeForm.getUserId() != null) {
+
+			getUserLog(userChangeForm);
+
+			Users auth = (Users) session.getAttribute(ScopeKey.LOGINUSER.getScopeKey());
+
+			// 作成ミス 本来ならサービス層で行う処理
+			Maps[] maps = null;
+			if (auth.getAuthority() <= 1) {
+				if (!userInfoService.getComapnies(userChangeForm.getCompanyName()).isEmpty()) {
+					userChangeForm.setCompanyId(
+							userInfoService.getComapnies(userChangeForm.getCompanyName()).get(0).getCompanyId());
+				}
+				maps = new Maps[userChangeForm.getTrainingId().length];
+				for (int i = 0; i < maps.length; i++) {
+					maps[i] = new Maps(userChangeForm.getUserId(), userChangeForm.getTrainingId()[i]);
+				}
 			}
-			maps = new Maps[userChangeForm.getTrainingId().length];
-			for (int i = 0; i < maps.length; i++) {
-				maps[i] = new Maps(userChangeForm.getUserId(), userChangeForm.getTrainingId()[i]);
-			}
+
+			userInfoService.update(auth, userChangeForm, maps);
+
+			UsersEx userEx = userInfoService.getUser(userChangeForm);
+
+			model.addAttribute("user", userEx);
 		}
-
-		userInfoService.update(auth, userChangeForm, maps);
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return JspPage.USERINFO.getPageName();

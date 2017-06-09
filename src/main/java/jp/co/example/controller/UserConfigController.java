@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import enums.*;
 import jp.co.example.entity.*;
+import jp.co.example.form.*;
 import jp.co.example.service.*;
 import lombok.extern.slf4j.*;
 import util.*;
@@ -20,27 +21,56 @@ public class UserConfigController {
 	@Autowired
 	private UserConfigService userConfigService;
 
+	@Autowired
+	private UserInfoService userInfoService;
 
-
-	//登録//
 	@RequestMapping("/userconfig")
-	public String getResistration(Model model) {
+	public String getUserConfig(Model model) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
-		List<Users> users = userConfigService.getUsers();
-
-
+		this.init(model);
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return JspPage.USERCONFIG.getPageName();
 	}
 
-	//削除
-	@RequestMapping(value = "/userdelete")
-	public String getDelete() {
+	@RequestMapping(value = "/userconfig", method = RequestMethod.POST)
+	public String postUserConfig(UserDeleteForm userDeleteForm, UserConfigForm userConfigForm, Model model) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+
+		if (userConfigForm.getUserName() != null) {
+			log.info("insert");
+			Maps[] maps = null;
+
+			if (!userInfoService.getComapnies(userConfigForm.getCompanyName()).isEmpty()) {
+				userConfigForm.setCompanyId(
+						userInfoService.getComapnies(userConfigForm.getCompanyName()).get(0).getCompanyId());
+			}
+			maps = new Maps[userConfigForm.getTrainingId().length];
+
+			for (int i = 0; i < maps.length; i++) {
+				maps[i] = new Maps(null, userConfigForm.getTrainingId()[i]);
+			}
+			userConfigService.insert(userConfigForm, maps);
+		}
+		else if(userDeleteForm.getUserId() != null){
+			log.info("delete");
+			userConfigService.delete(userDeleteForm);
+		}
+
+		this.init(model);
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return JspPage.USERCONFIG.getPageName();
 	}
 
+	private void init(Model model) {
+		List<UsersEx> users = userConfigService.getUser();
+		List<Companies> companies = userConfigService.getCompanies();
+		List<Trainings> trainigs = userConfigService.getTrainig();
+
+		model.addAttribute("companies", companies);
+		model.addAttribute("rooms", trainigs);
+		model.addAttribute("users", users);
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
+	}
 }

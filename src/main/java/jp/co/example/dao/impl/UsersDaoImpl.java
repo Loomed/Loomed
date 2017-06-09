@@ -1,20 +1,17 @@
 package jp.co.example.dao.impl;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.dao.*;
+import org.springframework.jdbc.core.*;
+import org.springframework.stereotype.*;
 
-import enums.LogEnum;
-import jp.co.example.dao.UsersDao;
-import jp.co.example.entity.Maps;
-import jp.co.example.entity.Users;
-import lombok.extern.slf4j.Slf4j;
-import util.Util;
+import enums.*;
+import jp.co.example.dao.*;
+import jp.co.example.entity.*;
+import lombok.extern.slf4j.*;
+import util.*;
 
 @Slf4j
 @Repository
@@ -23,10 +20,13 @@ public class UsersDaoImpl implements UsersDao {
 	private static final String SQL_SELECT_ID = "SELECT * FROM users WHERE user_id = ?";
 	private static final String UPDATE_PASS = "UPDATE users SET password = ? WHERE user_id = ?";
 	private static final String UPDATE_ALL = "UPDATE users SET password = ?, user_name = ?, company_id = ?, authority = ? WHERE user_id = ?";
-	//private static final String SQL_MEMBER_SELECT_COMP = "SELECT * FROM users WHERE company_id = ?";
+	// private static final String SQL_MEMBER_SELECT_COMP = "SELECT * FROM users
+	// WHERE company_id = ?";
 	private static final String SQL_MEMBER_SELECT_ROOM = "SELECT * FROM maps WHERE training_id = ?";
 	private static final String SQL_SELECT_ALL = "SELECT * FROM users";
 	private static final String SQL_SELECT_AUTH = "SELECT * FROM users WHERE authority = ?";
+	private static final String SQL_INSERT = "INSERT INTO users(user_name, password, company_id, authority) VALUES(?, ?, ?, ?) RETURNING user_id";
+	private static final String SQL_DELETE = "DELETE FROM mails WHERE reception_user_id = ? OR transmission_user_id = ?; DELETE FROM maps WHERE user_id = ? ;DELETE FROM users WHERE user_id = ?";
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -79,12 +79,13 @@ public class UsersDaoImpl implements UsersDao {
 			for (int i = 0; i < mapsUserId.size(); i++) {
 				memberOne = jdbcTemplate.queryForObject(SQL_SELECT_ID, new BeanPropertyRowMapper<Users>(Users.class),
 						mapsUserId.get(i).getUserId());
-				if (memberOne != null && memberOne.getCompanyId()==comId) {
+				if (memberOne != null && memberOne.getCompanyId() == comId) {
 					member.add(memberOne);
 				}
 			}
 
-			//member = jdbcTemplate.query(SQL_MEMBER_SELECT_COMP, new BeanPropertyRowMapper<Users>(Users.class), comId);
+			// member = jdbcTemplate.query(SQL_MEMBER_SELECT_COMP, new
+			// BeanPropertyRowMapper<Users>(Users.class), comId);
 		} catch (DataAccessException e) {
 			member = null;
 		}
@@ -125,6 +126,16 @@ public class UsersDaoImpl implements UsersDao {
 	@Override
 	public List<Users> findAuthUsers(int authority) {
 		return jdbcTemplate.query(SQL_SELECT_AUTH, new BeanPropertyRowMapper<Users>(Users.class), authority);
+	}
+
+	@Override
+	public Integer insert(String userName, String password, Integer companyId, Integer authority) {
+		return jdbcTemplate.queryForObject(SQL_INSERT, Integer.class, userName, password, companyId, authority);
+	}
+
+	@Override
+	public int delete(Integer userId) {
+		return jdbcTemplate.update(SQL_DELETE, userId, userId, userId, userId);
 	}
 
 }

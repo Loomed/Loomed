@@ -21,4 +21,5 @@ public interface UserInfoService {
 	List<Trainings> getTrainig();
 
 	List<Companies> getComapnies(String company);
+
 }

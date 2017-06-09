@@ -24,7 +24,8 @@
 						<h3 class="panel-title">ユーザ情報</h3>
 					</div>
 					<div class="panel-body">
-						<form class="form-horizontal">
+						<form:form modelAttribute="userForm" action="userchange">
+						<input type="hidden" id="userId" name="userId" value="${user.userId}">
 							<div class="form-group">
 								<label for="intputUserId" class="col-sm-2 control-label">ユーザID</label>
 								<div class="col-sm-10">
@@ -69,11 +70,10 @@
 								<div class="col-sm-offset-1 col-sm-10">
 									<button type="button" class="btn btn-default"
 										onclick="javascript:history.back();">前の画面に戻る</button>
-									<button type="button" class="btn btn-primary pull-right"
-										onclick="location.href = 'userchange';">ユーザ情報を変更する</button>
+									<button type="submit" class="btn btn-primary pull-right">ユーザ情報を変更する</button>
 								</div>
 							</div>
-						</form>
+						</form:form>
 					</div>
 				</div>
 			</div>

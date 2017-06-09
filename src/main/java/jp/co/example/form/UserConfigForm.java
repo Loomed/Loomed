@@ -12,9 +12,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class UserChangeForm extends UsersEx {
-	@NotNull
-	private Integer userId;
+public class UserConfigForm extends UsersEx {
 	@NotBlank
 	private String password;
 	@NotBlank

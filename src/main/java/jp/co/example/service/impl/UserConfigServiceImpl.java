@@ -6,10 +6,13 @@ import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.*;
 
+import enums.*;
 import jp.co.example.dao.*;
 import jp.co.example.entity.*;
+import jp.co.example.form.*;
 import jp.co.example.service.*;
 import lombok.extern.slf4j.*;
+import util.*;
 
 @Transactional
 @Service
@@ -29,8 +32,58 @@ public class UserConfigServiceImpl implements UserConfigService{
 	private CompaniesDao companyDao;
 
 	@Override
-	public List<Users> getUsers() {
-		return userDao.fingAllUsers();
+	public List<UsersEx> getUser() {
+		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
+
+
+		List<UsersEx> usersEx = new ArrayList<>();
+
+		List<Users> users = userDao.fingAllUsers();
+		for(Users tmp : users){
+			UsersEx userEx = new UsersEx(tmp);
+
+			List<Maps> maps = mapsDao.selectWhereUserId(tmp.getUserId());
+
+
+			List<Trainings> trainings = new ArrayList<>();
+			for (Maps map : maps) {
+				trainings.add(trainigDao.getTraining(map.getTrainingId()));
+			}
+
+			userEx.setTrainings(trainings);
+			userEx.setAuthName(Util.getAuthorityName(tmp.getAuthority()));
+
+			usersEx.add(userEx);
+		}
+
+		return usersEx;
 	}
 
+
+	@Override
+	public List<Companies> getCompanies() {
+		return companyDao.getCompanis();
+	}
+
+	@Override
+	public List<Trainings> getTrainig() {
+		return trainigDao.AllRooms();
+	}
+
+	@Override
+	public int insert(UserConfigForm user , Maps[] maps) {
+		Integer userId = userDao.insert(user.getUserName(), user.getPassword(), user.getCompanyId(), user.getAuthority());
+
+		for (Maps map : maps) {
+			mapsDao.update(userId, map.getTrainingId());
+		}
+
+		return 0;
+	}
+
+
+	@Override
+	public int delete(Users user) {
+		return userDao.delete(user.getUserId());
+	}
 }
