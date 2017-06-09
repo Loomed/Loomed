@@ -48,11 +48,11 @@ public class HomeServiceImpl implements HomeService {
 		return mailcnt;
 	}
 
-	public List<Schedules> getInpoSche() {
+	public List<Schedules> getInpoSche(Users user) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 		List<Schedules> list = new ArrayList<Schedules>();
 		try {
-			list = schedulesdao.getInpoSche();
+			list = schedulesdao.getInpoSche(user);
 		} catch (Exception e) {
 			list = null;
 		}

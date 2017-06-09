@@ -58,11 +58,11 @@
 						</h5>
 						<p>
 							<button type="submit" class="btn btn-primary btn-block"
-								value="userinfo">ユーザ情報</button>
+								value="location.href='userinfo'">ユーザ情報</button>
 						</p>
 						<p>
 							<button type="submit" class="btn btn-primary btn-block"
-								value="userconfig">ユーザ管理</button>
+								value="location.href='userconfig'">ユーザ管理</button>
 						</p>
 						<p>
 							<button type="submit" class="btn btn-primary btn-block"
@@ -258,8 +258,9 @@
 				'changeDate',
 				function() {
 					//Javasctiptからの遷移？
-					location.href = 'schedule.jsp?date='
-							+ $('#datepicker').datepicker('getFormattedDate');
+					location.href =  'schedule.jsp?date='
+						+ $('#datepicker').datepicker(
+						'getFormattedDate');
 				});
 	</script>
 

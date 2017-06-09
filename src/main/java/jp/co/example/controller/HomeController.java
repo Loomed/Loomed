@@ -53,7 +53,7 @@ public class HomeController {
 			HS.setOutPutStream(sl);
 		// サービスへ
 		cnt = HS.getNewMails(user);
-		list = HS.getInpoSche();
+		list = HS.getInpoSche(user);
 		//tr = HS.getTrainingName(training_id);
 		//メールの新着無しを処理してます
 		if (cnt.equals("0")) {

@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import jp.co.example.entity.Schedules;
+import jp.co.example.entity.Users;
 
 /**
  * スケジュールテーブルを操作するDAOインターフェース
@@ -21,7 +22,7 @@ public interface SchedulesDao {
 	 */
 	List<Schedules> selectScheduleWhereUserIdAndDate(Integer userId, Timestamp dateMin, Timestamp dateMax);
 
-	List<Schedules> getInpoSche();
+	List<Schedules> getInpoSche(Users user);
 
 	/**
 	 * スケジュールの更新を行うSQL文を実行するメソッド

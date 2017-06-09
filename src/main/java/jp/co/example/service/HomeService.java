@@ -9,7 +9,7 @@ import jp.co.example.entity.Users;
 
 public interface HomeService {
 	public String getNewMails(Users user);
-	public List<Schedules> getInpoSche();
+	public List<Schedules> getInpoSche(Users user);
 	public Trainings getTrainingName(int tr);
 	public void setOutPutStream(List<Shares> sl);
 }
