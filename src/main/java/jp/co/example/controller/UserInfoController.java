@@ -61,9 +61,11 @@ public class UserInfoController {
 
 			model.addAttribute("user", userEx);
 
-		} else if (userChangeForm.getUserId() != null) {
+		}
+		if (userChangeForm.getUserId() != null) {
+			log.info("comming");
 
-			getUserLog(userChangeForm);
+			// getUserLog(userChangeForm);
 
 			Users auth = (Users) session.getAttribute(ScopeKey.LOGINUSER.getScopeKey());
 
@@ -74,12 +76,15 @@ public class UserInfoController {
 					userChangeForm.setCompanyId(
 							userInfoService.getComapnies(userChangeForm.getCompanyName()).get(0).getCompanyId());
 				}
-				maps = new Maps[userChangeForm.getTrainingId().length];
-				for (int i = 0; i < maps.length; i++) {
-					maps[i] = new Maps(userChangeForm.getUserId(), userChangeForm.getTrainingId()[i]);
+				if (userChangeForm.getTrainingId() != null) {
+					maps = new Maps[userChangeForm.getTrainingId().length];
+					for (int i = 0; i < maps.length; i++) {
+						maps[i] = new Maps(userChangeForm.getUserId(), userChangeForm.getTrainingId()[i]);
+					}
 				}
 			}
 
+			log.info("auth : " + auth.getAuthority());
 			userInfoService.update(auth, userChangeForm, maps);
 
 			UsersEx userEx = userInfoService.getUser(userChangeForm);

@@ -46,14 +46,16 @@ public class UserConfigController {
 				userConfigForm.setCompanyId(
 						userInfoService.getComapnies(userConfigForm.getCompanyName()).get(0).getCompanyId());
 			}
-			maps = new Maps[userConfigForm.getTrainingId().length];
 
-			for (int i = 0; i < maps.length; i++) {
-				maps[i] = new Maps(null, userConfigForm.getTrainingId()[i]);
+			if (userConfigForm.getTrainingId() != null) {
+				maps = new Maps[userConfigForm.getTrainingId().length];
+
+				for (int i = 0; i < maps.length; i++) {
+					maps[i] = new Maps(null, userConfigForm.getTrainingId()[i]);
+				}
 			}
 			userConfigService.insert(userConfigForm, maps);
-		}
-		else if(userDeleteForm.getUserId() != null){
+		} else if (userDeleteForm.getUserId() != null) {
 			log.info("delete");
 			userConfigService.delete(userDeleteForm);
 		}

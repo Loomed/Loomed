@@ -2,22 +2,22 @@ package jp.co.example.test.dao;
 
 import static org.junit.Assert.*;
 
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.List;
+import java.sql.*;
+import java.text.*;
+import java.util.*;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.dao.DataAccessException;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
+import org.junit.*;
+import org.junit.runner.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.boot.test.context.*;
+import org.springframework.dao.*;
+import org.springframework.test.context.*;
+import org.springframework.test.context.junit4.*;
+import org.springframework.transaction.annotation.*;
 
-import jp.co.example.LoomedApplication;
-import jp.co.example.dao.ProjectorsDao;
-import jp.co.example.entity.Projectors;
+import jp.co.example.*;
+import jp.co.example.dao.*;
+import jp.co.example.entity.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

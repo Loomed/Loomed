@@ -51,7 +51,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 						user.getAuthority());
 
 				//ユーザのマップをすべて削除してから複数のマップを登録する
-				userDao.delete(user.getUserId());
+				mapsDao.delete(user.getUserId());
 				for (Maps map : maps) {
 					mapsDao.update(map.getUserId(), map.getTrainingId());
 				}

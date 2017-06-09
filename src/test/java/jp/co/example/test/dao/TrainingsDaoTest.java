@@ -24,7 +24,7 @@ public class TrainingsDaoTest {
 	@Test
 	public void trainingDaoTest_1() throws Exception {
 
-		assertEquals(12, trainingDao.AllRooms().size());
+		assertEquals(5, trainingDao.AllRooms().size());
 	}
 
 	@Test
@@ -61,9 +61,9 @@ public class TrainingsDaoTest {
 		trainingDao.InsTraining(0, null, 0, null);
 	}
 
-	@Test(expected=DataAccessException.class)
+	@Test(expected=DataIntegrityViolationException.class)
 	public void trainingDaoTest_6() throws Exception {
-		trainingDao.DelTraining(8);
+		trainingDao.DelTraining(4);
 	}
 
 	@Test

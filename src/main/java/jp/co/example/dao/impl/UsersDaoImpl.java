@@ -26,7 +26,7 @@ public class UsersDaoImpl implements UsersDao {
 	private static final String SQL_SELECT_ALL = "SELECT * FROM users";
 	private static final String SQL_SELECT_AUTH = "SELECT * FROM users WHERE authority = ?";
 	private static final String SQL_INSERT = "INSERT INTO users(user_name, password, company_id, authority) VALUES(?, ?, ?, ?) RETURNING user_id";
-	private static final String SQL_DELETE = "DELETE FROM mails WHERE reception_user_id = ? OR transmission_user_id = ?; DELETE FROM maps WHERE user_id = ? ;DELETE FROM users WHERE user_id = ?";
+	private static final String SQL_DELETE = "DELETE FROM projectors WHERE user_id = ?; DELETE FROM schedules WHERE user_id = ?; DELETE FROM mails WHERE reception_user_id = ? OR transmission_user_id = ?; DELETE FROM maps WHERE user_id = ? ;DELETE FROM users WHERE user_id = ?";
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -135,7 +135,7 @@ public class UsersDaoImpl implements UsersDao {
 
 	@Override
 	public int delete(Integer userId) {
-		return jdbcTemplate.update(SQL_DELETE, userId, userId, userId, userId);
+		return jdbcTemplate.update(SQL_DELETE,userId,userId, userId, userId, userId, userId);
 	}
 
 }
