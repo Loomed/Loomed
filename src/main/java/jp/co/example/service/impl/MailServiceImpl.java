@@ -75,4 +75,9 @@ public class MailServiceImpl implements MailService {
 
 		return mails;
 	}
+
+	@Override
+	public int openMail(Integer mailId) {
+		return mailsDao.updateFlag(mailId);
+	}
 }

@@ -24,43 +24,43 @@ public class MapsDaoTest {
 	private MapsDao mapDao;
 
 	@Test
-	public void MapsDaoTest_1() throws Exception{
+	public void MapsDaoTest_1() {
 		assertEquals(2, mapDao.selectWhereUserId(5).size());
 	}
 
 	@Test
-	public void MapsDaoTest_2() throws Exception{
+	public void MapsDaoTest_2() {
 		assertEquals(0, mapDao.selectWhereUserId(99).size());
 	}
 
 	@Test
-	public void MapsDaoTest_3() throws Exception{
+	public void MapsDaoTest_3() {
 		assertEquals(4, mapDao.selectUserIDAndUserNameJoinUsers(8, 4).size());
 	}
 
 	@Test
-	public void MapsDaoTest_4() throws Exception{
+	public void MapsDaoTest_4() {
 		assertEquals(0, mapDao.selectUserIDAndUserNameJoinUsers(99, 99).size());
 	}
 
 	@Test
-	public void MapsDaoTest_5() throws Exception{
+	public void MapsDaoTest_5() {
 		assertEquals(1, mapDao.update(4, 3));
 	}
 
 	@Test(expected=DataAccessException.class)
-	public void MapsDaoTest_6() throws Exception{
+	public void MapsDaoTest_6() {
 		mapDao.update(99, 99);
 	}
 
 	@Test
-	public void MapsDaoTest_7() throws Exception{
+	public void MapsDaoTest_7(){
 
 		assertEquals(1, mapDao.delete(3));
 	}
 
 	@Test
-	public void MapsDaoTest_8() throws Exception{
+	public void MapsDaoTest_8(){
 		assertEquals(0, mapDao.delete(99));
 	}
 }

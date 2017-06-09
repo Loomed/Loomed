@@ -179,8 +179,7 @@
 																placeholder="例:9時10分" required />
 														</div>
 													</div>
-													<br>
-													<br>
+													<br> <br>
 													<div class="form-group">
 														<label for="inputReason" class="col-sm-3 control-label">理由</label>
 														<div class="col-sm-9">
@@ -206,8 +205,7 @@
 																placeholder="例:1時間" required />
 														</div>
 													</div>
-													<br>
-													<br>
+													<br> <br>
 													<div class="form-group">
 														<label for="inputReason3" class="col-sm-3 control-label">理由</label>
 														<div class="col-sm-9">
@@ -261,37 +259,41 @@
 							<div class="panel-body">
 								<c:forEach var="mail" items="${mails}" varStatus="status">
 									<!--　アコーディオン用パネルグループ -->
-									<form:form modelAttribute="deleteForm"
-										id="deleteForm${status.index}" submit-flag="false">
-										<div class="panel-group" role="tablist"
-											aria-multiselectable="true">
-											<div class="panel panel-default">
-												<div class="panel-heading" role="tab">
-													<h4 class="panel-title">
-														<a role="button" data-toggle="collapse"
-															data-parent="#accordion" href="#collapse${status.index}"
-															aria-expanded="true" aria-controls="collapse01"> 宛先:<c:out
-																value="${mail.transmissionUserName}" /> 件名:<c:out
-																value="${mail.mailTitle }" />
-														</a> <input type="hidden" id="mailId" name="mailId"
-															value="<c:out value="${mail.mailId }" />"> <input
-															type="hidden" id="openFlag" name="openFlag"
-															value="<c:out value="${mail.openFlag }" />">
+									<form:form modelAttribute="mailCheckForm" id="mailPanel${mail.mailId}Form" target="hiddenFrame${mail.mailId}">
+										<input type="hidden" value="${mail.mailId }">
+									</form:form>
+									<iframe name="hiddenFrame${mail.mailId}" style="width:0px;height:0px;border:0px;"></iframe>
+
+									<div class="panel-group" role="tablist"
+										aria-multiselectable="true">
+										<div class="panel panel-default">
+											<div class="panel-heading" role="tab">
+												<h4 class="panel-title">
+													<a id="mailPanel${mail.mailId}" role="button" data-toggle="collapse"
+														data-parent="#accordion" href="#collapse${status.index}"
+														aria-expanded="true" aria-controls="collapse01"> 宛先:<c:out
+															value="${mail.transmissionUserName}" /> 件名:<c:out
+															value="${mail.mailTitle }" />
+													</a>
+													<form:form modelAttribute="deleteForm"
+														id="deleteForm${status.index}" submit-flag="false" >
+														<input type="hidden" id="mailId" name="mailId"
+															value="<c:out value="${mail.mailId }" />">
 														<button type="submit" class="btn btn-danger delete"
 															data-toggle="modal" data-target="#deleteModal">削除</button>
-
-													</h4>
-												</div>
-												<div id="collapse${status.index}"
-													class="panel-collapse collapse" role="tabpanel"
-													aria-labelledby="heading01">
-													<div class="panel-body">
-														<c:out value="${mail.mailContents }" />
-													</div>
+													</form:form>
+												</h4>
+											</div>
+											<div id="collapse${status.index}"
+												class="panel-collapse collapse" role="tabpanel"
+												aria-labelledby="heading01">
+												<div class="panel-body">
+													<c:out value="${mail.mailContents }" />
 												</div>
 											</div>
 										</div>
-									</form:form>
+									</div>
+
 								</c:forEach>
 							</div>
 						</div>
@@ -320,6 +322,7 @@
 				</div>
 			</div>
 		</div>
+
 	</div>
 	<script>
 		// 		$(function() {
@@ -397,6 +400,11 @@
 
 		$('#deleteModal').on('show.bs.modal', function(e) {
 			$(id).attr('submit-flag', 'false');
+		});
+
+		$("[ id ^= 'mailPanel' ]").click(function () {
+			var id = "#" + $(this).attr("id") + "Form";
+			$(id).submit();
 		});
 	</script>
 </body>
