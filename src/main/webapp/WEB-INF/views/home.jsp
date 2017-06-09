@@ -216,7 +216,7 @@
 														</div>
 													</header>
 													<div class="comment-post">
-														<p>研修内容：${fn:escapeXml(tr.trainingInfo)}</p>
+														<p>研修内容：${fn:escapeXml(loginroom.trainingInfo)}</p>
 													</div>
 												</div>
 											</div>
