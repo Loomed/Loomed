@@ -26,11 +26,11 @@ public class UsersDaoTset {
 	@Autowired
 	private UsersDao usersDao;
 
-	@Test(expected=DataAccessException.class)
+	@Test
 	public void テスト72() throws Exception {
 		Users user = usersDao.findByIdAndPass(1, "pass");
 
-		assertEquals("山田 太郎", user.getUserId());
+		assertEquals("山田 太郎", user.getUserName());
 		assertEquals(Integer.valueOf(1), user.getCompanyId());
 		assertEquals(Integer.valueOf(0), user.getAuthority());
 	}
@@ -46,7 +46,7 @@ public class UsersDaoTset {
 	public void テスト74() throws Exception {
 		Users user = usersDao.findById(2);
 
-		assertEquals("山田 次郎", user.getUserId());
+		assertEquals("山田 次郎", user.getUserName());
 		assertEquals(Integer.valueOf(1), user.getCompanyId());
 		assertEquals(Integer.valueOf(0), user.getAuthority());
 	}
@@ -60,44 +60,42 @@ public class UsersDaoTset {
 
 	@Test
 	public void テスト76() throws Exception {
-		usersDao.udpatePass(5, "aaa");
+		usersDao.updatePass(5, "aaa");
 
 		Users user = usersDao.findById(5);
 		assertEquals("aaa", user.getPassword());
 	}
-	@Test
+	@Test(expected=DataAccessException.class)
 	public void テスト77() throws Exception {
-		usersDao.udpatePass(5, null);
+		usersDao.updatePass(5, null);
 
-		Users user = usersDao.findById(5);
-		assertEquals(null, user.getPassword());
 	}
+
+//	@Test
+//	public void テスト78() throws Exception {
+//		usersDao.updatePass(5, null);
+//
+//		Users user = usersDao.findById(5);
+//		assertEquals(null, user.getPassword());
+//	}
 
 	@Test
 	public void テスト78() throws Exception {
-		usersDao.udpatePass(5, null);
-
-		Users user = usersDao.findById(5);
-		assertEquals(null, user.getPassword());
-	}
-
-	@Test
-	public void テスト79() throws Exception {
-		int cnt = usersDao.udpatePass(6, "12345678902234567890323456789042345これで50");
+		int cnt = usersDao.updatePass(6, "12345678902234567890323456789042345これで50");
 
 		assertEquals(1, cnt);
 	}
 
 	@Test
-	public void テスト80() throws Exception {
-		int cnt = usersDao.udpatePass(7, "123456789022345678903234567890423456これで51");
+	public void テスト79() throws Exception {
+		int cnt = usersDao.updatePass(7, "123456789022345678903234567890423456これで51");
 
 		assertEquals(0, cnt);
 	}
 
 	@Test
 	public void テスト81() throws Exception {
-		usersDao.udpatePass(8, "pppp");
+		usersDao.updatePass(8, "pppp");
 
 		Users user = usersDao.findById(8);
 		assertEquals("pppp", user.getPassword());

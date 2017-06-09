@@ -28,18 +28,17 @@
 }
 </style>
 <script>
-var downloadAsFile = function(content) {
-	var fileName = document.getElementById("");
-    var a = document.createElement('a');
-    a.download = fileName;
-    a.href = 'data:application/octet-stream,'+encodeURIComponent(content);
-    a.click();
-};
+	var downloadAsFile = function(content) {
+		var fileName = document.getElementById("");
+		var a = document.createElement('a');
+		a.download = fileName;
+		a.href = 'data:application/octet-stream,' + encodeURIComponent(content);
+		a.click();
+	};
 </script>
 </head>
 
 <body>
-
 	<%@ include file="common/header.jsp"%>
 	<div class="container-fluid">
 		<div class="row">
@@ -47,8 +46,8 @@ var downloadAsFile = function(content) {
 				<div class="card">
 					<ul class="nav nav-tabs" role="tablist">
 						<li role="presentation"><a aria-controls="home" role="tab"
-							data-toggle="tab">
-								${fn:escapeXml(sessionScope.user.userName)} さん</a></li>
+							data-toggle="tab">${fn:escapeXml(sessionScope.user.userName)}
+								さん</a></li>
 					</ul>
 					<!-- Tab panes -->
 					<div class="tab-content">
@@ -61,21 +60,23 @@ var downloadAsFile = function(content) {
 							</div>
 						</h4>
 						<p>
-						<form:form modelAttribute="userForm" action="userinfo">
-						<input type="hidden" id="userId" name="userId" value="${loginuser.userId }">
-							<button type="submit" class="btn btn-primary btn-block"
-								value="userinfo">ユーザ情報</button>
-								</form:form>
+							<form:form modelAttribute="userForm" action="userinfo">
+								<input type="hidden" id="userId" name="userId"
+									value="${loginuser.userId }">
+								<button type="submit" class="btn btn-primary btn-block"
+									value="userinfo">ユーザ情報</button>
+							</form:form>
 						</p>
 						<p>
 							<button type="submit" class="btn btn-primary btn-block"
 								onclick="location.href='member'" value="member">研修参加者一覧ページへ</button>
 						</p>
-						<c:if test="${loginuser.authority == 0 || loginuser.authority == 1 }">
-						<p>
-							<button type="submit" class="btn btn-primary btn-block"
-								onclick="location.href='shareconfig'">共有ファイルアップロード</button>
-						</p>
+						<c:if
+							test="${loginuser.authority == 0 || loginuser.authority == 1 }">
+							<p>
+								<button type="submit" class="btn btn-primary btn-block"
+									onclick="location.href='shareconfig'">共有ファイルアップロード</button>
+							</p>
 						</c:if>
 					</div>
 					<div class="card">
@@ -97,7 +98,7 @@ var downloadAsFile = function(content) {
 								</div>
 							</div>
 						</a>
-
+						</div>
 					</div>
 					<div class="card">
 						<ul class="nav nav-tabs" role="tablist">
@@ -121,7 +122,6 @@ var downloadAsFile = function(content) {
 								data-toggle="tab">重要スケジュール</a></li>
 						</ul>
 						<!-- Tab panes -->
-
 						<div class="tab-content">
 							<div role="tabpanel" class="tab-pane active" id="home">
 								<!--<h2 class="page-header">Search Results</h2>-->
@@ -132,13 +132,10 @@ var downloadAsFile = function(content) {
 											<div class="panel panel-default arrow left">
 												<c:forEach var="list" items="${list}" varStatus="status">
 													<div class="panel-body">
-
 														<header class="text-left">
-
 															<div class="comment-user">
 																<i></i>
 															</div>
-
 															<time class="comment-date"
 																datetime="${list.uploadDatetime}">
 																<i class="fa fa-clock-o"></i>${list.uploadDatetime}
@@ -181,8 +178,10 @@ var downloadAsFile = function(content) {
 
 														<div class="comment-post">
 															<p>
-																<input type="hidden" name="title" value="${sl.shareContents}">
-																<a href="file:///c:${sl.shareContents}" download="${sl.shareContents}">${sl.title}</a>
+																<input type="hidden" name="title"
+																	value="${sl.shareContents}"> <a
+																	href="file:///c:${sl.shareContents}"
+																	download="${sl.shareContents}">${sl.title}</a>
 															</p>
 														</div>
 													</div>

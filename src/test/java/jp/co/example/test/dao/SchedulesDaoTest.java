@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -82,15 +83,14 @@ public class SchedulesDaoTest {
 		assertEquals(1, cnt);
 	}
 
-//	@Test
-//	public void テスト50() throws Exception {
-//
-//		// テストデータ作成
-//		final SimpleDateFormat SDF_DATETIME = new SimpleDateFormat("yyyy/MM/dd HH:mm");
-//		int cnt = scheduleDao.updateScheduleWhereScheduleId(1,"", new Timestamp(SDF_DATETIME.parse("2016/1/1 0:0:0").getTime()),true);
-//
-//		assertEquals(1, cnt);
-//	}
+	@Test(expected=DataAccessException.class)
+	public void テスト50() throws Exception {
+
+		// テストデータ作成
+		 scheduleDao.updateScheduleWhereScheduleId(1,null,null,true);
+
+
+	}
 
 	@Test
 	public void テスト51() throws Exception {
@@ -147,14 +147,12 @@ public class SchedulesDaoTest {
 		assertEquals(1, cnt);
 	}
 
-//	@Test
-//	public void テスト57() throws Exception {
-//
-//		// テストデータ作成
-//		int cnt = scheduleDao.insertSchedule(10, null, null, true);
-//
-//		assertEquals(1, cnt);
-//	}
+	@Test(expected=DataAccessException.class)
+	public void テスト57() throws Exception {
+
+		// テストデータ作成
+		scheduleDao.insertSchedule(null, null, null, true);
+	}
 
 //	@Test
 //	public void テスト58() throws Exception {

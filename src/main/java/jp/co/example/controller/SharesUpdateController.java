@@ -38,8 +38,7 @@ public class SharesUpdateController {
 
 	// 登録
 	@RequestMapping(method = RequestMethod.POST)
-	public Object post(@RequestParam("upload_file") MultipartFile multipartFile,
-			@RequestParam("filetype") String fileType, // ファイル種類
+	public Object post(@RequestParam("upload_file") MultipartFile multipartFile, @RequestParam("filetype") String fileType, // ファイル種類
 			HttpSession session, HttpServletRequest reques) throws IOException {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
@@ -59,7 +58,7 @@ public class SharesUpdateController {
 		} else {
 			rad = false;
 		}
-		Trainings tra = (Trainings)session.getAttribute(ScopeKey.LOGINROOM.getScopeKey());
+		Trainings tra = (Trainings) session.getAttribute(ScopeKey.LOGINROOM.getScopeKey());
 		// ファイル種類から決まる値をセットする
 		// ファイルパス
 		StringBuffer filePath = new StringBuffer("/uploadfile").append(File.separator).append(fileType);
@@ -67,8 +66,8 @@ public class SharesUpdateController {
 		File uploadDir = mkdirs(filePath);
 		try {
 			// アップロードファイルを置く
-			File uploadFile = new File(uploadDir.getPath() + "/" + filename + fileType);
-			StringBuffer path = new StringBuffer(uploadDir.getPath() + "/" + filename + fileType);
+			File uploadFile = new File(uploadDir.getPath() + "\\" + filename + fileType);
+			StringBuffer path = new StringBuffer(uploadDir.getPath() + "\\" + filename + fileType);
 			String dlpath = new String(path);
 			byte[] bytes = multipartFile.getBytes();
 			System.out.println(dlpath);
@@ -79,13 +78,8 @@ public class SharesUpdateController {
 			list = SS.selectlist(tra.getTrainingId());
 			session.setAttribute("list", list);
 			return "アップロードが成功しました。リスト更新のためしばらくお待ち下さい。";
-		} catch (Exception e) {
-			// 異常終了時の処理
-			return "エラー";
-		} catch (Throwable t) {
-			// 異常終了時の処理
+		}catch (NullPointerException w) {
 		}
-
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 		return RedirectController.SHARECONFIG.getRedirectName();
@@ -103,7 +97,7 @@ public class SharesUpdateController {
 		// 既に存在する場合はそのフォルダにぶち込む
 		if (uploadDir.exists()) {
 			uploadDir = new File(filePath.toString());
-		}else{
+		} else {
 			uploadDir.mkdirs();
 		}
 		// フォルダ作成

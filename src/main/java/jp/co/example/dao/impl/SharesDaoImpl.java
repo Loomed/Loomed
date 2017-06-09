@@ -9,11 +9,15 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import enums.LogEnum;
 import jp.co.example.dao.SharesDao;
 import jp.co.example.entity.Shares;
 import jp.co.example.entity.Trainings;
+import lombok.extern.slf4j.Slf4j;
+import util.Util;
 
 @Repository
+@Slf4j
 public class SharesDaoImpl implements SharesDao{
 	private final String INSERT_INTO_SHARES ="INSERT INTO SHARES(training_id,share_contents,upload_date,visible,title)VALUES(?,?,?,?,?)";
 	private final String SELECT_FROM_SHARES_ALL = "SELECT * FROM shares WHERE training_id =? ORDER BY share_id DESC";
@@ -23,8 +27,9 @@ public class SharesDaoImpl implements SharesDao{
 	JdbcTemplate jt;
 	@Override
 	public void insertFilepass(Trainings tra, String filePath,Timestamp uploaddate, String filename, boolean radio) {
+		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 		jt.update(INSERT_INTO_SHARES,tra.getTrainingId(),filePath,uploaddate,radio,filename);
-
+		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
 	}
 	@Override
 	public List<Shares> selectlist(Integer trainingid) {
