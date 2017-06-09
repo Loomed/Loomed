@@ -81,7 +81,7 @@
 							</p>
 						</form>
 						<c:if
-							test="${ loginuser.authority == 1 }">
+							test="${ (loginuser.authority == 1 || loginuser.authority == 0) && usermap.userId == sessionScope.user.userId}">
 							<p>
 								<button type="submit" class="btn btn-primary btn-block"
 									onclick="location.href='trainingConfig'" value="trainingConfig">研修管理</button>

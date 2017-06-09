@@ -42,18 +42,19 @@ public class UserInfoServiceImpl implements UserInfoService {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 		try {
 			if (auth.getAuthority() <= 1) {
-				if(user.getCompanyId() == null)
-				{
+				if (user.getCompanyId() == null) {
 					companyDao.insert(user.getCompanyName());
 					user.setCompanyId(companyDao.findCompanyId(user.getCompanyName()).get(0).getCompanyId());
 				}
 				userDao.updateAll(user.getUserId(), user.getPassword(), user.getUserName(), user.getCompanyId(),
 						user.getAuthority());
 
-				//ユーザのマップをすべて削除してから複数のマップを登録する
+				// ユーザのマップをすべて削除してから複数のマップを登録する
 				mapsDao.delete(user.getUserId());
-				for (Maps map : maps) {
-					mapsDao.update(map.getUserId(), map.getTrainingId());
+				if (maps != null) {
+					for (Maps map : maps) {
+						mapsDao.update(map.getUserId(), map.getTrainingId());
+					}
 				}
 			} else {
 				userDao.updatePass(user.getUserId(), user.getPassword());
