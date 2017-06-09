@@ -18,6 +18,8 @@
 		});
 		$('.combobox').combobox();
 
+		$("#trainingId").removeAttr("required");
+
 		$('#trainingId').multiselect(
 				{
 					buttonWidth : '400px',
@@ -120,7 +122,7 @@
 												<label for="password" class="col-sm-2 control-label">パスワード</label>
 												<div class="col-sm-10">
 													<input type="password" id="password" name="password"
-														class="form-control" required/>
+														class="form-control" required />
 												</div>
 											</div>
 
@@ -186,7 +188,8 @@
 											<div class="form-group">
 												<label for="trainingId" class="col-sm-2 control-label">配属研修教室</label>
 												<div class="col-sm-10">
-													<select id="trainingId" name="trainingId" multiple size="4" required>
+													<select id="trainingId" name="trainingId" multiple size="4"
+														required>
 														<c:forEach var="room" items="${rooms}">
 															<option value="${room.trainingId}">
 																<c:out value="${room.trainingName}" />
@@ -250,13 +253,30 @@
 												<input type="submit" class="btn btn-primary change"
 													value="変更" />
 											</form:form></td>
-										<td><form:form modelAttribute="deleteForm"
-												id="deleteForm${status.index}" submit-flag="false">
-												<input type="hidden" value="${user.userId }" id="userId"
-													name="userId" />
-												<input type="submit" class="btn btn-danger delete"
-													value="削除" />
-											</form:form></td>
+										<td><c:choose>
+												<c:when test="${loginuser.authority == 0 }">
+													<c:if test="${user.userId != loginuser.userId }">
+														<form:form modelAttribute="deleteForm"
+															id="deleteForm${user.userId }" submit-flag="false">
+															<input type="hidden" value="${user.userId }" id="userId"
+																name="userId" />
+															<input type="submit" class="btn btn-danger delete"
+																value="削除" />
+														</form:form>
+													</c:if>
+												</c:when>
+												<c:when test="${loginuser.authority == 1 }">
+													<c:if test="${user.authority >= 2}">
+														<form:form modelAttribute="deleteForm"
+															id="deleteForm${user.userId }" submit-flag="false">
+															<input type="hidden" value="${user.userId }" id="userId"
+																name="userId" />
+															<input type="submit" class="btn btn-danger delete"
+																value="削除" />
+														</form:form>
+													</c:if>
+												</c:when>
+											</c:choose></td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -329,9 +349,8 @@
 	</div>
 	<script>
 		$("[ id ^= 'deleteForm' ]").submit(function() {
-
 			id = "#" + $(this).attr("id");
-			console.log("test " + $(id).attr('submit-flag'));
+			console.log("test " + id);
 
 			$('#sampleModal').modal('toggle');
 			if ($(this).attr('submit-flag') == 'false') {
@@ -348,6 +367,16 @@
 
 		$('#deleteModal').on('show.bs.modal', function(e) {
 			$(id).attr('submit-flag', 'false');
+		});
+
+		$('#authority').change(function() {
+			if ($(this).val() == "0" || $(this).val() == "1") {
+				$("#trainingId").removeAttr("required");
+				console.log("true");
+			} else {
+				$("#trainingId").attr("required", true);
+				console.log("false");
+			}
 		});
 	</script>
 </body>

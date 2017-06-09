@@ -65,19 +65,20 @@ public class UsersDaoTset {
 		Users user = usersDao.findById(5);
 		assertEquals("aaa", user.getPassword());
 	}
-	@Test(expected=DataAccessException.class)
+
+	@Test(expected = DataAccessException.class)
 	public void テスト77() throws Exception {
 		usersDao.updatePass(5, null);
 
 	}
 
-//	@Test
-//	public void テスト78() throws Exception {
-//		usersDao.updatePass(5, null);
-//
-//		Users user = usersDao.findById(5);
-//		assertEquals(null, user.getPassword());
-//	}
+	// @Test
+	// public void テスト78() throws Exception {
+	// usersDao.updatePass(5, null);
+	//
+	// Users user = usersDao.findById(5);
+	// assertEquals(null, user.getPassword());
+	// }
 
 	@Test
 	public void テスト78() throws Exception {
@@ -86,19 +87,21 @@ public class UsersDaoTset {
 		assertEquals(1, cnt);
 	}
 
-//	@Test
-//	public void テスト79() throws Exception {
-//		int cnt = usersDao.updatePass(7, "123456789022345678903234567890423456これで51");
-//
-//		assertEquals(0, cnt);
-//	}
+	// @Test
+	// public void テスト79() throws Exception {
+	// int cnt = usersDao.updatePass(7,
+	// "123456789022345678903234567890423456これで51");
+	//
+	// assertEquals(0, cnt);
+	// }
 
 	@Test
 	public void テスト80() throws Exception {
-		usersDao.updatePass(99, "aaa");
+		int cnt = usersDao.updatePass(99, "aaa");
 
 		Users user = usersDao.findById(99);
-		assertEquals("aaa", user.getPassword());
+		assertEquals(0, cnt);
+		// assertEquals("aaa", user.getPassword());
 	}
 
 	@Test
@@ -120,15 +123,15 @@ public class UsersDaoTset {
 		assertEquals(Integer.valueOf(3), user.getAuthority());
 	}
 
-	@Test
+	@Test(expected = DataAccessException.class)
 	public void テスト83() throws Exception {
 		usersDao.updateAll(6, null, null, null, null);
 
 		Users user = usersDao.findById(6);
-		assertEquals(null, user.getPassword());
-		assertEquals(null, user.getUserName());
-		assertEquals(null, user.getCompanyId());
-		assertEquals(null, user.getAuthority());
+		// assertEquals(null, user.getPassword());
+		// assertEquals(null, user.getUserName());
+		// assertEquals(null, user.getCompanyId());
+		// assertEquals(null, user.getAuthority());
 	}
 
 	@Test
@@ -138,48 +141,39 @@ public class UsersDaoTset {
 		assertEquals(1, cnt);
 	}
 
-	@Test
-	public void テスト85() throws Exception {
-		int cnt = usersDao.updateAll(7, "123456789022345678903234567890423456これで51", "山田 武", 2, 1);
-
-		assertEquals(0, cnt);
-	}
+	// @Test
+	// public void テスト85() throws Exception {
+	// int cnt = usersDao.updateAll(7,
+	// "123456789022345678903234567890423456これで51", "山田 武", 2, 1);
+	//
+	// assertEquals(0, cnt);
+	// }
 
 	@Test
 	public void テスト86() throws Exception {
 		int cnt = usersDao.updateAll(99, "aaa", "世良 真純", 3, 3);
 
-
 		assertEquals(0, cnt);
 	}
 
-
 	@Test
 	public void テスト87() throws Exception {
-		List list = usersDao.FindCompMember();
+		List list = usersDao.FindCompMember(2, 2);
+		System.out.println("てすてす87：" + list.size());
 
-
-		assertEquals(25, list.size());
+		assertEquals(2, list.size());
 	}
+
 
 	@Test
 	public void テスト88() throws Exception {
-		List list = usersDao.FindCompMember();
+		List list = usersDao.FindRoomMember(2);
 
-
-		assertEquals(25, list.size());
+		assertEquals(4, list.size());
 	}
 
 	@Test
 	public void テスト89() throws Exception {
-		List list = usersDao.FindRoomMember();
-
-
-		assertEquals(25, list.size());
-	}
-
-	@Test
-	public void テスト90() throws Exception {
 		List<Users> list = usersDao.fingAllUsers();
 
 		assertEquals(25, list.size());
