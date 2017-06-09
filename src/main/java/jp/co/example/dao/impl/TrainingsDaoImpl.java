@@ -17,7 +17,7 @@ import util.Util;
 @Slf4j
 public class TrainingsDaoImpl implements TrainingsDao{
 
-	private static final String SQL_SELECT_ALL_TRAININGS = "SELECT * FROM trainings ORDER BY training_id ASC";
+	private static final String SQL_SELECT_ALL_TRAININGS = "SELECT * FROM trainings WHERE training_id <> 1 ORDER BY training_id ASC";
 	private static final String SQL_SELECT__TRAININGS_WHERE_TRAININGID = "SELECT * FROM trainings WHERE training_id = ?";
 	private static final String SQL_SELECT_MAX_TRAININGS = "SELECT * FROM trainings ORDER BY training_id DESC LIMIT 1";
 	private static final String SQL_INS = "INSERT INTO trainings(training_name,projector_count,training_info) VALUES (?, ?, ?)";
