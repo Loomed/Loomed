@@ -23,6 +23,7 @@ public class MapsDaoTest {
 	@Autowired
 	private MapsDao mapDao;
 
+
 	@Test
 	public void MapsDaoTest_1() {
 		assertEquals(2, mapDao.selectWhereUserId(5).size());
