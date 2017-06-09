@@ -8,8 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import enums.JspPage;
-import enums.LogEnum;
+import enums.*;
 import jp.co.example.entity.Trainings;
 import jp.co.example.service.Generalized;
 import jp.co.example.service.TrainingChangeService;
@@ -72,6 +71,6 @@ public class TrainingChangeController {
 
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
-		return "forward:trainingConfig";
+		return RedirectController.TRAININGCONFIG.getRedirectName();
 	}
 }

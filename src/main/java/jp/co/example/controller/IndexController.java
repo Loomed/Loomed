@@ -10,12 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import enums.LogEnum;
-import enums.RedirectController;
-import enums.ScopeKey;
-import jp.co.example.entity.Maps;
-import jp.co.example.entity.Trainings;
-import jp.co.example.entity.Users;
+import enums.*;
+import jp.co.example.entity.*;
 import jp.co.example.service.IndexService;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -93,7 +89,7 @@ public class IndexController {
 
 			log.info(session.getAttribute(ScopeKey.USERMAP.getScopeKey()).toString());
 			log.info(Util.getMethodName() + LogEnum.END.getLogValue());
-			return "index";
+			return JspPage.INDEX.getPageName();
 		}
 
 		// 教室判定

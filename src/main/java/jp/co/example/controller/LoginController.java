@@ -74,7 +74,7 @@ public class LoginController {
 
 			session.setAttribute(ScopeKey.LOGINUSER.getScopeKey(), users);
 
-			return ForwardController.INDEX.getForwardName();
+			return RedirectController.INDEX.getRedirectName();
 		}
 
 		model.addAttribute("msg", "IDまたはPASSが間違っています");

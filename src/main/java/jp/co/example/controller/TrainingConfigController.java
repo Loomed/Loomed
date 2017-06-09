@@ -10,9 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import enums.JspPage;
-import enums.LogEnum;
-import enums.ScopeKey;
+import enums.*;
 import jp.co.example.entity.Trainings;
 import jp.co.example.entity.Users;
 import jp.co.example.service.TrainingConfigService;
@@ -61,7 +59,7 @@ public class TrainingConfigController {
 
 
 		log.info(Util.getMethodName() + LogEnum.END.getLogValue());
-		return "forward:trainingConfig";
+		return RedirectController.TRAININGCONFIG.getRedirectName();
 	}
 
 	// 登録
@@ -78,7 +76,7 @@ public class TrainingConfigController {
 			tcs.InsTrainings(newPro, newName, newInfo);
 
 			log.info(Util.getMethodName() + LogEnum.END.getLogValue());
-			return "forward:trainingConfig";
+			return RedirectController.TRAININGCONFIG.getRedirectName();
 		}
 
 }

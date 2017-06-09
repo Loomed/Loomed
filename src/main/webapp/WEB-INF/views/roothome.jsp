@@ -53,7 +53,19 @@
 						</h4>
 						<h5>
 							<div class="col-xs-9">
-								<label>権限：ルート</label>
+								<label>権限:
+									<c:choose>
+									<c:when test="${loginuser.authority == 0}">
+										ルート
+									</c:when>
+									<c:when test="${loginuser.authority == 1}">
+										講師
+									</c:when>
+									<c:otherwise>
+										エラー
+									</c:otherwise>
+									</c:choose>
+								</label>
 							</div>
 						</h5>
 						<form:form modelAttribute="userForm" action="userinfo">
