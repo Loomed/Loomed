@@ -32,7 +32,7 @@ public class MemberServiceImpl implements MemberService {
 	private static List<Companies> memberComp;
 
 	@Override
-	public List<Users> Member(List<Maps> UserMap, int userComId, int nowTrainingId) {
+	public List<Users> Member(List<Maps> UserMap, int userComId, int nowTrainingId, int Authority) {
 		log.info(Util.getMethodName() + LogEnum.START.getLogValue());
 
 		//←ここから
@@ -41,8 +41,11 @@ public class MemberServiceImpl implements MemberService {
 		memberComp = null;
 
 		for(int i=0;i<UserMap.size();i++){
+			log.info(LogEnum.IF.getLogValue() + "Authority == 3");
 			log.info(LogEnum.IF.getLogValue() + "UserMap.get(i).getTrainingId() == nowTrainingId");
-			if(UserMap.get(i).getTrainingId() == nowTrainingId){
+			if(Authority == 2){
+				log.info(LogEnum.TRUE.getLogValue() + "nowRoomFlag = 0");
+			}else if(UserMap.get(i).getTrainingId() == nowTrainingId){
 				log.info(LogEnum.TRUE.getLogValue() + "nowRoomFlag = 1");
 				nowRoomFlag = 1;
 			}else{
