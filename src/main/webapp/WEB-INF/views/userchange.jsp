@@ -267,6 +267,13 @@ table>td>input {
 			</div>
 		</div>
 	</div>
+	<c:if test="${loginuser.authority == 1 && loginuser.userId != user.userId}">
+		<script>
+			$(function () {
+				$("#password").attr("readonly", true);
+			});
+		</script>
+	</c:if>
 
 	<script>
 		function changeSubmit() {
