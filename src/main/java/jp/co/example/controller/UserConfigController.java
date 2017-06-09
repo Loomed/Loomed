@@ -47,7 +47,7 @@ public class UserConfigController {
 						userInfoService.getComapnies(userConfigForm.getCompanyName()).get(0).getCompanyId());
 			}
 
-			if (userConfigForm.getTrainingId().length > 0) {
+			if (userConfigForm.getTrainingId() != null) {
 				maps = new Maps[userConfigForm.getTrainingId().length];
 
 				for (int i = 0; i < maps.length; i++) {
