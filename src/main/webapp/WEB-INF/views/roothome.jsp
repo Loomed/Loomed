@@ -53,15 +53,14 @@
 						</h4>
 						<h5>
 							<div class="col-xs-9">
-								<label>権限:
-									<c:choose>
-									<c:when test="${loginuser.authority == 0}">
+								<label>権限: <c:choose>
+										<c:when test="${loginuser.authority == 0}">
 										ルート
 									</c:when>
-									<c:when test="${loginuser.authority == 1}">
+										<c:when test="${loginuser.authority == 1}">
 										講師
 									</c:when>
-									<c:otherwise>
+										<c:otherwise>
 										エラー
 									</c:otherwise>
 									</c:choose>
@@ -81,11 +80,13 @@
 								<button type="submit" class="btn btn-primary btn-block">ユーザ管理</button>
 							</p>
 						</form>
-
-						<p>
-							<button type="submit" class="btn btn-primary btn-block"
-								onclick="location.href='trainingConfig'" value="trainingConfig">研修管理</button>
-						</p>
+						<c:if
+							test="${ loginuser.authority == 1 }">
+							<p>
+								<button type="submit" class="btn btn-primary btn-block"
+									onclick="location.href='trainingConfig'" value="trainingConfig">研修管理</button>
+							</p>
+						</c:if>
 						<p>
 							<button type="submit" class="btn btn-primary btn-block"
 								onclick="location.href='shareconfig'">共有ファイルアップロード</button>

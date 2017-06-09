@@ -168,7 +168,9 @@
 									<article class="row">
 										<div class="col-md-10 col-sm-10">
 											<div class="panel panel-default arrow left">
+											<c:forEach var="map" items="${usermap}" varStatus="staus">
 												<c:forEach var="sl" items="${sl}" varStatus="status">
+												    <c:if test="${map.trainingId == loginroom.trainingId }">
 													<div class="panel-body">
 														<header class="text-left">
 															<time class="comment-date" datetime="2017:05:30">
@@ -185,6 +187,8 @@
 															</p>
 														</div>
 													</div>
+													</c:if>
+													</c:forEach>
 												</c:forEach>
 											</div>
 										</div>
