@@ -189,18 +189,23 @@ public class MailController {
 
 				for (int i = 0; i < auth3.size(); i++) {
 					// 自身（研修生）と研修IDが等しい研修生
-					List<Maps> mp = userChangeService.getMaps(auth3.get(i));
 
-					for (int k = 0; k < mp.size(); k++) {
+					if (auth3.get(i).getCompanyId() == user.getCompanyId()) {
+						newAuth3.add(auth3.get(i));
+					} else {
+						List<Maps> mp = userChangeService.getMaps(auth3.get(i));
 
-						for (int j = 0; j < user.getTrainings().size(); j++) {
-							log.info("PARAM-------> " + user.getTrainings().get(j).getTrainingId()
-									+ mp.get(k).getTrainingId());
-							// 自身（研修生）と研修IDが等しい研修生
-							if (user.getTrainings().get(j).getTrainingId() == mp.get(k).getTrainingId()) {
+						for (int k = 0; k < mp.size(); k++) {
 
-								newAuth3.add(auth3.get(i));
+							for (int j = 0; j < user.getTrainings().size(); j++) {
+								log.info("PARAM-------> " + user.getTrainings().get(j).getTrainingId()
+										+ mp.get(k).getTrainingId());
+								// 自身（研修生）と研修IDが等しい研修生
+								if (user.getTrainings().get(j).getTrainingId() == mp.get(k).getTrainingId()) {
 
+									newAuth3.add(auth3.get(i));
+
+								}
 							}
 						}
 					}
