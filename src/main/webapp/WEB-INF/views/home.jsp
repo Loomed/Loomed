@@ -29,16 +29,16 @@
 </style>
 </head>
 <script>
-  function OnLinkClick() {
-    var data = document.getElementById("path");
-    var fileName = document.getElementById("title");
-        var link = document.createElement("a");
-        document.body.appendChild(link);
-        link.href = data;
-        link.download = fileName;
-        link.click();
-        document.body.removeChild(link);
-    };
+	function OnLinkClick() {
+		var data =$(':hidden[name="path"]').val();
+		var fileName = $(':hidden[name="title"]').val();
+		var link = document.createElement("a");
+		document.body.appendChild(link);
+		link.href = "file:///c:" + data;
+		link.download = fileName;
+		link.click();
+		document.body.removeChild(link);
+	};
 </script>
 
 <body>
@@ -94,7 +94,7 @@
 							<li role="presentation"><a aria-controls="home" role="tab"
 								data-toggle="tab"><i class="fa fa-envelope-o fa-5x"
 									style="margin-right: 20px; margin-left: 20px;"></i></a></li>
-									<!--
+							<!--
 							<p class="announcement-heading" style="margin-top: 10px;">
 								<span class="badge">${cnt}</span>
 							</p>
@@ -199,11 +199,11 @@
 
 															<div class="comment-post">
 																<p>
-																<input type="hidden" id="path"
-																value="${sl.shareContents}">
-																<input type="hidden" id="title" value="${sl.title}"> <a
-																href="file:///c:${sl.shareContents}"onclick="OnLinkClick();"
-																download="${sl.title}">${sl.title}</a>
+																	<input type="hidden" name="path"
+																		value="${sl.shareContents}"> <input
+																		type="hidden" name="title" value="${sl.title}">
+																	<a href="#"
+																		onclick="OnLinkClick();">${sl.title}</a>
 																</p>
 															</div>
 														</div>
