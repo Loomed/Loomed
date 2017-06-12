@@ -18,10 +18,10 @@ import util.*;
 @Repository
 public class MailsDaoImpl implements MailsDao {
 	private static final String SQL_SELECT_MAILS_WHERE_OPENFLAG = "SELECT count(open_flag) FROM mails WHERE open_flag = true AND reception_user_id = ?;";
-	private static final String SQL_SELECT_FROM_MAILS_WHERE_RECEPTION_USER_ID = "SELECT * FROM mails WHERE reception_user_id = ?;";
+	private static final String SQL_SELECT_FROM_MAILS_WHERE_RECEPTION_USER_ID = "SELECT * FROM mails WHERE reception_user_id = ? ORDER BY mail_date DESC";
 	private static final String SQL_INSERT = "INSERT INTO mails (reception_user_id,transmission_user_id	,mail_title	,mail_contents,mail_date,open_flag)VALUES (?, ?, ?, ?, ?, ?)";
 	private static final String SQL_MAILS_DELETE = "DELETE FROM mails WHERE mail_id = ?";
-	private static final String SQL_SELECT_MAILS = "SELECT * FROM mails";
+	private static final String SQL_SELECT_MAILS = "SELECT * FROM mails ORDER BY mail_date DESC";
 	private static final String SQL_UPDATE_FLAG = "UPDATE mails SET open_flag = true WHERE mail_id = ?";
 	// フラッグ関連
 	@Autowired
