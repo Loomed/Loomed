@@ -416,7 +416,7 @@
 
 		$("[ id ^= 'mailPanel' ]").click(function() {
 			var id = "#" + $(this).attr("id") + "Form";
-			$(id).submit();
+			//$(id).submit();
 		});
 
 		function submitTrancemission() {
