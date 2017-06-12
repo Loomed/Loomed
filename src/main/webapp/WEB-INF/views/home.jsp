@@ -27,27 +27,19 @@
 	width: 100%;
 }
 </style>
-<script>
-	var downloadAsFile = function(content) {
-		var fileName = document.getElementById("");
-		var a = document.createElement('a');
-		a.download = fileName;
-		a.href = 'data:application/octet-stream,' + encodeURIComponent(content);
-		a.click();
-	};
-</script>
-<script>
-$(function(){
-    $("a.download").on("click", function(e){
-        $target = $(e.target);
-        $target.attr({
-            download: "file.png",
-            href:  ""
-        });
-    });
-});
-</script>
 </head>
+<script>
+  function OnLinkClick() {
+    var data = document.getElementById("path");
+    var fileName = document.getElementById("title");
+        var link = document.createElement("a");
+        document.body.appendChild(link);
+        link.href = data;
+        link.download = fileName;
+        link.click();
+        document.body.removeChild(link);
+    };
+</script>
 
 <body>
 	<%@ include file="common/header.jsp"%>
@@ -207,11 +199,11 @@ $(function(){
 
 															<div class="comment-post">
 																<p>
-																<input type="hidden" name="path"
+																<input type="hidden" id="path"
 																value="${sl.shareContents}">
-																<input type="hidden" name="title" value="${sl.title}"> <a
-																href="file:///c:${sl.shareContents}"
-																download="${sl.shareContents}">${sl.title}</a>
+																<input type="hidden" id="title" value="${sl.title}"> <a
+																href="file:///c:${sl.shareContents}"onclick="OnLinkClick();"
+																download="${sl.title}">${sl.title}</a>
 																</p>
 															</div>
 														</div>
