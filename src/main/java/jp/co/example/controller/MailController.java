@@ -168,6 +168,8 @@ public class MailController {
 
 				/* 研修生 */
 
+				//講師
+
 				List<Users> newAuth1 = new ArrayList<>();
 				for (int i = 0; i < auth1.size(); i++) {
 

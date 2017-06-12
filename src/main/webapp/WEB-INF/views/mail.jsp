@@ -282,7 +282,7 @@
 													<a id="mailPanel${mail.mailId}" role="button"
 														data-toggle="collapse" data-parent="#accordion"
 														href="#collapse${status.index}" aria-expanded="true"
-														aria-controls="collapse01" style="font-size: 130%;"> 宛先:<c:out
+														aria-controls="collapse01" style="font-size: 130%;"> 差出人:<c:out
 															value="${mail.transmissionUserName}" />　　　件名:<c:out
 															value="${mail.mailTitle }" />
 													</a>
