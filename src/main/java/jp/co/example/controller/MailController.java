@@ -1,21 +1,34 @@
 package jp.co.example.controller;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.servlet.http.*;
+import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.stereotype.*;
-import org.springframework.ui.*;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import enums.*;
-import jp.co.example.entity.*;
-import jp.co.example.form.*;
-import jp.co.example.service.*;
+import enums.JspPage;
+import enums.LogEnum;
+import enums.ScopeKey;
+import jp.co.example.entity.MailsEx;
+import jp.co.example.entity.Maps;
+import jp.co.example.entity.Users;
+import jp.co.example.entity.UsersEx;
+import jp.co.example.form.MailCheckForm;
+import jp.co.example.form.MailDeleteForm;
+import jp.co.example.form.MailInsertForm;
+import jp.co.example.form.WatchForm;
+import jp.co.example.service.MailService;
+import jp.co.example.service.UserChangeService;
+import jp.co.example.service.UserInfoService;
 //import jp.co.example.entity.Mails;
-import lombok.extern.slf4j.*;
-import util.*;
+import lombok.extern.slf4j.Slf4j;
+import util.Util;
 
 @Slf4j
 @Controller
@@ -170,7 +183,7 @@ public class MailController {
 							// 自身（担当者）と研修IDが等しい講師
 							if (user.getTrainings().get(j).getTrainingId() == mp.get(k).getTrainingId()) {
 
-								newAuth1.add(auth2.get(i));
+								newAuth1.add(auth1.get(i));
 
 							}
 						}
